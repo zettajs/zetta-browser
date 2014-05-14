@@ -259,6 +259,7 @@ sirenAppController.controller('AppCtrl', [
 	  
     $scope.main.class = JSON.stringify(data.class);
     $scope.main.actions = data.actions;
+    
     $scope.main.stateClass = 'label-info';
   
     var oldState = $scope.main.state;
@@ -322,12 +323,41 @@ sirenAppController.controller('AppCtrl', [
                   });
                   entity.totalStreams = device.totalStreams;
                   
-                  Object.keys(device.actions).forEach(function(key) {
+                  var actions = [];
+                  angular.forEach(Object.keys(device.actions), function(key) {
+                    actions.push(device.actions[key]);
+                  });
+
+                  if (actions) {
+                      actions = actions.sort(function(a, b) {
+                      console.log('a:', a);
+                      console.log('b:', b);
+                      if (a.fields && a.fields.length === 1 && a.fields[0].type === 'hidden') {
+                        return -1;
+                      } else if (b.fields && b.fields.length === 1 && b.fields[0].type === 'hidden') {
+                        return 1;
+                      } else {
+                        return 0;
+                      }
+                    });
+                  }
+
+                  angular.forEach(actions, function(action) {
+                    action.execute = function(cb) {
+                      $scope.executeInlineAction(action, cb);
+                    };
+
+                    //entity.actions[action.name.replace(/\//g, '_')] = action;
+                  });
+                  entity.actions = actions;
+
+                  /*Object.keys(device.actions).forEach(function(key) {
                     entity.actions[key] = device.actions[key];
                     entity.actions[key].execute = function(cb) {
                       $scope.executeInlineAction(entity.actions[key], cb);
                     };
-                  });
+                  });*/
+
                   entity.totalActions = device.totalActions;
                                     
                 });
