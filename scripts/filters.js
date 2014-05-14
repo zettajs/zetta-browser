@@ -102,6 +102,24 @@ sirenFilters.filter('largemapurl', function(){
   };
 });
 
+sirenFilters.filter('deviceurl', function(){
+  return function(device) {
+    var tilesUrl = "alanguirand.i04decfa";
+    var marker = "pin-l+f00";
+    var mapLoc = {
+      lat: 42.331389,
+      lon: -83.045833
+    };
+
+    var deviceMarker = "";
+    if(device.location) {
+      deviceMarker = marker+"("+device.location.lon+","+device.location.lat+")/";
+    }
+    var url =  "http://api.tiles.mapbox.com/v3/"+tilesUrl+"/"+deviceMarker+mapLoc.lon+","+mapLoc.lat+",2/600x160.png";
+    return url;
+  }
+});
+
 sirenFilters.filter('icon', function() {
     return function(klass) {
       //map classes to font awesome icons

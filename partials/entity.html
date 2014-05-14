@@ -1,5 +1,5 @@
 <div id="response" ng-cloak ng-init="init()" class="device-show">
-  
+
 <div id="header" class="pure-g">
   <div class="pure-u-2-3 breadcrumbs">
     <div class="content">
@@ -11,15 +11,15 @@
     </ul>
     </div>
   </div>
-    
+
   <div class="pure-u-1-3 logo">
     <div class="content">
       <a href="index.html"><img src="images/zetta-logo_sm.png"/></a>
     </div>
   </div>
 </div>
-  
-  
+
+
   <!-- Characteristic Title -->
   <div class="characteristic show">
     <div class="pure-g-r">
@@ -33,25 +33,24 @@
         </div>
         <div id="map" class="pure-u-1">
             <div class="content" ng-init="">
-        <leaflet defaults="defaults" height="160px" center="center" markers="markers" id="map_{{entity.heading}}"></leaflet>
+              <img src="{{ main | deviceurl }}"/>
             </div>
           </div>
-          
+
           <div id="properties" class="pure-u-1">
             <div class="content">
               <h3><i class="fa fa-list-ul"></i>  Properties</h3>
               <div ng-bind-html="formattedDiff" class="json"></div>
             </div>
           </div><!-- /#properties -->
-          
+
       </div><!-- /Left Column -->
-      
+
       <div class="pure-u-1-2"><!-- Right Column -->
-        <!-- nothing to see here yet 
+        <!-- nothing to see here yet
         <div id="sensors">
           <h3><i class="fa fa-tachometer"></i> Sensors</h3>
-        </div>
-        -->
+        </div>-->
         <div id="actions" ng-show="main.actions.length">
           <h3><i class="fa fa-bell-o"></i> Actuators</h3>
           <div class="pure-g">
@@ -70,10 +69,10 @@
             </div>
           </div>
         </div><!-- Actuators -->
-        
+
          <div id="states" class="pure-u-1">
             <div class="content">
-            
+
               <h3><i class="fa fa-bolt"></i>  State History</h3>
               <span ng-show="!stateLogs.length">State transitions for: </span>
               <span ng-show="stateLogs.length">Latest {{stateLogs.length | pluralize:'transition'}} for: </span>
@@ -88,9 +87,9 @@
               </div>
             </div>
           </div><!-- /#states -->
-        
+
       </div><!-- /Right Column -->
-      
+
 
         <div id="entities" ng-show="main.entities.length">
           <h3>Entities
@@ -111,7 +110,7 @@
              </div>
         </h3>
             <div ng-repeat="entity in main.entities" heading="{{entity.heading}}" is-open="$first">
-              
+
               <div ng-show="entity.properties.length">
                 <h4>Properties</h4>
                 <pre>{{entity.properties}}</pre>
@@ -130,35 +129,35 @@
             </ul>
             </div>
           </div>
-          
+
           <div class="pure-u-1-2 request">
             <div class="content">
-            
+
               <h3><i class="fa fa-bolt"></i>  Request</h3>
               <pre class="language-markup"><code>{{main.request}}</code></pre>
-              
+
             </div>
           </div>
-          
+
           <div class="pure-u-1-2 response">
             <div class="content">
-            
+
               <h3><i class="fa fa-bolt"></i>  Response</h3>
               <pre class="language-markup"><code>{{main.data | prettify}}</code></pre>
-              
+
             </div>
           </div>
-          
+
         </div>
-      
+
     </div>
-    
-  
-    
-    
-    
+
+
+
+
+
   </div><!-- /.characteristic -->
-  
+
 <ng-include src="'partials/footer.html'"></ng-include>
 
 </div>
