@@ -442,6 +442,10 @@ pre[class*="language-"] {
   .action, form {}
   form {
     font-size: .8em;
+    float: left;
+    &:not(.trigger){
+      clear: both; 
+    }
     .controls {
       margin: .3em 0;
     }
