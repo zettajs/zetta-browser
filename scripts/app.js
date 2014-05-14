@@ -549,6 +549,7 @@ var siren = angular
       function Input(obj){
         var defaults = {
           'name'        : "action",
+          'class'       : "pure-input-1",
           'id'          : "zettaAction",
           'type'        : "text",
           'ng-model'    : "",
@@ -556,6 +557,7 @@ var siren = angular
         }
         var params = $.extend(defaults, obj);
         var output = $('<input>')
+          .addClass(params.class)
           .attr('name', params.name)
           .attr('id', params.id)
           .attr('type', params.type)
