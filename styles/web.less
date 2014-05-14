@@ -1,6 +1,6 @@
 @import 'hues.css';
 
-@text: hsl(0, 0%, 55%);
+@text: hsl(0, 0%, 60%);
 @zborder: #ddd;
 
 @ao: #E86C1F;
@@ -20,6 +20,9 @@ body, html, #app_container{
 
 body {
   color: @text;
+  background-color: #fefefe;
+  
+  text-shadow: 0px 1px 0px #fff;
 }
 
 html, button, input, select, textarea,
@@ -128,24 +131,34 @@ p, pre {
 }
 .device-list {
   #project_map {
-    .centered;
-    margin-top: 0;
-    border-bottom: 1px solid @zborder; 
+    .content {
+      .centered; 
+      margin-top: 0; margin-bottom: 0;
+      img {width: 100%;}
+    }
   }
 
 }
 
 #devices_container {
   .centered;
+  margin-top: 1em;
 }
 #devices {
   
 }
 .device {
-  margin:0 0 2em 0 ;
+  margin:0;
+  padding: 1em 0;
   float: left;
   clear: both;
   width: 100%;
+  &.focused {
+    
+    box-shadow: 0px 0px 10px #888;
+    border-radius: .5em;
+    background-color: #fff;
+  }
 }
 
 .characteristic {
@@ -183,13 +196,22 @@ p, pre {
   }
   .name {
     padding: .5em 0 .3em 0;
-    font-family: @sans;
+    //font-family: @sans;
     font-size: 1em;
     font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    .ellipsis;
     
+    i {
+      color: white;
+      background-color: @text;
+      
+      padding: .2em;
+      display: inline-block;
+      width: 1em;
+      text-align: center;
+      border-radius: .2em;
+      margin-right: .5em;
+    }
     a {
       text-decoration: none;
       color: @text;
@@ -389,6 +411,12 @@ p, pre {
     padding: 1em;
   }
 }
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .sparkline {
   path{
     fill: none;
@@ -436,7 +464,7 @@ pre[class*="language-"] {
 //forms on homepage
 .actions{
   .content{
-    padding: 1em;
+    padding: 0em 1em;
     
   }
   .action, form {}
@@ -449,9 +477,32 @@ pre[class*="language-"] {
     
     
     .actionContent {
+      
       float: left;
       &:not(.trigger) {
+        
+        .controls {
+          border-bottom: 1px solid #eee;
+          &.hidden {border-bottom: none;}
+        }
+        
+        margin-top: .5em;
         clear: both;
+        width: 100%;
+        label {
+          .ellipsis;
+        }
+        input {
+          padding: .1em .6em;
+          border-bottom: none;
+          &[type=color]{
+            margin: 0;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+          }
+          
+        }
       }
     }
     
@@ -498,3 +549,4 @@ pre[class*="language-"] {
 				}
 			}
 		}
+

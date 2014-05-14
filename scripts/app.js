@@ -169,7 +169,7 @@ var siren = angular
 
   function link(scope, element, attrs) {
       
-        console.log('sparkline el: ', element);
+     //console.log('sparkline el: ', element);
      scope.$watchCollection('stream', function() {
           stream = scope.stream.map(function(item){
             return {'x': parseInt(item[0].getTime()), 'y': item[1]};
@@ -437,6 +437,22 @@ var siren = angular
     link: link
   };
 }])
+.directive('hoverClass', function () {
+    return {
+        restrict: 'A',
+        scope: {
+            hoverClass: '@'
+        },
+        link: function (scope, element) {
+            element.on('mouseenter', function() {
+                element.addClass(scope.hoverClass);
+            });
+            element.on('mouseleave', function() {
+                element.removeClass(scope.hoverClass);
+            });
+        }
+    };
+})
 .directive('srnAction', ['$compile', 'navigator', function($compile, navigator) {
     function link(scope, element, attrs) {
       if (!scope.action) {
@@ -505,7 +521,7 @@ var siren = angular
       
       function Label(obj){
         var defaults = {
-          'class' : "control-label",
+          'class' : "control-label pure-u-1-3",
           'for'   : "zettaAction",
           'text'  : "Action"
         }
@@ -549,7 +565,7 @@ var siren = angular
       function Input(obj){
         var defaults = {
           'name'        : "action",
-          'class'       : "pure-input-1",
+          'class'       : "pure-input-2-3",
           'id'          : "zettaAction",
           'type'        : "text",
           'ng-model'    : "",
@@ -588,7 +604,7 @@ var siren = angular
           });
         
         //don't wrap hidden field in it's own controls
-        var controls = $('<div>').addClass('controls');
+        var controls = $('<div>').addClass('controls pure-g');
         
         var iput = {
             'name'      :   field.name,
@@ -598,8 +614,22 @@ var siren = angular
             'value'     :   field.value
         }
          
-        if(iput.type === 'text'){iput.placeholder = field.title || field.name; }
-        if(iput.type === 'file'){ iput.file-model = 'action.fields[' + i + '].file'; }
+        if(iput.type === 'text'){
+          controls.addClass('text');
+          iput.placeholder = field.title || field.name; 
+          iput.class = "pure-input-1";
+        }
+        if(iput.type === 'file'){ 
+          controls.addClass('file');
+          iput.file-model = 'action.fields[' + i + '].file'; 
+        }
+        if(iput.type === 'hidden'){ 
+          controls.addClass('hidden'); 
+        }
+        if(iput.type === 'number'){
+          controls.addClass('number');
+          console.log('value: ', scope.action);
+        }
         
         var input = Input(iput);
         
@@ -609,9 +639,9 @@ var siren = angular
 
         if (iput.type !== 'hidden') {
           visible = true;
-          if (iput.type !== 'text') { container.append(label) };
+          if (iput.type !== 'text') { controls.prepend(label) };
         }
-
+        
         container.append(controls);
       }; //for actions loop
 
@@ -626,6 +656,7 @@ var siren = angular
       }else {
         var btn = Button({
           'class' : 'submit-button',
+          'html'  : 'Update ' + scope.action.name 
         }, scope);
       }
 

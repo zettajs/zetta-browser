@@ -355,8 +355,8 @@ sirenAppController.controller('AppCtrl', [
 
                   if (actions) {
                       actions = actions.sort(function(a, b) {
-                      console.log('a:', a);
-                      console.log('b:', b);
+                      // console.log('a:', a);
+                      // console.log('b:', b);
                       if (a.fields && a.fields.length === 1 && a.fields[0].type === 'hidden') {
                         return -1;
                       } else if (b.fields && b.fields.length === 1 && b.fields[0].type === 'hidden') {

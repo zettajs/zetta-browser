@@ -97,7 +97,7 @@ sirenFilters.filter('largemapurl', function(){
   return function(project) {
     var tilesUrl = "alanguirand.i04decfa";
     var marker = "pin-l+f00";
-    var url =  "http://api.tiles.mapbox.com/v3/"+tilesUrl+"/"+marker+"("+project.location.lon+","+project.location.lat+")/"+project.location.lon+","+project.location.lat+",1/1280x100.png";
+    var url =  "http://api.tiles.mapbox.com/v3/"+tilesUrl+"/"+marker+"("+project.location.lon+","+project.location.lat+")/"+project.location.lon+","+project.location.lat+",2/1280x100.png";
     return url;
   };
 });

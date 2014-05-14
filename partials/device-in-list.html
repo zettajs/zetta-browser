@@ -1,4 +1,4 @@
-    <div class="device" ng-init="entity=card">
+    <div class="device" ng-init="entity=card" hover-class="focused">
         <!-- Self link for state & actions -->    
         <div class="characteristic self" id="{{entity.heading}}">
             <div class="content">
@@ -18,7 +18,7 @@
               <table class="name_value">
                 <tr>
                   <td class="name">
-                    <div class="truncate" title="state"><i class="fa fa-circle" ></i>&nbsp; state</div>
+                    <div class="truncate" title="state">state</div>
                   </td>
                   <td class="value">{{entity.raw.state}}<span class="units"></span></td>
                 </tr>
@@ -64,7 +64,7 @@
       <div class="actions">
         <div class="content">
           <div class="action {{ action.name }}" ng-repeat="action in entity.actions"> 
-            <form class="pure-form">
+            <form class="pure-form pure-form-aligned">
               <zetta-action value="action"></zetta-action>
             </form>  
           </div>
