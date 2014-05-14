@@ -500,11 +500,7 @@ var siren = angular
         return;
       }
 
-<<<<<<< HEAD
       var container = $('<div>').addClass("actionContent");
-=======
-      var container = $('<form>').addClass('pure-form');
->>>>>>> 5fe5a3a1adcda679d3e4c9d95a4416ff490ead29
       var visible = false;
       
       function Label(obj){
