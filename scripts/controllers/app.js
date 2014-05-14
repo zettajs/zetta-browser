@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-var sirenAppController = angular.module('sirenAppController', ['leaflet-directive']);
+var sirenAppController = angular.module('sirenAppController', []);
 
 sirenAppController.controller('AppCtrl', [
   '$scope'
@@ -12,7 +12,7 @@ sirenAppController.controller('AppCtrl', [
   , '$location'
   , 'navigator'
   , 'getStreams'
-  , function($scope, $sce, $state, $http, $location, navigator, getStreams, leafletDirective) {
+  , function($scope, $sce, $state, $http, $location, navigator, getStreams) {
     angular.extend($scope, {
         markers: {
             devMarker: {
@@ -347,7 +347,6 @@ sirenAppController.controller('AppCtrl', [
                     entity.streams[key] = device.streams[key];
                   });
                   entity.totalStreams = device.totalStreams;
-<<<<<<< HEAD
 
                   var actions = [];
                   angular.forEach(Object.keys(device.actions), function(key) {
@@ -378,10 +377,8 @@ sirenAppController.controller('AppCtrl', [
                   entity.actions = actions;
 
                   /*Object.keys(device.actions).forEach(function(key) {
-=======
 
                   Object.keys(device.actions).forEach(function(key) {
->>>>>>> static-map-app
                     entity.actions[key] = device.actions[key];
                     entity.actions[key].execute = function(cb) {
                       $scope.executeInlineAction(entity.actions[key], cb);
