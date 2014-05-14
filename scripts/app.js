@@ -500,7 +500,7 @@ var siren = angular
         return;
       }
 
-      var container = $('<div>');
+      var container = $('<form>').addClass('pure-form');
       var visible = false;
       
       function Label(obj){
@@ -521,7 +521,7 @@ var siren = angular
           'dclass'  : "pure-button pure-button-primary",
           'class'   : "",
           'type'    : "submit",
-          'icons'   : '<i class="fa fa-caret-right"></i><i class="fa fa-refresh fa-spin"></i><i class="fa fa-check"></i>',
+          'icons'   : '<i class="fa fa-refresh fa-spin"></i><i class="fa fa-check"></i>',
           'html'    : "Update"
         }
         var params = $.extend(defaults, obj);
@@ -549,6 +549,7 @@ var siren = angular
       function Input(obj){
         var defaults = {
           'name'        : "action",
+          'class'       : "pure-input-1",
           'id'          : "zettaAction",
           'type'        : "text",
           'ng-model'    : "",
@@ -556,6 +557,7 @@ var siren = angular
         }
         var params = $.extend(defaults, obj);
         var output = $('<input>')
+          .addClass(params.class)
           .attr('name', params.name)
           .attr('id', params.id)
           .attr('type', params.type)
@@ -619,6 +621,7 @@ var siren = angular
           'class' : 'action-button',
           'html'  : scope.action.name 
         }, scope);
+        container.addClass("trigger");
       }else {
         var btn = Button({
           'class' : 'submit-button',

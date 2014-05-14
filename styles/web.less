@@ -259,6 +259,7 @@ p, pre {
     }
     form {
       padding: .5em 0;
+      
     }
   }
   
@@ -441,6 +442,13 @@ pre[class*="language-"] {
   .action, form {}
   form {
     font-size: .8em;
+    float: left;
+    &:not(.trigger){
+      clear: both; 
+    }
+    .controls {
+      margin: .3em 0;
+    }
   }
 }
 
@@ -453,6 +461,10 @@ pre[class*="language-"] {
       background-color: hsl(0, 0%, 83%);
       color: #333;
   }
+}
+
+.submit-button { 
+  margin: .1em .1em .8em .1em;
 }
 
 .action-button, .submit-button {

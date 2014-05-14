@@ -138,3 +138,9 @@ sirenFilters.filter('icon', function() {
       return mapping[klass] || def;
     }
   });
+
+sirenFilters.filter('sory_actions', function() {
+    return function(action) {
+      console.log(action);
+    }
+});
