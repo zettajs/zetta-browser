@@ -40,7 +40,7 @@
     </style>
 <!--    Load angular as soon as possible    -->
     <script src="scripts/vendor/angular.js"></script>
-    
+
   </head>
   <body>
 
@@ -98,8 +98,14 @@
 				}
 			});  
         
+            $(window).resize(fit_vis);
+        
 		});
-	  
+	   function fit_vis(){
+          vis = $('.vis');
+          vis.find('.dnastrip').width(vis.width());
+          vis.find('svg').width(vis.width());
+        }
 	</script>
   </body>
 </html>

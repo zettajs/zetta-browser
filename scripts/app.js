@@ -107,7 +107,10 @@ var siren = angular
   function link(scope, element, attrs) {
     var canvas = element.children()[0];
     var context = canvas.getContext('2d');
-
+    
+    //this works, but it hurts. 
+    canvas.width = $(canvas).parent().parent().width();
+    
     context.fillStyle = 'rgb(222, 222, 222)';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -166,12 +169,12 @@ var siren = angular
 
   function link(scope, element, attrs) {
       
-        
+        console.log('sparkline el: ', element);
      scope.$watchCollection('stream', function() {
           stream = scope.stream.map(function(item){
             return {'x': parseInt(item[0].getTime()), 'y': item[1]};
           }); 
-      
+          
           var x = d3.time.scale().range([0, scope.width]);
           var y = d3.scale.linear().range([scope.height, 0]);
       
@@ -572,7 +575,7 @@ var siren = angular
       }//Input
       
       
-      console.log("fields: ", scope.action.fields);
+      //console.log("fields: ", scope.action.fields);
 
       for(var i = 0; i < scope.action.fields.length; i++) {
         var field = scope.action.fields[i];

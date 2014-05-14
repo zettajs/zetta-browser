@@ -14,7 +14,8 @@ sirenAppController.controller('AppCtrl', [
   , 'getStreams'
   , function($scope, $sce, $state, $http, $location, navigator, getStreams, leafletDirective) {
     
-   angular.extend($scope, {
+    
+    angular.extend($scope, {
         markers: {
             devMarker: {
               lat: 42,
