@@ -500,7 +500,7 @@ var siren = angular
         return;
       }
 
-      var container = $('<div>');
+      var container = $('<div>').addClass("actionContent");
       var visible = false;
       
       function Label(obj){
@@ -521,7 +521,7 @@ var siren = angular
           'dclass'  : "pure-button pure-button-primary",
           'class'   : "",
           'type'    : "submit",
-          'icons'   : '<i class="fa fa-caret-right"></i><i class="fa fa-refresh fa-spin"></i><i class="fa fa-check"></i>',
+          'icons'   : '<i class="fa fa-refresh fa-spin"></i><i class="fa fa-check"></i>',
           'html'    : "Update"
         }
         var params = $.extend(defaults, obj);
@@ -617,6 +617,7 @@ var siren = angular
 
   
       if (!visible) {
+        container.addClass("trigger");
         var btn = Button({
           'class' : 'action-button',
           'html'  : scope.action.name 
