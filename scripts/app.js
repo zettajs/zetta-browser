@@ -621,7 +621,7 @@ var siren = angular
         }
         if(iput.type === 'file'){ 
           controls.addClass('file');
-          iput.file-model = 'action.fields[' + i + '].file'; 
+          iput['file-model'] = 'action.fields[' + i + '].file'; 
         }
         if(iput.type === 'hidden'){ 
           controls.addClass('hidden'); 
