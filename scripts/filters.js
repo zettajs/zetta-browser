@@ -114,6 +114,8 @@ sirenFilters.filter('deviceurl', function(){
     var deviceMarker = "";
     if(device.location) {
       deviceMarker = marker+"("+device.location.lon+","+device.location.lat+")/";
+    }else {
+      deviceMarker = marker+"("+mapLoc.lon+","+mapLoc.lat+")/";
     }
     var url =  "http://api.tiles.mapbox.com/v3/"+tilesUrl+"/"+deviceMarker+mapLoc.lon+","+mapLoc.lat+",2/600x160.png";
     return url;

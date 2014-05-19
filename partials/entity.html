@@ -25,11 +25,14 @@
     <div class="pure-g-r">
       <div class="pure-u-1-2"><!-- Left Column -->
         <div class="characteristicTitle pure-u-1">
-          <span class="name">
-            <i class="fa fa-cog h_277"></i> {{main.properties.raw.name}}
-          </span>
-          <!--<z-dna-strip entity="entity"></z-dna-strip> -->
-          <span ng-class="main.stateClass" class="state label">{{main.state}}</span>
+          <div class="content">
+            <span class="name">
+              <i class="fa fa-cog h_277"></i> {{main.properties.raw.name}}
+            </span>
+
+            <!--<z-dna-strip entity="entity"></z-dna-strip> -->
+            <span ng-class="main.stateClass" class="state label">{{main.state}}</span>
+          </div>
         </div>
         <div id="map" class="pure-u-1">
             <div class="content" ng-init="">
@@ -74,8 +77,8 @@
             <div class="content">
 
               <h3><i class="fa fa-bolt"></i>  State History</h3>
-              <span ng-show="!stateLogs.length">State transitions for: </span>
-              <span ng-show="stateLogs.length">Latest {{stateLogs.length | pluralize:'transition'}} for: </span>
+              <span ng-show="!stateLogs.length" class="h_197">State transitions for: </span>
+              <span ng-show="stateLogs.length" class="h_197">Latest {{stateLogs.length | pluralize:'transition'}} for: </span>
               {{main.properties.raw.name}}
               <!-- scrollable logs here -->
               <div class="state_log">
