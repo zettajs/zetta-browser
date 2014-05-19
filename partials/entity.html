@@ -58,8 +58,12 @@
               <h5 ng-show="action.title">{{action.title}}</h5>
               <h5 ng-show="!action.title">{{action.name}}</h5>
               <form class="form-horizontal">
-                <zetta-action value="action"></zetta-action>
-
+                <srn-action value="action"></srn-action>
+                <div class="control-group">
+                  <div class="controls">
+                    <button class="pure-button pure-button-primary" ng-click="execute(action)">Submit</button>
+                  </div>
+                </div>
                 
               </form>
             </div>
