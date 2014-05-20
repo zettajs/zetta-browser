@@ -12,6 +12,7 @@ var siren = angular
     , 'leaflet-directive'
     , 'akoenig.deckgrid'
     , 'rt.encodeuri'
+    , 'angular-responsive'
   ]);
 
 

@@ -15,6 +15,12 @@
 @ipad: ~"all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait)";
 @mobile: ~"only screen and (max-width: 768px)";
 
+@media only screen and (max-width: 480px) {
+  .pure-form button[type=submit] {
+    margin: .7em .3em 0 0;
+  }
+}
+
 body, html, #app_container{
   height: 100%;
 }
@@ -33,6 +39,7 @@ a {
     color: #fff;
     background-color: @link;
   }
+  @media @mobile {font-size: 1.3em;}
 }
 svg {
   width: 100%;
@@ -562,7 +569,7 @@ pre[class*="language-"] {
 
 .action-button {
   
-  margin: .1em .1em .4em .1em;
+  margin: .1em .3em .4em .1em;
   padding: .2em .4em;
   
   &.pure-button-primary {
