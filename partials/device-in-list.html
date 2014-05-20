@@ -3,24 +3,30 @@
         <div class="characteristic self" id="{{entity.heading}}">
             <div class="content">
               
+              <table class="name_value">
+                <tr>
+                  <td>
+                    <div class="truncate name device">
+                      <a ng-href="#/entity?url={{ entity.selfLink.href | encodeURIComponent }}">
+                        <i class="fa {{entity.raw.type | icon}}"></i> {{entity.heading}}
+                      </a>
+                    </div>
+                  </td>
+                  <td class="value">
+                    <div class="text_location" ng-show="entity.location.placename">
+                      <i class="fa fa-map-marker"></i> {{entity.location.placename}}
+                    </div>
+                  </td>
+                </tr>
+              </table>
               
-              
-              
-              <div class="name" ng-class="">
-                <a ng-href="#/entity?url={{ entity.selfLink.href | encodeURIComponent }}">
-                  <i class="fa {{entity.raw.type | icon}}"></i> {{entity.heading}}</a>
-                <!-- <a href="mock-device-show.html">{{entity.heading}}</a> -->
-              </div>
-              <div class="text_location" ng-show="entity.location.placename">
-                <i class="fa fa-map-marker"></i> {{entity.location.placename}}
-              </div>
               
               <table class="name_value">
                 <tr>
                   <td class="name">
                     <div class="truncate" title="state">state</div>
                   </td>
-                  <td class="value">{{entity.raw.state}}<span class="units"></span></td>
+                  <td class="value state">{{entity.raw.state}}<span class="units"></span></td>
                 </tr>
               </table>
               

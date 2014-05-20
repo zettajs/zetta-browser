@@ -13,6 +13,7 @@
 
 //target ipad & only in portrait orientation
 @ipad: ~"all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait)";
+@mobile: ~"only screen and (max-width: 768px)";
 
 body, html, #app_container{
   height: 100%;
@@ -141,8 +142,9 @@ p, pre {
 }
 
 #devices_container {
+ 
   .centered;
-  margin-top: 1em;
+
 }
 #devices {
   
@@ -188,12 +190,11 @@ p, pre {
     }
   }
   .text_location {
-    color: hsl(0, 0%, 70%);
+    color: hsl(0, 0%, 70%); 
     cont-weight: 400;
     padding: .3em .35em 0 .5em;
     i {margin-right: .25em;}
     font-size: .8em;
-    float: left;
   }
   .name {
     padding: .5em 0 .3em 0;
@@ -202,7 +203,7 @@ p, pre {
     font-weight: 400;
     .ellipsis;
     
-    i {
+    &.device i {
       color: white;
       background-color: @text;
       
@@ -359,28 +360,39 @@ p, pre {
     ul, li {margin: 0; padding: 0; list-style-type: none;}
     text-align: right;
     ul {display: inline-block;}
+    @media @mobile {
+      img {width: 60px;}
+    }
   }
   
   
 }
 
-.breadcrumbs .content{
-    font-family: @sans;
-    font-size: 1.8em;
-  @media @ipad {font-size: 1.2em;}
-    a {color: #888;}
-    padding: .2em 0;
-    a {text-decoration: none;}
-    ul {
-      margin: 0; 
-      padding: 0em;
-      list-style-type: none;
-    }
-    li {
-      color: hsl(0, 0%, 50%);
-      display: inline;
-    }
+
+.breadcrumbs 
+  {
     
+    .content{
+      font-family: @sans;
+      font-size: 1.8em;
+    
+      a {color: #888;}
+      padding: .2em 0;
+      a {text-decoration: none;}
+      ul {
+        margin: 0; 
+        padding: 0em;
+        list-style-type: none;
+      }
+      li {
+        color: hsl(0, 0%, 50%);
+        display: inline;
+      }
+      
+      @media @mobile {font-size: 1em;}
+      @media @ipad {font-size: 1.2em;}
+      
+    }
   }
 
 #footer {
@@ -405,10 +417,16 @@ p, pre {
   width: 80%;
   min-width: 1028px;
   margin: 2em auto;
+  @media @mobile {
+    width: 90%;
+    min-width: 300px;
+    padding: .5em;
+    margin: 1em auto;
+  }
   @media @ipad {
     width: auto;
     min-width: 0;
-    margin: 0em;
+    margin: 1em 0em 0em 0e;
     padding: 1em;
   }
 }
@@ -436,7 +454,7 @@ pre[class*="language-"] {
 /* Overview page columns */
 .deckgrid[deckgrid]::before {
   
-    content: '4 pure-u-1-4';
+    content: '4 .pure-u-sm-1.pure-u-1-4';
     font-size: 0;
     visibility:hidden;
     
@@ -456,9 +474,12 @@ pre[class*="language-"] {
   .value {
     padding-left: .5em;
     text-align: right;
-    color: #000;
-    font-size: 1.2em;
-    font-weight: bold;
+    
+    &.state {
+      color: #000;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
   }
 }
 
@@ -483,7 +504,7 @@ pre[class*="language-"] {
       &:not(.trigger) {
         
         .controls {
-          border-bottom: 1px solid #eee;
+          
           &.hidden {border-bottom: none;}
         }
         
@@ -522,7 +543,7 @@ pre[class*="language-"] {
 }
 
 .submit-button { 
-  margin: .1em .1em .8em .1em;
+  margin: .4em .1em 1.2em .1em;
 }
 
 .action-button, .submit-button {
