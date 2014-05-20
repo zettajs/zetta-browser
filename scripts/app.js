@@ -175,7 +175,8 @@ var siren = angular
             return {'x': parseInt(item[0].getTime()), 'y': item[1]};
           }); 
           
-          var x = d3.time.scale().range([0, scope.width]);
+          console.log();
+          var x = d3.time.scale().range([0, element.parent()[0].clientWidth]);
           var y = d3.scale.linear().range([scope.height, 0]);
       
           x.domain(d3.extent(stream, function(d) {return d.x}));
