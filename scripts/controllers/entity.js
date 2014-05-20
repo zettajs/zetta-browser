@@ -153,6 +153,16 @@ sirenEntityController.controller('EntityCtrl', [
 
   };
 	
+  $scope.executeInlineAction = function(action, cb) {
+    navigator.execute(action).then(function(result) {
+      // Instead of throwing all kinds of errors
+      if (result.noop) {
+        return;
+      }
+      cb();
+    });
+  };
+
   $scope.logger = function(url){
     
     var ws = new WebSocket(url);
@@ -229,6 +239,12 @@ sirenEntityController.controller('EntityCtrl', [
     $scope.main.class = JSON.stringify(data.class);
     $scope.main.actions = data.actions;
     $scope.main.stateClass = 'label-info';
+
+    angular.forEach($scope.main.actions, function(action) {
+      action.execute = function(cb) {
+        $scope.executeInlineAction(action, cb);
+      };
+    });
 	  
     var oldState = $scope.main.state;
 	
