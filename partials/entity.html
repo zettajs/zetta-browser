@@ -56,17 +56,17 @@
         </div>-->
         <div id="actions" ng-show="main.actions.length">
           <h3><i class="fa fa-bell-o"></i> Actuators</h3>
-          <div class="pure-g">
+          
             <div class="actions">
               <div class="content">
-                  <div ng-repeat="action in main.actions" class="pure-u-1-2">
+                  <div class="action {{ action.name }}" ng-repeat="action in main.actions">
                     <form class="pure-form pure-form-aligned">
                       <zetta-action value="action"></zetta-action>
                     </form>
                   </div>
               </div>
             </div>
-          </div>
+          
         </div><!-- Actuators -->
 
          <div id="states" class="pure-u-1">

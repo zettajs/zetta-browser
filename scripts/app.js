@@ -517,7 +517,7 @@ var siren = angular
         return;
       }
 
-      var container = $('<div>').addClass("actionContent");
+      var container = $('<div>').addClass("actionContent " + scope.action.name);
       var visible = false;
       
       function Label(obj){
