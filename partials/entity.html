@@ -57,18 +57,14 @@
         <div id="actions" ng-show="main.actions.length">
           <h3><i class="fa fa-bell-o"></i> Actuators</h3>
           <div class="pure-g">
-            <div ng-repeat="action in main.actions" class="pure-u-1-2">
-              <h5 ng-show="action.title">{{action.title}}</h5>
-              <h5 ng-show="!action.title">{{action.name}}</h5>
-              <form class="form-horizontal">
-                <zetta-action value="action"></zetta-action>
-                <div class="control-group">
-                  <div class="controls">
-                    <button class="pure-button pure-button-primary" ng-click="execute(action)">Submit</button>
+            <div class="actions">
+              <div class="content">
+                  <div ng-repeat="action in main.actions" class="pure-u-1-2">
+                    <form class="pure-form pure-form-aligned">
+                      <zetta-action value="action"></zetta-action>
+                    </form>
                   </div>
-                </div>
-                
-              </form>
+              </div>
             </div>
           </div>
         </div><!-- Actuators -->
