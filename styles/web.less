@@ -89,6 +89,7 @@ p, pre {
   height: 100%;
   #footer{ 
     margin: 5em auto 0 auto; 
+    
   }
 }
 #zetta-start {
@@ -426,12 +427,20 @@ p, pre {
   .centered;
   position: relative;
   bottom: 0;
+  text-align: center;
   
   font-size: 1.4em;
-  .content{padding: 1em;}
-  border-top: 1px solid @zborder; 
   
-  .logo {text-align: right;}
+  border-top: 1px solid @zborder; 
+  .content{padding: 1em;}
+  .logo {
+    text-align: right;
+    .content {padding: 1.7em 1em;}
+  }
+  .icons {
+    text-align: left;
+    
+  }
   
   ul{margin: 0; padding: .2em 0 0 0; list-style-type: none;}
   li {
