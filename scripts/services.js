@@ -21,14 +21,18 @@ sirenServices.factory('getStreams', ['$q', '$http',
               totalActions: 0
             };
           
-            if (response.actions) {
+            if (response.links) {
               //go over each action
-              angular.forEach(response.actions, function(action) {
-                if (action.class && action.class.indexOf('event-subscription') !== -1) {
+              angular.forEach(response.links, function(link) {
+                if (link.rel.indexOf('http://rels.zettajs.io/object-stream') !== -1) {
+                  if (link.title === 'logs' || link.title === 'state') {
+                    return;
+                  }
+
 //                if it has a stream, add it to e
                   var stream = {
-                    action: action,
-                    name: action.name.replace(/\//g, '_'),
+                    action: link,
+                    name: link.title.replace(/\//g, '_'),
                     data: [],
                     xFunction: function(){ return function(d){ return d[0]; } },
                     yFunction: function(){ return function(d){ return d[1]; } },
@@ -36,17 +40,17 @@ sirenServices.factory('getStreams', ['$q', '$http',
                     min: null,
                     max: null
                   };
-                  e.streams[stream.name] = stream;
+                  e.streams[link.title] = stream;
                   e.totalStreams++;
                 } else {
 //                if it has another action type, add it to e                  
-                  var act = { 
-                    name: action.name.replace(/\//g, '_'),
-                    action: action
+                  /*var act = { 
+                    name: link.title.replace(/\//g, '_'),
+                    action: link
                   }
-                  angular.extend(act, action);
+                  angular.extend(act, link);
                   e.actions[act.name] = act;
-                  e.totalActions++;
+                  e.totalActions++;*/
                   
                 }
               });

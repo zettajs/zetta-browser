@@ -22,7 +22,7 @@ var siren = angular
     , function(classRouterProvider, $stateProvider) {
       // Route Siren entity classes to UI states.
       classRouterProvider
-        .when(['app'], 'app')
+        .when(['server'], 'app')
         .otherwise('entity');
 
       // Configure UI states for app. (this should be rolled up into the .when declarations above
@@ -119,7 +119,7 @@ var siren = angular
     function getColor() {
       return {
         hue: textToColor(scope.entity.raw.state),
-        saturation: textToSaturation(scope.entity.raw.name),
+        saturation: textToSaturation(scope.entity.raw.id),
         lightness: '50%'
       };
     };
@@ -187,7 +187,11 @@ var siren = angular
               .x(function(d) {return x(d.x);})
               .y(function(d) {return y(d.y);});
        
-          element.find('path').attr({"d": scope.line(stream)});
+         var d = scope.line(stream);
+
+         if (d) {
+           element.find('path').attr({"d": scope.line(stream)});
+         }
     }); 
 
   }
@@ -300,7 +304,7 @@ var siren = angular
     function getColor(entity) {
       return {
         hue: textToColor(entity.raw.state),
-        saturation: textToSaturation(entity.raw.name),
+        saturation: textToSaturation(entity.raw.id),
         lightness: '50%'
       };
     };
