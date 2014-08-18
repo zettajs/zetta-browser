@@ -13,7 +13,7 @@
           <div class="row stream pure-g" ng-repeat="stream in device.streams">
             <div class="name pure-u-1-2 pure-u-md-1-3">: {{ stream.name }}</div>
             <div class="vis sparkline pure-u-1 pure-u-md-5-12" ng-if="stream.type === 'numerical'">
-              <sparkline height="100" stream="stream.data" id="{{ stream.name }}"></sparkline>
+              <sparkline height="50" stream="stream.data" id="{{ stream.name }}"></sparkline>
             </div>
             <div class="vis sparkline pure-u-1 pure-u-md-5-12" ng-if="stream.type === 'categorical'">
               <z-dna-strip width="200" height="20" stream="stream"></z-dna-strip>

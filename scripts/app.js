@@ -190,7 +190,7 @@ var zetta = angular
          var d = scope.line(stream);
 
          if (d) {
-           element.find('path').attr({"d": scope.line(stream)});
+           element.find('path').attr({"d": d});
          }
     }); 
 
