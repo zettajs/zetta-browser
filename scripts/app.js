@@ -1,11 +1,10 @@
-var siren = angular
+var zetta = angular
   .module('zetta', [
     'siren'
     , 'ui.state'
     , 'ngAnimate'
     , 'luegg.directives'
     , 'sirenFilters'
-    , 'sirenAppController'
     , 'sirenEntityController'
     , 'sirenMainController'
     , 'sirenServices'
@@ -16,14 +15,15 @@ var siren = angular
   ]);
 
 
-  siren.config([
+  zetta.config([
     'classRouterProvider'
     , '$stateProvider'
     , function(classRouterProvider, $stateProvider) {
       // Route Siren entity classes to UI states.
       classRouterProvider
+        .when(['root'], 'root')
         .when(['server'], 'app')
-        .otherwise('entity');
+        .otherwise('device');
 
       // Configure UI states for app. (this should be rolled up into the .when declarations above
       $stateProvider
@@ -32,15 +32,15 @@ var siren = angular
           templateUrl: 'partials/start.html',
           controller: 'MainCtrl'
         })
-        .state('app', {
-          url: '/app?url',
-          templateUrl: 'partials/app.html',
-          controller: 'AppCtrl'
+        .state('root', {
+          url: '/root?url',
+          templateUrl: 'partials/root.html',
+          controller: 'RootCtrl'
         })
-        .state('entity', {
-          url: '/entity?url',
-          templateUrl: 'partials/entity.html',
-          controller: 'EntityCtrl'
+        .state('device', {
+          url: '/device?url',
+          templateUrl: 'partials/device.html',
+          controller: 'DeviceCtrl'
         });
     }
   ])
@@ -118,8 +118,8 @@ var siren = angular
     var colors = [];
     function getColor() {
       return {
-        hue: textToColor(scope.entity.raw.state),
-        saturation: textToSaturation(scope.entity.raw.id),
+        hue: textToColor(scope.stream.current),
+        saturation: textToSaturation(scope.stream.name),
         lightness: '50%'
       };
     };
@@ -135,16 +135,16 @@ var siren = angular
     var last = getColor();
     colors.push(last);
 
-    var lastTransitionTimer;
+    /*var lastTransitionTimer;
     scope.$watch('entity.lastTransition', function() {
       if (scope.entity.lastTransition === null) {
         return;
       }
 
-      colors.unshift(getTransitionColor(scope.entity.raw.state));
+      colors.unshift(getTransitionColor(scope.entity.current));
 
       scope.entity.lastTransition = null;
-    });
+    });*/
 
     var index = 1;
     var interval = setInterval(function() {
@@ -160,7 +160,8 @@ var siren = angular
   return {
     restrict: 'E',
     scope: {
-      entity: '='
+      stream: '=',
+      height: '='
     },
     templateUrl: 'partials/dna-strip.html',
     link: link
@@ -176,7 +177,6 @@ var siren = angular
             return {'x': parseInt(item[0].getTime()), 'y': item[1]};
           }); 
           
-          console.log();
           var x = d3.time.scale().range([0, element.parent()[0].clientWidth]);
           var y = d3.scale.linear().range([scope.height, 0]);
       
@@ -536,7 +536,7 @@ var siren = angular
           .addClass(params.class)
           .attr('for',params.for)
           .text(params.text);
-      }//Label
+      }
       
       function Button(obj, scope){
         var defaults = {
@@ -566,7 +566,7 @@ var siren = angular
         
         return btn;
         
-      }//Label
+      }
       
       function Input(obj){
         var defaults = {
@@ -596,11 +596,8 @@ var siren = angular
         
         return output;
         
-      }//Input
+      }
       
-      
-      //console.log("fields: ", scope.action.fields);
-
       for(var i = 0; i < scope.action.fields.length; i++) {
         var field = scope.action.fields[i];
 
@@ -609,7 +606,6 @@ var siren = angular
             'text': field.title || field.name
           });
         
-        //don't wrap hidden field in it's own controls
         var controls = $('<div>').addClass('controls pure-g');
         
         var iput = {
@@ -634,14 +630,39 @@ var siren = angular
         }
         if(iput.type === 'number'){
           controls.addClass('number');
-          console.log('value: ', scope.action);
         }
         
-        var input = Input(iput);
-        
-        $compile(input)(scope);
+        if (iput.type === 'radio' || iput.type === 'checkbox') {
+          iput.value.forEach(function(val) {
+            var input = $('<input>')
+              .attr('name', iput.name)
+              .attr('id', scope.action.name + field.name + val.value)
+              .attr('type', iput.type)
+              .attr('ng-model', iput['ng-model'])
+              .val(val.value);
 
-        controls.append(input);
+            $compile(input)(scope);
+
+            var con = $('<div>').addClass('pure-u-1');
+
+            con.append(input);
+
+            var label = $('<label>')
+              .attr('for', scope.action.name + field.name + val.value)
+              .text(val.title || val.value);
+
+            con.append('   ');
+            con.append(label);
+            con.append($('<br/>'));
+            controls.append(con);
+          });
+        } else {
+          var input = Input(iput);
+          
+          $compile(input)(scope);
+
+          controls.append(input);
+        }
 
         if (iput.type !== 'hidden') {
           visible = true;
@@ -659,10 +680,10 @@ var siren = angular
           'html'  : scope.action.name 
         }, scope);
         container.addClass("trigger");
-      }else {
+      } else {
         var btn = Button({
           'class' : 'submit-button',
-          'html'  : 'Update ' + scope.action.name 
+          'html'  : scope.action.name 
         }, scope);
       }
 

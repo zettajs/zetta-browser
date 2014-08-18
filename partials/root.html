@@ -1,0 +1,14 @@
+<div id="response" ng-cloak ng-init="init()" class="device-list">
+  <zetta-pinned/>
+  <zetta-servers ng-show="servers.length" servers="servers"/>
+  <zetta-muted/>
+  <!--<pre><code>{{ servers | prettify }}</code></pre>-->
+  <div ng-repeat="server in servers">
+    <div>
+      <h2>{{ server.name }}</h2>
+      <div ng-repeat="device in server.devices">
+        <a ng-click="resolve(device.href)">{{ device.type }} : {{ device.name }}</a>
+      </div>
+    </div>
+  </div>
+</div>

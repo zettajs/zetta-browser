@@ -1,0 +1,73 @@
+<ng-include src="'partials/header.html'"></ng-include>
+<section class="page_content pure-g" id="show" ng-init="init()">
+  <header class="pure-u-1">
+    <section class="content">
+      <h1>{{ device.properties.name}}</h1>
+    </section>
+  </header>
+  <div class="focus pure-u-1">
+    <div class="characteristic">
+      <h2 class="name">{{ device.properties.name }}</h2>
+      <section class="devices pure-g">
+        <section class="device pure-u-1">
+          <div class="row stream pure-g" ng-repeat="stream in device.streams">
+            <div class="name pure-u-1-2 pure-u-md-1-3">: {{ stream.name }}</div>
+            <div class="vis sparkline pure-u-1 pure-u-md-5-12" ng-if="stream.type === 'numerical'">
+              <sparkline height="100" stream="stream.data" id="{{ stream.name }}"></sparkline>
+            </div>
+            <div class="vis sparkline pure-u-1 pure-u-md-5-12" ng-if="stream.type === 'categorical'">
+              <z-dna-strip width="200" height="20" stream="stream"></z-dna-strip>
+            </div>
+            <div class="value before-md pure-u-md-1-4">&nbsp;{{ stream.current }}</div>
+          </div>
+        </section>
+      </section>
+    </div>
+  </div>  
+  <section class="device-meta pure-g">
+    <div class="actions meta-group pure-u-1 pure-u-md-1-3">
+      <h2 class="name pure-u-1">Actions</h2>
+      <section class="content">
+        <span ng-show="!device.actions || !device.actions.length">No actions available.</span>
+        <div class="action {{ action.name }}" ng-repeat="action in device.actions">
+          <form class="pure-form pure-form-aligned">
+            <zetta-action value="action"></zetta-action>
+          </form>
+        </div>
+      </section>
+    </div>
+    <div class="log meta-group pure-u-1 pure-u-md-2-3">
+      <h2 class="name pure-u-1">Events</h2>
+      <section class="content">
+        <span ng-show="!stateLogs.length" class="h_197">State transitions for: </span>
+        <span ng-show="stateLogs.length" class="h_197">Latest {{stateLogs.length | pluralize:'transition'}} for: </span>
+        {{device.name}}
+        <!-- scrollable logs here -->
+        <div class="state_log">
+          <ul>
+            <li ng-repeat="log in stateLogs" ng-class="{latest: $index==stateLogs.length-1}">
+              <strong>{{ log.transition }}</strong> <span>{{log.time.localTime}} ({{log.time.elapsed}} ms later)</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <div class="properties meta-group pure-u-1 pure-u-md-1-3">
+      <h2 class="name pure-u-1">Properties</h2>
+      <section class="content">
+        <code><pre>{{ device.properties | prettify }}</pre></code>
+      </section>
+    </div>
+    <div class="api meta-group pure-u-1 pure-u-md-2-3">
+      <h2 class="name pure-u-1">API Request</h2>
+      <section class="content request">
+        <code><pre>{{ request }}</pre></code>
+      </section>
+      <h2 class="name pure-u-1">API Response</h2>
+      <section class="content response">
+        <code><pre>{{ response | prettify }}</pre></code>
+      </section>
+    </div>
+  </section>
+</section>
+<ng-include src="'partials/footer.html'"></ng-include>
