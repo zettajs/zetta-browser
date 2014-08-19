@@ -39,7 +39,7 @@
           </div>
           <div class="value before-md pure-u-md-1-4">&nbsp;{{ stream.current }}</div>
         </div>
-        <div class="row action pure-g" ng-repeat="action in device.actions">
+        <form class="row action pure-g pure-form" ng-repeat="action in device.actions">
           <div class="switches pure-u-1-6 pure-u-md-1-12">
             <b class="mute">eye</b>&nbsp;<b class="pin">pushpin</b>
           </div>
@@ -52,7 +52,7 @@
             <zetta-action value="action"/>
           </div>
           <div class="value before-md pure-u-md-1-4"></div>
-        </div>
+        </form>
       </section>
     </section>
   </div>

@@ -1,4 +1,5 @@
-angular.module('zetta').directive('zettaWampumBelt', ['$compile', function($compile) {
+angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared', 
+  function($compile, zettaShared) {
   function textToColor(text, min, max) {
     if (!min) {
       min = 0;
@@ -72,7 +73,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', function($comp
       y = y + height;
       x = context.canvas.width - unitWidth;
 
-      if (row.streams.length) {
+      /*if (row.streams.length) {
         row.streams.forEach(function(strm) {
           strm.forEach(function(color) {
             context.fillStyle = 'hsl(' + color.hue + ', ' + color.saturation + ', 50%)';
@@ -83,7 +84,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', function($comp
           y = y + height;
           x = context.canvas.width - unitWidth;
         });
-      }
+      }*/
     });
 
     if (cb) cb();
@@ -91,12 +92,13 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', function($comp
 
   function link(scope, element, attrs) {
     var canvas = element.children()[0];
+    canvas.height = 0;
     var context = canvas.getContext('2d');
 
-    function getColor(entity) {
+    function getColor(stream) {
       return {
-        hue: textToColor(entity.raw.state),
-        saturation: textToSaturation(entity.raw.id),
+        hue: textToColor(stream.current),
+        saturation: textToSaturation(stream.name),
         lightness: '50%'
       };
     };
@@ -118,29 +120,71 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', function($comp
       };
     }
 
-    scope.$watchCollection('main.entities', function() {
-      if (scope.main.entities.length === 0) {
+    var streams = [];
+    var addedHrefs = [];
+    scope.$watchCollection('servers', function() {
+      scope.servers.forEach(function(server, i) {
+        scope.$watchCollection('servers[' + i + '].devices', function() {
+          if (!scope.servers[i].devices) {
+            return;
+          }
+          scope.servers[i].devices.forEach(function(device, j) {
+            scope.$watchCollection('servers[' + i + '].devices[' + j + '].streams', function() {
+              var s = scope.servers[i].devices[j].streams;
+              s.forEach(function(stream, k) {
+                if (addedHrefs.indexOf(stream.href) === -1) {
+                  streams.push(stream);
+                  addedHrefs.push(stream.href);
+                  update();
+                }
+
+                scope.$watchCollection('servers[' + i + '].devices[' + j + '].streams[' + k + '].data', function() {
+                  var stream = scope.servers[i].devices[j].streams[k];
+                  var d = stream.data;
+                  if (d.length === 0) {
+                    return;
+                  }
+                  var arr = d[d.length - 1];
+                  //var c = { hue: (Math.abs(arr[1].toFixed(0) % 360)), saturation: '100%' };
+                  var c = getStreamColor(arr[1], stream.min, stream.max);
+                  var last = getColor(stream);
+                  var block = {
+                    type: 'stream',
+                    color: last
+                  };
+                  colors[i].state.unshift(block);
+                });
+              });
+
+            });
+          });
+        });
+      });
+    });
+
+    var colors = [];
+
+    window.onresize = function() {
+      canvas.width = window.innerWidth;//unitSize * 36;
+      canvas.height = streams.length * unitSize;
+      context.fillStyle = 'rgb(222, 222, 222)';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      drawCanvas(context, colors);
+    };
+
+    var update = function() {
+      if (streams.length === 0) {
         return;
       }
 
       var unitSize = UNIT_SIZE;
       canvas.width = window.innerWidth;//unitSize * 36;
-      canvas.height = scope.main.entities.length * unitSize;
+      canvas.height = streams.length * unitSize;
       context.fillStyle = 'rgb(222, 222, 222)';
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      var colors = [];
-
-      window.onresize = function() {
-        canvas.width = window.innerWidth;//unitSize * 36;
-        canvas.height = scope.main.entities.length * unitSize;
-        context.fillStyle = 'rgb(222, 222, 222)';
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        drawCanvas(context, colors);
-      };
-
-      angular.forEach(scope.main.entities, function(entity, i) {
-        var last = getColor(entity);
+      angular.forEach(streams, function(stream, i) {
+        var last = getColor(stream);
         var block = {
           type: 'state',
           color: last
@@ -148,82 +192,31 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', function($comp
 
         colors[i] = {};
         colors[i].state = [];
-        colors[i].streams = [];
         colors[i].state.push(block);
-
-        var identifier = 'main.entities[' + i + ']';
-        var lastTransitionIdentifier = identifier + '.lastTransition';
-        scope.$watch(lastTransitionIdentifier, function() {
-          if (scope.main.entities[i].lastTransition === null ||
-              scope.main.entities[i].lastTransition === undefined) {
-            return;
-          }
-
-          var block = {
-            type: 'transition',
-            color: getTransitionColor(scope.main.entities[i].raw.state)
-          };
-
-          colors[i].state.unshift(block);
-        });
-
-        var watchedStream = [];
-
-        scope.$watchCollection(identifier, function() {
-
-          var keys = Object.keys(entity.streams);
-
-          if (keys.length === 0) {
-            return;
-          }
-
-          angular.forEach(keys, function(key) {
-            if (watchedStream.indexOf(key) !== -1) {
-              return;
-            }
-
-            watchedStream.push(key);
-            canvas.height += unitSize;
-            colors[i].streams.push([]);
-            var streamIndex = colors[i].streams.length - 1;
-
-            scope.$watchCollection('main.entities[' + i + '].streams["' + key + '"].data', function() {
-              var d = entity.streams[key].data;
-              if (d.length === 0) {
-                return;
-              }
-              var arr = d[d.length - 1];
-              //var c = { hue: (Math.abs(arr[1].toFixed(0) % 360)), saturation: '100%' };
-              var c = getStreamColor(arr[1], entity.streams[key].min, entity.streams[key].max);
-              colors[i].streams[streamIndex].unshift(c);
-            });
-          });
-        }, true);
       });
-      
-      var interval = setInterval(function() {
-        angular.forEach(scope.main.entities, function(entity, i) {
-          var last = getColor(scope.main.entities[i]);
-          var block = {
-            type: 'state',
-            color: last
-          };
+    };
+
+    update();
+    
+    var interval = setInterval(function() {
+      angular.forEach(streams, function(entity, i) {
+        var last = getColor(streams[i]);
+        var block = {
+          type: 'stream',
+          color: last
+        };
+        try {
+          colors[i].state = colors[i].state || [];
           colors[i].state.unshift(block);
           colors[i].state = colors[i].state.slice(0, 49);
-          colors[i].streams.forEach(function(strm, j) {
-            var streamColors = colors[i].streams[j];
-            var last = streamColors[0];
+        } catch(e) {
+          console.log('current:', i);
+          console.log('length:', colors.length);
+        }
+      });
 
-            if (last) {
-              colors[i].streams[j].unshift(last);
-            }
-            colors[i].streams[j] = colors[i].streams[j].slice(0, 49);
-          });
-        });
-
-        drawCanvas(context, colors);
-      }, 50);
-    });
+      drawCanvas(context, colors);
+    }, 50);
   }
 
   return {

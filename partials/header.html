@@ -1,27 +1,20 @@
-<header ng-controller="HeaderCtrl">  
-  <nav>
-    <section class="pure-g">
-        <a href="/" class="home pure-u-1-6"><div class="zetta-logo">zetta</div></a>
-      
-        
-        <ul class="pure-u-3-4">
-          <li ng-repeat="crumb in breadcrumbs">
-            <span ng-if="crumb.href">
-              <a ng-click="follow(crumb.href)">{{ crumb.title }}</a>
-            </span>
-            <span ng-if="!crumb.href">
-              {{ crumb.title }}
-            </span>
-          </li>
-        </ul>
-      <!--
-        <div class="pure-u-3-4" id="navToggle">
-          <button class="icon"><span>toggle menu</span></button>
-        </div>
-      -->
-    </section>
-  </nav>
-</header>
-<section id="wampum" servers="servers">
-<!--<zetta-wampum-belt/>-->
-</section>
+<div ng-controller="HeaderCtrl">
+  <header>  
+    <nav>
+      <section class="pure-g">
+          <a href="/" class="home pure-u-1-6"><div class="zetta-logo">zetta</div></a>
+          <ul class="pure-u-3-4">
+            <li ng-repeat="crumb in breadcrumbs">
+              <span ng-if="crumb.href">
+                <a ng-click="follow(crumb.href)">{{ crumb.title }}</a>
+              </span>
+              <span ng-if="!crumb.href">
+                {{ crumb.title }}
+              </span>
+            </li>
+          </ul>
+      </section>
+    </nav>
+  </header>
+  <!--<zetta-wampum-belt id="wampum" servers="servers"/>-->
+</div>
