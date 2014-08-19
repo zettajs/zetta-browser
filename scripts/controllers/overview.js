@@ -1,4 +1,4 @@
-angular.module('zetta').controller('RootCtrl', [
+angular.module('zetta').controller('OverviewCtrl', [
   '$scope', '$state', '$http', 'navigator', 'zettaShared', function($scope, $state, $http, navigator, zettaShared) {
     $scope.pinned = [];
     $scope.servers = zettaShared.servers = [];

@@ -1,9 +1,4 @@
-'use strict';
-
-/* Controllers */
-var sirenMainController = angular.module('sirenMainController', []);
-
-sirenMainController.controller('MainCtrl', [
+angular.module('zetta').controller('MainCtrl', [
   '$scope', '$state', 'navigator', 'appState', 'zettaShared',
   function($scope, $state, navigator, appState, zettaShared) {
       zettaShared.breadcrumbs = [];
