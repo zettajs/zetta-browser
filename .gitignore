@@ -1,6 +1,7 @@
 *.swo
 *.swp
 *.map
+.brackets.json
 .DS_Store
 node_modules
 .tern-port
