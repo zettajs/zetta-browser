@@ -42,7 +42,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
     return ((code * Math.floor(text.length/3)) % 100) + '%';
   }
 
-  var UNIT_SIZE = 10;
+  var UNIT_SIZE = 6;
 
   function drawCanvas(context, colors, cb) {
     var unitWidth = context.canvas.width / 36;
