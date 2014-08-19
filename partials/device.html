@@ -2,12 +2,12 @@
 <section class="page_content pure-g" id="show" ng-init="init()">
   <header class="pure-u-1">
     <section class="content">
-      <h1>{{ device.properties.name}}</h1>
+      <h1>{{ device.properties.name || device.properties.type }}</h1>
     </section>
   </header>
   <div class="focus pure-u-1">
     <div class="characteristic">
-      <h2 class="name">{{ device.properties.name }}</h2>
+      <h2 class="name">{{ device.properties.name || device.properties.type }}</h2>
       <section class="devices pure-g">
         <section class="device pure-u-1">
           <div class="row stream pure-g" ng-repeat="stream in device.streams">
@@ -38,10 +38,13 @@
     </div>
     <div class="log meta-group pure-u-1 pure-u-md-2-3">
       <h2 class="name pure-u-1">Events</h2>
-      <section class="content">
+      <section class="content" ng-if="!device.properties.hasOwnProperty('state')">
+      No transitions available.
+      </section>
+      <section class="content" ng-if="device.properties.hasOwnProperty('state')">
         <span ng-show="!stateLogs.length" class="h_197">State transitions for: </span>
         <span ng-show="stateLogs.length" class="h_197">Latest {{stateLogs.length | pluralize:'transition'}} for: </span>
-        {{device.name}}
+        {{ device.properties.name || device.properties.type }}
         <!-- scrollable logs here -->
         <div class="state_log">
           <ul>

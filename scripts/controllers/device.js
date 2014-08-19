@@ -61,10 +61,22 @@ angular.module('zetta').controller('DeviceCtrl', [
     });
   };
 
+  $scope.loggerSocket = null;
+  $scope.loggerUrl = null;
   $scope.logger = function(url){
-    var ws = new WebSocket(url);
+    if ($scope.loggerSocket && $scope.loggerUrl === url) {
+      return;
+    } else {
+      if ($scope.loggerSocket) {
+        $scope.loggerSocket.close();
+      }
+
+      $scope.loggerUrl = url;
+    }
+
+    $scope.loggerSocket = new WebSocket($scope.loggerUrl);
     
-    ws.onmessage = function(event) {
+    $scope.loggerSocket.onmessage = function(event) {
       var d = JSON.parse(event.data);
 
       var dt = new Date(d.timestamp);
@@ -85,7 +97,7 @@ angular.module('zetta').controller('DeviceCtrl', [
           }
         });
 
-        if($scope.stateLogs.length > 500){ $scope.stateLogs.pop() } //keep things civil
+        if($scope.stateLogs.length > 10){ $scope.stateLogs.pop() } //keep things civil
       });
     }
   };
