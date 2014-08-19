@@ -45,7 +45,7 @@ angular.module('zetta').controller('OverviewCtrl', [
               });
             }
 
-            server.devices[i] = device;
+            server.devices[i].actions = device.actions;
           }
         }
       }
