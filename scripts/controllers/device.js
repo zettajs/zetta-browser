@@ -1,5 +1,5 @@
 angular.module('zetta').controller('DeviceCtrl', [
-  '$scope', '$state', '$http', 'navigator', function($scope, $state, $http, navigator) {
+  '$scope', '$state', '$http', 'navigator', 'zettaShared', function($scope, $state, $http, navigator, zettaShared) {
     //leaflet, I'm beside myself. This default marker gets overriden by the actual data from the state machine
    angular.extend($scope, {
     markers: {
@@ -119,6 +119,12 @@ angular.module('zetta').controller('DeviceCtrl', [
     if (objectStreamLinks.length) {
       device.streams = [];
     }
+
+    var upLinks = deviceData.links.forEach(function(link) {
+      if (link.rel.indexOf('up') !== -1) {
+        zettaShared.breadcrumbs = [ { title: link.title, href: link.href } ];
+      }
+    });
 
     objectStreamLinks.forEach(function(objectStream) {
       if (savedStreams.hasOwnProperty(objectStream.href)) {

@@ -1,10 +1,11 @@
 angular.module('zetta').controller('RootCtrl', [
-  '$scope', '$state', '$http', 'navigator', function($scope, $state, $http, navigator) {
+  '$scope', '$state', '$http', 'navigator', 'zettaShared', function($scope, $state, $http, navigator, zettaShared) {
     $scope.pinned = [];
-    $scope.servers = [];
+    $scope.servers = zettaShared.servers = [];
     $scope.muted = [];
 
     $scope.init = function() {
+      zettaShared.root = $state.params.url;
       $http.get($state.params.url).then(function(response) {
         var data = response.data;
         if (typeof data === 'string') {
@@ -17,7 +18,7 @@ angular.module('zetta').controller('RootCtrl', [
 
         if (serverLinks.length) {
           var server = serverLinks[0];
-          $scope.servers.push({
+          zettaShared.servers.push({
             name: server.title,
             type: 'server',
             href: server.href
@@ -29,7 +30,7 @@ angular.module('zetta').controller('RootCtrl', [
         });
 
         peerLinks.forEach(function(peer) {
-          $scope.servers.push({
+          zettaShared.servers.push({
             name: peer.title,
             type: 'peer',
             href: peer.href
@@ -41,7 +42,7 @@ angular.module('zetta').controller('RootCtrl', [
     };
 
     $scope.crawl = function() {
-      $scope.servers.forEach(function(server) {
+      zettaShared.servers.forEach(function(server) {
         $http.get(server.href).then(function(response) {
           var data = response.data;
           if (typeof data === 'string') {
@@ -128,7 +129,6 @@ angular.module('zetta').controller('RootCtrl', [
     };
 
     $scope.resolve = function(href) {
-      console.log(href);
       navigator.transitionTo(href, { url: href });
     };
   }

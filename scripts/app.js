@@ -22,7 +22,7 @@ var zetta = angular
       // Route Siren entity classes to UI states.
       classRouterProvider
         .when(['root'], 'root')
-        .when(['server'], 'app')
+        .when(['server'], 'root')
         .otherwise('device');
 
       // Configure UI states for app. (this should be rolled up into the .when declarations above
@@ -702,3 +702,10 @@ var zetta = angular
       link: link
     };
   }])
+.factory('zettaShared', function() {
+  return {
+    servers: [],
+    root: null,
+    breadcrumbs: []
+  };
+});

@@ -1,12 +1,12 @@
-<header>  
+<header ng-controller="HeaderCtrl">  
   <nav>
     <section class="pure-g">
         <a href="/" class="home pure-u-1-6"><div class="zetta-logo">zetta</div></a>
       
         
         <ul class="pure-u-3-4">
-          <li><a href="#" >Projects</a></li>  
-          <li>Mini Factory Detroit</li>
+          <li><a ng-click="follow()">root</a></li>  
+          <li ng-repeat="crumb in breadcrumbs"><a ng-click="follow(crumb.href)">{{ crumb.title }}</a></li>
         </ul>
       <!--
         <div class="pure-u-3-4" id="navToggle">
