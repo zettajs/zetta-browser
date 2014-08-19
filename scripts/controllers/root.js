@@ -43,7 +43,6 @@ angular.module('zetta').controller('RootCtrl', [
       });
     };
 
-    var savedStreams = {};
     $scope.crawl = function() {
       zettaShared.servers.forEach(function(server) {
         $http.get(server.href).then(function(response) {
@@ -126,8 +125,7 @@ angular.module('zetta').controller('RootCtrl', [
                     stream.socket = new WebSocket(stream.href);
                   };
 
-                  stream.type = getAssumedStreamType(stream);
-                  savedStreams[stream.href] = stream;
+                  stream.type = zettaShared.getAssumedStreamType(stream);
                   device.streams.push(stream);
                 }
               });
@@ -137,63 +135,21 @@ angular.module('zetta').controller('RootCtrl', [
                 device.actions = deviceData.actions;
               }
 
-              device.streams.forEach(function(stream) {
-                stream.socket.onmessage = function(event) {
-                  //Add data to model w/ timestamp here
-                  var d = JSON.parse(event.data);
-
-                  var update = {
-                    target: d.topic.replace(/\//g, '_'),
-                    data: d.data
-                  }
-
-                  var color;
-                  stream.data.push([new Date(), update.data]);
-
-                  stream.current = update.data;
-
-                  stream.type = getAssumedStreamType(stream);
-
-                  if (stream.min === null) {
-                    stream.min = d.data;
-                  }
-
-                  if (stream.max === null) {
-                    stream.max = d.data;
-                  }
-
-                  if (d.data < stream.min) {
-                    stream.min = d.data;
-                  }
-
-                  if (d.data > stream.max) {
-                    stream.max = d.data;
-                  }
-
-                  if(stream.data.length > 40){
-                    stream.data.shift();
-                  }
-
-                  $scope.$apply();
-                }
-              });
-
               server.devices.push(device);
+
+              zettaShared.wireUpStreams(device, function() {
+                $scope.$apply();
+              });
             });
           });
-          console.log($scope.servers);
         });
       });
+
     };
 
     $scope.resolve = function(href) {
       navigator.transitionTo(href, { url: href });
     };
     
-    var getAssumedStreamType = function(stream) {
-      return isNaN(parseInt(stream.current))
-              ? 'categorical'
-              : 'numerical';
-    };
   }
 ]);

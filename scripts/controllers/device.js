@@ -153,7 +153,7 @@ angular.module('zetta').controller('DeviceCtrl', [
           stream.socket = new WebSocket(stream.href);
         };
 
-        stream.type = getAssumedStreamType(stream);
+        stream.type = zettaShared.getAssumedStreamType(stream);
 
         savedStreams[stream.href] = stream;
         device.streams.push(stream);
@@ -173,45 +173,8 @@ angular.module('zetta').controller('DeviceCtrl', [
 
     $scope.logger(device.monitorHref);
 
-    device.streams.forEach(function(stream) {
-      stream.socket.onmessage = function(event) {
-        //Add data to model w/ timestamp here
-        var d = JSON.parse(event.data);
-
-        var update = {
-          target: d.topic.replace(/\//g, '_'),
-          data: d.data
-        }
-
-        var color;
-        stream.data.push([new Date(), update.data]);
-
-        stream.current = update.data;
-
-        stream.type = getAssumedStreamType(stream);
-
-        if (stream.min === null) {
-          stream.min = d.data;
-        }
-
-        if (stream.max === null) {
-          stream.max = d.data;
-        }
-
-        if (d.data < stream.min) {
-          stream.min = d.data;
-        }
-
-        if (d.data > stream.max) {
-          stream.max = d.data;
-        }
-
-        if(stream.data.length > 40){
-          stream.data.shift();
-        }
-
-        $scope.$apply();
-      }
+    zettaShared.wireUpStreams(device, function() {
+      $scope.$apply();
     });
   };
 
@@ -234,9 +197,4 @@ angular.module('zetta').controller('DeviceCtrl', [
     });
   };
 
-  var getAssumedStreamType = function(stream) {
-    return isNaN(parseInt(stream.current))
-            ? 'categorical'
-            : 'numerical';
-  };
 }]);

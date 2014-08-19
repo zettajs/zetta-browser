@@ -703,9 +703,64 @@ var zetta = angular
     };
   }])
 .factory('zettaShared', function() {
+  var servers = [];
+  var root = null;
+  var breadcrumbs = [];
+  var savedStreams = [];
+  var getAssumedStreamType = function(stream) {
+    return isNaN(parseInt(stream.current))
+            ? 'categorical'
+            : 'numerical';
+  };
+
+  var wireUpStreams = function(device, cb) {
+    device.streams.forEach(function(stream) {
+      stream.socket.onmessage = function(event) {
+        //Add data to model w/ timestamp here
+        var d = JSON.parse(event.data);
+
+        var update = {
+          target: d.topic.replace(/\//g, '_'),
+          data: d.data
+        }
+
+        var color;
+        stream.data.push([new Date(), update.data]);
+
+        stream.current = update.data;
+
+        stream.type = getAssumedStreamType(stream);
+
+        if (stream.min === null) {
+          stream.min = d.data;
+        }
+
+        if (stream.max === null) {
+          stream.max = d.data;
+        }
+
+        if (d.data < stream.min) {
+          stream.min = d.data;
+        }
+
+        if (d.data > stream.max) {
+          stream.max = d.data;
+        }
+
+        if(stream.data.length > 40){
+          stream.data.shift();
+        }
+
+        cb();
+      }
+    });
+  };
+
   return {
-    servers: [],
-    root: null,
-    breadcrumbs: []
+    servers: servers,
+    root: root,
+    breadcrumbs: breadcrumbs,
+    wireUpStreams: wireUpStreams,
+    getAssumedStreamType: getAssumedStreamType
   };
 });
