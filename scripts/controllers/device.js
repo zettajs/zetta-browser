@@ -102,6 +102,7 @@ angular.module('zetta').controller('DeviceCtrl', [
     }
   };
   
+  var savedStreams = {};
   var showData = function(deviceData) {
     if (typeof deviceData === 'string') {
       deviceData = JSON.parse(deviceData);
@@ -120,6 +121,12 @@ angular.module('zetta').controller('DeviceCtrl', [
     }
 
     objectStreamLinks.forEach(function(objectStream) {
+      if (savedStreams.hasOwnProperty(objectStream.href)) {
+        var stream = savedStreams[objectStream.href];
+        device.streams.push(stream);
+        return;
+      }
+
       if (objectStream.title === 'logs') {
         device.monitorHref = objectStream.href;
       } else {
@@ -135,7 +142,13 @@ angular.module('zetta').controller('DeviceCtrl', [
                     ? device.properties[objectStream.title] : null,
         };
 
+        stream.socket.onclose = function() {
+          stream.socket = new WebSocket(stream.href);
+        };
+
         stream.type = getAssumedStreamType(stream);
+
+        savedStreams[stream.href] = stream;
         device.streams.push(stream);
       }
     });
