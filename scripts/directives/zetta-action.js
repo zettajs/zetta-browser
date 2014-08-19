@@ -22,7 +22,7 @@ angular.module('zetta').directive('zettaAction', ['$compile', 'navigator', funct
     
     function Button(obj, scope){
       var defaults = {
-        'dclass'  : "pure-button pure-button-primary",
+        'dclass'  : "pure-button",
         'class'   : "",
         'type'    : "submit",
         'icons'   : '<i class="fa fa-refresh fa-spin"></i><i class="fa fa-check"></i>',
@@ -158,13 +158,13 @@ angular.module('zetta').directive('zettaAction', ['$compile', 'navigator', funct
     if (!visible) {
       container.addClass("trigger");
       var btn = Button({
-        'class' : 'action-button',
+        'class' : 'pure-button',
         'html'  : scope.action.name 
       }, scope);
       container.addClass("trigger");
     } else {
       var btn = Button({
-        'class' : 'submit-button',
+        'class' : 'pure-button',
         'html'  : scope.action.name 
       }, scope);
     }
