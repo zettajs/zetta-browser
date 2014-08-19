@@ -5,6 +5,7 @@ angular.module('zetta').controller('RootCtrl', [
     $scope.muted = [];
 
     $scope.init = function() {
+      $scope.servers = zettaShared.servers = [];
       zettaShared.root = $state.params.url;
       $http.get($state.params.url).then(function(response) {
         var data = response.data;
@@ -124,6 +125,7 @@ angular.module('zetta').controller('RootCtrl', [
               server.devices.push(device);
             });
           });
+          console.log($scope.servers);
         });
       });
     };

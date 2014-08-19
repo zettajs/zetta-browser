@@ -1,14 +1,45 @@
-<div id="response" ng-cloak ng-init="init()" class="device-list">
+<!--<section class="page_content pure-g" id="overview" ng-init="init()">
+  <header class="pure-u-1">
+    <section class="content">
+    <h1>~/root</h1>
+    </section>
+  </header>
+  <div class="pinned device-group pure-g">
+    <div class="pure-u-1-6 pure-u-md-1-12"></div>
+    <h2 class="name pure-u-5-6 pure-u-md-11-12">Pinned<span>:group</span></h2>
+    <section class="devices pure-u-1">some devices</section>
+  </div>
+
+  <div class="server device-group pure-g">
+    <div class="pure-u-1-6 pure-u-md-1-12"></div>
+      <div ng-repeat="server in servers">
+        <h2 class="name pure-u-5-6 pure-u-md-11-12">{{ server.name }}<span>:{{ server.type }}</span></h2>
+        <section class="devices pure-u-1" ng-repeat="device in server.devices">
+          <a ng-click="resolve(device.href)">{{ device.type }} : {{ device.name }}</a>
+        </section>
+      </div>
+    </div>
+  </div>  
+  <div class="muted device-group pure-g">
+    <div class="pure-u-1-6 pure-u-md-1-12"></div>
+    <h2 class="name pure-u-5-6 pure-u-md-11-12">Muted<span>:group</span></h2>
+    <section class="devices pure-u-1">some devices</section>
+  </div>
+  
+  </section>-->
+
+<section id="response" ng-cloak ng-init="init()" class="pure-g">
   <zetta-pinned/>
   <zetta-servers ng-show="servers.length" servers="servers"/>
   <zetta-muted/>
+  <div class="pure-u-1-3"></div>
   <!--<pre><code>{{ servers | prettify }}</code></pre>-->
-  <div ng-repeat="server in servers">
+  <div ng-repeat="server in servers" class="pure-u-2-3 pure-g">
     <div>
-      <h2>{{ server.name }}</h2>
-      <div ng-repeat="device in server.devices">
+      <h2 class="pure-u-1">{{ server.name }}</h2>
+      <div class="pure-u-1" ng-repeat="device in server.devices">
         <a ng-click="resolve(device.href)">{{ device.type }} : {{ device.name }}</a>
       </div>
     </div>
   </div>
-</div>
+</section>
