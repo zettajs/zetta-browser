@@ -1,24 +1,13 @@
-<div ng-init="init()">
-
-<div id="header" class="pure-g-r">
-  <div class="pure-u-2-3 breadcrumbs">
-    <div class="content">Get Started</div>
-  </div>
-  <div class="pure-u-1-3 logo">
-    <div class="content">
-      <a href="index.html"><img src="images/zetta-logo_sm.png"/></a>
-    </div>
-  </div>
-</div>
-
-<div>
-  <div>
-      <input type="url" ng-model="params.url" name="url"/>
-      <button ng-click="fetchUrl(params)">Go</button>
-  </div>
-
-</div>
-
+<ng-include src="'partials/header.html'"></ng-include>
+<section class="page_content front-door pure-g" ng-init="init()">
+  <header class="pure-u-1">
+    <section class="content">
+      <h1>Zetta Browser</h1>
+      <form class="pure-form">
+        <input placeholder="Server URL" type="url" ng-model="params.url" name="url" class="pure-u-1 pure-u-md-1-2"/>
+        <button ng-click="fetchUrl(params)" class="pure-button">Connect</button>
+      </form>
+    </section>
+  </header>
+</section>
 <ng-include src="'partials/footer.html'"></ng-include>
-
-</div>

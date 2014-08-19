@@ -117,7 +117,17 @@ angular.module('zetta').controller('DeviceCtrl', [
 
     device.links.forEach(function(link) {
       if (link.rel.indexOf('up') !== -1) {
-        zettaShared.breadcrumbs = [ { title: link.title, href: link.href },
+        var rootUrl = zettaShared.root;
+
+        if (!rootUrl) {
+          var parser = document.createElement('a');
+          parser.href = link.href;
+          rootUrl = parser.protocol + '//' + parser.hostname;
+          if (parser.port) {
+            rootUrl += ':' + parser.port;
+          }
+        }
+        zettaShared.breadcrumbs = [ { title: 'root', href: rootUrl }, { title: link.title, href: link.href },
           { title: device.properties.name || device.properties.type } ];
       }
     });

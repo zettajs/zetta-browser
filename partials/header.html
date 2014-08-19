@@ -5,7 +5,6 @@
       
         
         <ul class="pure-u-3-4">
-          <li><a ng-click="follow()">root</a></li>  
           <li ng-repeat="crumb in breadcrumbs">
             <span ng-if="crumb.href">
               <a ng-click="follow(crumb.href)">{{ crumb.title }}</a>

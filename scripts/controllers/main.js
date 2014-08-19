@@ -4,11 +4,9 @@
 var sirenMainController = angular.module('sirenMainController', []);
 
 sirenMainController.controller('MainCtrl', [
-  '$scope'
-  , '$state'
-  , 'navigator'
-  , 'appState'
-  , function($scope, $state, navigator, appState) {
+  '$scope', '$state', 'navigator', 'appState', 'zettaShared',
+  function($scope, $state, navigator, appState, zettaShared) {
+      zettaShared.breadcrumbs = [];
       $scope.init = function() {
         $scope.params = { url: appState.url || '' };
       };

@@ -7,7 +7,7 @@ angular.module('zetta').controller('RootCtrl', [
     $scope.init = function() {
       $scope.servers = zettaShared.servers = [];
       zettaShared.root = $state.params.url;
-      zettaShared.breadcrumbs = [];
+      zettaShared.breadcrumbs = [ { title: 'root', href: $state.params.url }];
       $http.get($state.params.url).then(function(response) {
         var data = response.data;
         if (typeof data === 'string') {
