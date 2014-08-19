@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" ng-app="zetta">
+  <head>
+    <title>Zetta Browser</title>
+    <meta charset="utf-8" />
+    <meta name="fragment" content="!" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    
+    <link rel="stylesheet" type="text/css" href="styles/zetta.css" />
+    <script src="scripts/zetta.js"></script>
+
+  </head>
+  <body>
+
+    <div ui-view/>
+    
+    <script>
+	  $(document).ready(function(){
+          $(window).resize(fit_vis);
+		});
+	   
+        function fit_vis(){
+          vis = $('.vis');
+          vis.find('.dnastrip').width(vis.width());
+          vis.find('svg').width(vis.width());
+        }
+	</script>
+  </body>
+</html>

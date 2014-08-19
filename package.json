@@ -15,5 +15,21 @@
     "mime": "~1.2.9",
     "less": "~1.7.0",
     "less-middleware": "^0.2.1-beta"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.6",
+    "gulp-less": "~1.3.2",
+    "gulp-minify-css": "~0.3.7",
+    "gulp-uglify": "~0.3.1",
+    "gulp-concat": "~2.3.4",
+    "gulp-strip-debug": "~0.3.0",
+    "gulp-jshint": "~1.7.1",
+    "gulp-sourcemaps": "~1.1.0",
+    "gulp-less-sourcemap": "~1.3.3",
+    "gulp-autoprefixer": "0.0.8",
+    "gulp-liquid": "~0.1.0",
+    "gulp-htmlmin": "~0.1.3",
+    "gulp-serve": "~0.2.0",
+    "gulp-file-include": "~0.4.0"
   }
 }
