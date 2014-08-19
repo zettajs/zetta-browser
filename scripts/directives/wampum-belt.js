@@ -53,19 +53,10 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
     var height = UNIT_SIZE;//context.canvas.height;
 
     colors.forEach(function(row) {
-      row.state.forEach(function(block) {
-        var w;
+      row.forEach(function(color) {
+        var w = width;
 
-        switch(block.type) {
-          case 'transition': 
-            w = transitionWidth;
-            break;
-          case 'state':
-            w = width;
-            break;
-        }
-
-        context.fillStyle = 'hsl(' + block.color.hue + ', ' + block.color.saturation + ', ' + block.color.lightness + ')';
+        context.fillStyle = 'hsl(' + color.hue + ', ' + color.saturation + ', 50%)';
         context.fillRect(x, y, w, height);
         x = x - unitWidth;
       });
@@ -85,6 +76,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
           x = context.canvas.width - unitWidth;
         });
       }*/
+      $('.page_content header').css('padding-top', $('#wampum canvas').height());
     });
 
     if (cb) cb();
@@ -147,12 +139,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
                   var arr = d[d.length - 1];
                   //var c = { hue: (Math.abs(arr[1].toFixed(0) % 360)), saturation: '100%' };
                   var c = getStreamColor(arr[1], stream.min, stream.max);
-                  var last = getColor(stream);
-                  var block = {
-                    type: 'stream',
-                    color: last
-                  };
-                  colors[i].state.unshift(block);
+                  colors[i].unshift(c);
                 });
               });
 
@@ -163,6 +150,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
     });
 
     var colors = [];
+    var unitSize = UNIT_SIZE;
 
     window.onresize = function() {
       canvas.width = window.innerWidth;//unitSize * 36;
@@ -177,22 +165,15 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
         return;
       }
 
-      var unitSize = UNIT_SIZE;
       canvas.width = window.innerWidth;//unitSize * 36;
       canvas.height = streams.length * unitSize;
       context.fillStyle = 'rgb(222, 222, 222)';
       context.fillRect(0, 0, canvas.width, canvas.height);
 
       angular.forEach(streams, function(stream, i) {
-        var last = getColor(stream);
-        var block = {
-          type: 'state',
-          color: last
-        };
-
-        colors[i] = {};
-        colors[i].state = [];
-        colors[i].state.push(block);
+        var last = getStreamColor(stream);
+        colors[i] = colors[i] || [];
+        colors[i].push(last);
       });
     };
 
@@ -201,18 +182,10 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
     var interval = setInterval(function() {
       angular.forEach(streams, function(entity, i) {
         var last = getColor(streams[i]);
-        var block = {
-          type: 'stream',
-          color: last
-        };
-        try {
-          colors[i].state = colors[i].state || [];
-          colors[i].state.unshift(block);
-          colors[i].state = colors[i].state.slice(0, 49);
-        } catch(e) {
-          console.log('current:', i);
-          console.log('length:', colors.length);
-        }
+
+        colors[i] = colors[i] || [];
+        colors[i].unshift(last);
+        colors[i] = colors[i].slice(0, 49);
       });
 
       drawCanvas(context, colors);

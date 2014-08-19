@@ -135,7 +135,6 @@ angular.module('zetta').directive('zettaAction', ['$compile', 'navigator', funct
 
           con.append('   ');
           con.append(label);
-          con.append($('<br/>'));
           controls.append(con);
         });
       } else {
