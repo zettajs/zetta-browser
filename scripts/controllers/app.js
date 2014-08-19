@@ -74,10 +74,6 @@ sirenAppController.controller('AppCtrl', [
 
     var parser = document.createElement('a');
     parser.href = rootUrl;
-
-    var loggerUrl = 'ws://' + parser.host + '/events';
-
-    $scope.logger(loggerUrl);
   };
 
   $scope.executeInlineAction = function(action, cb) {
@@ -124,7 +120,7 @@ sirenAppController.controller('AppCtrl', [
     var action = stream.action;
 
     // Subscribe to any events that need it via websockets
-    if (action.class && action.class.indexOf('event-subscription') !== -1) {
+    if (action.rel.indexOf('http://rels.zettajs.io/object-stream') !== -1) {
       var ws = new WebSocket(action.href);
 
       //when there's a stream message
@@ -133,7 +129,7 @@ sirenAppController.controller('AppCtrl', [
         var d = JSON.parse(event.data);
 
         var update = {
-          target: d.destination.replace(/\//g, '_'),
+          target: d.topic.replace(/\//g, '_'),
           data: d.data
         }
 
@@ -165,15 +161,6 @@ sirenAppController.controller('AppCtrl', [
 
         $scope.$apply();
       }
-
-      var command = { cmd: action.method };
-      action.fields.forEach(function(field) {
-        command[field.name] = field.value;
-      });
-
-      ws.onopen = function(event) {
-        ws.send(JSON.stringify(command));
-      };
 
       ws.onclose = function(reason) {
         console.log('closing stream socket:', reason);
@@ -233,7 +220,7 @@ sirenAppController.controller('AppCtrl', [
     };
 
     ws.onclose = function(reason) {
-      console.log('closing:', reason);
+      console.log('closing log url:', reason);
       $scope.logger(url);
     };
   };
@@ -253,6 +240,19 @@ sirenAppController.controller('AppCtrl', [
     $state.params.url = url;
 
     navigator.fetch(url, $state.params).then(function(data) {
+      if (typeof data === 'string') {
+        data = JSON.parse(data);
+      }
+
+      var monitor = data.links.filter(function(link) {
+        return link.rel.indexOf('monitor') !== -1;
+      })[0];
+
+      var loggerUrl = monitor.href;
+      loggerUrl = loggerUrl.replace(/^http/, 'ws');
+
+      $scope.logger(loggerUrl);
+
       showData(data);
     });
   };

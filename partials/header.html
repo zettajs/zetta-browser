@@ -1,19 +1,20 @@
-
-<div id="header" class="pure-g">
-  <div class="pure-u-4-5 breadcrumbs">
-    <div class="content">
-    <ul>
-      <li><a href="/index.html">Projects</a></li>
-      <li ng-repeat="link in breadcrumbs">
-              /  <a ng-href="#/entity?url={{ link.href | encodeURIComponent }}" class="entity-link">{{ link.text }}</a>
-      </li>
-    </ul>
-    </div>
-  </div>
-    
-  <div class="pure-u-1-5 logo">
-    <div class="content">
-      <a href="index.html"><img src="images/zetta-logo_sm.png"/></a>
-    </div>
-  </div>
+<div ng-controller="HeaderCtrl">
+  <header>  
+    <nav>
+      <section class="pure-g">
+          <a href="/" class="home pure-u-1-6"><div class="zetta-logo">zetta</div></a>
+          <ul class="pure-u-3-4">
+            <li ng-repeat="crumb in breadcrumbs">
+              <span ng-if="crumb.href">
+                <a ng-click="follow(crumb.href)">{{ crumb.title }}</a>
+              </span>
+              <span ng-if="!crumb.href">
+                {{ crumb.title }}
+              </span>
+            </li>
+          </ul>
+      </section>
+    </nav>
+  </header>
+  <!--<zetta-wampum-belt id="wampum" servers="servers"/>-->
 </div>

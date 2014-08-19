@@ -1,38 +1,13 @@
-<div ng-init="init()" class="projects">
-
-<div id="header" class="pure-g-r">
-  <div class="pure-u-2-3 breadcrumbs">
-    <div class="content">Projects</div>
-  </div>
-  <div class="pure-u-1-3 logo">
-    <div class="content">
-      <a href="index.html"><img src="images/zetta-logo_sm.png"/></a>
-    </div>
-  </div>
-</div>
-
-<div class="pure-g-r" id="projects-list">
-
-  <div class="pure-u-lg-1-3 pure-u-1-3 pure-g" ng-repeat="project in projects">
-    <div class="pure-u-1">
-      <div ng-init="params.project=project" class="content">
-        <h1 ng-init="params.url='{{project.appUrl}}'" class="project_name">
-          <a ng-href="#/app?url={{project.appUrl|encodeUri}}" class="online" ng-click="fetchUrl(params)" ng-show="project.online"><i class="fa fa-circle"></i> {{project.name}}</a>
-          <span class="offline" ng-show="!project.online">{{project.name}}</span>
-
-        </h1>
-        <a ng-href="#/app?url={{project.appUrl|encodeUri}}" class="online" ng-click="fetchUrl(params)" ng-show="project.online">
-          <img src="{{project | mapurl}}" ng-show="project.online"/><br/>
-        </a>
-        <img src="{{project | mapurl}}" ng-show="!project.online"/><br/>
-        {{project.location.name}}
-      </div>
-    </div>
-  </div>
-
-</div>
-
+<ng-include src="'partials/header.html'"></ng-include>
+<section class="page_content front-door pure-g" ng-init="init()">
+  <header class="pure-u-1">
+    <section class="content">
+      <h1>Zetta Browser</h1>
+      <form class="pure-form">
+        <input placeholder="Server URL" type="url" ng-model="params.url" name="url" class="pure-u-1 pure-u-md-1-2"/>
+        <button ng-click="fetchUrl(params)" class="pure-button">Connect</button>
+      </form>
+    </section>
+  </header>
+</section>
 <ng-include src="'partials/footer.html'"></ng-include>
-
-</div>
-<div id="entity" siren-view />

@@ -6,58 +6,31 @@
     <meta name="fragment" content="!" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     
-<!--    Pure CSS    -->
-    <link rel="stylesheet" href="styles/vendor/pure-min.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css" />
 
-<!--    Code Highlighting   -->
-    <link href="styles/vendor/prism.css" rel="stylesheet" />
-    
-<!--    Multiple weights of Source Sans Pro   -->
-    <link href="styles/vendor/fonts/source_sans_pro200+300+400+700.css" rel="stylesheet">
-    <link href="styles/vendor/fonts/source_code_pro400+500+600+700.css" rel="stylesheet">
-
-<!-- Typkit fonts -->
-    
-    <script type="text/javascript" src="//use.typekit.net/rcx5hyq.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-    
-<!--     Icons, yo!   -->
-    <link rel="stylesheet" href="styles/vendor/font-awesome-4.0.3/css/font-awesome.min.css">
-
-    <!-- Graph Styles -->
-    <!-- animations in angular -->
-    <link rel="stylesheet" href="styles/vendor/animate.css">
-    <!-- Formatter for JSON diff/patch -->
-	<link rel="stylesheet" href="styles/vendor/formatters/html.css">
-    
-<!-- maps -->
-    <link rel="stylesheet" href="styles/vendor/leaflet.css">
-
-<!--    Our Stylesheet    -->
-    <link href="styles/web.css" rel="stylesheet" />
-    <style type="text/css">
-      
-    </style>
+    <script type="text/javascript">
+      (function(d) {
+        var tkTimeout=3000;
+        if(window.sessionStorage){if(sessionStorage.getItem('useTypekit')==='false'){tkTimeout=0;}}
+        var config = {
+          kitId: 'tpa7gzm',
+          scriptTimeout: tkTimeout
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+"wf-inactive";if(window.sessionStorage){sessionStorage.setItem("useTypekit","false")}},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+="wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+    </script>
 <!--    Load angular as soon as possible    -->
     <script src="scripts/vendor/angular.js"></script>
 
   </head>
   <body>
 
-    
-    <div ui-view id="app_container"></div>
-        
-
-
+    <div ui-view/>
 <!--    Library angular directives    -->
-    <script src="scripts/vendor/angular-animate.js"></script>
     <script src="scripts/vendor/angular-ui-router.min.js"></script>
-	<script src="scripts/vendor/angular-sanitize.min.js"></script>
-    <script src="bower_components/angular-deckgrid/angular-deckgrid.js"></script>
+    <script src="scripts/vendor/angular-sanitize.min.js"></script>
     <script src="scripts/vendor/responsive-directive.js"></script>
 <!--    Maps    -->
-    <script src="scripts/vendor/leaflet.js"></script>
-    <script src="scripts/vendor/angular-leaflet-directive.js"></script>
     <script src="bower_components/angular-encode-uri/dist/angular-encode-uri.min.js"></script>
     
 <!--    Syntax Highlighting   -->
@@ -67,26 +40,28 @@
     
 <!--    JSON diff/patch   -->
     <script src="scripts/vendor/bundle-full.min.js"></script>
-	<script src="scripts/vendor/formatters.min.js"></script>
+    <script src="scripts/vendor/formatters.min.js"></script>
 
 <!--    Data Driven Documents (D3) + angular directive  -->
-	<script src="scripts/vendor/d3.min.js"></script>
+    <script src="scripts/vendor/d3.min.js"></script>
     
-<!--    Angular directive for smart scrolling to emulate console behavior   -->
-    <script src="scripts/vendor/scrollglue.js"></script>
-	
 <!--    Siren routing   -->
     <script src="scripts/siren/module.js"></script>
     
+<!--    Our App   -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services/zetta-shared.js"></script>
+    <script src="scripts/filters.js"></script>
+    <script src="scripts/directives/dna-strip.js"></script>
+    <script src="scripts/directives/sparkline.js"></script>
+    <script src="scripts/directives/wampum-belt.js"></script>
+    <script src="scripts/directives/zetta-action.js"></script>
+
 <!--    Controller    -->
     <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/app.js"></script>
-    <script src="scripts/controllers/entity.js"></script>
-	
-<!--    Our App   -->
-    <script src="scripts/services.js"></script>
-    <script src="scripts/filters.js"></script>
-    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/header.js"></script>
+    <script src="scripts/controllers/overview.js"></script>
+    <script src="scripts/controllers/device.js"></script>
 	
 	<script>
 	  $(document).ready(function(){

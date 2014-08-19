@@ -96,6 +96,7 @@ angular
           var params = {};
 
           angular.forEach(action.fields, function(field) {
+          console.log(field);
             params[field.name] = field.value;
           });
 
