@@ -437,7 +437,7 @@ var zetta = angular
   return {
     restrict: 'E',
     scope: {
-      main: '='
+      servers: '='
     },
     template: '<canvas class="wampum" id="wampum" width="100%"></canvas>',
     link: link

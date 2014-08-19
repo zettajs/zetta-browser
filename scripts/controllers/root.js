@@ -109,7 +109,7 @@ angular.module('zetta').controller('RootCtrl', [
                   device.streams.push({
                     name: objectStream.title,
                     href: objectStream.href,
-                    //socket: new WebSocket(objectStream.href),
+                    socket: new WebSocket(objectStream.href),
                     current: null,
                     pinned: false,
                     muted: false
