@@ -122,7 +122,8 @@ angular.module('zetta').controller('DeviceCtrl', [
 
     var upLinks = deviceData.links.forEach(function(link) {
       if (link.rel.indexOf('up') !== -1) {
-        zettaShared.breadcrumbs = [ { title: link.title, href: link.href } ];
+        zettaShared.breadcrumbs = [ { title: link.title, href: link.href },
+          { title: device.properties.name || device.properties.type } ];
       }
     });
 

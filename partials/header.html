@@ -6,7 +6,14 @@
         
         <ul class="pure-u-3-4">
           <li><a ng-click="follow()">root</a></li>  
-          <li ng-repeat="crumb in breadcrumbs"><a ng-click="follow(crumb.href)">{{ crumb.title }}</a></li>
+          <li ng-repeat="crumb in breadcrumbs">
+            <span ng-if="crumb.href">
+              <a ng-click="follow(crumb.href)">{{ crumb.title }}</a>
+            </span>
+            <span ng-if="!crumb.href">
+              {{ crumb.title }}
+            </span>
+          </li>
         </ul>
       <!--
         <div class="pure-u-3-4" id="navToggle">
