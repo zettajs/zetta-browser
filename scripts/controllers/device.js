@@ -104,70 +104,23 @@ angular.module('zetta').controller('DeviceCtrl', [
   
   var savedStreams = {};
   var showData = function(deviceData) {
-    if (typeof deviceData === 'string') {
-      deviceData = JSON.parse(deviceData);
-    }
+    var device = zettaShared.buildDeviceFromData(deviceData);
 
-    var device = {
-      properties: deviceData.properties
-    };
-
-    var objectStreamLinks = deviceData.links.filter(function(link) {
-      return link.rel.indexOf('http://rels.zettajs.io/object-stream') !== -1;
-    });
-
-    if (objectStreamLinks.length) {
-      device.streams = [];
-    }
-
-    var upLinks = deviceData.links.forEach(function(link) {
-      if (link.rel.indexOf('up') !== -1) {
-        zettaShared.breadcrumbs = [ { title: link.title, href: link.href },
-          { title: device.properties.name || device.properties.type } ];
-      }
-    });
-
-    objectStreamLinks.forEach(function(objectStream) {
-      if (savedStreams.hasOwnProperty(objectStream.href)) {
-        var stream = savedStreams[objectStream.href];
-        device.streams.push(stream);
-        return;
-      }
-
-      if (objectStream.title === 'logs') {
-        device.monitorHref = objectStream.href;
-      } else {
-        var stream = {
-          name: objectStream.title,
-          href: objectStream.href,
-          socket: new WebSocket(objectStream.href),
-          data: [],
-          min: null,
-          max: null,
-          type: null,
-          current: objectStream.rel.indexOf('monitor') !== -1
-                    ? device.properties[objectStream.title] : null,
-        };
-
-        stream.socket.onclose = function() {
-          stream.socket = new WebSocket(stream.href);
-        };
-
-        stream.type = zettaShared.getAssumedStreamType(stream);
-
-        savedStreams[stream.href] = stream;
-        device.streams.push(stream);
-      }
-    });
-
-    if (deviceData.actions && deviceData.actions.length) {
-      device.actions = deviceData.actions.map(function(action) {
+    if (device.actions && device.actions.length) {
+      device.actions = device.actions.map(function(action) {
         action.execute = function() {
           $scope.execute(action);
         };
         return action;
       });
     }
+
+    device.links.forEach(function(link) {
+      if (link.rel.indexOf('up') !== -1) {
+        zettaShared.breadcrumbs = [ { title: link.title, href: link.href },
+          { title: device.properties.name || device.properties.type } ];
+      }
+    });
 
     $scope.device = device;
 

@@ -82,7 +82,7 @@ angular.module('zetta').controller('RootCtrl', [
 
             $http.get(selfLink.href).then(function(response) {
               var deviceData = response.data;
-              if (typeof deviceData === 'string') {
+              /*if (typeof deviceData === 'string') {
                 deviceData = JSON.parse(deviceData);
               }
 
@@ -133,8 +133,9 @@ angular.module('zetta').controller('RootCtrl', [
 
               if (deviceData.actions && deviceData.actions.length) {
                 device.actions = deviceData.actions;
-              }
+              }*/
 
+              var device = zettaShared.buildDeviceFromData(deviceData);
               server.devices.push(device);
 
               zettaShared.wireUpStreams(device, function() {
