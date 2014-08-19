@@ -7,6 +7,7 @@ angular.module('zetta').controller('RootCtrl', [
     $scope.init = function() {
       $scope.servers = zettaShared.servers = [];
       zettaShared.root = $state.params.url;
+      zettaShared.breadcrumbs = [];
       $http.get($state.params.url).then(function(response) {
         var data = response.data;
         if (typeof data === 'string') {
@@ -42,6 +43,7 @@ angular.module('zetta').controller('RootCtrl', [
       });
     };
 
+    var savedStreams = {};
     $scope.crawl = function() {
       zettaShared.servers.forEach(function(server) {
         $http.get(server.href).then(function(response) {
@@ -90,8 +92,7 @@ angular.module('zetta').controller('RootCtrl', [
               };
 
               if (deviceData.properties) {
-                device.name = deviceData.properties.name;
-                device.type = deviceData.properties.type;
+                device.properties = deviceData.properties;
               }
 
               var objectStreamLinks = deviceData.links.filter(function(link) {
@@ -107,20 +108,75 @@ angular.module('zetta').controller('RootCtrl', [
                   device.monitorHref = objectStream.href;
                   //device.socket = new WebSocket(objectStream.href);
                 } else {
-                  device.streams.push({
+                  var stream = {
                     name: objectStream.title,
                     href: objectStream.href,
                     socket: new WebSocket(objectStream.href),
-                    current: null,
                     pinned: false,
-                    muted: false
-                  });
+                    muted: false,
+                    data: [],
+                    min: null,
+                    max: null,
+                    type: null,
+                    current: objectStream.rel.indexOf('monitor') !== -1
+                    ? device.properties[objectStream.title] : null,
+                  };
+
+                  stream.socket.onclose = function() {
+                    stream.socket = new WebSocket(stream.href);
+                  };
+
+                  stream.type = getAssumedStreamType(stream);
+                  savedStreams[stream.href] = stream;
+                  device.streams.push(stream);
                 }
               });
+
 
               if (deviceData.actions && deviceData.actions.length) {
                 device.actions = deviceData.actions;
               }
+
+              device.streams.forEach(function(stream) {
+                stream.socket.onmessage = function(event) {
+                  //Add data to model w/ timestamp here
+                  var d = JSON.parse(event.data);
+
+                  var update = {
+                    target: d.topic.replace(/\//g, '_'),
+                    data: d.data
+                  }
+
+                  var color;
+                  stream.data.push([new Date(), update.data]);
+
+                  stream.current = update.data;
+
+                  stream.type = getAssumedStreamType(stream);
+
+                  if (stream.min === null) {
+                    stream.min = d.data;
+                  }
+
+                  if (stream.max === null) {
+                    stream.max = d.data;
+                  }
+
+                  if (d.data < stream.min) {
+                    stream.min = d.data;
+                  }
+
+                  if (d.data > stream.max) {
+                    stream.max = d.data;
+                  }
+
+                  if(stream.data.length > 40){
+                    stream.data.shift();
+                  }
+
+                  $scope.$apply();
+                }
+              });
 
               server.devices.push(device);
             });
@@ -132,6 +188,12 @@ angular.module('zetta').controller('RootCtrl', [
 
     $scope.resolve = function(href) {
       navigator.transitionTo(href, { url: href });
+    };
+    
+    var getAssumedStreamType = function(stream) {
+      return isNaN(parseInt(stream.current))
+              ? 'categorical'
+              : 'numerical';
     };
   }
 ]);
