@@ -1,5 +1,8 @@
 angular.module('zetta').directive('zDnaStrip', ['$compile', function($compile) {
   function textToColor(text) {
+    if (text === null) {
+      return 0;
+    }
     var code = text.toString().split('').map(function(c) {
       return c.charCodeAt(0);
     }).reduce(function(previous, current) {

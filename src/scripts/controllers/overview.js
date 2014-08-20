@@ -4,7 +4,7 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.servers = zettaShared.servers = [];
   $scope.muted = [];
 
-  $scope.execute = function(action) {
+  $scope.execute = function(action, cb) {
     navigator.execute(action).then(function(result) {
       if (result.noop) {
         return;
@@ -46,6 +46,7 @@ angular.module('zetta').controller('OverviewCtrl', [
             }
 
             server.devices[i].actions = device.actions;
+            if (cb) cb();
           }
         }
       }
@@ -135,8 +136,8 @@ angular.module('zetta').controller('OverviewCtrl', [
 
             if (device.actions && device.actions.length) {
               device.actions = device.actions.map(function(action) {
-                action.execute = function() {
-                  $scope.execute(action);
+                action.execute = function(cb) {
+                  $scope.execute(action, cb);
                 };
                 return action;
               });
