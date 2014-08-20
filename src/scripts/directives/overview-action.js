@@ -1,7 +1,23 @@
 angular.module('zetta').directive('zettaOverviewAction', [function() {
   var link = function(scope, element) {
     if (scope.action.fields) {
-      if (scope.action.fields.length === 1 && scope.action.fields[0].type === 'radio') {
+      if (scope.action.fields.length === 2
+          && (scope.action.fields[0].type === 'radio' || scope.action.fields[1].type === 'radio')) {
+        var radio = scope.action.fields.filter(function(field) {
+          return field.type === 'radio';
+        })[0];
+
+        scope.action.radioField = {
+          name: radio.name,
+          value: radio.value
+        };
+
+        scope.action.radioField.value.forEach(function(val) {
+          val.execute = function() {
+            radio.value = val.value;
+            scope.execute();
+          };
+        });
         scope.action.renderOptionsAsButtons = true;
       } else {
         scope.action.renderOptionsAsButtons = false;
