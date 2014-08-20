@@ -15,15 +15,15 @@
     <div ui-view/>
     
     <script>
-	  $(document).ready(function(){
-          $(window).resize(fit_vis);
-		});
-	   
-        function fit_vis(){
-          vis = $('.vis');
-          vis.find('.dnastrip').width(vis.width());
-          vis.find('svg').width(vis.width());
-        }
-	</script>
+      $(document).ready(function(){
+        $(window).resize(fit_vis);
+      });
+       
+      function fit_vis(){
+        vis = $('.vis');
+        vis.find('.dnastrip').width(vis.width());
+        vis.find('svg').width(vis.width());
+      }
+    </script>
   </body>
 </html>

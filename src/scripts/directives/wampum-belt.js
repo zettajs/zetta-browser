@@ -1,5 +1,8 @@
 angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared', 
   function($compile, zettaShared) {
+
+  $('#wampum').on('dblclick', function() { $('#wampum').hide(); });
+
   function textToColor(text, min, max) {
     if (!min) {
       min = 0;
