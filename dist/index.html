@@ -15,14 +15,37 @@
     <div ui-view/>
     
     <script>
-	  $(document).ready(function(){
-          $(window).resize(fit_vis);
+        //Those canvas elements ain't resizing themselves.
+      
+	    $(document).ready(function(){
+          $(window).on('load resize', function(){
+            fit_vis()
+          })
+          
+          var l = window.location.href;
+          var check = window.setInterval(function(){
+            if(l != window.location.href){
+              l = window.location.href;
+              fit_vis();
+            }
+          }, 100);
+          
 		});
 	   
         function fit_vis(){
-          vis = $('.vis');
-          vis.find('.dnastrip').width(vis.width());
-          vis.find('svg').width(vis.width());
+          //console.log('fit vis!');
+          
+          dna = $('.vis .dnastrip');
+          dna.each(function(){
+            
+            var c = $(this).find('canvas')
+            c[0].width = dna.width();
+            c[0].height = c.parent().attr('height');
+          });
+          
+          //width(vis.width());
+          //vis.find('svg').width(vis.width());
+          
         }
 	</script>
   </body>

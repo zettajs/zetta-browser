@@ -8,28 +8,22 @@
   <div class="focus pure-u-1">
     <div class="streams">
       <div ng-repeat="stream in device.streams">
-        <section class="stream numerical pure-g" ng-if="stream.type === 'numerical'">
+        <section class="vis stream numerical pure-g">
           <div class="meta pure-u-1 pure-u-md-1-3">
             <div class="value">
               <span>{{ stream.current }}</span>
             </div>
             <div class="name">: {{ stream.name }}</div>
           </div>
-          <div class="vis pure-u-1 pure-u-md-2-3">
-            <sparkline width="200" height="50" stream="stream.data" id="{{ stream.name }}"></sparkline>
+          <div class="sparkline pure-u-1 pure-u-md-2-3" ng-if="stream.type === 'numerical'">
+            <sparkline height="96" stream="stream.data" id="{{ stream.name }}"></sparkline>
           </div>
+          <div class="dnastrip pure-u-1 pure-u-md-2-3" ng-if="stream.type === 'categorical'">
+            <z-dna-strip width="100" height="48" stream="stream"></z-dna-strip>
+          </div>
+          
         </section>
-        <section class="stream categorical pure-g" ng-if="stream.type === 'categorical'">
-          <div class="meta pure-u-1 pure-u-md-1-3">
-            <div class="value">
-              <span>{{ stream.current }}</span>
-            </div>
-            <div class="name">: {{ stream.name }}</div>
-          </div>
-          <div class="vis pure-u-1 pure-u-md-2-3">
-            <z-dna-strip width="200" height="20" stream="stream"></z-dna-strip>
-          </div>
-        </section>
+        
       </div>
     </div>
   </div>  

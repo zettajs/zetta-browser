@@ -1,0 +1,214 @@
+.device-group, .device-meta {
+  border-bottom: 2px solid @apigee-gray;
+  h2 {.serverHeading();}
+}
+.device-group {
+  .centered();
+}
+.pinned, .muted{
+  .devices{
+    .row {
+      
+      &:not(:first-child){
+        .switches {.border-top(@gray_5, 1px);}
+      }
+      
+      .name { padding: 0rem !important; }
+      .sparkline {
+        margin: 0 1rem 1rem 0;
+        @media @md { margin: 1rem 0 1rem 0; }
+      }
+      
+      .server-name { font-size: .5rem; }
+      .device-name {
+        font-weight: 700;
+        color: @apigee-grey;
+      }
+      .stream-name {font-size: .75rem;}
+      .action {
+        margin-left: 0;
+      }
+      
+    }
+  }
+}
+.pinned .pin { color: @apigee-grey !important; }
+.muted .mute { color: @apigee-grey !important; }
+
+
+#overview .row .vis {
+  .border-box();
+  padding: .5rem 1rem;
+  @media @md {
+    padding: 1rem 0rem;
+  }
+}
+
+
+#show .stream.vis {
+  .border-box();
+  margin: 0;
+  .dnastrip {
+    padding-top: 1rem;
+  }
+}
+
+
+.devices {
+    background-color: #fff;
+    .border-top(@apigee-gray);
+  
+  .device {
+    background-color: transparent; 
+    &:not(:first-child){
+      .border-top(@gray_20, 1px)
+    }
+  }
+    
+    
+  .row {
+    line-height: 1rem;
+    .switches, .name, .value {
+        padding: 1rem 0;
+        .body-font();
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    
+    .value {
+      padding: 1rem;
+      color: @apigee-gray;
+      .dotdot();
+      
+      text-align: right;
+      @media @md { text-align: left; }
+    }
+    
+    .spacer {
+      @media @md {display: none;}
+    }
+    &:not(:first-child){
+      .name, .value {
+        .border-top(@gray_5, 1px);
+        padding-left: 1rem;
+      }
+      @media @md {
+        .vis, .value{ .border-top(@gray_5, 1px)}
+      }
+      
+    }
+    
+    .switches{
+      padding:1.1rem 0 .9rem 0;
+      text-align: center;
+      font-size: 1em;
+      b{
+        color: @gray_10;
+        &:hover {
+          color: @apigee-gray;
+          cursor: pointer;
+        }
+      }
+    }
+    &.main {
+      .name {
+        color: @apigee-gray;
+        font-weight: 700;
+      }
+    }
+    
+    
+    &.action {
+      .border-box();
+      .value {
+        .border-box();
+        padding: 0rem .5rem .5rem 0;
+        text-align: right;
+        border-top: none;
+        @media @md {
+          padding: .5rem 1rem;
+          text-align: left;
+          .border-top(@gray_5, 1px);
+        }
+      }
+      .vis {
+        padding: .5rem 1rem !important;
+        @media @md {
+          padding: .5rem 0rem !important;
+        }
+      }
+    }
+  }
+  
+}
+
+input {
+  .body-font();
+  margin-right: .5rem;
+  padding: .25rem .5rem .35rem .5rem !important;
+  border-radius: 0 !important;
+}
+  
+  ::-webkit-input-placeholder { font-style: italic; font-weight: 100;}
+  :-moz-placeholder { }
+  ::-moz-placeholder { }
+  :-ms-input-placeholder { }
+
+.pure-button {
+    border-radius: 0 !important;
+    padding: .3rem .5rem;
+    box-shadow: 0px .1rem 0 @apigee-grey;
+    color: @apigee-grey;
+    &:hover {color: #000;}
+    margin: 0 .5rem 0 0;
+    .body-font();
+  }
+
+
+
+
+.device-meta {
+  .centered();
+  h2.name {
+    .border-box();
+    .serverHeading(); text-transform: uppercase; 
+    @media @md{padding-left: 1rem;}
+  }
+  border-bottom: none !important;
+  .content {
+    background-color: #fff;
+    .border-top(@apigee-grey);
+    border-bottom: 2px solid @apigee-grey;
+    padding: 1rem;
+    pre {margin: 0; padding: 0}
+  }
+  .meta-group {
+    .smallPadding()
+  }
+  .actions, .properties {
+    .border-box();
+    
+    padding-right: 1rem;
+  }
+  .properties .content {
+    padding: 0 !important;
+   
+    div:not(:first-child) { .border-top(@gray_20, 1px); }
+    div:nth-child(even) { 
+      background-color: @gray_5; 
+    }
+    span {
+      .border-box();
+      padding: .1rem .5rem;
+      font-size: .8rem;
+      .dotdot();
+    }
+    
+  }
+}
+
+
+
+
+
