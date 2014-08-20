@@ -15,6 +15,7 @@
     <div ui-view/>
     
     <script>
+<<<<<<< HEAD
         //Those canvas elements ain't resizing themselves.
       
 	    $(document).ready(function(){
@@ -48,5 +49,17 @@
           
         }
 	</script>
+=======
+      $(document).ready(function(){
+        $(window).resize(fit_vis);
+      });
+       
+      function fit_vis(){
+        vis = $('.vis');
+        vis.find('.dnastrip').width(vis.width());
+        vis.find('svg').width(vis.width());
+      }
+    </script>
+>>>>>>> f245ccdb88197b118acf6f78593f8b2e2b87e96f
   </body>
 </html>
