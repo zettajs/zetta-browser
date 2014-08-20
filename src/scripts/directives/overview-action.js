@@ -31,7 +31,7 @@ angular.module('zetta').directive('zettaOverviewAction', [function() {
     scope: {
       action: '=value'
     },
-    templateUrl: 'partials/overview-action.html',
+    templateUrl: 'partials/action-overview.html',
     link: link
   };
 }]);
