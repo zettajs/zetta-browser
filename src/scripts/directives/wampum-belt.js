@@ -127,14 +127,30 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
             scope.$watchCollection('servers[' + i + '].devices[' + j + '].streams', function() {
               var s = scope.servers[i].devices[j].streams;
               s.forEach(function(stream, k) {
-                if (addedHrefs.indexOf(stream.href) === -1) {
-                  streams.push(stream);
-                  addedHrefs.push(stream.href);
-                  update();
+                if (addedHrefs.indexOf(stream.href) !== -1) {
+                  return;
                 }
+
+                console.log(device.properties.type + ':' + stream.name + ':', stream.href)
+
+                streams.push(stream);
+                addedHrefs.push(stream.href);
+                update();
 
                 scope.$watchCollection('servers[' + i + '].devices[' + j + '].streams[' + k + '].data', function() {
                   var stream = scope.servers[i].devices[j].streams[k];
+                  var colorIndex;
+
+                  streams.forEach(function(s, index) {
+                    if (s.href === stream.href) {
+                      colorIndex = index;
+                    }
+                  });
+
+                  if (!colorIndex) {
+                    return;
+                  }
+
                   var d = stream.data;
                   if (d.length === 0) {
                     return;
@@ -142,7 +158,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
                   var arr = d[d.length - 1];
                   //var c = { hue: (Math.abs(arr[1].toFixed(0) % 360)), saturation: '100%' };
                   var c = getStreamColor(arr[1], stream.min, stream.max);
-                  colors[i].unshift(c);
+                  colors[colorIndex].unshift(c);
                 });
               });
 
