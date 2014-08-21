@@ -43,9 +43,8 @@
           
           <div class="value before-md pure-u-md-1-4">&nbsp;{{ stream.current }}</div>
         </div>
-        <div ng-repeat="action in device.actions">
-          <zetta-overview-action value="action"/>
-        </div>
+        <zetta-overview-action ng-repeat="action in device.actions" class="row action" value="action" />
+        
       </section>
     </section>
   </div>

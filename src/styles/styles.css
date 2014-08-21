@@ -969,6 +969,9 @@ footer a {
     padding: 1rem 0rem;
   }
 }
+#overview .row .vis .fields {
+  margin-right: 1.1rem;
+}
 #show .stream.vis {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1073,6 +1076,15 @@ footer a {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.devices .row.action .action-content .vis {
+  border-top: 1px solid #ededed;
+  /*
+  background-image: linear-gradient(@color @width, transparent @width);
+  background-size: 100% @width;
+  background-repeat: no-repeat;
+  background-position: top;
+  */
 }
 .devices .row.action .value {
   -webkit-box-sizing: border-box;

@@ -1,4 +1,4 @@
-<div class="row action pure-g pure-form" ng-if="action.renderOptionsAsButtons">
+<div class="pure-g action-content" ng-if="action.renderOptionsAsButtons">
   <div class="switches pure-u-1-6 pure-u-md-1-12">
     <b class="mute">eye</b>&nbsp;<b class="pin">pushpin</b>
   </div>
@@ -13,41 +13,29 @@
       <button class="pure-button {{ action.name + '-button' }}" ng-click="val.execute()">{{ val.title || val.value}}</button>
     </form> 
   </div>
-  <div class="value before-md pure-u-md-1-4"></div>
+  
 </div>
 
-<form class="row action pure-g pure-form" ng-if="!action.renderOptionsAsButtons">
+<form class="pure-g pure-form action-content" ng-if="!action.renderOptionsAsButtons">
   <div class="switches pure-u-1-6 pure-u-md-1-12">
     <b class="mute">eye</b>&nbsp;<b class="pin">pushpin</b>
   </div>
   <div class="name before-md pure-u-5-6 pure-u-md-1-4">
     # {{ action.name }}
   </div>
-  <div class="value pure-u-5-12 hide-md"></div>
-  <div class="pure-u-1-6 hide-md">&nbsp;</div>
-  <div class="vis pure-u-5-6 pure-u-md-5-12">
-    <div ng-repeat="field in action.fields">
-      <div ng-switch="field.type">
-        <div ng-switch-when="radio">
-          <label for="{{ name + field.name }}">{{ field.name }}</label>
-          <div class="pure-u-1" ng-repeat="val in field.value">
+  <div class="vis pure-u-5-6 pure-u-md-5-12" >
+    <div class="fields">
+          <label ng-repeat-start="field in action.fields" for="{{ name + field.name }}" ng-if="field.type == 'radio'">{{ field.name }}</label>
+          <div class="pure-u-1" ng-repeat="val in field.value" ng-if="field.type == 'radio'">
             <input type="radio" name="{{ field.name }}" id="{{ action.name + field.name + val.value }}"
-            value="{{ val.value }}" ng-model="action.fields[$index].value" />  <label for="{{ action.name + field.name + val.value }}">{{ val.title || val.value }}</label>
+            value="{{ val.value }}" ng-model="action.fields[$index].value" />  
+            <label for="{{ action.name + field.name + val.value }}">{{ val.title || val.value }}</label>
           </div>
-        </div>
-        <div ng-switch-when="text">
-          <input placeholder="{{ field.name }}" type="text" class="pure-input-1" name="{{ field.name }}" value="{{ field.value }}" 
-          id="{{ action.name + field.name }}" ng-model="field.value"/>
-        </div>
-        <div ng-switch-default>
-          <input type="{{ field.type }}" class="pure-input-1" name="{{ field.name }}" value="{{ field.value }}" 
-            id="{{ action.name + field.name }}" ng-model="field.value"/>
-        </div>
-      </div>
+          <input ng-repeat-end placeholder="{{ field.name }}" type="{{ field.type }}" class="pure-u-1" name="{{ field.name }}" value="{{ field.value }}" 
+            id="{{ action.name + field.name }}" ng-model="field.value" ng-if="field.type != 'radio'"/>
     </div>
   </div>
   <div class="value pure-u-1 pure-u-md-1-4">
     <button class="pure-button {{ action.name + '-button' }}" ng-click="execute()">{{ action.name }}</button>
   </div>
-  <div class="value before-md pure-u-md-1-4"></div>
 </form>
