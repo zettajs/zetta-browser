@@ -2,6 +2,7 @@ angular.module('zetta').controller('MainCtrl', [
   '$scope', '$state', 'navigator', 'appState', 'zettaShared',
   function($scope, $state, navigator, appState, zettaShared) {
     zettaShared.breadcrumbs = [];
+    zettaShared.servers = [];
 
     $scope.init = function() {
       $scope.params = { url: appState.url || '' };
