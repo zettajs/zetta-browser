@@ -908,6 +908,9 @@ footer a {
     margin: 0 auto !important;
   }
 }
+.overview-action-form {
+  display: inline;
+}
 .pinned .devices .row:not(:first-child) .switches,
 .muted .devices .row:not(:first-child) .switches {
   border-top: 1px solid #f2f2f2;
