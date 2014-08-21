@@ -9,7 +9,7 @@
   <div class="pure-u-1-6 hide-md">&nbsp;</div>
   <div class="vis pure-u-5-6 pure-u-md-5-12"></div>
   <div class="value pure-u-1 pure-u-md-1-4">
-    <form ng-repeat="val in action.radioField.value track by $index" class="pure-form overview-action-form">
+    <form ng-repeat="val in action.radioField.value" class="pure-form overview-action-form">
       <button class="pure-button {{ action.name + '-button' }}" ng-click="val.execute()">{{ val.title || val.value}}</button>
     </form> 
   </div>
@@ -25,14 +25,8 @@
   </div>
   <div class="vis pure-u-5-6 pure-u-md-5-12" >
     <div class="fields">
-          <label ng-repeat-start="field in action.fields" for="{{ name + field.name }}" ng-if="field.type == 'radio'">{{ field.name }}</label>
-          <div class="pure-u-1" ng-repeat="val in field.value track by $index" ng-if="field.type == 'radio'">
-            <input type="radio" name="{{ field.name }}" id="{{ action.name + field.name + val.value }}"
-            value="{{ val.value }}" ng-model="action.fields[$index].value" />  
-            <label for="{{ action.name + field.name + val.value }}">{{ val.title || val.value }}</label>
-          </div>
-          <input ng-repeat-end placeholder="{{ field.name }}" type="{{ field.type }}" class="pure-u-1" name="{{ field.name }}" value="{{ field.value }}" 
-            id="{{ action.name + field.name }}" ng-model="field.value" ng-if="field.type != 'radio'"/>
+          <input ng-repeat="field in action.fields" placeholder="{{ field.name }}" type="{{ field.type }}" class="pure-u-1" name="{{ field.name }}" value="{{ field.value }}" 
+            id="{{ action.name + field.name }}" ng-model="field.value"/>
     </div>
   </div>
   <div class="value pure-u-1 pure-u-md-1-4">
