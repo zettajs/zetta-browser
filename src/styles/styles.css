@@ -413,6 +413,7 @@ a {
   color: #faa438;
   text-decoration: none;
   text-shadow: 0px 1px #ffffff;
+  cursor: pointer;
 }
 a:hover {
   text-decoration: underline;
@@ -648,77 +649,6 @@ nav .zetta-logo {
     Code highlighting 
     see: zetta-prism.less 
 */
-pre {
-  margin: 0;
-  padding: 0 1rem;
-  /*background-color: @dark;*/
-  border-radius: .3em;
-}
-pre code {
-  font-family: "fira-mono", courier, monospace;
-  /*background-color: @dark !important;*/
-  margin: 0;
-  padding: 0;
-}
-.code {
-  background-color: #0b1a1f;
-  z-index: 2000;
-  margin-bottom: 1rem;
-  font-size: .8rem;
-  line-height: 1rem;
-}
-.code code {
-  background-color: transparent !important;
-}
-.code:after {
-  content: '';
-  width: 0;
-  height: 0;
-  border: 3em solid transparent;
-  border-top-width: 0;
-  border-bottom-color: #ededed;
-  display: block;
-  margin: 0 auto;
-}
-@media screen and (min-width: 48em) {
-  .code:after {
-    display: none;
-  }
-}
-.code pre {
-  background-image: none;
-  overflow: visible;
-  background-color: transparent !important;
-}
-.code pre .arrow {
-  display: none;
-  height: 0;
-  width: 0;
-  border: 2em solid transparent;
-}
-@media screen and (min-width: 48em) {
-  .code pre .arrow {
-    display: block;
-    position: absolute;
-    border-width: 2em;
-    margin: 0;
-  }
-}
-.code pre.hilight {
-  background-image: none;
-  background-size: 100% 0px;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-}
-@media screen and (min-width: 48em) {
-  .code pre.hilight {
-    background-image: linear-gradient(#5287a2 1px, #5287a2 1px);
-  }
-  .code pre.hilight .arrow {
-    border-left-color: #5287a2;
-    /* bg */
-  }
-}
 /* features */
 .feature {
   margin-bottom: 2rem;
@@ -843,14 +773,6 @@ header nav,
   padding-right: 2rem;
 }
 #device .properties {
-  overflow: hidden;
-}
-#device .properties table {
-  width: 100%;
-}
-#device .properties table td {
-  text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
 }
 .front-door header {
@@ -1177,10 +1099,6 @@ input {
   border-bottom: 2px solid #59595b;
   padding: 1rem;
 }
-.device-meta .content pre {
-  margin: 0;
-  padding: 0;
-}
 .device-meta .meta-group {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1197,6 +1115,19 @@ input {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding-right: 1rem;
+}
+.device-meta .api .content.request,
+.device-meta .api .content.response {
+  padding: 0;
+}
+.device-meta .api .content.request pre,
+.device-meta .api .content.response pre {
+  margin: 0;
+  padding: 0;
+}
+.device-meta .api .content.request pre code,
+.device-meta .api .content.response pre code {
+  padding: 1.5rem 1rem;
 }
 .device-meta .properties .content {
   padding: 0 !important;
@@ -1222,6 +1153,14 @@ input {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+.device-meta .properties .content input {
+  margin: 0;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border: none;
+  font-size: .8rem;
+  background-color: transparent;
 }
 /* Device Show */
 .focus {

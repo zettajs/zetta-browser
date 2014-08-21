@@ -64,9 +64,12 @@ gulp.task('styles',['css'], function() {
 });
 
 gulp.task('css', function() {
-  gulp.src(['./src/styles/pure.css',
-            './src/styles/grids-responsive-min.css', 
-            './src/styles/styles.css'])
+  gulp.src([
+       './src/styles/pure.css'
+      ,'./src/styles/grids-responsive-min.css'
+      ,'./src/styles/prism.css'
+      ,'./src/styles/styles.css'
+    ])
     .pipe(sourcemaps.init())
       /* .pipe(prefix("last 2 version", "> 5%", "ie 9")) */
       .pipe(concat('zetta.css'))

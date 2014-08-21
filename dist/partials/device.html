@@ -38,17 +38,20 @@
       <h2 class="name pure-u-1">Actions</h2>
       <section class="content">
         <span ng-show="!device.actions || !device.actions.length">No actions available.</span>
-        <div class="action {{ action.name }}" ng-repeat="action in device.actions">
-          <form class="pure-form pure-form-aligned">
-            <zetta-action value="action"></zetta-action>
-          </form>
+        
+        <div class="action {{ action.name }}" ng-repeat="action in device.actions"/>
+        
+          <zetta-device-action value="action" />
+         
         </div>
       </section>
     </div>
     <div class="properties meta-group pure-u-1">
       <h2 class="name pure-u-1">Properties</h2>
-      <section class="content">
-        <code><pre>{{ device.properties | prettify }}</pre></code>
+      <section class="content pure-g">
+        <div class="pure-u-1" ng-repeat="(key, value) in device.properties">
+          <span class="pure-u-2-5">{{key}}</span><input readonly class="pure-u-3-5" value="{{value}}"/>
+        </div>
       </section>
     </div>
     </section>  
@@ -78,11 +81,11 @@
     <div class="api meta-group pure-u-1">
       <h2 class="name pure-u-1">API Request</h2>
       <section class="content request">
-        <code><pre>{{ request }}</pre></code>
+        <pre><code class="language-bash" prism>{{ request }}</code></pre>
       </section>
       <h2 class="name pure-u-1">API Response</h2>
       <section class="content response">
-        <code><pre>{{ response | prettify }}</pre></code>
+        <pre><code class="language-javascript" prism>{{ response | prettify }}</code></pre>
       </section>
     </div>
     </section>

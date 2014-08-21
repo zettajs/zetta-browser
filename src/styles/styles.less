@@ -8,7 +8,6 @@
 @import 'apigee-colors.less';
 @import 'breakpoints.less';
 
-
 @images: "../images";
 
 body {
@@ -152,6 +151,7 @@ a {
   color: @yellow; 
   text-decoration: none;
   text-shadow: 0px 1px @white;
+  cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
@@ -365,71 +365,6 @@ nav {
     see: zetta-prism.less 
 */
 
-pre {
-  margin: 0; 
-  padding: 0 1rem;
-  /*background-color: @dark;*/
-  border-radius: .3em;
-  code {
-    .mono();
-    /*background-color: @dark !important;*/
-    margin: 0; padding: 0;
-  }
-}
-
-
-.code {
-  background-color: @dark;
-  z-index: 2000;
-  margin-bottom: 1rem;
-  font-size: .8rem;
-  line-height: 1rem;
-  code {background-color: transparent !important;}
-  &:after {
-      content: '';
-      width: 0;
-      height: 0;
-      border: 3em solid transparent;
-      border-top-width: 0;
-      border-bottom-color: @light-grey-bg;
-      display: block;
-      margin: 0 auto;
-      @media @md {display: none;}
-  }
-  pre {
-    background-image: none;
-    overflow: visible;
-    background-color: transparent !important;
-    .arrow {
-      display: none;
-      height: 0;
-      width: 0;
-      border: 2em solid transparent;
-      
-      @media @md {
-        display: block;
-        position: absolute;
-        border-width: 2em;
-        margin: 0;
-        
-      }
-      
-    }
-    
-    &.hilight {
-      background-image: none;
-      background-size: 100% 0px;
-      background-repeat: no-repeat;
-      background-position: 0 0;
-      
-      @media @md {
-        background-image: linear-gradient(@blue-bg 1px, @blue-bg 1px);
-        .arrow { border-left-color: @blue-bg; /* bg */ }
-      }
-    }
-  }
-  
-}
 
 
 
@@ -541,12 +476,7 @@ header nav, #wampum {
   }
   .properties {
     overflow: hidden;
-    table {
-      width: 100%;
-      td {
-        .dotdot();
-      }
-    }
+    
   }
 }
 

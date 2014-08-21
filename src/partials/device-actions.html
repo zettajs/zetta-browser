@@ -1,0 +1,32 @@
+
+<form class="pure-form pure-form-stacked">
+  <fieldset>
+    <legend># {{ action.name }}</legend>
+    <label ng-repeat-start="field in action.fields" for="{{ action.name + field.name }}" class="{{ field.type }}"></label>
+    {{field.type}}
+    
+    <ng-switch on="field.type">
+      
+      
+      
+      <input placeholder="{{ field.name }}" type="{{ field.type }}" class="" name="{{ field.name }}" value="{{ field.value }}" 
+              id="{{ action.name + field.name }}" ng-model="field.value" ng-switch-default/>
+    </ng-switch>
+    <br ng-repeat-end />
+    
+    <button class="pure-button {{ action.name + '-button' }}" ng-click="execute()">{{ action.name }}</button>
+  </fieldset>
+ 
+</form>
+
+<!--
+ <div class="field pure-u-1 pure-u-lg-3-4" ng-repeat="field in action.fields">
+    <div class="field" >
+          <input placeholder="{{ field.name }}" type="{{ field.type }}" class="pure-u-1" name="{{ field.name }}" value="{{ field.value }}" 
+            id="{{ action.name + field.name }}" ng-model="field.value"/>
+    </div>
+  </div>
+  <div class="submit pure-u-1 pure-u-lg-1-4">
+    <button class="pure-button {{ action.name + '-button' }}" ng-click="execute()">{{ action.name }}</button>
+  </div>
+-->

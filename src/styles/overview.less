@@ -194,16 +194,36 @@ input {
     .border-top(@apigee-grey);
     border-bottom: 2px solid @apigee-grey;
     padding: 1rem;
-    pre {margin: 0; padding: 0}
+
   }
+
   .meta-group {
-    .smallPadding()
+    .smallPadding();
+    
+   
+ 
   }
   .actions, .properties {
     .border-box();
     
     padding-right: 1rem;
+    
+     
+    
   }
+  
+  .api .content.request, .api .content.response {
+    padding: 0;
+    pre {
+      margin: 0; padding: 0;
+      code {
+        padding: 1.5rem 1rem;
+      }
+    }
+   
+    
+  }
+  
   .properties .content {
     padding: 0 !important;
    
@@ -217,7 +237,14 @@ input {
       font-size: .8rem;
       .dotdot();
     }
-    
+    input {
+      margin: 0; 
+      padding-left:0 !important; 
+      padding-right:0 !important; 
+      border: none;
+      font-size: .8rem;
+      background-color: transparent;
+    }
   }
 }
 
