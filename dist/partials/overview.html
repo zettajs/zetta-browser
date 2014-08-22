@@ -24,6 +24,7 @@
           <div class="dnastrip pure-u-1" ng-if="characteristic.type === 'categorical'">
             <z-dna-strip width="100" height="16" stream="characteristic"></z-dna-strip>
           </div>
+          <div class="value before-md pure-u-md-1-4" ng-if="characteristic.type">&nbsp;{{ characteristic.current }}</div>
           <zetta-overview-action class="row action" value="characteristic" ng-if="!characteristic.type" />
         </div>
       </div>
