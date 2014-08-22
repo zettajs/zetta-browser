@@ -161,7 +161,11 @@ angular.module('zetta').controller('OverviewCtrl', [
 
   $scope.pin = function(characteristic) {
     characteristic.pinned = true;
-    $scope.pinned.push(characteristic);
+    if ($scope.pinned.indexOf(characteristic) === -1) {
+      $scope.pinned.push(characteristic);
+    } else {
+      $scope.unpin(characteristic);
+    }
   };
 
   $scope.unpin = function(characteristic) {

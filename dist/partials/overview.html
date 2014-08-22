@@ -50,7 +50,9 @@
         </div>
         <div class="row stream pure-g" ng-repeat="stream in device.streams">
           <div class="switches pure-u-1-6 pure-u-md-1-12">
-            <b class="mute">eye</b>&nbsp;<b class="pin" ng-click="pin(stream)">pushpin</b>
+            <div ng-class="{ pinned: stream.pinned }">
+              <b class="mute">eye</b>&nbsp;<b class="pin" ng-click="pin(stream)">pushpin</b>
+            </div>
           </div>
           <div class="name pure-u-5-12 pure-u-md-1-4">
             : {{ stream.name }}
@@ -72,7 +74,9 @@
         <div class="row action" ng-repeat="action in device.actions">
           <div class="pure-g action-content">
             <div class="switches pure-u-1-6 pure-u-md-1-12">
-              <b class="mute">eye</b>&nbsp;<b class="pin" ng-click="pin(action)">pushpin</b>
+              <div ng-class="{ pinned: action.pinned }">
+                <b class="mute">eye</b>&nbsp;<b class="pin" ng-click="pin(action)">pushpin</b>
+              </div>
             </div>
             <div class="name before-md pure-u-5-6 pure-u-md-1-4">
               # {{ action.name }}
