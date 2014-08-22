@@ -9,5 +9,17 @@
       </form>
     </section>
   </header>
+  <section class="device-meta pure-u-1">
+    <div class="meta-group">
+      <h2 class="name">Recent Servers</h2>
+      <div class="content">
+        <ol class="project_list">
+          <li ng-repeat="url in serverUrls">
+            <a href="#" ng-click="fetchUrl({ url: url })">{{ url }}</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
 </section>
 <ng-include src="'partials/footer.html'"></ng-include>
