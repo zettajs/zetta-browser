@@ -184,6 +184,11 @@ angular.module('zetta').controller('OverviewCtrl', [
 
   $scope.pin = function(characteristic) {
     characteristic.pinned = true;
+
+    if (characteristic.muted) {
+      $scope.unmute(characteristic);
+    }
+
     if ($scope.pinned.indexOf(characteristic) === -1) {
       $scope.pinned.push(characteristic);
     } else {
@@ -196,6 +201,27 @@ angular.module('zetta').controller('OverviewCtrl', [
     if (index > -1) {
       $scope.pinned[index].pinned = false;
       $scope.pinned.splice(index, 1);
+    }
+  };
+
+  $scope.mute = function(characteristic) {
+    characteristic.muted = true;
+    if (characteristic.pinned) {
+      $scope.unpin(characteristic);
+    }
+
+    if ($scope.muted.indexOf(characteristic) === -1) {
+      $scope.muted.push(characteristic);
+    } else {
+      $scope.unmute(characteristic);
+    }
+  };
+
+  $scope.unmute = function(characteristic) {
+    var index = $scope.muted.indexOf(characteristic);
+    if (index > -1) {
+      $scope.muted[index].muted = false;
+      $scope.muted.splice(index, 1);
     }
   };
 }]);
