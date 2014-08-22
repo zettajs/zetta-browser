@@ -164,8 +164,14 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
                   }
                   var arr = d[d.length - 1];
                   //var c = { hue: (Math.abs(arr[1].toFixed(0) % 360)), saturation: '100%' };
-                  var c = getStreamColor(arr[1], stream.min, stream.max);
-                  colors[colorIndex].unshift(c);
+                  //var c = getStreamColor(arr[1], stream.min, stream.max);
+                  var last;
+                  if (stream.type === 'categorical') {
+                    last = getColor(stream);
+                  } else {
+                    last = getStreamColor(arr[1], stream.min, stream.max);
+                  }
+                  colors[colorIndex].unshift(last);
                 };
 
                 /*scope.$watchCollection('servers[' + i + '].devices[' + j + '].streams[' + k + '].data', function() {
@@ -230,8 +236,13 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
     update();
     
     var interval = setInterval(function() {
-      angular.forEach(streams, function(entity, i) {
-        var last = getColor(streams[i]);
+      streams.forEach(function(stream, i) {
+        var last;
+        if (stream.type === 'categorical') {
+          last = getColor(stream);
+        } else {
+          last = getStreamColor(stream.current, stream.min, stream.max);
+        }
 
         colors[i] = colors[i] || [];
         colors[i].unshift(last);
