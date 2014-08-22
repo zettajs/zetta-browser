@@ -154,8 +154,30 @@ angular.module('zetta').controller('DeviceCtrl', [
     $scope.request = ['GET ' + anchor.pathname,
       'Host: ' + anchor.hostname,
       'Accept: application/vnd.siren+json'].join('\r\n');
+
     navigator.redirectOrFetch(url, $state.params).then(function(data) {
-      $scope.response = data;
+      $scope.response = {};
+
+      ['class', 'properties', 'entities', 'actions', 'links'].forEach(function(prop) {
+        if (data.hasOwnProperty(prop)) {
+          $scope.response[prop] = data[prop];
+        }
+      });
+
+      if ($scope.response.actions) {
+        $scope.response.actions = $scope.response.actions.map(function(action) {
+          var a = {};
+          ['class', 'name', 'method', 'href', 'fields'].forEach(function(prop) {
+            if (action.hasOwnProperty(prop)) {
+              a[prop] = action[prop];
+            }
+          });
+
+          return a;
+        });
+      }
+
+      console.log($scope.response);
       showData(data);
     });
   };

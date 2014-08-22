@@ -1,7 +1,7 @@
 angular.module('zetta').controller('OverviewCtrl', [
   '$scope', '$state', '$http', 'navigator', 'zettaShared', function($scope, $state, $http, navigator, zettaShared) {
-  $scope.pinned = zettaShared.pinned = [];
-  $scope.servers = zettaShared.servers = [];
+  $scope.pinned = zettaShared.pinned;
+  $scope.servers = zettaShared.servers;
   $scope.muted = [];
 
   $scope.execute = function(action, cb) {

@@ -2,6 +2,7 @@ angular.module('zetta').factory('zettaShared', function() {
   var servers = [];
   var root = null;
   var breadcrumbs = [];
+  var pinned = [];
   var savedStreams = [];
   var getAssumedStreamType = function(stream) {
     return isNaN(parseInt(stream.current))
@@ -125,6 +126,7 @@ angular.module('zetta').factory('zettaShared', function() {
 
   return {
     servers: servers,
+    pinned: pinned,
     root: root,
     breadcrumbs: breadcrumbs,
     wireUpStreams: wireUpStreams,
