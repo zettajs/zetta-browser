@@ -160,7 +160,15 @@ angular.module('zetta').controller('OverviewCtrl', [
   };
 
   $scope.pin = function(characteristic) {
-    console.log(characteristic);
+    characteristic.pinned = true;
     $scope.pinned.push(characteristic);
+  };
+
+  $scope.unpin = function(characteristic) {
+    var index = $scope.pinned.indexOf(characteristic);
+    if (index > -1) {
+      $scope.pinned[index].pinned = false;
+      $scope.pinned.splice(index, 1);
+    }
   };
 }]);
