@@ -177,7 +177,6 @@ angular.module('zetta').controller('DeviceCtrl', [
         });
       }
 
-      console.log($scope.response);
       showData(data);
     });
   };

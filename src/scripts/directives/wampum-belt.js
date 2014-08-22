@@ -131,8 +131,6 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
                   return;
                 }
 
-                console.log(device.properties.type + ':' + stream.name + ':', stream.href)
-
                 streams.push(stream);
                 addedHrefs.push(stream.href);
                 update();

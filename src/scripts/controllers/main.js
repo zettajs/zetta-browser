@@ -23,7 +23,6 @@ angular.module('zetta').controller('MainCtrl', [
       $scope.serverUrls.unshift(url);
 
       localStorage.serverUrls = JSON.stringify($scope.serverUrls);
-      console.log($scope.serverUrls);
 
       navigator.transitionTo(url, { url: url });
     };
