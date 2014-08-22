@@ -12,7 +12,12 @@ angular.module('zetta').factory('zettaShared', function() {
 
   var wireUpStreams = function(device, cb) {
     device.streams.forEach(function(stream) {
+      var oldOnMessage = stream.socket.onmessage;
       stream.socket.onmessage = function(event) {
+        if (oldOnMessage) {
+          oldOnMessage(event);
+        }
+
         //Add data to model w/ timestamp here
         var d = JSON.parse(event.data);
 

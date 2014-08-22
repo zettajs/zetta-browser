@@ -163,9 +163,6 @@ angular.module('zetta').controller('OverviewCtrl', [
             foundCount++;
 
             if (foundCount === devices.length) {
-              console.log('device length:', devices.length);
-              console.log('found count:', foundCount);
-              console.log(foundDevices);
               server.devices = foundDevices;
               server.devices.forEach(function(device) {
                 zettaShared.wireUpStreams(device, function() {

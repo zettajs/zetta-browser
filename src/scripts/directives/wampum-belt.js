@@ -130,7 +130,6 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
                 if (addedHrefs.indexOf(stream.href) !== -1) {
                   return;
                 }
-
                 streams.push(stream);
                 addedHrefs.push(stream.href);
                 update();
@@ -146,7 +145,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
                   }
 
                   var stream = scope.servers[i].devices[j].streams[k];
-                  var colorIndex;
+                  var colorIndex = null;
 
                   streams.forEach(function(s, index) {
                     if (s.href === stream.href) {
@@ -154,7 +153,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
                     }
                   });
 
-                  if (!colorIndex) {
+                  if (colorIndex === null) {
                     return;
                   }
 
@@ -171,6 +170,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
                   } else {
                     last = getStreamColor(arr[1], stream.min, stream.max);
                   }
+
                   colors[colorIndex].unshift(last);
                 };
 
