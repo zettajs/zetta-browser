@@ -89,6 +89,7 @@ angular.module('zetta').factory('zettaShared', function() {
           name: objectStream.title,
           href: objectStream.href,
           socket: new WebSocket(objectStream.href),
+          device: device,
           data: [],
           pinned: false,
           muted: false,
@@ -111,7 +112,13 @@ angular.module('zetta').factory('zettaShared', function() {
     });
 
     device.links = deviceData.links;
-    device.actions = deviceData.actions;
+
+    if (deviceData.actions) {
+      device.actions = deviceData.actions.map(function(action) {
+        action.device = device;
+        return action;
+      });
+    }
 
     return device;
   };

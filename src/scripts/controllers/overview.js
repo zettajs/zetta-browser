@@ -1,6 +1,6 @@
 angular.module('zetta').controller('OverviewCtrl', [
   '$scope', '$state', '$http', 'navigator', 'zettaShared', function($scope, $state, $http, navigator, zettaShared) {
-  $scope.pinned = [];
+  $scope.pinned = zettaShared.pinned = [];
   $scope.servers = zettaShared.servers = [];
   $scope.muted = [];
 
@@ -133,6 +133,7 @@ angular.module('zetta').controller('OverviewCtrl', [
             var deviceData = response.data;
 
             var device = zettaShared.buildDeviceFromData(deviceData);
+            device.server = server;
 
             if (device.actions && device.actions.length) {
               device.actions = device.actions.map(function(action) {
@@ -156,5 +157,10 @@ angular.module('zetta').controller('OverviewCtrl', [
 
   $scope.resolve = function(href) {
     navigator.transitionTo(href, { url: href });
+  };
+
+  $scope.pin = function(characteristic) {
+    console.log(characteristic);
+    $scope.pinned.push(characteristic);
   };
 }]);
