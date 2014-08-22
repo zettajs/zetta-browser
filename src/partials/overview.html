@@ -5,6 +5,31 @@
       <h1>root</h1>
     </section>
   </header>
+  <div class="pinned device-group pure-g">
+    <div class="pure-u-1-6 pure-u-md-1-12"></div>
+    <h2 class="name pure-u-5-6 pure-u-md-11-12">Pinned<span>:group</span></h2>
+    <section classes="devices pure-u-1">
+      <div class="device pure-u-1 row action pure-g" ng-repeat="characteristic in pinned">
+        <div class="switches pure-u-1-6 pure-u-md-1-12">
+          <b class="mute">eye</b>&nbsp;<b class="pin" ng-click="unpin(characteristic)">pushpin</b>
+        </div>
+        <div class="name pure-u-5-6 pure-u-md-1-4">
+          <span class="server-name">{{ characteristic.device.server.name }} &gt; </span>
+          <br/>
+          <span class="device-name">{{ characteristic.device.properties.type || characteristic.device.properties.name }}</span>
+          <span class="stream-name"> {{ characteristic.name }}</span>
+          <div class="sparkline pure-u-1" ng-if="characteristic.type === 'numerical'">
+            <sparkline height="16" stream="characteristic.data" id="{{ characteristic.name }}"></sparkline>
+          </div>
+          <div class="dnastrip pure-u-1" ng-if="characteristic.type === 'categorical'">
+            <z-dna-strip width="100" height="16" stream="characteristic"></z-dna-strip>
+          </div>
+          <div class="value before-md pure-u-md-1-4" ng-if="characteristic.type">&nbsp;{{ characteristic.current }}</div>
+          <zetta-overview-action class="row action" value="characteristic" ng-if="!characteristic.type" />
+        </div>
+      </div>
+    </section>
+  </div>
   <div class="server device-group pure-g" ng-repeat="server in servers" ng-show="server.devices.length">
     <div class="pure-u-1-6 pure-u-md-1-12"></div>
     <h2 class="name pure-u-5-6 pure-u-md-11-12">
@@ -20,7 +45,7 @@
         </div>
         <div class="row stream pure-g" ng-repeat="stream in device.streams">
           <div class="switches pure-u-1-6 pure-u-md-1-12">
-            <b class="mute">eye</b>&nbsp;<b class="pin">pushpin</b>
+            <b class="mute">eye</b>&nbsp;<b class="pin" ng-click="pin(stream)">pushpin</b>
           </div>
           <div class="name pure-u-5-12 pure-u-md-1-4">
             : {{ stream.name }}
@@ -39,7 +64,17 @@
           </div>
           <div class="value before-md pure-u-md-1-4">&nbsp;{{ stream.current }}</div>
         </div>
-        <zetta-overview-action ng-repeat="action in device.actions" class="row action" value="action" />
+        <div class="row action" ng-repeat="action in device.actions">
+          <div class="pure-g action-content">
+            <div class="switches pure-u-1-6 pure-u-md-1-12">
+              <b class="mute">eye</b>&nbsp;<b class="pin" ng-click="pin(action)">pushpin</b>
+            </div>
+            <div class="name before-md pure-u-5-6 pure-u-md-1-4">
+              # {{ action.name }}
+            </div>
+            <zetta-overview-action value="action" class="pure-u-md-2-3 pure-u-1 pure-g" />
+          </div>
+        </div>
       </section>
     </section>
   </div>

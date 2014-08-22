@@ -2,6 +2,7 @@ angular.module('zetta').factory('zettaShared', function() {
   var servers = [];
   var root = null;
   var breadcrumbs = [];
+  var pinned = [];
   var savedStreams = [];
   var getAssumedStreamType = function(stream) {
     return isNaN(parseInt(stream.current))
@@ -89,6 +90,7 @@ angular.module('zetta').factory('zettaShared', function() {
           name: objectStream.title,
           href: objectStream.href,
           socket: new WebSocket(objectStream.href),
+          device: device,
           data: [],
           pinned: false,
           muted: false,
@@ -111,13 +113,20 @@ angular.module('zetta').factory('zettaShared', function() {
     });
 
     device.links = deviceData.links;
-    device.actions = deviceData.actions;
+
+    if (deviceData.actions) {
+      device.actions = deviceData.actions.map(function(action) {
+        action.device = device;
+        return action;
+      });
+    }
 
     return device;
   };
 
   return {
     servers: servers,
+    pinned: pinned,
     root: root,
     breadcrumbs: breadcrumbs,
     wireUpStreams: wireUpStreams,
