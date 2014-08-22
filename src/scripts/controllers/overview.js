@@ -36,8 +36,10 @@ angular.module('zetta').controller('OverviewCtrl', [
         for(var i = 0; i < server.devices.length; i++) {
           var d = server.devices[i];
           if (d.href === selfUrl) {
+            device.server = server;
             if (device.actions && device.actions.length) {
               device.actions = device.actions.map(function(action) {
+                action.device = device;
                 action.execute = function() {
                   $scope.execute(action);
                 };
