@@ -26,4 +26,12 @@ angular.module('zetta')
       return ordinal + ' ' + plural;
     }
   };
+})
+.filter('datetime', function($filter) {
+ return function(input){
+  if(input == null){ return ""; } 
+  var _date = $filter('date')(new Date(input), 'yy-dd-MMM HH:mm:ss.sss');
+  return _date.toUpperCase();
+
+ };
 });

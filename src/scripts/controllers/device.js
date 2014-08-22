@@ -78,11 +78,11 @@ angular.module('zetta').controller('DeviceCtrl', [
     
     $scope.loggerSocket.onmessage = function(event) {
       var d = JSON.parse(event.data);
-
+      
       var dt = new Date(d.timestamp);
       var etime = 0;
       if($scope.stateLogs.length){
-        etime = d.timestamp -  $scope.stateLogs[$scope.stateLogs.length -1].time.time;
+        etime = d.timestamp -  $scope.stateLogs[0].time.time;
       }
       
       $scope.$apply(function() {

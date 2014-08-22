@@ -721,6 +721,7 @@ header nav,
 #wampum {
   position: fixed;
   width: 100%;
+  z-index: 50;
 }
 #wampum {
   top: 2.5rem;

@@ -64,14 +64,14 @@
       No transitions available.
       </section>
       <section class="content" ng-if="device.properties.hasOwnProperty('state')">
-        <span ng-show="!stateLogs.length" class="h_197">State transitions for: </span>
-        <span ng-show="stateLogs.length" class="h_197">Latest {{stateLogs.length | pluralize:'transition'}} for: </span>
+        <span ng-show="!stateLogs.length">State transitions for: </span>
+        <span ng-show="stateLogs.length">Latest {{stateLogs.length | pluralize:'transition'}} for: </span>
         {{ device.properties.name || device.properties.type }}
         <!-- scrollable logs here -->
         <div class="state_log">
           <ul>
             <li ng-repeat="log in stateLogs" ng-class="{latest: $index==stateLogs.length-1}">
-              <strong>{{ log.transition }}</strong> <span>{{log.time.localTime}} ({{log.time.elapsed}} ms later)</span>
+              <strong>{{ log.transition }}</strong> <span>{{log.time.time | datetime}} </span>(+{{log.time.elapsed}}ms)
             </li>
           </ul>
         </div>

@@ -1,5 +1,5 @@
 (function(d) {
-        var tkTimeout=3000;
+        var tkTimeout=1500;
         if(window.sessionStorage){if(sessionStorage.getItem('useTypekit')==='false'){tkTimeout=0;}}
         var config = {
           kitId: 'tpa7gzm',
