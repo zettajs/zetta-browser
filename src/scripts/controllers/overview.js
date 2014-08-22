@@ -117,6 +117,8 @@ angular.module('zetta').controller('OverviewCtrl', [
           return entity.class.indexOf('device') !== -1;
         });
 
+        var foundCount = 0;
+        var foundDevices = [];
         devices.forEach(function(device) {
           var selfLink;
           device.links.forEach(function(link) {
@@ -144,11 +146,33 @@ angular.module('zetta').controller('OverviewCtrl', [
               });
             }
 
-            server.devices.push(device);
+            foundDevices.push(device);
+            foundDevices = foundDevices.sort(function(a, b) {
+              var identifierA = a.properties.name || a.properties.type;
+              var identifierB = b.properties.name || b.properties.type;
 
-            zettaShared.wireUpStreams(device, function() {
-              $scope.$apply();
+              if (identifierA > identifierB) {
+                return 1;
+              } else if (identifierA < identifierB) {
+                return -1; 
+              } else {
+                return 0;
+              }
             });
+
+            foundCount++;
+
+            if (foundCount === devices.length) {
+              console.log('device length:', devices.length);
+              console.log('found count:', foundCount);
+              console.log(foundDevices);
+              server.devices = foundDevices;
+              server.devices.forEach(function(device) {
+                zettaShared.wireUpStreams(device, function() {
+                  $scope.$apply();
+                });
+              });
+            }
           });
         });
       });

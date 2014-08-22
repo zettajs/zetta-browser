@@ -102,7 +102,9 @@ angular.module('zetta').factory('zettaShared', function() {
         };
 
         stream.socket.onclose = function() {
+          var oldOnMessage = stream.socket.onmessage;
           stream.socket = new WebSocket(stream.href);
+          stream.socket.onmessage = oldOnMessage;
         };
 
         stream.type = getAssumedStreamType(stream);
