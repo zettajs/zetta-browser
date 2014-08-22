@@ -49,9 +49,9 @@ angular.module('zetta').directive('zDnaStrip', ['$compile', function($compile) {
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     var colors = [];
-    function getColor() {
+    function getColor(text) {
       return {
-        hue: textToColor(scope.stream.current),
+        hue: textToColor(text),
         saturation: textToSaturation(scope.stream.name),
         lightness: '50%'
       };
@@ -65,8 +65,24 @@ angular.module('zetta').directive('zDnaStrip', ['$compile', function($compile) {
       };
     }
 
-    var last = getColor();
-    colors.push(last);
+
+    var oldMessage;
+    if (scope.stream.socket.onmessage) {
+      oldMessage = scope.stream.socket.onmessage;
+    }
+
+    scope.stream.socket.onmessage = function(d) {
+      if (oldMessage) {
+        oldMessage(d);
+      }
+
+      var data = JSON.parse(d.data);
+      var last = getColor(data.data);
+      colors.unshift(last);
+    };
+
+    var last = getColor(scope.stream.current);
+    colors.unshift(last);
 
     /*var lastTransitionTimer;
     scope.$watch('entity.lastTransition', function() {
@@ -81,7 +97,7 @@ angular.module('zetta').directive('zDnaStrip', ['$compile', function($compile) {
 
     var index = 1;
     var interval = setInterval(function() {
-      var last = getColor();
+      var last = getColor(scope.stream.current);
       colors.unshift(last);
       if (colors.length > 36) {
         colors = colors.slice(0, 35);
