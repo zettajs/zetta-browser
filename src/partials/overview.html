@@ -5,6 +5,24 @@
       <h1>root</h1>
     </section>
   </header>
+  <div class="pinned device-group pure-g">
+    <div class="pure-u-1-6 pure-u-md-1-12"></div>
+    <h2 class="name pure-u-5-6 pure-u-md-11-12">Pinned<span>:group</span></h2>
+    <section classes="devices pure-u-1">
+      <div class="device pure-u-1 row action pure-g" ng-repeat="characteristic in pinned">
+        <div class="switches pure-u-1-6 pure-u-md-1-12">
+          <b class="mute">eye</b>&nbsp;<b class="pin">pushpin</b>
+        </div>
+        <div class="name pure-u-5-6 pure-u-md-1-4">
+          <span class="server-name">{{ characteristic.device.server.name }} &gt; </span>
+          <br/>
+          <span class="device-name">{{ characteristic.device.properties.type || characteristic.device.properties.name }}</span>
+          <span class="stream-name"> {{ characteristic.name }}</span>
+          <zetta-overview-action class="row action" value="characteristic" />
+        </div>
+      </div>
+    </section>
+  </div>
   <div class="server device-group pure-g" ng-repeat="server in servers" ng-show="server.devices.length">
     <div class="pure-u-1-6 pure-u-md-1-12"></div>
     <h2 class="name pure-u-5-6 pure-u-md-11-12">
