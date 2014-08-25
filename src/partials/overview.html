@@ -16,7 +16,7 @@
         <div class="name pure-u-5-6 pure-u-md-1-4">
           <span class="server-name">{{ characteristic.device.server.name }} &gt; </span>
           <br/>
-          <span class="device-name">{{ characteristic.device.properties.type || characteristic.device.properties.name }}</span>
+          <span class="device-name">{{ characteristic.device.properties.name || characteristic.device.properties.type }}</span>
           <span class="stream-name"> {{ characteristic.name }}</span>
         </div>
         <div class="vis pure-u-5-6 pure-u-md-5-12" ng-if="characteristic.type">
@@ -98,7 +98,7 @@
         <div class="name pure-u-5-6 pure-u-md-1-4">
           <span class="server-name">{{ characteristic.device.server.name }} &gt; </span>
           <br/>
-          <span class="device-name">{{ characteristic.device.properties.type || characteristic.device.properties.name }}</span>
+          <span class="device-name">{{ characteristic.device.properties.name || characteristic.device.properties.type }}</span>
           <span class="stream-name"> {{ characteristic.name }}</span>
         </div>
         <div class="vis pure-u-5-6 pure-u-md-5-12">
