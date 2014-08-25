@@ -28,10 +28,17 @@ angular.module('zetta')
   };
 })
 .filter('datetime', function($filter) {
- return function(input){
-  if(input == null){ return ""; } 
-  var _date = $filter('date')(new Date(input), 'yy-dd-MMM HH:mm:ss.sss');
-  return _date.toUpperCase();
+  return function(input){
+    if(input == null){ return ""; } 
+    var _date = $filter('date')(new Date(input), 'yy-dd-MMM HH:mm:ss.sss');
+    return _date.toUpperCase();
+  };
 
- };
+})
+.filter('elapsed', function() {
+ return function(input){
+  if(input > (1000 * 60 * 1.5)){ return (input / (1000 * 60)).toFixed(2) + " m"; }
+  else if(input > 10000){ return (input / 1000).toFixed(1) + " s"; } 
+  else {return input + " ms";}
+ }
 });

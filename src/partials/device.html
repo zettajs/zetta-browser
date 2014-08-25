@@ -71,7 +71,7 @@
         <div class="state_log">
           <ul>
             <li ng-repeat="log in stateLogs" ng-class="{latest: $index==stateLogs.length-1}" class="pure-g">
-              <strong class="pure-u-1-2">{{ log.transition }}</strong><span class="pure-u-1-2">{{log.time.time | datetime}} (+{{log.time.elapsed}}ms)</span>
+              <strong class="pure-u-1-2">{{ log.transition }}</strong><span class="pure-u-1-2">{{log.time.time | datetime}} (+{{log.time.elapsed | elapsed }})</span>
             </li>
           </ul>
         </div>
