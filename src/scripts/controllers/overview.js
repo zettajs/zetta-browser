@@ -37,34 +37,67 @@ angular.module('zetta').controller('OverviewCtrl', [
           var d = server.devices[i];
           if (d.href === selfUrl) {
             device.server = server;
-            var earlierActions = d.actions;
-            if (device.actions && device.actions.length) {
-              var newActions = device.actions.map(function(action) {
-                action.device = device;
-                action.execute = function() {
-                  $scope.execute(action);
-                };
-                return action;
-              });
 
-              var newNames = newActions.map(function(action) {
-                return action.name;
-              });
-
-              earlierActions.forEach(function(action) {
-                var index = newNames.indexOf(action.name);
-                if (index === -1) {
-                  action.available = false;
-                  newActions.push(action);
-                }
-              });
-
-              device.actions = newActions;
+            if (!device.actions && device.actions.length) {
+              return;
             }
 
+            var earlierActions = d.actions;
+
+            var newActions = device.actions.map(function(action) {
+              action.device = device;
+              action.execute = function() {
+                $scope.execute(action);
+              };
+              return action;
+            });
+
+            var earlierNames = earlierActions.map(function(action) {
+              return action.name;
+            });
+
+            var newNames = newActions.map(function(action) {
+              return action.name;
+            });
+
+            earlierActions.forEach(function(action) {
+              var index = newNames.indexOf(action.name);
+              if (index === -1) {
+                action.available = false;
+                newActions.push(action);
+              }
+            });
+
+            var resolvedNames = newActions.map(function(action) {
+              return action.name;
+            });
+
+            $scope.pinned.filter(function(characteristic, i) {
+              if (!characteristic.type && characteristic.device.href == selfUrl) { // if it's an action
+                var index = resolvedNames.indexOf(characteristic.name);
+                if (index !== -1) {
+                  $scope.pinned[i] = newActions[index];
+                }
+              }
+            });
+
+            device.actions = newActions.sort(function(a, b) {
+              var identifierA = a.name;
+              var identifierB = b.name;
+
+              if (identifierA > identifierB) {
+                return 1;
+              } else if (identifierA < identifierB) {
+                return -1; 
+              } else {
+                return 0;
+              }
+            });
+
             server.devices[i].actions = device.actions;
-            if (cb) cb();
           }
+
+          if (cb) cb();
         }
       }
     });
