@@ -1,0 +1,110 @@
+<ng-include src="'partials/header.html'"></ng-include>
+<section class="page_content pure-g" id="overview" ng-init="init()">
+  <header class="pure-u-1">
+    <section class="content">
+      <h1>root</h1>
+    </section>
+  </header>
+  <div class="pinned device-group pure-g " ng-show="pinned.length">
+    <div class="pure-u-1-6 pure-u-md-1-12"></div>
+    <h2 class="name pure-u-5-6 pure-u-md-11-12">Pinned<span>:group</span></h2>
+    <section class="devices pure-u-1">
+
+    <div class="device row pure-g animate-size"
+      ng-class="{ action: !characteristic.type, stream: !!characteristic.type, disabled: (!characteristic.type && !characteristic.available) }" ng-repeat="characteristic in pinned">
+        <div class="switches pure-u-1-6 pure-u-md-1-12">
+          <b class="mute" ng-click="mute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="unpin(characteristic)">pushpin</b>
+        </div>
+        <div class="name pure-u-5-6 pure-u-md-1-4">
+          <span class="server-name">{{ characteristic.device.server.name }} &gt; </span>
+          <br/>
+          <span class="device-name">{{ characteristic.device.properties.name || characteristic.device.properties.type }}</span>
+          <span class="stream-name"> {{ characteristic.name }}</span>
+        </div>
+        <div class="vis pure-u-5-6 pure-u-md-5-12" ng-if="characteristic.type">
+          <div class="sparkline" ng-if="characteristic.type === 'numerical'">
+            <sparkline height="16" stream="characteristic.data" id="{{ characteristic.name }}"></sparkline>
+          </div>
+          <div class="dnastrip" ng-if="characteristic.type === 'categorical'">
+            <z-dna-strip width="100" height="16" stream="characteristic"></z-dna-strip>
+          </div>
+        </div>
+        <div class="value before-md pure-u-md-1-4" ng-if="characteristic.type">&nbsp;{{ characteristic.current }}</div>
+        <div class="vis pure-u-5-6 pure-u-md-2-3"  ng-if="!characteristic.type">
+          <zetta-overview-action class="row action" value="characteristic" />
+        </div>
+        
+      </div>
+    </section>
+  </div>
+  <div class="server device-group pure-g" ng-repeat="server in servers" ng-show="server.devices.length">
+    <div class="pure-u-1-6 pure-u-md-1-12"></div>
+    <h2 class="name pure-u-5-6 pure-u-md-11-12">
+      {{ server.name }} :{{server.type}}
+    </h2>
+    <section class="devices pure-u-1">
+      <section class="device pure-u-1" ng-repeat="device in server.devices">
+        <div class="row main pure-g animate-size">
+          <div class="pure-u-1-6 pure-u-md-1-12"></div>
+          <div class="name pure-u-5-6 pure-u-md-11-12">
+            <a ng-click="resolve(device.href)">{{ device.properties.name || device.properties.type }}</a>
+          </div>
+        </div>
+        <div class="row stream pure-g animate-size" ng-repeat="stream in device.streams" ng-show="!stream.muted">
+          <div class="switches pure-u-1-6 pure-u-md-1-12">
+            <div ng-class="{ pinned: stream.pinned }">
+              <b class="mute" ng-click="mute(stream)">eye</b>&nbsp;<b class="pin" ng-click="pin(stream)">pushpin</b>
+            </div>
+          </div>
+          <div class="name pure-u-5-12 pure-u-md-1-4">
+            : {{ stream.name }}
+          </div>
+          <div class="vis pure-u-5-6 pure-u-md-5-12">
+              <div class="sparkline pure-u-1" ng-if="stream.type === 'numerical'">
+                <sparkline height="16" stream="stream.data" id="{{ stream.name }}"></sparkline>
+              </div>
+              <div class="dnastrip pure-u-1" ng-if="stream.type === 'categorical'">
+                <z-dna-strip width="100" height="16" stream="stream"></z-dna-strip>
+              </div>
+          </div>
+          <div class="value before-md pure-u-md-1-4">&nbsp;{{ stream.current }}</div>
+        </div>
+        <div class="row action animate-size" ng-repeat="action in device.actions" ng-show="!action.muted && action.available">
+          <div class="pure-g action-content">
+            <div class="switches pure-u-1-6 pure-u-md-1-12">
+              <div ng-class="{ pinned: action.pinned }">
+                <b class="mute" ng-click="mute(action)">eye</b>&nbsp;<b class="pin" ng-click="pin(action)">pushpin</b>
+              </div>
+            </div>
+            <div class="name before-md pure-u-5-6 pure-u-md-1-4">
+              # {{ action.name }}
+            </div>
+            <zetta-overview-action value="action" class="pure-u-md-2-3 pure-u-5-6 pure-g" />
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+  <div class="muted device-group pure-g" ng-show="muted.length">
+    <div class="pure-u-1-6 pure-u-md-1-12"></div>
+    <h2 class="name pure-u-5-6 pure-u-md-11-12">Muted<span>:group</span></h2>
+    <section class="devices pure-u-1">
+      <div class="device row action pure-g animate-size" ng-repeat="characteristic in muted">
+        <div class="switches pure-u-1-6 pure-u-md-1-12">
+          <b class="mute"ng-click="unmute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="pin(characteristic)">pushpin</b>
+        </div>
+        <div class="name pure-u-5-6 pure-u-md-1-4">
+          <span class="server-name">{{ characteristic.device.server.name }} &gt; </span>
+          <br/>
+          <span class="device-name">{{ characteristic.device.properties.name || characteristic.device.properties.type }}</span>
+          <span class="stream-name"> {{ characteristic.name }}</span>
+        </div>
+        <div class="vis pure-u-5-6 pure-u-md-5-12">
+          -
+        </div>
+        <div class="value before-md pure-u-md-1-4">&nbsp;-</div>
+      </div>
+    </section>
+  </div>
+</section>
+<ng-include src="'partials/footer.html'"></ng-include>
