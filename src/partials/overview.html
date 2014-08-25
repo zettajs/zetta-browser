@@ -9,7 +9,8 @@
     <div class="pure-u-1-6 pure-u-md-1-12"></div>
     <h2 class="name pure-u-5-6 pure-u-md-11-12">Pinned<span>:group</span></h2>
     <section class="devices pure-u-1">
-      <div class="device row action pure-g animated fadeIn" ng-repeat="characteristic in pinned">
+    <div class="device row action pure-g animated fadeIn" ng-repeat="characteristic in pinned"
+      ng-class="{ disabled: (!characteristic.type && !characteristic.available) }">
         <div class="switches pure-u-1-6 pure-u-md-1-12">
           <b class="mute" ng-click="mute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="unpin(characteristic)">pushpin</b>
         </div>
