@@ -577,7 +577,20 @@ footer {
     
   }
 }
-
+.state_log ul {
+  margin: 1rem 0 0 0; 
+  padding: 0;
+  li {
+    list-style-type: none; 
+    &:not(:last-child){ .border-bottom(@gray_10, 1px);}
+    &:not(:first-child){ color: @gray_40; }
+    strong {
+      .mono()!important; .dotdot(); 
+      
+    }
+  }
+  span {font-size: .8em;}
+}
 
 
 /* Mixins  */
@@ -668,6 +681,10 @@ footer {
 .expand(){
   &.animate-size { 
     transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    /*
+    height: auto;
+    max-height: 0;
+    */
     overflow: hidden;
   } 
  

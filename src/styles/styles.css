@@ -937,6 +937,10 @@ footer a {
 }
 .devices .row.animate-size {
   transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  /*
+    height: auto;
+    max-height: 0;
+    */
   overflow: hidden;
 }
 .devices .row.animate-size.closed {
@@ -1146,6 +1150,7 @@ input {
 }
 .device-meta .api .content.request,
 .device-meta .api .content.response {
+  font-size: .9rem;
   padding: 0;
 }
 .device-meta .api .content.request pre,
@@ -1286,6 +1291,34 @@ input {
   .focus .streams .stream.categorical .vis {
     margin-top: 1.5rem;
   }
+}
+.state_log ul {
+  margin: 1rem 0 0 0;
+  padding: 0;
+}
+.state_log ul li {
+  list-style-type: none;
+}
+.state_log ul li:not(:last-child) {
+  border-bottom: 1px solid #e6e6e6;
+  /*
+  background-image: linear-gradient(transparent @width, @color @width);
+  background-size: 100% @width;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  */
+}
+.state_log ul li:not(:first-child) {
+  color: #999999;
+}
+.state_log ul li strong {
+  font-family: "fira-mono", courier, monospace !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.state_log ul span {
+  font-size: .8em;
 }
 /* Mixins  */
 /*# sourceMappingURL=styles.css.map */
