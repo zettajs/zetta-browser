@@ -48,7 +48,7 @@
             <a ng-click="resolve(device.href)">{{ device.properties.name || device.properties.type }}</a>
           </div>
         </div>
-        <div class="row stream pure-g" ng-repeat="stream in device.streams" ng-show="!stream.muted">
+        <div class="row stream pure-g" ng-repeat="stream in device.streams" ng-show="!stream.muted" ng-animate=" 'animate' ">
           <div class="switches pure-u-1-6 pure-u-md-1-12">
             <div ng-class="{ pinned: stream.pinned }">
               <b class="mute" ng-click="mute(stream)">eye</b>&nbsp;<b class="pin" ng-click="pin(stream)">pushpin</b>
@@ -87,7 +87,7 @@
     <div class="pure-u-1-6 pure-u-md-1-12"></div>
     <h2 class="name pure-u-5-6 pure-u-md-11-12">Muted<span>:group</span></h2>
     <section class="devices pure-u-1">
-      <div class="device row action pure-g" ng-repeat="characteristic in muted">
+      <div class="device row action pure-g animated fadeIn" ng-repeat="characteristic in muted">
         <div class="switches pure-u-1-6 pure-u-md-1-12">
           <b class="mute"ng-click="unmute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="pin(characteristic)">pushpin</b>
         </div>
