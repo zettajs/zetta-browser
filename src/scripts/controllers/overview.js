@@ -76,6 +76,7 @@ angular.module('zetta').controller('OverviewCtrl', [
               if (!characteristic.type && characteristic.device.href == selfUrl) { // if it's an action
                 var index = resolvedNames.indexOf(characteristic.name);
                 if (index !== -1) {
+                  newActions[index].pinned = true;
                   $scope.pinned[i] = newActions[index];
                 }
               }
