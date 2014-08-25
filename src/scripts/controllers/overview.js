@@ -11,33 +11,12 @@ angular.module('zetta').controller('OverviewCtrl', [
       }
     
       var data = result.data;
-      var device = zettaShared.buildDeviceFromData(data);
-      var selfUrl;
-      var serverName;
+      var device = zettaShared.buildDeviceFromData(data, $scope.servers);
 
-      device.links.forEach(function(link) {
-        if (link.rel.indexOf('up') !== -1) {
-          serverName = link.title;
-        }
-        if (link.rel.indexOf('self') !== -1) {
-          selfUrl = link.href;
-        }
-      });
-
-      var server;
-
-      zettaShared.servers.forEach(function(s) {
-        if (s.name === serverName) {
-          server = s;
-        }
-      });
-
-      if (server) {
-        for(var i = 0; i < server.devices.length; i++) {
-          var d = server.devices[i];
-          if (d.href === selfUrl) {
-            device.server = server;
-
+      if (device.server) {
+        for (var i = 0; i < device.server.devices.length; i++) {
+          var d = device.server.devices[i];
+          if (d.href === device.href) {
             if (!device.actions && device.actions.length) {
               return;
             }
@@ -63,6 +42,7 @@ angular.module('zetta').controller('OverviewCtrl', [
             earlierActions.forEach(function(action) {
               var index = newNames.indexOf(action.name);
               if (index === -1) {
+                action.open = false;
                 action.available = false;
                 newActions.push(action);
               }
@@ -73,11 +53,23 @@ angular.module('zetta').controller('OverviewCtrl', [
             });
 
             $scope.pinned.filter(function(characteristic, i) {
-              if (!characteristic.type && characteristic.device.href == selfUrl) { // if it's an action
+              if (!characteristic.type && characteristic.device.href == device.href) { // if it's an action
                 var index = resolvedNames.indexOf(characteristic.name);
                 if (index !== -1) {
                   newActions[index].pinned = true;
+                  newActions[index].pinOpen = true;
                   $scope.pinned[i] = newActions[index];
+                }
+              }
+            });
+
+            $scope.muted.filter(function(characteristic, i) {
+              if (!characteristic.type && characteristic.device.href == device.href) { // if it's an action
+                var index = resolvedNames.indexOf(characteristic.name);
+                if (index !== -1) {
+                  newActions[index].muted = true;
+                  newActions[index].muteOpen = true;
+                  $scope.muted[i] = newActions[index];
                 }
               }
             });
@@ -95,7 +87,7 @@ angular.module('zetta').controller('OverviewCtrl', [
               }
             });
 
-            server.devices[i].actions = device.actions;
+            device.server.devices[i].actions = device.actions;
           }
 
           if (cb) cb();
@@ -185,8 +177,7 @@ angular.module('zetta').controller('OverviewCtrl', [
           $http.get(selfLink.href).then(function(response) {
             var deviceData = response.data;
 
-            var device = zettaShared.buildDeviceFromData(deviceData);
-            device.server = server;
+            var device = zettaShared.buildDeviceFromData(deviceData, $scope.servers);
 
             if (device.actions && device.actions.length) {
               device.actions = device.actions.map(function(action) {
@@ -219,6 +210,18 @@ angular.module('zetta').controller('OverviewCtrl', [
                 zettaShared.wireUpStreams(device, function() {
                   $scope.$apply();
                 });
+                
+                if (device.streams) {
+                  device.streams.forEach(function(stream) {
+                    stream.open = true;
+                  });
+                }
+
+                if (device.actions) {
+                  device.actions.forEach(function(action) {
+                    action.open = true;
+                  });
+                }
               });
             }
           });
@@ -240,6 +243,7 @@ angular.module('zetta').controller('OverviewCtrl', [
 
     if ($scope.pinned.indexOf(characteristic) === -1) {
       $scope.pinned.push(characteristic);
+      setTimeout(function() { characteristic.pinOpen = true; }, 1);
     } else {
       $scope.unpin(characteristic);
     }
@@ -249,18 +253,27 @@ angular.module('zetta').controller('OverviewCtrl', [
     var index = $scope.pinned.indexOf(characteristic);
     if (index > -1) {
       $scope.pinned[index].pinned = false;
-      $scope.pinned.splice(index, 1);
+      characteristic.pinOpen = false;
+      setTimeout(function() {
+        $scope.pinned.splice(index, 1);
+      }, 1);
     }
   };
 
   $scope.mute = function(characteristic) {
-    characteristic.muted = true;
     if (characteristic.pinned) {
       $scope.unpin(characteristic);
     }
 
     if ($scope.muted.indexOf(characteristic) === -1) {
       $scope.muted.push(characteristic);
+      setTimeout(function() {
+        characteristic.open = false;
+        characteristic.muteOpen = true;
+        setTimeout(function() {
+          characteristic.muted = true;
+        }, 500);
+      }, 1);
     } else {
       $scope.unmute(characteristic);
     }
@@ -273,7 +286,13 @@ angular.module('zetta').controller('OverviewCtrl', [
     var index = $scope.muted.indexOf(characteristic);
     if (index > -1) {
       $scope.muted[index].muted = false;
-      $scope.muted.splice(index, 1);
+      characteristic.muteOpen = false;
+      setTimeout(function() {
+        if (characteristic.available) {
+          characteristic.open = true;
+        }
+        $scope.muted.splice(index, 1);
+      }, 1);
     }
   };
 }]);
