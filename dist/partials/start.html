@@ -2,7 +2,7 @@
 <section class="page_content front-door pure-g" ng-init="init()">
   <header class="pure-u-1">
     <section class="content">
-      <h1>Zetta Browser</h1>
+      <h1 class="">Zetta Browser</h1>
       <form class="pure-form">
         <input placeholder="Server URL" type="url" ng-model="params.url" name="url" class="pure-u-1 pure-u-md-1-2"/>
         <button ng-click="fetchUrl(params)" class="pure-button">Connect</button>
@@ -14,7 +14,7 @@
       <h2 class="name">Recent Servers</h2>
       <div class="content">
         <ol class="project_list">
-          <li ng-repeat="url in serverUrls">
+          <li ng-repeat="url in serverUrls" class="animated fadeIn">
             <a href="#" ng-click="fetchUrl({ url: url })">{{ url }}</a>
           </li>
         </ol>
