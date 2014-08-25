@@ -935,6 +935,18 @@ footer a {
 .devices .row {
   line-height: 1rem;
 }
+.devices .row.animate-size {
+  transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  overflow: hidden;
+}
+.devices .row.animate-size.closed {
+  height: auto;
+  max-height: 0;
+}
+.devices .row.animate-size.open {
+  height: auto;
+  max-height: 100px;
+}
 .devices .row .switches,
 .devices .row .name,
 .devices .row .value {
@@ -1050,6 +1062,7 @@ footer a {
 }
 .pinned .devices .row.action .vis {
   padding: 0!important;
+  border-top: 0;
 }
 /*.pinned .devices .row.action .vis {padding: 0!important;}*/
 input {

@@ -665,4 +665,20 @@ footer {
   white-space: nowrap;
   overflow: hidden;
 }
+.expand(){
+  &.animate-size { 
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    overflow: hidden;
+  } 
+ 
+  &.animate-size.closed {
+      height: auto;
+      max-height: 0;
+  }
 
+  &.animate-size.open {
+      height: auto;
+      max-height: 100px;
+  }
+
+}

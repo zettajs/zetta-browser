@@ -267,6 +267,9 @@ angular.module('zetta').controller('OverviewCtrl', [
   };
 
   $scope.unmute = function(characteristic) {
+    
+    //Need to animate fading back into device list
+    
     var index = $scope.muted.indexOf(characteristic);
     if (index > -1) {
       $scope.muted[index].muted = false;
