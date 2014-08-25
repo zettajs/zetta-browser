@@ -649,6 +649,12 @@ nav .zetta-logo {
     Code highlighting 
     see: zetta-prism.less 
 */
+.muted .devices {
+  background-color: transparent;
+}
+.muted .devices .row .switches b {
+  color: #cccccc;
+}
 /* features */
 .feature {
   margin-bottom: 2rem;
@@ -1035,9 +1041,13 @@ footer a {
 }
 @media screen and (min-width: 48em) {
   .devices .row.action .vis {
-    padding: .5rem 0rem !important;
+    padding: .5rem 0rem;
   }
 }
+.pinned .devices .row.action .vis {
+  padding: 0!important;
+}
+/*.pinned .devices .row.action .vis {padding: 0!important;}*/
 input {
   font-family: "jaf-facitweb", Helvetica, Arial, sans-serif;
   margin-right: .5rem;
