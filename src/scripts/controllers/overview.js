@@ -51,6 +51,14 @@ angular.module('zetta').controller('OverviewCtrl', [
                 return action.name;
               });
 
+              var pinnedNames = $scope.pinned.filter(function(characteristic) {
+                if (!characteristic.type) { // if it's an action
+                  return characteristic;
+                }
+              }).map(function(action) {
+                return action.name;
+              });
+
               earlierActions.forEach(function(action) {
                 var index = newNames.indexOf(action.name);
                 if (index === -1) {
