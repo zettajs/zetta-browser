@@ -127,6 +127,17 @@ angular.module('zetta').factory('zettaShared', function() {
         action.device = device;
         action.available = true;
         return action;
+      }).sort(function(a, b) {
+        var identifierA = a.name;
+        var identifierB = b.name;
+
+        if (identifierA > identifierB) {
+          return 1;
+        } else if (identifierA < identifierB) {
+          return -1; 
+        } else {
+          return 0;
+        }
       });
     }
 
