@@ -48,7 +48,7 @@
             <a ng-click="resolve(device.href)">{{ device.properties.name || device.properties.type }}</a>
           </div>
         </div>
-        <div class="row stream pure-g" ng-repeat="stream in device.streams">
+        <div class="row stream pure-g" ng-repeat="stream in device.streams" ng-show="!stream.muted">
           <div class="switches pure-u-1-6 pure-u-md-1-12">
             <div ng-class="{ pinned: stream.pinned, muted: stream.muted }">
               <b class="mute" ng-click="mute(stream)">eye</b>&nbsp;<b class="pin" ng-click="pin(stream)">pushpin</b>
@@ -71,7 +71,7 @@
           <div class="value before-md pure-u-md-1-4" ng-if="!stream.muted">&nbsp;{{ stream.current }}</div>
           <div class="value before-md pure-u-md-1-4" ng-if="stream.muted">&nbsp;-</div>
         </div>
-        <div class="row action" ng-repeat="action in device.actions">
+        <div class="row action" ng-repeat="action in device.actions" ng-show="!action.muted">
           <div class="pure-g action-content">
             <div class="switches pure-u-1-6 pure-u-md-1-12">
               <div ng-class="{ pinned: action.pinned, muted: action.muted }">
