@@ -68,6 +68,7 @@ gulp.task('css', function() {
        './src/styles/pure.css'
       ,'./src/styles/grids-responsive-min.css'
       ,'./src/styles/prism.css'
+      ,'./src/styles/animate.css'  
       ,'./src/styles/styles.css'
     ])
     .pipe(sourcemaps.init())
