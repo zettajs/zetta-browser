@@ -37,14 +37,29 @@ angular.module('zetta').controller('OverviewCtrl', [
           var d = server.devices[i];
           if (d.href === selfUrl) {
             device.server = server;
+            var earlierActions = d.actions;
             if (device.actions && device.actions.length) {
-              device.actions = device.actions.map(function(action) {
+              var newActions = device.actions.map(function(action) {
                 action.device = device;
                 action.execute = function() {
                   $scope.execute(action);
                 };
                 return action;
               });
+
+              var newNames = newActions.map(function(action) {
+                return action.name;
+              });
+
+              earlierActions.forEach(function(action) {
+                var index = newNames.indexOf(action.name);
+                if (index === -1) {
+                  action.available = false;
+                  newActions.push(action);
+                }
+              });
+
+              device.actions = newActions;
             }
 
             server.devices[i].actions = device.actions;

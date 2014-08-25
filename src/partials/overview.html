@@ -67,7 +67,7 @@
           </div>
           <div class="value before-md pure-u-md-1-4">&nbsp;{{ stream.current }}</div>
         </div>
-        <div class="row action" ng-repeat="action in device.actions" ng-show="!action.muted">
+        <div class="row action" ng-repeat="action in device.actions" ng-class="{ disabled: !action.available }" ng-show="!action.muted">
           <div class="pure-g action-content">
             <div class="switches pure-u-1-6 pure-u-md-1-12">
               <div ng-class="{ pinned: action.pinned }">

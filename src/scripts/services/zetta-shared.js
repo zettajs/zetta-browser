@@ -125,6 +125,7 @@ angular.module('zetta').factory('zettaShared', function() {
     if (deviceData.actions) {
       device.actions = deviceData.actions.map(function(action) {
         action.device = device;
+        action.available = true;
         return action;
       });
     }
