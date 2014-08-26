@@ -14,7 +14,6 @@
       <h2 class="name">Recent Servers</h2>
       <div class="content">
         <ol class="project_list">
-          <li>http://zetta-cloud-2.herokuapp.com</li>
           <li ng-repeat="url in serverUrls" class="animated fadeIn">
             <a href="#" ng-click="fetchUrl({ url: url })">{{ url }}</a>
           </li>
