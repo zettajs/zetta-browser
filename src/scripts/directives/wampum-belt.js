@@ -4,6 +4,10 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
   $('#wampum').on('dblclick', function() { $('#wampum').hide(); });
 
   function textToColor(text, min, max) {
+    if (text === null || text === undefined) {
+      return 0;
+    }
+
     if (!min) {
       min = 0;
     }
