@@ -3,11 +3,21 @@
   <fieldset>
     <legend># {{ action.name }}</legend>
     <label ng-repeat-start="field in action.fields" for="{{ action.name + field.name }}" class="{{ field.type }}"></label>
-    {{field.type}}
     
     <ng-switch on="field.type">
+      <div ng-switch-when="radio" >
+        <!-- regular radios -->
+        <label class="pure-radio" ng-repeat="val in action.radioField.value" for="{{ action.name + field.name }}_{{ $index }}" >
+        <input id="{{ action.name + field.name }}_{{ $index }}" type="radio" name="{{ action.name + field.name }}" value="{{ val }}"/>
+          {{ val }}
+        </label> 
       
+      </div>
       
+      <!-- TODO: renderOptionsAsButtons -->
+      
+      <textarea ng-switch-when="textarea" name="{{ field.name }}" value="{{ field.value }}" 
+              id="{{ action.name + field.name }}" ng-model="field.value" ></textarea>
       
       <input placeholder="{{ field.name }}" type="{{ field.type }}" class="" name="{{ field.name }}" value="{{ field.value }}" 
               id="{{ action.name + field.name }}" ng-model="field.value" ng-switch-default/>
