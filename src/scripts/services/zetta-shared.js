@@ -167,7 +167,7 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
     return device;
   };
 
-  function loadServers(rootUrl, execute, cb) {
+  function loadServers(rootUrl, cb) {
     $http.get(rootUrl).then(function(response) {
       var data = response.data;
       if (typeof data === 'string') {
@@ -199,11 +199,11 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
         });
       });
 
-      crawl(execute, cb);
+      crawl(cb);
     });
   };
 
-  var crawl = function(execute, cb) {
+  var crawl = function(cb) {
     var serverCount = 0;
     state.servers.forEach(function(server) {
       $http.get(server.href).then(function(response) {
