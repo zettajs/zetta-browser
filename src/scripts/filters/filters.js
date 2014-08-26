@@ -41,4 +41,30 @@ angular.module('zetta')
   else if(input > 10000){ return (input / 1000).toFixed(1) + " s"; } 
   else {return input + " ms";}
  }
+})
+.filter('purify', function() {
+  return function(input) {
+    var purified = {};
+
+    ['class', 'properties', 'entities', 'actions', 'links'].forEach(function(prop) {
+      if (input.hasOwnProperty(prop)) {
+        purified[prop] = input[prop];
+      }
+    });
+
+    if (purified.actions) {
+      purified.actions = purified.actions.map(function(action) {
+        var a = {};
+        ['class', 'name', 'method', 'href', 'fields'].forEach(function(prop) {
+          if (action.hasOwnProperty(prop)) {
+            a[prop] = action[prop];
+          }
+        });
+
+        return a;
+      });
+    }
+
+    return purified;
+  };
 });

@@ -1,10 +1,15 @@
 angular.module('zetta').controller('HeaderCtrl', [
   '$scope', '$state', '$http', 'navigator', 'zettaShared', function($scope, $state, $http, navigator, zettaShared) {
 
-    $scope.servers = zettaShared.servers;
-    $scope.breadcrumbs = zettaShared.breadcrumbs;
+    $scope.shared = zettaShared.state;
+    $scope.servers = $scope.shared.servers;
+    $scope.breadcrumbs = $scope.shared.breadcrumbs;
     $scope.follow = function(url) {
-      url = url || zettaShared.root;
+      url = url || $scope.shared.root;
       navigator.transitionTo(url, { url: url });
     }
+
+    $scope.$watchCollection('shared', function() { 
+      $scope.breadcrumbs = $scope.shared.breadcrumbs;
+    });
 }]);

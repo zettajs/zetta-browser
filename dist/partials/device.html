@@ -85,7 +85,7 @@
       </section>
       <h2 class="name pure-u-1">API Response</h2>
       <section class="content response">
-        <pre><code class="language-javascript" prism>{{ response | prettify }}</code></pre>
+        <pre><code class="language-javascript" ng-if="device.body">{{ device.body | purify | prettify }}</code></pre>
       </section>
     </div>
     </section>
