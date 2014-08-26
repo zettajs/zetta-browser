@@ -37,7 +37,7 @@
       </div>
     </section>
   </div>
-  <div class="server device-group pure-g" ng-repeat="server in servers" ng-show="server.available">
+  <div class="server device-group pure-g" ng-repeat="server in servers" ng-show="server.available && server.devices.length">
     <div class="pure-u-1-6 pure-u-md-1-12"></div>
     <h2 class="name pure-u-5-6 pure-u-md-11-12">
       {{ filter ? ':devices' : server.name + ' :' + server.type }}
