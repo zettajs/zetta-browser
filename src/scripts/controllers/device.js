@@ -29,7 +29,7 @@ angular.module('zetta').controller('DeviceCtrl', [
       'Accept: application/vnd.siren+json'].join('\r\n');
 
     if (!zettaShared.state.servers.length) {
-      zettaShared.state.loadServers(rootUrl, zettaShared.state.execute, function() {
+      zettaShared.state.loadServers(rootUrl, function() {
         findDevice();
       });
     } else {

@@ -167,7 +167,7 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
     return device;
   };
 
-  function loadServers(rootUrl, execute, cb) {
+  function loadServers(rootUrl, cb) {
     $http.get(rootUrl).then(function(response) {
       var data = response.data;
       if (typeof data === 'string') {
@@ -199,11 +199,11 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
         });
       });
 
-      crawl(execute, cb);
+      crawl(cb);
     });
   };
 
-  var crawl = function(execute, cb) {
+  var crawl = function(cb) {
     var serverCount = 0;
     state.servers.forEach(function(server) {
       $http.get(server.href).then(function(response) {
@@ -282,7 +282,6 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
               server.devices.forEach(function(device) {
                 wireUpStreams(device, function() {
                   state.onStreamUpdate();
-                  //$scope.$apply();
                 });
                 
                 if (device.streams) {
@@ -364,7 +363,7 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
                 if (index !== -1) {
                   newActions[index].pinned = true;
                   newActions[index].pinOpen = true;
-                  $scope.pinned[i] = newActions[index];
+                  state.pinned[i] = newActions[index];
                 }
               }
             });
@@ -375,7 +374,7 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
                 if (index !== -1) {
                   newActions[index].muted = true;
                   newActions[index].muteOpen = true;
-                  $scope.muted[i] = newActions[index];
+                  state.muted[i] = newActions[index];
                 }
               }
             });
