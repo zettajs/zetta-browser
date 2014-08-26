@@ -17,6 +17,10 @@ angular.module('zetta').controller('DeviceCtrl', [
       zettaShared.state.root = rootUrl;
     }
 
+    zettaShared.state.onStreamUpdate = function() {
+      $scope.$apply();
+    };
+
     var anchor = document.createElement('a');
     anchor.href = $state.params.url;
 

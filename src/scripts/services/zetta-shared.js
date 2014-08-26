@@ -5,7 +5,8 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
     breadcrumbs: null,
     pinned: [],
     muted: [],
-    savedStreams: []
+    savedStreams: [],
+    onStreamUpdate: function() { /* default no op */ }
   };
 
   var getAssumedStreamType = function(stream) {
@@ -280,6 +281,7 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
               server.devices = foundDevices;
               server.devices.forEach(function(device) {
                 wireUpStreams(device, function() {
+                  state.onStreamUpdate();
                   //$scope.$apply();
                 });
                 

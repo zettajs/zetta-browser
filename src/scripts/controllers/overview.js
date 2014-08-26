@@ -9,6 +9,9 @@ angular.module('zetta').controller('OverviewCtrl', [
     zettaShared.state.root = $state.params.url;
     zettaShared.state.breadcrumbs = [ { title: 'root', href: $state.params.url }];
     zettaShared.state.loadServers($state.params.url, zettaShared.state.execute);
+    zettaShared.state.onStreamUpdate = function() {
+      $scope.$apply();
+    };
   };
 
   $scope.resolve = function(href) {
