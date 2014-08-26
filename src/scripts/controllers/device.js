@@ -1,63 +1,58 @@
 angular.module('zetta').controller('DeviceCtrl', [
-  '$scope', '$state', '$http', 'navigator', 'zettaShared', function($scope, $state, $http, navigator, zettaShared) {
-    //leaflet, I'm beside myself. This default marker gets overriden by the actual data from the state machine
-   angular.extend($scope, {
-    markers: {
-        thisMarker: {
-          lat: 22,
-          lng: 43,
-          focus: false,
-          draggable: false
-        }
-    },
-    center: {
-      lat: 42,
-      lng: -83,
-      zoom: 2
-    },
-    attributionControl: false,
-    defaults: {
-        scrollWheelZoom: false,
-        tileLayer: 'http://api.tiles.mapbox.com/v3/alanguirand.i04decfa/{z}/{x}/{y}.jpg',
-        minZoom: 2,
-        maxZoom: 2,
-    }
-
-  }); 
-    
+  '$scope', '$state', 'zettaShared', function($scope, $state, zettaShared) {
   $scope.device = null;
   $scope.request = null;
-  $scope.response = null;
 
   $scope.init = function() {
+    var rootUrl = zettaShared.state.root;
+
+    if (!rootUrl) {
+      var parser = document.createElement('a');
+      parser.href = $state.params.url;
+      rootUrl = parser.protocol + '//' + parser.hostname;
+      if (parser.port) {
+        rootUrl += ':' + parser.port;
+      }
+
+      zettaShared.state.root = rootUrl;
+    }
+
+    zettaShared.state.onStreamUpdate = function() {
+      $scope.$apply();
+    };
+
+    var anchor = document.createElement('a');
+    anchor.href = $state.params.url;
+
+    $scope.request = ['GET ' + anchor.pathname,
+      'Host: ' + anchor.hostname,
+      'Accept: application/vnd.siren+json'].join('\r\n');
+
+    if (!zettaShared.state.servers.length) {
+      zettaShared.state.loadServers(rootUrl, zettaShared.state.execute, function() {
+        findDevice();
+      });
+    } else {
+      findDevice();
+    };
+
     $scope.stateLogs = [];
-    follow($state.params.url);
   };
 
-  $scope.execute = function(action) {
-    navigator.execute(action).then(function(result) {
-      if (result.noop) {
-        return;
-      }
-		
-      var data = result.data;
-      var config = result.config;
+  var findDevice = function() {
+    zettaShared.state.servers.forEach(function(server) {
+      server.devices.forEach(function(device) {
+        if (device.href === $state.params.url) {
+          $scope.device = device;
+          $scope.logger(device.monitorHref);
 
-      $scope.formattedDiff = "";
-      $scope.url = config.url;
-      $state.params.url = config.url;
-
-      showData(data);
-    });
-  };
-	
-  $scope.executeInlineAction = function(action, cb) {
-    navigator.execute(action).then(function(result) {
-      // Instead of throwing all kinds of errors
-      if (result.noop) {
-        return;
-      }
-      cb();
+          zettaShared.state.breadcrumbs = [
+            { title: 'root', href: zettaShared.state.root },
+            { title: server.name, href: server.href },
+            { title: device.properties.name || device.properties.type , href: $state.params.url }
+          ];
+        }
+      });
     });
   };
 
@@ -97,88 +92,10 @@ angular.module('zetta').controller('DeviceCtrl', [
           }
         });
 
-        if($scope.stateLogs.length > 10){ $scope.stateLogs.pop() } //keep things civil
+        if($scope.stateLogs.length > 10) {
+          $scope.stateLogs.pop()
+        }
       });
     }
   };
-  
-  var savedStreams = {};
-  var showData = function(deviceData) {
-    var device = zettaShared.buildDeviceFromData(deviceData, zettaShared.servers);
-
-    if (device.actions && device.actions.length) {
-      device.actions = device.actions.map(function(action) {
-        action.execute = function() {
-          $scope.execute(action);
-        };
-        return action;
-      });
-    }
-
-    device.links.forEach(function(link) {
-      if (link.rel.indexOf('up') !== -1) {
-        var rootUrl = zettaShared.root;
-
-        if (!rootUrl) {
-          var parser = document.createElement('a');
-          parser.href = link.href;
-          rootUrl = parser.protocol + '//' + parser.hostname;
-          if (parser.port) {
-            rootUrl += ':' + parser.port;
-          }
-        }
-        zettaShared.breadcrumbs = [ { title: 'root', href: rootUrl }, { title: link.title, href: link.href },
-          { title: device.properties.name || device.properties.type } ];
-      }
-    });
-
-    $scope.device = device;
-
-    $scope.logger(device.monitorHref);
-
-    zettaShared.wireUpStreams(device, function() {
-      $scope.$apply();
-    });
-  };
-
-  var follow = function(rootUrl) {
-    var url = rootUrl;
-
-    $scope.url = url;
-
-    $state.params.url = url;
-
-    var anchor = document.createElement('a');
-    anchor.href = url;
-
-    $scope.request = ['GET ' + anchor.pathname,
-      'Host: ' + anchor.hostname,
-      'Accept: application/vnd.siren+json'].join('\r\n');
-
-    navigator.redirectOrFetch(url, $state.params).then(function(data) {
-      $scope.response = {};
-
-      ['class', 'properties', 'entities', 'actions', 'links'].forEach(function(prop) {
-        if (data.hasOwnProperty(prop)) {
-          $scope.response[prop] = data[prop];
-        }
-      });
-
-      if ($scope.response.actions) {
-        $scope.response.actions = $scope.response.actions.map(function(action) {
-          var a = {};
-          ['class', 'name', 'method', 'href', 'fields'].forEach(function(prop) {
-            if (action.hasOwnProperty(prop)) {
-              a[prop] = action[prop];
-            }
-          });
-
-          return a;
-        });
-      }
-
-      showData(data);
-    });
-  };
-
 }]);

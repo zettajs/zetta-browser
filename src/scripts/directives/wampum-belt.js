@@ -4,6 +4,10 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
   $('#wampum').on('dblclick', function() { $('#wampum').hide(); });
 
   function textToColor(text, min, max) {
+    if (text === null || text === undefined) {
+      return 0;
+    }
+
     if (!min) {
       min = 0;
     }
@@ -13,7 +17,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
     }
 
     var tryFloat = parseFloat(text);
-    if (typeof text === 'string' && isNaN(tryFloat)) {
+    if (typeof text !== 'number' && isNaN(tryFloat)) {
       var code = text.toString().split('').map(function(c) {
         return c.charCodeAt(0);
       }).reduce(function(previous, current) {
@@ -67,18 +71,6 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
       y = y + height;
       x = context.canvas.width - unitWidth;
 
-      /*if (row.streams.length) {
-        row.streams.forEach(function(strm) {
-          strm.forEach(function(color) {
-            context.fillStyle = 'hsl(' + color.hue + ', ' + color.saturation + ', 50%)';
-            //context.fillStyle = 'hsl(' + color.hue + ', 100%, 50%)';
-            context.fillRect(x, y, width, height);
-            x = x - unitWidth;
-          });
-          y = y + height;
-          x = context.canvas.width - unitWidth;
-        });
-      }*/
       $('.page_content header').css('padding-top', $('#wampum canvas').height());
     });
 
@@ -162,8 +154,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
                     return;
                   }
                   var arr = d[d.length - 1];
-                  //var c = { hue: (Math.abs(arr[1].toFixed(0) % 360)), saturation: '100%' };
-                  //var c = getStreamColor(arr[1], stream.min, stream.max);
+
                   var last;
                   if (stream.type === 'categorical') {
                     last = getColor(stream);
