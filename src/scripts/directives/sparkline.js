@@ -34,8 +34,6 @@ angular.module('zetta').directive('sparkline', ['$compile', function($compile) {
         }
       });
       
-      console.log(mm);
-      
       if (d) {
         
        angular.element(element[0].querySelector('.dataline')).attr({"d": d});

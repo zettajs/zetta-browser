@@ -183,7 +183,8 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
         state.servers.push({
           name: server.title,
           type: 'server',
-          href: server.href
+          href: server.href,
+          available: true
         });
       }
 
@@ -195,7 +196,8 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
         state.servers.push({
           name: peer.title,
           type: 'peer',
-          href: peer.href
+          href: peer.href,
+          available: true
         });
       });
 

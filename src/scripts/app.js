@@ -6,7 +6,6 @@ angular.module('zetta',
 
   classRouterProvider
     .when(['root'], 'overview')
-    .when(['server'], 'overview')
     .otherwise('device');
 
   $stateProvider
@@ -16,7 +15,7 @@ angular.module('zetta',
       controller: 'MainCtrl'
     })
     .state('overview', {
-      url: '/overview?url',
+      url: '/overview?url&filter',
       templateUrl: 'partials/overview.html',
       controller: 'OverviewCtrl'
     })
@@ -28,5 +27,5 @@ angular.module('zetta',
   }
 ])
 .factory('appState', function() {
-  return { url: '' };
+  return { url: '', filter: null };
 });

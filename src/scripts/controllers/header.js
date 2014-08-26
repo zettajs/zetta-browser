@@ -4,9 +4,16 @@ angular.module('zetta').controller('HeaderCtrl', [
     $scope.shared = zettaShared.state;
     $scope.servers = $scope.shared.servers;
     $scope.breadcrumbs = $scope.shared.breadcrumbs;
-    $scope.follow = function(url) {
+    $scope.follow = function(url, filter) {
       url = url || $scope.shared.root;
-      navigator.transitionTo(url, { url: url });
+      var params = { url: url };
+
+      if (filter) {
+        $state.params.url = $scope.shared.root;
+        params.filter = filter;
+      }
+
+      navigator.transitionTo(url, params);
     }
 
     $scope.$watchCollection('shared', function() { 

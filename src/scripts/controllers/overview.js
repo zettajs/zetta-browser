@@ -7,11 +7,61 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.init = function() {
     $scope.servers = zettaShared.state.servers = [];
     zettaShared.state.root = $state.params.url;
-    zettaShared.state.breadcrumbs = [ { title: 'root', href: $state.params.url }];
-    zettaShared.state.loadServers($state.params.url);
+    zettaShared.state.breadcrumbs = [];
     zettaShared.state.onStreamUpdate = function() {
       $scope.$apply();
     };
+
+    var rootUrl = zettaShared.state.root;
+
+    if (!rootUrl) {
+      var parser = document.createElement('a');
+      parser.href = $state.params.url;
+      rootUrl = parser.protocol + '//' + parser.hostname;
+      if (parser.port) {
+        rootUrl += ':' + parser.port;
+      }
+
+      zettaShared.state.root = rootUrl;
+    }
+
+    if ($state.params.filter) {
+      $scope.filter = $state.params.filter;
+
+      zettaShared.state.breadcrumbs = [
+        { title: 'root', href: $state.params.url },
+        { title: $state.params.filter }
+      ];
+    }
+
+    if (!zettaShared.state.servers.length) {
+      zettaShared.state.loadServers(rootUrl, function() {
+        if ($state.params.filter) {
+          filterServer();
+        } else {
+          zettaShared.state.servers.forEach(function(server) {
+            server.available = true;
+          })
+        }
+      });
+    } else {
+      if ($state.params.filter) {
+        filterServer();
+        $scope.$apply();
+      } else {
+        zettaShared.state.servers.forEach(function(server) {
+          server.available = true;
+        })
+      }
+    }
+  };
+
+  var filterServer = function() {
+    $scope.servers.forEach(function(server) {
+      if (server.name !== $state.params.filter) {
+        server.available = false;
+      }
+    });
   };
 
   $scope.resolve = function(href) {

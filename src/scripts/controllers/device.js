@@ -48,8 +48,8 @@ angular.module('zetta').controller('DeviceCtrl', [
 
           zettaShared.state.breadcrumbs = [
             { title: 'root', href: zettaShared.state.root },
-            { title: server.name, href: server.href },
-            { title: device.properties.name || device.properties.type , href: $state.params.url }
+            { title: server.name, href: zettaShared.state.root, filter: server.name },
+            { title: device.properties.name || device.properties.type }
           ];
         }
       });

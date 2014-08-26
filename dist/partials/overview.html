@@ -2,7 +2,7 @@
 <section class="page_content pure-g" id="overview" ng-init="init()">
   <header class="pure-u-1">
     <section class="content">
-      <h1>root</h1>
+      <h1>{{ filter || 'root' }}</h1>
     </section>
   </header>
   <div class="pinned device-group pure-g " ng-show="pinned.length">
@@ -37,10 +37,10 @@
       </div>
     </section>
   </div>
-  <div class="server device-group pure-g" ng-repeat="server in servers" ng-show="server.devices.length">
+  <div class="server device-group pure-g" ng-repeat="server in servers" ng-show="server.available">
     <div class="pure-u-1-6 pure-u-md-1-12"></div>
     <h2 class="name pure-u-5-6 pure-u-md-11-12">
-      {{ server.name }} :{{server.type}}
+      {{ filter ? ':devices' : server.name + ' :' + server.type }}
     </h2>
     <section class="devices pure-u-1">
       <section class="device pure-u-1" ng-repeat="device in server.devices">
