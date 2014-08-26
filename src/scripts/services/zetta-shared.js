@@ -282,7 +282,6 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
               server.devices.forEach(function(device) {
                 wireUpStreams(device, function() {
                   state.onStreamUpdate();
-                  //$scope.$apply();
                 });
                 
                 if (device.streams) {
@@ -364,7 +363,7 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
                 if (index !== -1) {
                   newActions[index].pinned = true;
                   newActions[index].pinOpen = true;
-                  $scope.pinned[i] = newActions[index];
+                  state.pinned[i] = newActions[index];
                 }
               }
             });
@@ -375,7 +374,7 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
                 if (index !== -1) {
                   newActions[index].muted = true;
                   newActions[index].muteOpen = true;
-                  $scope.muted[i] = newActions[index];
+                  state.muted[i] = newActions[index];
                 }
               }
             });
