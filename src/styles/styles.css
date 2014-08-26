@@ -524,6 +524,9 @@ nav ul li a:after {
   margin: 0 0 0 .5rem;
   color: #ededed;
 }
+nav ul li a:hover {
+  text-decoration: none;
+}
 nav .zetta-logo {
   margin-top: .25rem;
 }
@@ -1275,13 +1278,20 @@ input {
   background-color: #eee;
 }
 .focus .streams .stream.numerical .vis {
-  height: 6rem;
+  height: 5rem;
   margin-top: 1rem;
 }
 @media screen and (min-width: 48em) {
   .focus .streams .stream.numerical .vis {
     margin-top: 0rem;
   }
+}
+.focus .streams .stream.numerical .sparkline {
+  padding-bottom: 2rem;
+  background-image: url(../images/graph-axis.svg);
+  background-size: 100% auto;
+  background-position: bottom;
+  background-repeat: no-repeat;
 }
 .focus .streams .stream.categorical .vis {
   height: 3rem;

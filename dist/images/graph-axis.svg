@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="539.5px" height="93.6px" viewBox="0 0 539.5 93.6" enable-background="new 0 0 539.5 93.6" xml:space="preserve">
+<g>
+	
+	<line fill="none" stroke="#989898" stroke-miterlimit="10" x1="1.2" y1="70.9" x2="538.5" y2="70.9"/>
+	<g>
+		<g>
+			<rect x="486.2" y="78.4" fill="none" width="52.5" height="13.3"/>
+			<text transform="matrix(1 0 0 1 521.7723 85.6291)" fill="#B4B4B4" font-family="'SourceSansPro-Light'" font-size="10">0ms</text>
+		</g>
+		<g>
+			<rect x="0.6" y="78.4" fill="none" width="52.5" height="13.3"/>
+			<text transform="matrix(1 0 0 1 0.6003 85.6291)" fill="#B4B4B4" font-family="'SourceSansPro-Light'" font-size="10">+1800ms</text>
+		</g>
+		<g>
+			<rect x="153.4" y="78.4" fill="none" width="52.5" height="13.3"/>
+			<text transform="matrix(1 0 0 1 161.6507 85.6291)" fill="#B4B4B4" font-family="'SourceSansPro-Light'" font-size="10">+1200ms</text>
+		</g>
+		<g>
+			<rect x="63.5" y="78.4" fill="none" width="52.5" height="13.3"/>
+			<text transform="matrix(1 0 0 1 71.6945 85.6291)" fill="#B4B4B4" font-family="'SourceSansPro-Light'" font-size="10">+1500ms</text>
+		</g>
+		<g>
+			<rect x="243.4" y="78.4" fill="none" width="52.5" height="13.3"/>
+			<text transform="matrix(1 0 0 1 254.0018 85.6291)" fill="#B4B4B4" font-family="'SourceSansPro-Light'" font-size="10">+900ms</text>
+		</g>
+		<g>
+			<rect x="334" y="78.4" fill="none" width="52.5" height="13.3"/>
+			<text transform="matrix(1 0 0 1 344.5589 85.6291)" fill="#B4B4B4" font-family="'SourceSansPro-Light'" font-size="10">+600ms</text>
+		</g>
+		<g>
+			<rect x="422.7" y="78.4" fill="none" width="52.5" height="13.3"/>
+			<text transform="matrix(1 0 0 1 433.3123 85.6291)" fill="#B4B4B4" font-family="'SourceSansPro-Light'" font-size="10">+300ms</text>
+		</g>
+	</g>
+	<line fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="1.1" y1="68.9" x2="1.1" y2="73.4"/>
+	<line fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="90.7" y1="68.9" x2="90.7" y2="73.4"/>
+	<line fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="180.2" y1="68.9" x2="180.2" y2="73.4"/>
+	<line fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="269.8" y1="68.9" x2="269.8" y2="73.4"/>
+	<line fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="359.4" y1="68.9" x2="359.4" y2="73.4"/>
+	<line fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="449" y1="68.9" x2="449" y2="73.4"/>
+	<line fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="538.5" y1="68.9" x2="538.5" y2="73.4"/>
+	
+</g>
+</svg>

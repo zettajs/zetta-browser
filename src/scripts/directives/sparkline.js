@@ -18,7 +18,8 @@ angular.module('zetta').directive('sparkline', ['$compile', function($compile) {
       var d = scope.line(stream);
 
       if (d) {
-       element.find('path').attr({"d": d});
+        
+       angular.element(element[0].querySelector('.dataline')).attr({"d": d});
       }
     }); 
   }
