@@ -104,7 +104,7 @@ angular.module('zetta').controller('DeviceCtrl', [
   
   var savedStreams = {};
   var showData = function(deviceData) {
-    var device = zettaShared.buildDeviceFromData(deviceData);
+    var device = zettaShared.buildDeviceFromData(deviceData, zettaShared.servers);
 
     if (device.actions && device.actions.length) {
       device.actions = device.actions.map(function(action) {

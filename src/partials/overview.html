@@ -10,8 +10,8 @@
     <h2 class="name pure-u-5-6 pure-u-md-11-12">Pinned<span>:group</span></h2>
     <section class="devices pure-u-1">
 
-    <div class="device row pure-g animate-size"
-      ng-class="{ action: !characteristic.type, stream: !!characteristic.type, disabled: (!characteristic.type && !characteristic.available) }" ng-repeat="characteristic in pinned">
+    <div class="device row pure-g animate-size closed"
+      ng-class="{ open: !!characteristic.pinOpen, closed: !characteristic.pinOpen, action: !characteristic.type, stream: !!characteristic.type, disabled: (!characteristic.type && !characteristic.available) }" ng-repeat="characteristic in pinned">
         <div class="switches pure-u-1-6 pure-u-md-1-12">
           <b class="mute" ng-click="mute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="unpin(characteristic)">pushpin</b>
         </div>
@@ -44,13 +44,13 @@
     </h2>
     <section class="devices pure-u-1">
       <section class="device pure-u-1" ng-repeat="device in server.devices">
-        <div class="row main pure-g animate-size">
+        <div class="row main pure-g">
           <div class="pure-u-1-6 pure-u-md-1-12"></div>
           <div class="name pure-u-5-6 pure-u-md-11-12">
             <a ng-click="resolve(device.href)">{{ device.properties.name || device.properties.type }}</a>
           </div>
         </div>
-        <div class="row stream pure-g animate-size" ng-repeat="stream in device.streams" ng-show="!stream.muted">
+        <div class="row stream pure-g animate-size closed" ng-repeat="stream in device.streams" ng-show="!stream.muted" id="{{ stream.id }}" ng-class="{ open: !!stream.open, closed: !stream.open }">
           <div class="switches pure-u-1-6 pure-u-md-1-12">
             <div ng-class="{ pinned: stream.pinned }">
               <b class="mute" ng-click="mute(stream)">eye</b>&nbsp;<b class="pin" ng-click="pin(stream)">pushpin</b>
@@ -69,7 +69,7 @@
           </div>
           <div class="value before-md pure-u-md-1-4">&nbsp;{{ stream.current }}</div>
         </div>
-        <div class="row action animate-size" ng-repeat="action in device.actions" ng-show="!action.muted && action.available">
+        <div class="row action animate-size closed" ng-repeat="action in device.actions" ng-show="!action.muted" id="{{ action.id }}" ng-class="{ open: !!action.open, closed: !action.open }">
           <div class="pure-g action-content">
             <div class="switches pure-u-1-6 pure-u-md-1-12">
               <div ng-class="{ pinned: action.pinned }">
@@ -89,7 +89,7 @@
     <div class="pure-u-1-6 pure-u-md-1-12"></div>
     <h2 class="name pure-u-5-6 pure-u-md-11-12">Muted<span>:group</span></h2>
     <section class="devices pure-u-1">
-      <div class="device row action pure-g animate-size" ng-repeat="characteristic in muted">
+    <div ng-class="{ open: !!characteristic.muteOpen, closed: !characteristic.muteOpen }" class="device row action pure-g animate-size closed" ng-repeat="characteristic in muted">
         <div class="switches pure-u-1-6 pure-u-md-1-12">
           <b class="mute"ng-click="unmute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="pin(characteristic)">pushpin</b>
         </div>

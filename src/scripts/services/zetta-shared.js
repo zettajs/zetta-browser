@@ -59,7 +59,7 @@ angular.module('zetta').factory('zettaShared', function() {
     });
   };
 
-  var buildDeviceFromData = function(deviceData) {
+  var buildDeviceFromData = function(deviceData, servers) {
     if (typeof deviceData === 'string') {
       deviceData = JSON.parse(deviceData);
     }
@@ -69,10 +69,19 @@ angular.module('zetta').factory('zettaShared', function() {
     };
 
     deviceData.links.forEach(function(link) {
+      if (link.rel.indexOf('up') !== -1) {
+        var serverName = link.title;
+        servers.forEach(function(s) {
+          if (s.name === serverName) {
+            device.server = s;
+          }
+        });
+      }
       if (link.rel.indexOf('self') !== -1) {
         device.href = link.href;
       }
     });
+
 
     var objectStreamLinks = deviceData.links.filter(function(link) {
       return link.rel.indexOf('http://rels.zettajs.io/object-stream') !== -1;
@@ -93,12 +102,17 @@ angular.module('zetta').factory('zettaShared', function() {
         device.monitorHref = objectStream.href;
       } else {
         var stream = {
+          id: device.server.name.replace(/\./g, '-') + 'device' + device.server.devices.length + 'stream' + savedStreams.length + objectStream.title,
           name: objectStream.title,
           href: objectStream.href,
           socket: new WebSocket(objectStream.href),
           device: device,
           data: [],
           pinned: false,
+          available: true,
+          open: true,
+          pinOpen: false,
+          muteOpen: false,
           muted: false,
           min: null,
           max: null,
@@ -123,9 +137,13 @@ angular.module('zetta').factory('zettaShared', function() {
     device.links = deviceData.links;
 
     if (deviceData.actions) {
-      device.actions = deviceData.actions.map(function(action) {
+      device.actions = deviceData.actions.map(function(action, i) {
         action.device = device;
         action.available = true;
+        action.id = device.server.name.replace(/\./g, '-') + 'device' + device.server.devices.length + 'action' + i + action.name;
+        action.open = true;
+        action.pinOpen = false;
+        action.muteOpen = false;
         return action;
       }).sort(function(a, b) {
         var identifierA = a.name;
