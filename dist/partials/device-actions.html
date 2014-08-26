@@ -8,8 +8,8 @@
       <div ng-switch-when="radio" >
         <!-- regular radios -->
         <label class="pure-radio" ng-repeat="val in action.radioField.value" for="{{ action.name + field.name }}_{{ $index }}" >
-        <input id="{{ action.name + field.name }}_{{ $index }}" type="radio" name="{{ action.name + field.name }}" value="{{ val }}"/>
-          {{ val }}
+        <input id="{{ action.name + field.name }}_{{ $index }}" type="radio" name="{{ action.name + field.name }}" value="{{ val.value }}"/>
+          {{ val.value }}
         </label> 
       
       </div>
