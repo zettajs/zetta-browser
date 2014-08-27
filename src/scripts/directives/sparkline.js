@@ -45,7 +45,7 @@ angular.module('zetta').directive('sparkline', ['$compile', function($compile) {
        });
        angular.element(element[0].querySelector('.max')).attr({
         "cx": x(mm.max.x),
-        "cy": y(mm.max.y) + 3
+        "cy": y(mm.max.y) + 6
        });
        angular.element(element[0].querySelector('.val')).attr({
         "cx": x(mm.val.x),

@@ -43,6 +43,7 @@
     margin-right: 1.1rem;
     
   }
+  .sparkline circle {display: none;}
 }
 
 
@@ -68,6 +69,7 @@
     
     
   .row {
+    overflow-x: hidden;
     .expand();
     line-height: 1rem;
     .switches, .name, .value {
@@ -156,14 +158,16 @@
   .row.action .vis {
     
     border-top: 0;
+    padding: .5rem 0 .5rem 1rem;
     @media @md { padding-top: .25rem; }
   }
   .row.categorical .vis {
+    padding: 0 1rem .5rem 1rem;
     @media @md { padding-top: 1rem; }
   }
   
   .row.numerical .vis {
-    padding: 0 1rem 1rem 0;
+    padding: 0 1rem 1rem 1rem;
     @media @md { padding: 1rem 0 1rem 0; }
   }
 }

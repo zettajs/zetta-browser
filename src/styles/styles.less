@@ -56,6 +56,7 @@ body {
   color: @gray;
   line-height: 1.5rem;
   padding: 0;
+  margin: 0;
 }
 
 code {.mono();}
@@ -111,13 +112,16 @@ section.main{
   background-image: url('@{images}/zetta-logo.svg'), none;
   color: transparent;
   background-repeat: no-repeat;
-  background-size: auto 3rem; 
-  height: 3rem;
+  background-size: auto 2.2rem; 
+  background-position: 1rem 0;
+  height: 2rem;
   margin: 1rem 0 0 0;
   
-  @media @sm {
+  @media @md {
+    background-position: 0rem 0;
     background-size: auto 2rem;
     height: 2rem;
+   
   }
   
 }
@@ -221,26 +225,76 @@ nav {
   background-color: @dark;
   text-align: left;
   
+  .menu-toggle {
+    .border-box;
+    color: @yellow;
+    background-color: transparent;
+    text-align: right;
+    font-size: 1.5em;
+    padding: .5rem 1rem 0 0;
+    
+    &.open .open-icon, &.closed .closed-icon {display: none;}
+    b {cursor: pointer;}
+    height: 2rem;
+  }
+  
   ul {
+    .border-box;
+    transition: max-height 1s;
+    height: auto;
+    max-height: 10rem;
+    padding: 1rem;
+    
+    &.closed {
+      max-height: 0;
+      padding: 0 1rem;
+      li {
+        opacity: 0;
+        display: none;
+      }
+    }
+    background-color: @dark;
+    
+    
     margin: 0 ;
-    padding: 0;
+    
+    
+    @media @md {
+      max-height: 2rem;
+      padding: 0;
+      background-color: transparent;
+    }
+    
     li {
-      display: inline-block;
+      transition: opacity 1s;
+      opacity: 1;
+      height: 2rem;
+      line-height: 2rem;
+      font-size: 1rem;
+      .body-font();
+      
       height: 2.5rem;
       color: @light-gray-bg;
+      
+      @media @md {
+        display: inline-block;
+      }
+      
       a {
-        display: block;
-        padding: .5rem .25rem .5rem 0rem;
+        
         background-color: transparent;
         text-shadow: none;
         
-         &:after
-          {
+        @media @md {
+         display: block;
+         padding: .5rem .25rem .5rem 0rem;
+         &:after {
             content: '/';
             margin: 0 0 0 .5rem;
             color: @light-gray-bg;
             
           }
+        }
         &:hover {text-decoration: none;}
       }
       
@@ -444,6 +498,8 @@ header nav, #wampum {
 }
 #wampum {
   top: 2.5rem;
+  display: none;
+  @media @md {display: block;}
 }
 
 .page_content {
@@ -454,7 +510,7 @@ header nav, #wampum {
     margin-top: 2.5rem;
     background-color: #fff;
     padding: 0;
-    h1 {margin: 3rem 0 1rem 0;}
+    h1 {margin: 2rem 0 1rem 0;}
     .smallPadding();
     
     .content {
@@ -497,6 +553,7 @@ footer {
   padding: 2rem 0 7rem 0;
   margin-top: 4rem;
   color: @white;
+  overflow-x: hidden;
   ul{ 
     margin: 0; 
     padding: 0; 
@@ -504,7 +561,11 @@ footer {
   }
   li.apigee  {margin-top: 1rem;}
   .creative-commons {margin-top: 3rem; font-size: .8em;}
- .zetta-logo {margin-bottom: 1rem;} 
+ .zetta-logo {
+   margin-bottom: 1rem;
+   
+ 
+ } 
   a {text-shadow: none;}
 }
 

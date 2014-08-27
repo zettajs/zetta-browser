@@ -284,6 +284,7 @@ body {
   color: #59595b;
   line-height: 1.5rem;
   padding: 0;
+  margin: 0;
 }
 code {
   font-family: "fira-mono", courier, monospace;
@@ -372,12 +373,14 @@ section.main {
   background-image: url('../images/zetta-logo.svg'), none;
   color: transparent;
   background-repeat: no-repeat;
-  background-size: auto 3rem;
-  height: 3rem;
+  background-size: auto 2.2rem;
+  background-position: 1rem 0;
+  height: 2rem;
   margin: 1rem 0 0 0;
 }
-@media screen and (min-width: 35.5em) {
+@media screen and (min-width: 48em) {
   .zetta-logo {
+    background-position: 0rem 0;
     background-size: auto 2rem;
     height: 2rem;
   }
@@ -504,25 +507,79 @@ nav section {
     margin: 0 auto !important;
   }
 }
+nav .menu-toggle {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #faa438;
+  background-color: transparent;
+  text-align: right;
+  font-size: 1.5em;
+  padding: .5rem 1rem 0 0;
+  height: 2rem;
+}
+nav .menu-toggle.open .open-icon,
+nav .menu-toggle.closed .closed-icon {
+  display: none;
+}
+nav .menu-toggle b {
+  cursor: pointer;
+}
 nav ul {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  transition: max-height 1s;
+  height: auto;
+  max-height: 10rem;
+  padding: 1rem;
+  background-color: #0b1a1f;
   margin: 0 ;
-  padding: 0;
+}
+nav ul.closed {
+  max-height: 0;
+  padding: 0 1rem;
+}
+nav ul.closed li {
+  opacity: 0;
+  display: none;
+}
+@media screen and (min-width: 48em) {
+  nav ul {
+    max-height: 2rem;
+    padding: 0;
+    background-color: transparent;
+  }
 }
 nav ul li {
-  display: inline-block;
+  transition: opacity 1s;
+  opacity: 1;
+  height: 2rem;
+  line-height: 2rem;
+  font-size: 1rem;
+  font-family: "jaf-facitweb", Helvetica, Arial, sans-serif;
   height: 2.5rem;
   color: #ededed;
 }
+@media screen and (min-width: 48em) {
+  nav ul li {
+    display: inline-block;
+  }
+}
 nav ul li a {
-  display: block;
-  padding: .5rem .25rem .5rem 0rem;
   background-color: transparent;
   text-shadow: none;
 }
-nav ul li a:after {
-  content: '/';
-  margin: 0 0 0 .5rem;
-  color: #ededed;
+@media screen and (min-width: 48em) {
+  nav ul li a {
+    display: block;
+    padding: .5rem .25rem .5rem 0rem;
+  }
+  nav ul li a:after {
+    content: '/';
+    margin: 0 0 0 .5rem;
+    color: #ededed;
+  }
 }
 nav ul li a:hover {
   text-decoration: none;
@@ -734,6 +791,12 @@ header nav,
 }
 #wampum {
   top: 2.5rem;
+  display: none;
+}
+@media screen and (min-width: 48em) {
+  #wampum {
+    display: block;
+  }
 }
 .page_content a {
   color: #b27b31;
@@ -746,7 +809,7 @@ header nav,
   padding-right: 1rem;
 }
 .page_content header h1 {
-  margin: 3rem 0 1rem 0;
+  margin: 2rem 0 1rem 0;
 }
 @media screen and (min-width: 48em) {
   .page_content header {
@@ -794,6 +857,7 @@ footer {
   padding: 2rem 0 7rem 0;
   margin-top: 4rem;
   color: #ffffff;
+  overflow-x: hidden;
 }
 footer ul {
   margin: 0;
@@ -888,6 +952,9 @@ footer a {
 #overview .row .vis .fields {
   margin-right: 1.1rem;
 }
+#overview .row .vis .sparkline circle {
+  display: none;
+}
 #show .stream.vis {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -920,6 +987,7 @@ footer a {
   */
 }
 .devices .row {
+  overflow-x: hidden;
   line-height: 1rem;
 }
 .devices .row.animate-size {
@@ -1053,11 +1121,15 @@ footer a {
 }
 .device-group .row.action .vis {
   border-top: 0;
+  padding: .5rem 0 .5rem 1rem;
 }
 @media screen and (min-width: 48em) {
   .device-group .row.action .vis {
     padding-top: .25rem;
   }
+}
+.device-group .row.categorical .vis {
+  padding: 0 1rem .5rem 1rem;
 }
 @media screen and (min-width: 48em) {
   .device-group .row.categorical .vis {
@@ -1065,7 +1137,7 @@ footer a {
   }
 }
 .device-group .row.numerical .vis {
-  padding: 0 1rem 1rem 0;
+  padding: 0 1rem 1rem 1rem;
 }
 @media screen and (min-width: 48em) {
   .device-group .row.numerical .vis {

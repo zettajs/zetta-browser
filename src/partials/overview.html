@@ -10,7 +10,7 @@
     <h2 class="name pure-u-5-6 pure-u-md-11-12">Pinned<span>:group</span></h2>
     <section class="devices pure-u-1">
 
-    <div ng-repeat="characteristic in pinned" class="device row pure-g animate-size closed {{characteristic.type}}"
+    <div ng-repeat="characteristic in pinned" class="device row pure-g animate-size {{characteristic.type}}"
       ng-class="{ open: !!characteristic.pinOpen, closed: !characteristic.pinOpen, action: !characteristic.type, stream: !!characteristic.type, disabled: (!characteristic.type && !characteristic.available) }" >
         <div class="switches pure-u-1-6 pure-u-md-1-12">
           <b class="mute" ng-click="mute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="unpin(characteristic)">pushpin</b>
@@ -59,6 +59,8 @@
           <div class="name pure-u-5-12 pure-u-md-1-4">
             : {{ stream.name }}
           </div>
+          <div class="value hide-md pure-u-5-12">{{ stream.current }}</div>
+          <div class="pure-u-1-6 hide-md"></div>
           <div class="vis pure-u-5-6 pure-u-md-5-12">
               <div class="sparkline pure-u-1" ng-if="stream.type === 'numerical'">
                 <sparkline height="16" stream="stream.data" id="{{ stream.name }}"></sparkline>
