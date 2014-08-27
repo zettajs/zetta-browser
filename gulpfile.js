@@ -9,7 +9,8 @@ var gulp = require('gulp')
   , prefix = require('gulp-autoprefixer')
   , sourcemaps = require('gulp-sourcemaps')
   , htmlmin = require('gulp-htmlmin')
-  , serve = require('gulp-serve');
+  , serve = require('gulp-serve')
+  , livereload = require('gulp-livereload');
 
 var scripts = [
             './src/scripts/angular.js'

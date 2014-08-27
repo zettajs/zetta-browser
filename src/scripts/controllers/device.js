@@ -79,12 +79,12 @@ angular.module('zetta').controller('DeviceCtrl', [
       if($scope.stateLogs.length){
         etime = d.timestamp -  $scope.stateLogs[0].time.time;
       }
-      
+      //console.log(d);
       $scope.$apply(function() {
         $scope.stateLogs.unshift({
           transition: d.transition,
           state: d.properties.state,
-          msg: null,
+          msg: (d.input[0]) ? d.input[0].value : null,
           time: {
             time: d.timestamp,
             localTime: dt.toLocaleString(),
