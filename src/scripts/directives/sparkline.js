@@ -11,14 +11,13 @@ angular.module('zetta').directive('sparkline', ['$compile', function($compile) {
       x.domain(d3.extent(stream, function(d) {return d.x}));
       y.domain(d3.extent(stream, function(d) {return d.y}));
 
-      
-      
-      
       scope.line = d3.svg.line()
           .x(function(d) {return x(d.x);})
           .y(function(d) {return y(d.y);});
 
       var d = scope.line(stream);
+
+      
       var mm = {
         raw: d3.extent(stream.map(function(point){return point.y})),
         min: null,
@@ -38,6 +37,7 @@ angular.module('zetta').directive('sparkline', ['$compile', function($compile) {
         
        angular.element(element[0].querySelector('.dataline')).attr({"d": d});
       }
+      
     }); 
   }
 

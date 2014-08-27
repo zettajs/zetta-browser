@@ -19,10 +19,6 @@
       }
       
       .name { padding: 0rem !important; }
-      .sparkline {
-        margin: 0 1rem 1rem 0;
-        @media @md { margin: 1rem 0 1rem 0; }
-      }
       
       .server-name { font-size: .5rem; }
       .device-name {
@@ -43,10 +39,6 @@
 
 #overview .row .vis {
   .border-box();
-  padding: .5rem 1rem;
-  @media @md {
-    padding: 1rem 0rem;
-  }
   .fields {
     margin-right: 1.1rem;
     
@@ -150,17 +142,33 @@
         }
       }
       .vis {
-        padding: .5rem 1rem !important;
+        padding: .5rem 1rem ;
         @media @md {
-          padding: .5rem 0rem;
+          padding: 0rem 0rem;
         }
       }
     }
   }
   
 }
-.pinned .devices .row.action .vis {padding: 0!important; border-top: 0;}
-/*.pinned .devices .row.action .vis {padding: 0!important;}*/
+
+.device-group {
+  .row.action .vis {
+    
+    border-top: 0;
+    @media @md { padding-top: .25rem; }
+  }
+  .row.categorical .vis {
+    @media @md { padding-top: 1rem; }
+  }
+  
+  .row.numerical .vis {
+    padding: 0 1rem 1rem 0;
+    @media @md { padding: 1rem 0 1rem 0; }
+  }
+}
+
+
 input {
   .body-font();
   margin-right: .5rem;

@@ -511,6 +511,7 @@ footer {
 
 @import 'overview.less';
 
+
 /* Device Show */
 
 .focus {
@@ -603,6 +604,32 @@ footer {
     }
   }
   span {font-size: .8em;}
+}
+
+
+.loading {
+  visibility: hidden !important;
+}
+.loading:before {
+    .pika();
+    visibility: visible;
+    content: 'loading';
+
+    -webkit-animation: rotation 3s infinite linear;
+    text-align: center;
+    display: block; float: left;
+    margin-right: 1rem;
+    padding-top: 2px;
+
+    width: 20px;
+    height: 18px;
+    line-height: 20px;
+    font-size: 20px;
+  }
+              
+@-webkit-keyframes rotation {
+  from {-webkit-transform: rotate(0deg);}
+  to   {-webkit-transform: rotate(359deg);}
 }
 
 

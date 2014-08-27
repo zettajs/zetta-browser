@@ -1,7 +1,7 @@
 <ng-include src="'partials/header.html'"></ng-include>
 <section class="page_content pure-g" id="overview" ng-init="init()">
   <header class="pure-u-1">
-    <section class="content">
+    <section class="content" >
       <h1>{{ filter || 'root' }}</h1>
     </section>
   </header>
@@ -10,8 +10,8 @@
     <h2 class="name pure-u-5-6 pure-u-md-11-12">Pinned<span>:group</span></h2>
     <section class="devices pure-u-1">
 
-    <div class="device row pure-g animate-size closed"
-      ng-class="{ open: !!characteristic.pinOpen, closed: !characteristic.pinOpen, action: !characteristic.type, stream: !!characteristic.type, disabled: (!characteristic.type && !characteristic.available) }" ng-repeat="characteristic in pinned">
+    <div ng-repeat="characteristic in pinned" class="device row pure-g animate-size closed {{characteristic.type}}"
+      ng-class="{ open: !!characteristic.pinOpen, closed: !characteristic.pinOpen, action: !characteristic.type, stream: !!characteristic.type, disabled: (!characteristic.type && !characteristic.available) }" >
         <div class="switches pure-u-1-6 pure-u-md-1-12">
           <b class="mute" ng-click="mute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="unpin(characteristic)">pushpin</b>
         </div>
@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="value before-md pure-u-md-1-4" ng-if="characteristic.type">&nbsp;{{ characteristic.current }}</div>
-        <div class="vis pure-u-5-6 pure-u-md-2-3"  ng-if="!characteristic.type">
+        <div class="pure-u-5-6 pure-u-md-2-3"  ng-if="!characteristic.type">
           <zetta-overview-action class="row action" value="characteristic" />
         </div>
         
@@ -50,7 +50,7 @@
             <a ng-click="resolve(device.href)">{{ device.properties.name || device.properties.type }}</a>
           </div>
         </div>
-        <div class="row stream pure-g animate-size closed" ng-repeat="stream in device.streams" ng-show="!stream.muted" id="{{ stream.id }}" ng-class="{ open: !!stream.open, closed: !stream.open }">
+        <div ng-repeat="stream in device.streams" class="row stream pure-g animate-size closed {{stream.type}}" ng-show="!stream.muted" id="{{ stream.id }}" ng-class="{ open: !!stream.open, closed: !stream.open }">
           <div class="switches pure-u-1-6 pure-u-md-1-12">
             <div ng-class="{ pinned: stream.pinned }">
               <b class="mute" ng-click="mute(stream)">eye</b>&nbsp;<b class="pin" ng-click="pin(stream)">pushpin</b>

@@ -5,7 +5,7 @@
     <label ng-repeat-start="field in action.fields" for="{{ action.name + field.name }}" class="{{ field.type }}"></label>
     
     <ng-switch on="field.type">
-      <div ng-switch-when="radio" >
+      <div ng-switch-when="radio" ng-if="!action.renderOptionsAsButtons">
         <!-- regular radios -->
         <label class="pure-radio" ng-repeat="val in action.radioField.value" for="{{ action.name + field.name }}_{{ $index }}" >
         <input id="{{ action.name + field.name }}_{{ $index }}" type="radio" name="{{ action.name + field.name }}" value="{{ val.value }}"/>
@@ -14,7 +14,10 @@
       
       </div>
       
-      <!-- TODO: renderOptionsAsButtons -->
+      <div ng-switch-when="radio" ng-if="action.renderOptionsAsButtons">
+            <button ng-repeat="val in action.radioField.value" class="pure-button {{ action.name + '-button' }}" ng-click="val.execute()">{{ val.title || val.value}}</button>
+      </div>
+
       
       <textarea ng-switch-when="textarea" name="{{ field.name }}" value="{{ field.value }}" 
               id="{{ action.name + field.name }}" ng-model="field.value" ></textarea>
@@ -22,9 +25,9 @@
       <input placeholder="{{ field.name }}" type="{{ field.type }}" class="" name="{{ field.name }}" value="{{ field.value }}" 
               id="{{ action.name + field.name }}" ng-model="field.value" ng-switch-default/>
     </ng-switch>
-    <br ng-repeat-end />
+    <span ng-repeat-end></span>
     
-    <button class="pure-button {{ action.name + '-button' }}" ng-click="execute()">{{ action.name }}</button>
+    <button class="pure-button {{ action.name + '-button' }}" ng-click="execute()" ng-if="!action.renderOptionsAsButtons">{{ action.name }}</button>
   </fieldset>
  
 </form>

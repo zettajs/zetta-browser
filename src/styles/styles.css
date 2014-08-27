@@ -857,16 +857,6 @@ footer a {
 .muted .devices .row .name {
   padding: 0rem !important;
 }
-.pinned .devices .row .sparkline,
-.muted .devices .row .sparkline {
-  margin: 0 1rem 1rem 0;
-}
-@media screen and (min-width: 48em) {
-  .pinned .devices .row .sparkline,
-  .muted .devices .row .sparkline {
-    margin: 1rem 0 1rem 0;
-  }
-}
 .pinned .devices .row .server-name,
 .muted .devices .row .server-name {
   font-size: .5rem;
@@ -894,12 +884,6 @@ footer a {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: .5rem 1rem;
-}
-@media screen and (min-width: 48em) {
-  #overview .row .vis {
-    padding: 1rem 0rem;
-  }
 }
 #overview .row .vis .fields {
   margin-right: 1.1rem;
@@ -1060,18 +1044,34 @@ footer a {
   }
 }
 .devices .row.action .vis {
-  padding: .5rem 1rem !important;
+  padding: .5rem 1rem ;
 }
 @media screen and (min-width: 48em) {
   .devices .row.action .vis {
-    padding: .5rem 0rem;
+    padding: 0rem 0rem;
   }
 }
-.pinned .devices .row.action .vis {
-  padding: 0!important;
+.device-group .row.action .vis {
   border-top: 0;
 }
-/*.pinned .devices .row.action .vis {padding: 0!important;}*/
+@media screen and (min-width: 48em) {
+  .device-group .row.action .vis {
+    padding-top: .25rem;
+  }
+}
+@media screen and (min-width: 48em) {
+  .device-group .row.categorical .vis {
+    padding-top: 1rem;
+  }
+}
+.device-group .row.numerical .vis {
+  padding: 0 1rem 1rem 0;
+}
+@media screen and (min-width: 48em) {
+  .device-group .row.numerical .vis {
+    padding: 1rem 0 1rem 0;
+  }
+}
 input {
   font-family: "jaf-facitweb", Helvetica, Arial, sans-serif;
   margin-right: .5rem;
@@ -1329,6 +1329,35 @@ input {
 }
 .state_log ul span {
   font-size: .8em;
+}
+.loading {
+  visibility: hidden !important;
+}
+.loading:before {
+  font-family: 'SSPika';
+  -moz-font-variant-ligatures: common-ligatures;
+  -webkit-font-variant-ligatures: common-ligatures;
+  font-variant-ligatures: common-ligatures;
+  visibility: visible;
+  content: 'loading';
+  -webkit-animation: rotation 3s infinite linear;
+  text-align: center;
+  display: block;
+  float: left;
+  margin-right: 1rem;
+  padding-top: 2px;
+  width: 20px;
+  height: 18px;
+  line-height: 20px;
+  font-size: 20px;
+}
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
 }
 /* Mixins  */
 /*# sourceMappingURL=styles.css.map */
