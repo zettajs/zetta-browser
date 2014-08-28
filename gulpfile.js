@@ -94,6 +94,7 @@ gulp.task('html', function() {
 });
 
 gulp.task('move', function() {
+  gulp.src(['./src/styles/fonts/*.*']).pipe(gulp.dest('./dist/styles/fonts'));
   gulp.src(['./src/index.html']).pipe(gulp.dest('./dist'));
   gulp.src(['./src/images/*.*']).pipe(gulp.dest('./dist/images'));
   gulp.src(['./src/partials/*.*']).pipe(gulp.dest('./dist/partials'));
