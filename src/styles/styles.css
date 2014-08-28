@@ -1393,13 +1393,6 @@ input {
     margin-top: 0rem;
   }
 }
-.focus .streams .stream.numerical .sparkline {
-  padding-bottom: 2rem;
-  background-image: url(../images/graph-axis.svg);
-  background-size: 100% auto;
-  background-position: bottom;
-  background-repeat: no-repeat;
-}
 .focus .streams .stream.categorical .vis {
   height: 3rem;
   margin-top: 1rem;
@@ -1465,6 +1458,18 @@ input {
   to {
     -webkit-transform: rotate(359deg);
   }
+}
+.linegraph .labels {
+  text-align: center;
+  font-size: .8rem;
+  height: 1rem;
+  color: #b3b3b3;
+}
+.linegraph .labels .q5 {
+  text-align: left;
+}
+.linegraph .labels .q1 {
+  text-align: right;
 }
 /* Mixins  */
 /*# sourceMappingURL=styles.css.map */

@@ -15,8 +15,8 @@
             </div>
             <div class="name">: {{ stream.name }}</div>
           </div>
-          <div class="sparkline pure-u-1 pure-u-md-2-3" ng-if="stream.type === 'numerical'">
-            <sparkline height="96" stream="stream.data" id="{{ stream.name }}"></sparkline>
+          <div class="linegraph pure-u-1 pure-u-md-2-3" ng-if="stream.type === 'numerical'">
+            <linegraph height="96" stream="stream.data" id="{{ stream.name }}"></linegraph>
           </div>
           <div class="dnastrip pure-u-1 pure-u-md-2-3" ng-if="stream.type === 'categorical'">
             <z-dna-strip width="100" height="48" stream="stream"></z-dna-strip>
