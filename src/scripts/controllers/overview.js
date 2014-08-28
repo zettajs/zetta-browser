@@ -1,5 +1,6 @@
 angular.module('zetta').controller('OverviewCtrl', [
-  '$scope', '$state', '$http', '$location', 'navigator', 'zettaShared', function($scope, $state, $http, $location, navigator, zettaShared) {
+  '$scope', '$state', '$http', '$location', '$window', 'navigator', 'zettaShared',
+    function($scope, $state, $http, $location, $window, navigator, zettaShared) {
   $scope.pinned = zettaShared.state.pinned;
   $scope.servers = zettaShared.state.servers;
   $scope.muted = zettaShared.state.muted;
@@ -60,8 +61,9 @@ angular.module('zetta').controller('OverviewCtrl', [
 
   $scope.loadServer = function(server) {
     $state.params.filter = server.name;
+    $location.search($state.params);
     loadServers();
-    window.location.hash = window.location.hash + '&filter=' + server.name;
+    $window.scrollTo(0, 0);
   };
 
   var filterServer = function() {

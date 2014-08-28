@@ -42,9 +42,10 @@ angular.module('zetta').directive('zDnaStrip', ['$compile', function($compile) {
     var canvas = element.children()[0];
     var context = canvas.getContext('2d');
     
+    console.log('linking');
     //this works, but it hurts. 
-    canvas.width = $(canvas).parent().parent().width();
-    
+    canvas.width = $(canvas).parent().parent().innerWidth();
+
     context.fillStyle = 'rgb(222, 222, 222)';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
