@@ -40,7 +40,7 @@
         <span ng-show="!device.actions || !device.actions.length">No actions available.</span>
         
         <div class="action {{ action.name }}" ng-repeat="action in device.actions"/>
-          <zetta-device-action value="action" />
+          <zetta-device-action value="action" ng-show="action.available" />
          
         </div>
       </section>
