@@ -265,13 +265,20 @@ nav {
       max-height: 2rem;
       padding: 0;
       background-color: transparent;
+      &.closed, &.open {
+        max-height: 2rem; 
+        li {
+          opacity: 1;
+          display: inline-block;
+        }
+      }
     }
     
     li {
       transition: opacity 1s;
       opacity: 1;
-      height: 2rem;
-      line-height: 2rem;
+      height: 1.5rem;
+      line-height: 1.5rem;
       font-size: 1rem;
       .body-font();
       
@@ -279,6 +286,7 @@ nav {
       color: @light-gray-bg;
       
       @media @md {
+        
         display: inline-block;
       }
       

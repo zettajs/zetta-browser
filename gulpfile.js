@@ -60,14 +60,13 @@ gulp.task('styles',['css'], function() {
     }))
     .pipe(gulp.dest('./src/styles'));
   
-  gulp.src('./src/styles/fonts/*.*').pipe(gulp.dest('./dist/styles/fonts'));
   gulp.src('./src/styles/fonts/*.*').pipe(gulp.dest('./dist/fonts'));
 });
 
 gulp.task('css', function() {
   gulp.src([
        './src/styles/pure.css'
-      ,'./src/styles/grids-responsive-min.css'
+      ,'./src/styles/grids-responsive.css'
       ,'./src/styles/prism.css'
       ,'./src/styles/animate.css'  
       ,'./src/styles/styles.css'
@@ -94,7 +93,6 @@ gulp.task('html', function() {
 });
 
 gulp.task('move', function() {
-  gulp.src(['./src/styles/fonts/*.*']).pipe(gulp.dest('./dist/styles/fonts'));
   gulp.src(['./src/index.html']).pipe(gulp.dest('./dist'));
   gulp.src(['./src/images/*.*']).pipe(gulp.dest('./dist/images'));
   gulp.src(['./src/partials/*.*']).pipe(gulp.dest('./dist/partials'));
