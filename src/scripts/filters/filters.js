@@ -36,10 +36,16 @@ angular.module('zetta')
 
 })
 .filter('elapsed', function() {
- return function(input){
-  if(input > (1000 * 60 * 1.5)){ return (input / (1000 * 60)).toFixed(2) + " m"; }
-  else if(input > 10000){ return (input / 1000).toFixed(1) + " s"; } 
-  else {return input + " ms";}
+ return function(input){ 
+  if(input < 1000){return input + " ms";}
+  else if(input < (1000 * 60)){ return (input / 1000).toFixed(1) + " s"; }
+  else if(input < (1000 * 60 * 60)){
+    return (input / (1000 * 60)).toFixed(2) + " m";
+  }else if(input < (1000 * 60 * 60 * 24)){
+    var h = parseInt(input / (1000 * 60 * 60));
+    var min = (input / (1000 * 60)) % 60;
+    return h + "h " + min + "m";
+  }
  }
 })
 .filter('idSafe', function(){
