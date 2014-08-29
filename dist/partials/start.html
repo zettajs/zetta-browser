@@ -3,6 +3,9 @@
   <header class="pure-u-1">
     <section class="content">
       <h1 class="">Zetta Browser</h1>
+      <div class="serverError" ng-show="errMsg">
+        {{errMsg}}
+      </div>
       <form class="pure-form">
         <input placeholder="Server URL" type="url" ng-model="params.url" name="url" class="pure-u-1 pure-u-md-1-2"/>
         <button ng-click="fetchUrl(params)" class="pure-button">Connect</button>

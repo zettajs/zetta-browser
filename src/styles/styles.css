@@ -886,6 +886,9 @@ header nav,
 #device .properties {
   overflow: hidden;
 }
+.serverError {
+  color: #ff4300;
+}
 .front-door header {
   padding-bottom: 1rem;
 }
