@@ -500,28 +500,6 @@ a.home:hover {
   }
 }
 /* navbar stuff */
-#navToggle {
-  height: 3rem;
-}
-#navToggle button {
-  width: 100%;
-  text-align: right;
-  font-size: 1.5em;
-  border: none;
-  color: #faa438;
-  background-color: transparent;
-  margin: 0;
-  padding: .25rem 0;
-}
-#navToggle button:before {
-  content: "rows";
-}
-#navToggle button.open:before {
-  content: "close";
-}
-#navToggle button span {
-  display: none;
-}
 nav {
   background-color: #0b1a1f;
   text-align: left;
@@ -926,6 +904,7 @@ footer .creative-commons {
 }
 footer .zetta-logo {
   margin-bottom: 1rem;
+  background-position: 0 0;
 }
 footer a {
   text-shadow: none;
@@ -948,6 +927,14 @@ footer a {
 }
 .device-group {
   width: 100%;
+}
+.device-group h2 {
+  padding-left: 1rem;
+}
+@media screen and (min-width: 48.1em) {
+  .device-group h2 {
+    padding-left: 0;
+  }
 }
 @media screen and (min-width: 48.1em) {
   .device-group {
@@ -1052,7 +1039,7 @@ footer a {
 }
 .devices .row.animate-size.open {
   height: auto;
-  max-height: 100px;
+  max-height: 10rem;
 }
 .devices .row .switches,
 .devices .row .name,
@@ -1167,15 +1154,6 @@ footer a {
     padding: 0rem 0rem;
   }
 }
-.device-group .row.action .vis {
-  border-top: 0;
-  padding: .5rem 0 .5rem 1rem;
-}
-@media screen and (min-width: 48.1em) {
-  .device-group .row.action .vis {
-    padding: .25rem 0 .5rem 0;
-  }
-}
 .device-group .row.categorical .vis {
   padding: 0 1rem .5rem 1rem;
 }
@@ -1191,6 +1169,45 @@ footer a {
   .device-group .row.numerical .vis {
     padding: 1rem 0 1rem 0;
   }
+}
+.device-group .row.action .value {
+  text-align: left;
+  padding-left: 1rem;
+}
+.device-group .row.action .vis {
+  border-top: 0;
+  padding: .5rem 1rem .5rem 1rem;
+}
+@media screen and (min-width: 48.1em) {
+  .device-group .row.action .vis {
+    padding: .25rem 0 .5rem 0;
+  }
+}
+.device-group .row.action .vis input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  margin-top: .5rem;
+}
+.device-group .row.action .vis input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.device-group .row.action .vis input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+.device-group.pinned .row.action .value {
+  padding-left: 0rem;
+}
+.device-group.pinned .row.action .vis {
+  padding: .5rem 1rem .5rem 0rem;
+}
+@media screen and (min-width: 48.1em) {
+  .device-group.pinned .row.action .vis {
+    padding: .25rem 0 .5rem 0;
+  }
+}
+.device-group.pinned .row.numerical .vis,
+.device-group.pinned .row.categorical .vis {
+  padding-left: 0;
 }
 input {
   font-family: "jaf-facitweb", Helvetica, Arial, sans-serif;
