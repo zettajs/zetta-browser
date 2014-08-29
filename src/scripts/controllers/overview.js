@@ -5,18 +5,22 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.servers = zettaShared.state.servers;
   $scope.muted = zettaShared.state.muted;
   
-  $scope.pageNav = "top";
+  $scope.pageNav = null;
   
   $scope.init = function() {
     loadServers();
   };
 
   $scope.$watch('pageNav', function() {
+    if ($scope.pageNav === null) {
+      return;
+    }
+
     if($('#' + $scope.pageNav).length){
       var pos = $('#' + $scope.pageNav)[0].offsetTop - $('nav:first').height() - $('#wampum').height();
       
       $(window).scrollTop(pos);
-      
+      $scope.pageNav = null;
     }
   });    
       
