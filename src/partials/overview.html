@@ -7,7 +7,7 @@
       <!-- add to select when done w/ dev:  -->
       <select ng-model="pageNav" ng-show="!filter && servers.length > 1">
         <option value="top">Jump to...</option>
-        <option ng-repeat="server in servers" ng-show="server.available && server.devices.length" value="{{ server.name + server.type | idSafe }}"> {{ server.name }} : {{ server.type }}</option>
+        <option ng-repeat="server in servers" ng-if="server.available && server.devices.length" value="{{ server.name + server.type | idSafe }}"> {{ server.name }} : {{ server.type }}</option>
       </select>
     </section>
   </header>
