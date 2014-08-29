@@ -10,7 +10,10 @@ angular.module('zetta').controller('MainCtrl', [
       $scope.params = { url: appState.url || '' };
     };
 
+    $scope.errMsg = null;
+    
     $scope.fetchUrl = function(params) {
+      $scope.errMsg = null;
       if (!params.url) {
         return;
       }
@@ -27,8 +30,9 @@ angular.module('zetta').controller('MainCtrl', [
       localStorage.serverUrls = JSON.stringify($scope.serverUrls);
 
       var navigationPromise = navigator.transitionTo(url, { url: url }, true);
-      navigationPromise.catch(function(status) {
-        console.log('Bad server retrieval. Status Code: ' + status);
+      navigationPromise.catch(function(status, url) {
+        $scope.errMsg = 'Bad server retrieval. Status Code: ' + status;
+        //console.log('Bad server retrieval. Status Code: ' + status + url); 
       });
 
     };
