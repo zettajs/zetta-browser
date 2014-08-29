@@ -26,7 +26,11 @@ angular.module('zetta').controller('MainCtrl', [
 
       localStorage.serverUrls = JSON.stringify($scope.serverUrls);
 
-      navigator.transitionTo(url, { url: url });
+      var navigationPromise = navigator.transitionTo(url, { url: url }, true);
+      navigationPromise.catch(function(status) {
+        console.log('Bad server retrieval. Status Code: ' + status);
+      });
+
     };
 
     if (!localStorage.serverUrls) {
