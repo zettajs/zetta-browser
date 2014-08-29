@@ -42,6 +42,9 @@ angular.module('zetta')
   else {return input + " ms";}
  }
 })
+.filter('idSafe', function(){
+  return function(input){ return input.replace(/([^A-z0-9])+/g,''); }
+})
 .filter('purify', function() {
   return function(input) {
     var purified = {};

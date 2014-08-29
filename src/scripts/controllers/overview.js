@@ -4,11 +4,22 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.pinned = zettaShared.state.pinned;
   $scope.servers = zettaShared.state.servers;
   $scope.muted = zettaShared.state.muted;
-
+  
+  $scope.pageNav = "top";
+  
   $scope.init = function() {
     loadServers();
   };
 
+  $scope.$watch('pageNav', function() {
+    if($('#' + $scope.pageNav).length){
+      var pos = $('#' + $scope.pageNav)[0].offsetTop - $('nav:first').height() - $('#wampum').height();
+      
+      $(window).scrollTop(pos);
+      
+    }
+  });    
+      
   function loadServers() {
     zettaShared.state.root = $state.params.url;
     zettaShared.state.breadcrumbs = [];

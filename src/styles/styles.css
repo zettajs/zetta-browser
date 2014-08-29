@@ -842,18 +842,21 @@ header nav,
 .page_content header {
   margin-top: 2.5rem;
   background-color: #fff;
-  padding: 0;
+  padding: 0 0 1rem 0;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 .page_content header h1 {
-  margin: 2rem 0 1rem 0;
+  margin: 2rem 0 0rem 0;
 }
 @media screen and (min-width: 48.1em) {
   .page_content header {
     padding-left: inherit;
     padding-right: inherit;
   }
+}
+.page_content header select {
+  margin-top: 1rem;
 }
 .page_content header .content {
   width: 100%;
