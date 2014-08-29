@@ -75,6 +75,9 @@ angular
           if (immediateReturn && (stateIsUnknown || resolveIfKnown)) {
             deferred.resolve(data);
           }
+        }).error(function(data, status, headers, config) {
+          console.log('error');
+          deferred.reject(status);
         });
 
         if (immediateReturn) {
