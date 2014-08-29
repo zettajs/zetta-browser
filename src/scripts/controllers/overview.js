@@ -78,11 +78,30 @@ angular.module('zetta').controller('OverviewCtrl', [
   };
 
   var filterServer = function() {
+    var width = $('.dnastrip canvas').width();
+    var height = $('.dnastrip canvas').height();
+
     $scope.servers.forEach(function(server) {
       if (server.name !== $state.params.filter) {
         server.available = false;
       }
     });
+
+    $('.dnastrip canvas').each(function() {
+      console.log(width);
+      console.log(height);
+      this.width = width;
+      this.height = height;
+
+      var context = this.getContext('2d');
+      context.clearRect(0, 0, width, height);
+      context.fillStyle = 'rgb(222, 222, 222)';
+      context.fillRect(0, 0, width, height);
+      console.log(this);
+      console.log(context);
+    });
+    //$('.dnastrip canvas').height(height);
+    //$('.dnastrip canvas').width(width);
   };
 
   $scope.resolve = function(href) {
