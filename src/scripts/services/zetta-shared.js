@@ -1,4 +1,4 @@
-angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($http, navigator) {
+angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', function($http, $state, navigator) {
   var state = {
     servers: [],
     root: null,
@@ -184,7 +184,7 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
           name: server.title,
           type: 'server',
           href: server.href,
-          available: true
+          available: $state.params.filter ? $state.params.filter === server.title : true
         });
       }
 
@@ -197,7 +197,7 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
           name: peer.title,
           type: 'peer',
           href: peer.href,
-          available: true
+          available: $state.params.filter ? $state.params.filter === peer.title : true
         });
       });
 
@@ -299,6 +299,8 @@ angular.module('zetta').factory('zettaShared', ['$http', 'navigator', function($
                 }
               });
 
+              console.log(serverCount);
+              console.log(state.servers.length);
               if (serverCount === state.servers.length) {
                 if (cb !== undefined && cb !== null) cb(state.servers);
               }
