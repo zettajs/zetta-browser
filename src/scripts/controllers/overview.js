@@ -5,18 +5,22 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.servers = zettaShared.state.servers;
   $scope.muted = zettaShared.state.muted;
   
-  $scope.pageNav = "top";
+  $scope.pageNav = null;
   
   $scope.init = function() {
     loadServers();
   };
 
   $scope.$watch('pageNav', function() {
+    if ($scope.pageNav === null) {
+      return;
+    }
+
     if($('#' + $scope.pageNav).length){
       var pos = $('#' + $scope.pageNav)[0].offsetTop - $('nav:first').height() - $('#wampum').height();
       
       $(window).scrollTop(pos);
-      
+      $scope.pageNav = null;
     }
   });    
       
@@ -78,9 +82,30 @@ angular.module('zetta').controller('OverviewCtrl', [
   };
 
   var filterServer = function() {
+    var width = $('.dnastrip canvas').width();
+    var height = $('.dnastrip canvas').height();
+
     $scope.servers.forEach(function(server) {
       if (server.name !== $state.params.filter) {
         server.available = false;
+      } else {
+        if (!server.devices) {
+          return;
+        }
+
+        server.devices.forEach(function(device) {
+          if (!device.streams) {
+            return;
+          }
+
+          device.streams.forEach(function(stream) {
+            if (typeof stream.refresh === 'function') {
+              setTimeout(function() {
+                stream.refresh(width);
+              }, 100);
+            }
+          });
+        });
       }
     });
   };

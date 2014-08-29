@@ -1,12 +1,11 @@
 <ng-include src="'partials/header.html'"></ng-include>
 <section class="page_content pure-g" id="overview" ng-init="init()">
   <header class="pure-u-1">
-    <a name="top"></a>
     <section class="content" >
       <h1>{{ filter || 'root' }}
       <!-- add to select when done w/ dev:  -->
       <select ng-model="pageNav" ng-show="!filter && servers.length > 1">
-        <option value="top">Jump to...</option>
+        <option value="null">Jump to...</option>
         <option ng-repeat="server in servers" ng-if="server.available && server.devices.length" value="{{ server.name + server.type | idSafe }}"> {{ server.name }} : {{ server.type }}</option>
       </select>
       </h1>
