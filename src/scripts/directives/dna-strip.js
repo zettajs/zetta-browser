@@ -42,6 +42,10 @@ angular.module('zetta').directive('zDnaStrip', ['$compile', function($compile) {
     var canvas = element.children()[0];
     var context = canvas.getContext('2d');
     
+    scope.stream.refresh = function() {
+      canvas.width = $(canvas).parent().parent().innerWidth();
+    };
+
     //this works, but it hurts. 
     canvas.width = $(canvas).parent().parent().innerWidth();
 

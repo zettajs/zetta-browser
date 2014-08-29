@@ -88,24 +88,26 @@ angular.module('zetta').controller('OverviewCtrl', [
     $scope.servers.forEach(function(server) {
       if (server.name !== $state.params.filter) {
         server.available = false;
+      } else {
+        if (!server.devices) {
+          return;
+        }
+
+        server.devices.forEach(function(device) {
+          if (!device.streams) {
+            return;
+          }
+
+          device.streams.forEach(function(stream) {
+            if (typeof stream.refresh === 'function') {
+              setTimeout(function() {
+                stream.refresh(width);
+              }, 100);
+            }
+          });
+        });
       }
     });
-
-    $('.dnastrip canvas').each(function() {
-      console.log(width);
-      console.log(height);
-      this.width = width;
-      this.height = height;
-
-      var context = this.getContext('2d');
-      context.clearRect(0, 0, width, height);
-      context.fillStyle = 'rgb(222, 222, 222)';
-      context.fillRect(0, 0, width, height);
-      console.log(this);
-      console.log(context);
-    });
-    //$('.dnastrip canvas').height(height);
-    //$('.dnastrip canvas').width(width);
   };
 
   $scope.resolve = function(href) {
