@@ -299,8 +299,6 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
                 }
               });
 
-              console.log(serverCount);
-              console.log(state.servers.length);
               if (serverCount === state.servers.length) {
                 if (cb !== undefined && cb !== null) cb(state.servers);
               }
