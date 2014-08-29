@@ -41,6 +41,10 @@ angular.module('zetta').controller('DeviceCtrl', [
 
   var findDevice = function() {
     zettaShared.state.servers.forEach(function(server) {
+      if (!server.devices) {
+        return;
+      }
+
       server.devices.forEach(function(device) {
         if (device.href === $state.params.url) {
           $scope.device = device;
