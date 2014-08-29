@@ -856,7 +856,14 @@ header nav,
   }
 }
 .page_content header select {
-  margin-top: 1rem;
+  appearance: none;
+  -webkit-appearance: none;
+  margin-left: 1rem;
+  border: none;
+  border-radius: 0;
+  font-size: .8rem;
+  color: #808080;
+  background-color: transparent;
 }
 .page_content header .content {
   width: 100%;

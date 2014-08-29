@@ -522,7 +522,16 @@ header nav, #wampum {
     padding: 0 0 1rem 0;
     h1 {margin: 2rem 0 0rem 0;}
     .smallPadding();
-    select {margin-top: 1rem;}
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      margin-left: 1rem;
+      border: none;
+      border-radius: 0;
+      font-size: .8rem;
+      color: @gray_50;
+      background-color: transparent;
+    }
     .content {
       form {
         margin-top: 1rem;

@@ -15,7 +15,7 @@ angular.module('zetta').directive('linegraph', ['$compile', function($compile) {
           .x(function(d) {return x(d.x) - 6;})
           .y(function(d) {return y(d.y)+3;});
       
-      var total = stream[0].x - stream[stream.length -1].x;
+      var total = stream[stream.length -1].x - stream[0].x;
       
       scope.label = {
         q1: "0",
