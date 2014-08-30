@@ -6,7 +6,7 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.muted = zettaShared.state.muted;
   
   $scope.pageNav = null;
-  
+  $scope.loading = true;
   $scope.init = function() {
     loadServers();
   };
@@ -25,10 +25,12 @@ angular.module('zetta').controller('OverviewCtrl', [
   });    
       
   function loadServers() {
+    
     zettaShared.state.root = $state.params.url;
     zettaShared.state.breadcrumbs = [];
     zettaShared.state.onStreamUpdate = function() {
       $scope.$apply();
+      $scope.loading = false;
     };
 
     var rootUrl = zettaShared.state.root;
@@ -59,6 +61,7 @@ angular.module('zetta').controller('OverviewCtrl', [
           filterServer();
         } else {
           zettaShared.state.servers.forEach(function(server) {
+            
             server.available = true;
           })
         }
@@ -69,6 +72,7 @@ angular.module('zetta').controller('OverviewCtrl', [
       } else {
         zettaShared.state.servers.forEach(function(server) {
           server.available = true;
+          
         })
       }
     }
@@ -79,6 +83,7 @@ angular.module('zetta').controller('OverviewCtrl', [
     $location.search($state.params);
     loadServers();
     $window.scrollTo(0, 0);
+    
   };
 
   var filterServer = function() {

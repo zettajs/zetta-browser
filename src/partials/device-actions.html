@@ -20,9 +20,9 @@
 
       
       <textarea ng-switch-when="textarea" name="{{ field.name }}" value="{{ field.value }}" 
-              id="{{ action.name + field.name }}" ng-model="field.value" ></textarea>
+              id="{{ action.name + field.name }}" ng-model="field.value" class="pure-u-1"></textarea>
       
-      <input placeholder="{{ field.name }}" type="{{ field.type }}" class="" name="{{ field.name }}" value="{{ field.value }}" 
+      <input placeholder="{{ field.name }}" type="{{ field.type }}" class="pure-u-1" name="{{ field.name }}" value="{{ field.value }}" 
               id="{{ action.name + field.name }}" ng-model="field.value" ng-switch-default/>
     </ng-switch>
     <span ng-repeat-end></span>

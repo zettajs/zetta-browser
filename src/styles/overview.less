@@ -173,16 +173,6 @@
       padding: .5rem 1rem .5rem 1rem;
       @media @md { padding: .25rem 0 .5rem 0; }
 
-      input[type="color"] {
-        -webkit-appearance: none; 
-        border: none;
-        margin-top: .5rem;
-        &::-webkit-color-swatch-wrapper {padding: 0;}
-        &::-webkit-color-swatch {
-            border: none;
-        }
-      }
-
     }
   }
   
@@ -205,6 +195,17 @@ input {
   margin-right: .5rem;
   padding: .25rem .5rem .35rem .5rem !important;
   border-radius: 0 !important;
+  
+  
+  &[type="color"] {
+    -webkit-appearance: none; 
+    border: none;
+    margin-top: .5rem;
+    &::-webkit-color-swatch-wrapper {padding: 0;}
+    &::-webkit-color-swatch {
+        border: none;
+    }
+  }
 }
   
   ::-webkit-input-placeholder { font-style: italic; font-weight: 100;}
@@ -227,6 +228,7 @@ input {
 
 .device-meta {
   .centered();
+  .border-box();
   h2.name {
     .border-box();
     .serverHeading(); text-transform: uppercase; 

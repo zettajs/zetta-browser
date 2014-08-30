@@ -39,7 +39,7 @@
       <section class="content">
         <span ng-show="!device.actions || !device.actions.length">No actions available.</span>
         
-        <div class="action {{ action.name }}" ng-repeat="action in device.actions"/>
+        <div class="action {{ action.name }}" ng-repeat="action in device.actions">
           <zetta-device-action value="action" ng-show="action.available" />
          
         </div>
@@ -54,15 +54,14 @@
       </section>
     </div>
     </section>  
-      
     <section class="right_column pure-u-1 pure-u-md-2-3">
     
-    <div class="log meta-group pure-u-1">
+    <div class="log meta-group pure-g">
       <h2 class="name pure-u-1">Events</h2>
-      <section class="content" ng-if="!device.properties.hasOwnProperty('state')">
+      <section class="content pure-u-1" ng-if="!device.properties.hasOwnProperty('state')">
       No transitions available.
       </section>
-      <section class="content" ng-if="device.properties.hasOwnProperty('state')">
+      <section class="content pure-u-1" ng-if="device.properties.hasOwnProperty('state')">
         <span ng-show="!stateLogs.length">State transitions for: </span>
         <span ng-show="stateLogs.length">Latest {{stateLogs.length | pluralize:'transition'}} for: </span>
         {{ device.properties.name || device.properties.type }}
@@ -77,17 +76,18 @@
       </section>
     </div>
     
-    <div class="api meta-group pure-u-1">
+    <div class="api meta-group pure-g">
       <h2 class="name pure-u-1">API Request</h2>
-      <section class="content request">
+      <section class="content request pure-u-1">
         <pre><code class="language-http" prism>{{ request }}</code></pre>
       </section>
       <h2 class="name pure-u-1">API Response</h2>
-      <section class="content response">
+      <section class="content response pure-u-1">
         <pre><code class="language-javascript" ng-if="device.body">{{ device.body | purify | prettify }}</code></pre>
       </section>
     </div>
     </section>
+    
   </section>
 </section>
 <ng-include src="'partials/footer.html'"></ng-include>

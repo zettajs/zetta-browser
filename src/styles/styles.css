@@ -779,6 +779,53 @@ nav .zetta-logo {
     display: none;
   }
 }
+.server-loading {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+}
+@media screen and (min-width: 48.1em) {
+  .server-loading {
+    width: 90%;
+    margin: 0 auto !important;
+  }
+}
+@media screen and (min-width: 48.1em) {
+  .server-loading {
+    padding-left: inherit;
+    padding-right: inherit;
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: .3;
+  }
+  10% {
+    opacity: .3;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .3;
+  }
+}
+.server-loading b:nth-child(1) {
+  opacity: 0;
+  -webkit-animation: blink 1s 0s ease infinite;
+}
+.server-loading b:nth-child(2) {
+  opacity: 0;
+  -webkit-animation: blink 1s .1s ease infinite;
+}
+.server-loading b:nth-child(3) {
+  opacity: 0;
+  -webkit-animation: blink 1s .2s ease infinite;
+}
 .pairing + .pairing {
   margin-top: 3rem;
 }
@@ -1183,17 +1230,6 @@ footer a {
     padding: .25rem 0 .5rem 0;
   }
 }
-.device-group .row.action .vis input[type="color"] {
-  -webkit-appearance: none;
-  border: none;
-  margin-top: .5rem;
-}
-.device-group .row.action .vis input[type="color"]::-webkit-color-swatch-wrapper {
-  padding: 0;
-}
-.device-group .row.action .vis input[type="color"]::-webkit-color-swatch {
-  border: none;
-}
 .device-group.pinned .row.action .value {
   padding-left: 0rem;
 }
@@ -1215,6 +1251,17 @@ input {
   padding: .25rem .5rem .35rem .5rem !important;
   border-radius: 0 !important;
 }
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  margin-top: .5rem;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
 ::-webkit-input-placeholder {
   font-style: italic;
   font-weight: 100;
@@ -1232,6 +1279,9 @@ input {
 }
 .device-meta {
   width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   border-bottom: none !important;
 }
 @media screen and (min-width: 48.1em) {
