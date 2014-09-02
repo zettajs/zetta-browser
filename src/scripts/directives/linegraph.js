@@ -1,6 +1,12 @@
 angular.module('zetta').directive('linegraph', ['$compile', function($compile) {
   function link(scope, element, attrs) {
     scope.$watchCollection('stream', function() {
+      
+      function roundMS(ms){
+        if(ms < 1000){ms = parseInt(ms);}
+        return ms;
+      }
+      
       stream = scope.stream.map(function(item){
         return {'x': parseInt(item[0].getTime()), 'y': item[1]};
       }); 
@@ -19,9 +25,9 @@ angular.module('zetta').directive('linegraph', ['$compile', function($compile) {
       
       scope.label = {
         q1: "0",
-        q2: total * .25,
-        q3: total * .5,
-        q4: total * .75,
+        q2: roundMS(total * .25),
+        q3: roundMS(total * .5),
+        q4: roundMS(total * .75),
         q5: total,
         min: 0,
         max: 0
