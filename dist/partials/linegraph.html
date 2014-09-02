@@ -1,8 +1,13 @@
+  <div class="min-max" style="position: absolute; ">
+    <div class="min-label">{{label.min}}</div>
+    <div class="max-label">{{label.max}}</div>
+  </div>
+ 
   <svg ng-attr-height="{{height * .833}}" width="100%">
     <path class="dataline" stroke="#989898" stroke-width="2" fill="none"></path>
-    <circle class="max" cx="10" cy="" r="5" fill="#ED2124" />
-    <circle class="min" cx="50" cy="" r="5" fill="#57C9E8" />
-    <circle class="val" cx="100" cy="" r="7" fill="#F7911D" />
+    <circle class="max" cx="10" cy="10" r="5" fill="#ED2124" />
+    <circle class="min" cx="10" cy="10" r="5" fill="#57C9E8" />
+    <circle class="val" cx="10" cy="10" r="7" fill="#F7911D" />
     
     <g stroke="#939598" stroke-width="2" stroke-miterlimit="10" >
       <line x1="100%" y1="95%" x2="100%" y2="100%" stroke-width="4"/>
@@ -13,6 +18,7 @@
     </g>
     <line stroke="#939598" stroke-width="4" stroke-miterlimit="10" x1="0%" y1="100%" x2="100%" y2="100%"/>
   </svg>
+ 
   <div class="labels pure-g">
     <div class="pure-u-1-8 q5">+{{label.q5 | elapsed}}</div>
     <div class="pure-u-1-4 q4">+{{label.q4 | elapsed}}</div>

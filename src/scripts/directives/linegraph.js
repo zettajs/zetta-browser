@@ -22,7 +22,9 @@ angular.module('zetta').directive('linegraph', ['$compile', function($compile) {
         q2: total * .25,
         q3: total * .5,
         q4: total * .75,
-        q5: total
+        q5: total,
+        min: 0,
+        max: 0
       }
       
       var d = scope.line(stream);
@@ -38,14 +40,15 @@ angular.module('zetta').directive('linegraph', ['$compile', function($compile) {
       stream.forEach(function(point){
         if(mm.min == null && point.y == mm.raw[0]){
           mm.min = point;
+          scope.label.min = point.y
         }
         else if(mm.max == null && point.y == mm.raw[1]){
            mm.max = point;
+           scope.label.max = point.y
         }
       });
       
       //console.log(x(mm.max.x));
-      
       
       if (d) {
         
