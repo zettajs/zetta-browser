@@ -1555,6 +1555,7 @@ input[type="color"]::-webkit-color-swatch {
   padding: .0 0 0 .3rem;
   position: absolute;
   text-align: left;
+  opacity: .8;
 }
 .linegraph .labels.min-max .max-label {
   color: #ED2124;
@@ -1564,9 +1565,6 @@ input[type="color"]::-webkit-color-swatch {
   color: #57C9E8;
   heigh: 1rem;
   margin-top: 2.6rem;
-}
-.linegraph .labels.min-max span {
-  background-color: #ffffff;
 }
 /* Mixins  */
 /*# sourceMappingURL=styles.css.map */
