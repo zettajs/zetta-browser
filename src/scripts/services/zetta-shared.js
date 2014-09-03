@@ -209,7 +209,6 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
     var serverCount = 0;
     state.servers.forEach(function(server) {
       $http.get(server.href).then(function(response) {
-        serverCount++;
         var data = response.data;
         if (typeof data === 'string') {
           data = JSON.parse(data);
@@ -223,6 +222,7 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
         });
         
         if (!data.entities) {
+          serverCount++;
           return;
         }
 
@@ -299,7 +299,13 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
                 }
               });
 
+              serverCount++;
+    console.log('server count:', serverCount);
+    console.log('server name:', server.name);
+    console.log('real server count:', state.servers.length);
+    console.log('state.servers.length:', state.servers.length);
               if (serverCount === state.servers.length) {
+                console.log('server count = state.servers.length');
                 if (cb !== undefined && cb !== null) cb(state.servers);
               }
             }
