@@ -64,8 +64,6 @@ angular.module('zetta').controller('OverviewCtrl', [
           })
         }
 
-        console.log('loading = false, loaded from server');
-        console.log('length:', $scope.servers.length);
         $scope.loading = false;
       });
     } else {
@@ -76,8 +74,6 @@ angular.module('zetta').controller('OverviewCtrl', [
           server.available = true;
         })
       }
-      console.log('loading = false, loaded from memory');
-      console.log('length:', $scope.servers.length);
       $scope.loading = false;
     }
   }
