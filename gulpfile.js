@@ -49,7 +49,7 @@ gulp.task('scripts', function() {
   /*  .pipe(stripDebug()) */
       .pipe(uglify({mangle:false})) //remove mangle.false to further reduce filesize of the production JS file. about a 30% savings
   /*  .pipe(sourcemaps.write('./')) */
-    .pipe(gulp.dest('./dist/scripts'))
+      .pipe(gulp.dest('./dist/scripts'))
 });
 
 gulp.task('styles',['css'], function() {
@@ -60,7 +60,7 @@ gulp.task('styles',['css'], function() {
     }))
     .pipe(gulp.dest('./src/styles'));
   
-  gulp.src('./src/styles/fonts/*.*').pipe(gulp.dest('./dist/fonts'));
+ 
 });
 
 gulp.task('css', function() {
@@ -71,24 +71,25 @@ gulp.task('css', function() {
       ,'./src/styles/animate.css'  
       ,'./src/styles/styles.css'
     ])
-    .pipe(sourcemaps.init())
-      /* .pipe(prefix("last 2 version", "> 5%", "ie 9")) */
+    /*.pipe(sourcemaps.init())*/
+    /*.pipe(prefix("last 2 version", "> 5%", "ie 9")) */
       .pipe(concat('zetta.css'))
       .pipe(minifyCSS({noAdvanced:true, keepSpecialComments: 0}))
-    .pipe(sourcemaps.write('./'))
+    /*.pipe(sourcemaps.write('./'))*/
     .pipe(gulp.dest('./dist/styles'));
+  
 });
   
 gulp.task('html', function() {
   gulp.src('./src/*.html')
-    .pipe(sourcemaps.init())
+    /*.pipe(sourcemaps.init())*/
       .pipe(htmlmin({
         useShortDoctype: true
         , removeRedundantAttributes: true
       /*, collapseWhitespace: true
         , conservativeCollapse: true */
       }))
-    .pipe(sourcemaps.write())
+    /*.pipe(sourcemaps.write())*/
     .pipe(gulp.dest('./dist'))
 });
 
@@ -96,6 +97,7 @@ gulp.task('move', function() {
   gulp.src(['./src/index.html']).pipe(gulp.dest('./dist'));
   gulp.src(['./src/images/*.*']).pipe(gulp.dest('./dist/images'));
   gulp.src(['./src/partials/*.*']).pipe(gulp.dest('./dist/partials'));
+  gulp.src('./src/styles/fonts/*.*').pipe(gulp.dest('./dist/fonts'));
 });
 
 gulp.task('serve', serve({
