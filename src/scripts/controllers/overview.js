@@ -17,7 +17,7 @@ angular.module('zetta').controller('OverviewCtrl', [
     }
 
     if($('#' + $scope.pageNav).length){
-      var pos = $('#' + $scope.pageNav)[0].offsetTop - $('nav:first').height() - $('#wampum').height();
+      var pos = $('#' + $scope.pageNav)[0].offsetTop - $('nav:first').height() - $('#wampum').height() -32;
       
       $(window).scrollTop(pos);
       $scope.pageNav = null;
