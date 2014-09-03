@@ -79,11 +79,11 @@
     <div class="api meta-group pure-g">
       <h2 class="name pure-u-1">API Request</h2>
       <section class="content request pure-u-1">
-        <pre><code class="language-http" prism>{{ request }}</code></pre>
+        <pre code class="language-http" prism source="{{ request }}"></pre>
       </section>
       <h2 class="name pure-u-1">API Response</h2>
       <section class="content response pure-u-1">
-        <pre><code class="language-javascript" ng-if="device.body">{{ device.body | purify | prettify }}</code></pre>
+        <pre class="language-javascript" ng-if="device.body" prism source="{{ device.body | purify | prettify }}"></pre>
       </section>
     </div>
     </section>
