@@ -30,7 +30,6 @@ angular.module('zetta').controller('OverviewCtrl', [
     zettaShared.state.breadcrumbs = [];
     zettaShared.state.onStreamUpdate = function() {
       $scope.$apply();
-      $scope.loading = false;
     };
 
     var rootUrl = zettaShared.state.root;
@@ -61,10 +60,11 @@ angular.module('zetta').controller('OverviewCtrl', [
           filterServer();
         } else {
           zettaShared.state.servers.forEach(function(server) {
-            
             server.available = true;
           })
         }
+
+        $scope.loading = false;
       });
     } else {
       if ($state.params.filter) {
@@ -72,9 +72,9 @@ angular.module('zetta').controller('OverviewCtrl', [
       } else {
         zettaShared.state.servers.forEach(function(server) {
           server.available = true;
-          
         })
       }
+      $scope.loading = false;
     }
   }
 
