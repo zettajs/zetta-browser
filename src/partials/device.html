@@ -36,12 +36,11 @@
     
     <div class="actions meta-group pure-u-1">
       <h2 class="name pure-u-1">Actions</h2>
-      <section class="content">
+      <section class="content devices">
         <span ng-show="!device.actions || !device.actions.length">No actions available.</span>
         
-        <div class="action {{ action.name }}" ng-repeat="action in device.actions">
-          <zetta-device-action value="action" ng-show="action.available" />
-         
+        <div class="action {{ action.name }} row animate-size" ng-repeat="action in device.actions" ng-class="{ open: !!action.open, closed: !action.open }">
+          <zetta-device-action value="action" />
         </div>
       </section>
     </div>

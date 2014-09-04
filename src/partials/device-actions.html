@@ -27,7 +27,7 @@
     </ng-switch>
     <span ng-repeat-end></span>
     
-    <button class="pure-button {{ action.name + '-button' }}" ng-click="execute()" ng-if="!action.renderOptionsAsButtons">{{ action.name }}</button>
+    <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()" ng-if="!action.renderOptionsAsButtons">{{ action.name }}</button>
   </fieldset>
  
 </form>
