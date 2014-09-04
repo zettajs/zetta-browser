@@ -221,7 +221,7 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
           }
         });
         
-        if (!data.entities) {
+        if (!data.entities || !data.entities.length) {
           serverCount++;
           return;
         }
