@@ -111,8 +111,6 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
     var addedHrefs = [];
     scope.$watchCollection('servers', function() {
       scope.servers.forEach(function(server, i) {
-        console.log('server:', server);
-        console.log('length:', streams.length);
         scope.$watchCollection('servers[' + i + '].devices', function() {
           if (!scope.servers[i].devices) {
             return;
