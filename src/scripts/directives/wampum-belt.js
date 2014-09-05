@@ -111,6 +111,8 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
     var addedHrefs = [];
     scope.$watchCollection('servers', function() {
       scope.servers.forEach(function(server, i) {
+        console.log('server:', server);
+        console.log('length:', streams.length);
         scope.$watchCollection('servers[' + i + '].devices', function() {
           if (!scope.servers[i].devices) {
             return;
@@ -123,6 +125,30 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
                   return;
                 }
                 streams.push(stream);
+                var s = [];
+
+                // order streams for multiple servers
+                scope.servers.forEach(function(server) {
+                  if (!server.devices || !server.devices.length) {
+                    return;
+                  }
+
+                  server.devices.forEach(function(device) {
+                    if (!device.streams || !device.streams.length) {
+                      return;
+                    }
+
+                    device.streams.forEach(function(streamA) {
+                      streams.forEach(function(streamB) {
+                        if (streamA.href === streamB.href) {
+                          s.push(streamB);
+                        }
+                      });
+                    });
+                  });
+                });
+
+                streams = s;
                 addedHrefs.push(stream.href);
                 update();
 
@@ -164,32 +190,7 @@ angular.module('zetta').directive('zettaWampumBelt', ['$compile', 'zettaShared',
 
                   colors[colorIndex].unshift(last);
                 };
-
-                /*scope.$watchCollection('servers[' + i + '].devices[' + j + '].streams[' + k + '].data', function() {
-                  var stream = scope.servers[i].devices[j].streams[k];
-                  var colorIndex;
-
-                  streams.forEach(function(s, index) {
-                    if (s.href === stream.href) {
-                      colorIndex = index;
-                    }
-                  });
-
-                  if (!colorIndex) {
-                    return;
-                  }
-
-                  var d = stream.data;
-                  if (d.length === 0) {
-                    return;
-                  }
-                  var arr = d[d.length - 1];
-                  //var c = { hue: (Math.abs(arr[1].toFixed(0) % 360)), saturation: '100%' };
-                  var c = getStreamColor(arr[1], stream.min, stream.max);
-                  colors[colorIndex].unshift(c);
-                });*/
               });
-
             });
           });
         });
