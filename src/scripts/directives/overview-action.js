@@ -1,5 +1,6 @@
 angular.module('zetta').directive('zettaOverviewAction', [function() {
   var link = function(scope, element) {
+
     if (scope.action.fields) {
       if (scope.action.fields.length === 2
           && (scope.action.fields[0].type === 'radio' || scope.action.fields[1].type === 'radio')) {
@@ -24,6 +25,11 @@ angular.module('zetta').directive('zettaOverviewAction', [function() {
         scope.action.fields.forEach(function(field, i) {
           if (!field.type) {
             scope.action.fields[i].type = 'text';
+          }
+
+          // When no value is set, set as empty string.
+          if (field.value === undefined) {
+            field.value = '';
           }
         });
       }
@@ -51,4 +57,3 @@ angular.module('zetta').directive('zettaOverviewAction', [function() {
     link: link
   };
 }]);
-
