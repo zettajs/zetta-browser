@@ -34,9 +34,9 @@ html, button, input, select, textarea,
 .pure-g [class *= "pure-u"] {
     /* Set your content font stack here: */
     font-family: "jaf-facitweb", Helvetica, Arial, sans-serif;
-    
+
     h1, h2, h3, h4, h5, h6 { .heading-fonts(); }
-  
+
     code {
       .mono();
     }
@@ -44,8 +44,8 @@ html, button, input, select, textarea,
     b {font-weight: normal;}
 }
 h1, h2, h3, h4, h5, h6 {
-  &[class *= "pure-u"] { 
-    .heading-fonts() !important; 
+  &[class *= "pure-u"] {
+    .heading-fonts() !important;
   }
 }
 button { outline: none; }
@@ -54,7 +54,7 @@ button { outline: none; }
   letter-spacing: -.35em;
 }
 
-body {  
+body {
   color: @gray;
   line-height: 1.5rem;
   padding: 0;
@@ -74,7 +74,7 @@ code {.mono();}
   font-family: 'SSPika';
   -moz-font-variant-ligatures: common-ligatures;
   -webkit-font-variant-ligatures: common-ligatures;
-  font-variant-ligatures: common-ligatures; 
+  font-variant-ligatures: common-ligatures;
 }
 .icon, b {
   .pika();
@@ -93,8 +93,8 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-h1 { 
-  font: normal 2em/3rem; margin: 1rem 0; 
+h1 {
+  font: normal 2em/3rem; margin: 1rem 0;
   line-height: 2rem;
 }
 h2 { font: normal 1.75em/2rem; margin: .7rem 0; }
@@ -114,25 +114,25 @@ section.main{
   background-image: url('@{images}/zetta-logo.svg'), none;
   color: transparent;
   background-repeat: no-repeat;
-  background-size: auto 2.2rem; 
+  background-size: auto 2.2rem;
   background-position: 1rem 0;
   height: 2rem;
   margin: 1rem 0 0 0;
-  
+
   @media @md {
     background-position: 0rem 0;
     background-size: auto 2rem;
     height: 2rem;
-   
+
   }
-  
+
 }
 /*
 
 .pure-button {
     padding: 0.5em 1em;
-    color: #fff; // rgba not supported (IE 8) 
-    color: rgba(255, 255, 255, 1); // rgba supported 
+    color: #fff; // rgba not supported (IE 8)
+    color: rgba(255, 255, 255, 1); // rgba supported
     *color: #fff; // IE 6 & 7
     border: 0px solid #999;  /*IE 6/7/8
     border: none rgba(0, 0, 0, 0);  // IE9 + everything else
@@ -140,9 +140,9 @@ section.main{
     text-decoration: none;
     border-radius: 0px;
     font-weight: normal;
-  
+
     &-orange  {background-color: @orange; }
-    &-green   {background-color: @green;  }  
+    &-green   {background-color: @green;  }
     &-blue    {background-color: @blue;   }
     &-purple  {background-color: @purple; }
     &-gray    {background-color: @gray;   }
@@ -154,7 +154,7 @@ header, footer  {
 
 /* links */
 a {
-  color: @yellow; 
+  color: @yellow;
   text-decoration: none;
   text-shadow: 0px 1px @white;
   cursor: pointer;
@@ -162,7 +162,7 @@ a {
     text-decoration: underline;
   }
   &.home {
-      margin: 0; padding: 0; 
+      margin: 0; padding: 0;
       background-color: transparent;
       color: transparent;
       text-shadow: none;
@@ -209,7 +209,7 @@ nav {
   }
   background-color: @dark;
   text-align: left;
-  
+
   .menu-toggle {
     .border-box;
     color: @yellow;
@@ -217,19 +217,19 @@ nav {
     text-align: right;
     font-size: 1.5em;
     padding: .5rem 1rem 0 0;
-    
+
     &.open .open-icon, &.closed .closed-icon {display: none;}
     b {cursor: pointer;}
     height: 2rem;
   }
-  
+
   ul {
     .border-box;
     transition: max-height 1s;
     height: auto;
     max-height: 10rem;
     padding: 1rem;
-    
+
     &.closed {
       max-height: 0;
       padding: 0 1rem;
@@ -239,24 +239,24 @@ nav {
       }
     }
     background-color: @dark;
-    
-    
+
+
     margin: 0 ;
-    
-    
+
+
     @media @md {
       max-height: 2rem;
       padding: 0;
       background-color: transparent;
       &.closed, &.open {
-        max-height: 2rem; 
+        max-height: 2rem;
         li {
           opacity: 1;
           display: inline-block;
         }
       }
     }
-    
+
     li {
       transition: opacity 1s;
       opacity: 1;
@@ -264,20 +264,20 @@ nav {
       line-height: 1.5rem;
       font-size: 1rem;
       .body-font();
-      
+
       height: 2.5rem;
       color: @light-gray-bg;
-      
+
       @media @md {
-        
+
         display: inline-block;
       }
-      
+
       a {
-        
+
         background-color: transparent;
         text-shadow: none;
-        
+
         @media @md {
          display: block;
          padding: .5rem .25rem .5rem 0rem;
@@ -285,17 +285,17 @@ nav {
             content: '/';
             margin: 0 0 0 .5rem;
             color: @light-gray-bg;
-            
+
           }
         }
         &:hover {text-decoration: none;}
       }
-      
+
     }
   }
-  
-  
-  
+
+
+
   .zetta-logo {margin-top: .25rem;}
   height: 2.5rem;
 }
@@ -303,7 +303,7 @@ nav {
 /* get-started */
 
 .install {
-  
+
   input {
     width: 100%;
     font-size: 1.2rem;
@@ -311,12 +311,12 @@ nav {
     padding: .7rem 0 0rem 1rem;
     border: none;
     background-color: transparent;
-    
+
   }
-  
-  
+
+
   background-color: @white;
-  
+
   height: 2.65rem;
   border-bottom: .35rem solid @yellow;
   margin: 0 0rem 1rem 0;
@@ -328,14 +328,14 @@ nav {
   padding-bottom: 2rem;
   .build, .learn, .npm {
     margin: 0; padding: 0; overflow: hidden;
-    
+
   }
   p {
     .body-font();
     font-size: .8em;
     height: 2rem;
-    margin: 1rem 0 0 0; 
-    
+    margin: 1rem 0 0 0;
+
     color: @white;
     font-weight: 300;
   }
@@ -344,17 +344,17 @@ nav {
       height: 3rem;
       font-size: 1.2rem;
       width: 100%;
-      
+
     }
   }
-  
+
 }
 .learn {
   margin: 0; padding: 0;
   ul {
     .menu();
     width: 100%;
-    
+
     li {
       margin: .9rem .5rem 0 0;
       font-size: .9em;
@@ -389,11 +389,11 @@ nav {
 
 /* video */
 .video {
-  background-color: transparent; 
+  background-color: transparent;
   background-image: linear-gradient(@dark-blue-bg 1px, @dark-blue-bg 1px);
   background-size: 100% 5rem;
   background-repeat: no-repeat;
-  
+
   margin-bottom: 2rem;
 }
 #video  {
@@ -403,16 +403,16 @@ nav {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100px 100px;
-  
+
   width: 100%;
   height: 20.5rem;
   text-align: center;
   border-bottom: .5rem solid #d1d2d4;
 }
 
-/*  
-    Code highlighting 
-    see: zetta-prism.less 
+/*
+    Code highlighting
+    see: zetta-prism.less
 */
 
 .muted .devices {
@@ -429,9 +429,9 @@ nav {
   }
   margin-bottom: 2rem;
   //overflow: hidden;
- 
+
   .vis {
-    
+
     position: static;
     .example {
       width: 100%;
@@ -446,7 +446,7 @@ nav {
     }
     @media @sm {
       .example {
-        width: 50%; 
+        width: 50%;
         float: left;
       }
     }
@@ -463,11 +463,11 @@ nav {
           display: none;
         }
       }
-      
+
       position: relative;
       width: 64em;
     }
-    
+
   }
 }
 
@@ -475,7 +475,7 @@ nav {
   .centered();
   .smallPadding();
   padding-top: 1rem;
-  
+
   @-webkit-keyframes blink {
     0%    { opacity: .3; }
     10%   { opacity: .3; }
@@ -483,7 +483,7 @@ nav {
     85%   { opacity: 1;  }
     100%  { opacity: .3; }
   }
-  
+
   b:nth-child(1) {
     opacity: 0;
     -webkit-animation: blink 1s 0s ease infinite;
@@ -496,7 +496,7 @@ nav {
     opacity: 0;
     -webkit-animation: blink 1s .2s ease infinite;
   }
-  
+
 }
 
 .pairing + .pairing {
@@ -505,7 +505,7 @@ nav {
 
 /* layouts */
 
-section.description {  
+section.description {
   div { .centered(); }
   background-color: @white;
   p:first-of-type {margin-top: 0;}
@@ -524,7 +524,7 @@ header nav, #wampum {
 }
 
 .page_content {
-  
+
   a {color: mix(@yellow, @dark, 70%);}
 
   header {
@@ -552,9 +552,9 @@ header nav, #wampum {
         }
       }
       .centered();
-      
+
     }
-    
+
   }
 }
 
@@ -571,7 +571,7 @@ header nav, #wampum {
   }
   .properties {
     overflow: hidden;
-    
+
   }
 }
 .serverError {color: @orange;}
@@ -584,9 +584,9 @@ footer {
   margin-top: 4rem;
   color: @white;
   overflow-x: hidden;
-  ul{ 
-    margin: 0; 
-    padding: 0; 
+  ul{
+    margin: 0;
+    padding: 0;
     li {list-style-type: none;}
   }
   li.apigee  {margin-top: 1rem;}
@@ -594,8 +594,8 @@ footer {
  .zetta-logo {
    margin-bottom: 1rem;
    background-position: 0 0;
- 
- } 
+
+ }
   a {text-shadow: none;}
 }
 
@@ -609,26 +609,26 @@ footer {
   background-color: #fff;
   .border-top(@apigee-gray); .border-bottom(@apigee-gray);
   margin-top: 1rem;
-  
+
   .streams {
-    
+
     padding: 0;
     .smallPadding();
     .border-box();
     .centered();
     .stream {
-      
+
       padding: 1rem 0;
       &:not(:first-child){
-        .border-top(@light-gray-bg, 1px); 
+        .border-top(@light-gray-bg, 1px);
       }
-    
+
       .value {
         font-size: 3rem;
         line-height: 4rem;
         height: 4rem;
         .dotdot();
-        margin-top: 1rem; 
+        margin-top: 1rem;
         span:hover {
            position: absolute;
            overflow: visible;
@@ -637,29 +637,29 @@ footer {
            padding: 1rem;
            background-color: #fff;
            box-shadow: 0px 0px 5px @apigee-grey;
-           
+
            font-size: 2rem;
            line-height: 2rem;
         }
-       
+
       }
-      
+
       .name {
         color: @gray_30;
       }
-      
+
       &.numerical .vis, &.categorical .vis {
         background-color: #eee;
       }
       &.numerical{
-        
+
         .vis {
           height: 5rem;
-          
+
           margin-top: 1rem;
           @media @md {margin-top: 0rem;}
         }
-        
+
 
       }
       &.categorical {
@@ -670,21 +670,21 @@ footer {
         }
       }
     }
-    
-    
-    
+
+
+
   }
 }
 .state_log ul {
-  margin: 1rem 0 0 0; 
+  margin: 1rem 0 0 0;
   padding: 0;
   li {
-    list-style-type: none; 
+    list-style-type: none;
     &:not(:last-child){ .border-bottom(@gray_10, 1px);}
     &:not(:first-child){ color: @gray_40; }
     strong {
-      .mono()!important; .dotdot(); 
-      
+      .mono()!important; .dotdot();
+
     }
   }
   span {font-size: .8em;}
@@ -710,7 +710,7 @@ footer {
     line-height: 20px;
     font-size: 20px;
   }
-              
+
 @-webkit-keyframes rotation {
   from {-webkit-transform: rotate(0deg);}
   to   {-webkit-transform: rotate(359deg);}
@@ -725,7 +725,7 @@ footer {
     font-size: .8rem;
     height: 1rem;
     color: @gray_30;
-    
+
     &.min-max {
       padding: .0 0 0 .3rem;
       position: absolute;
@@ -741,7 +741,7 @@ footer {
         margin-top: 2.6rem;
       }
     }
-    
+
   }
 }
 
@@ -773,7 +773,7 @@ footer {
 
 .centered(){
   width: 100%;
-  
+
   @media @md {
     width: 90%;
     margin: 0 auto !important;;
@@ -785,7 +785,7 @@ footer {
   font-family: 'SSPika';
   -moz-font-variant-ligatures: common-ligatures;
   -webkit-font-variant-ligatures: common-ligatures;
-  font-variant-ligatures: common-ligatures; 
+  font-variant-ligatures: common-ligatures;
 }
 
 .serverHeading(){
@@ -806,7 +806,7 @@ footer {
 
 .border-bottom(@color, @width: 2px){
   border-bottom: @width solid @color;
-  
+
   /*
   background-image: linear-gradient(transparent @width, @color @width);
   background-size: 100% @width;
@@ -831,15 +831,15 @@ footer {
   overflow: hidden;
 }
 .expand(){
-  &.animate-size { 
+  &.animate-size {
     transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     /*
     height: auto;
     max-height: 0;
     */
     overflow: hidden;
-  } 
- 
+  }
+
   &.animate-size.closed {
       height: auto;
       max-height: 0;
@@ -847,7 +847,7 @@ footer {
 
   &.animate-size.open {
       height: auto;
-      max-height: 10rem;
+      max-height: 30rem;
   }
 
 }

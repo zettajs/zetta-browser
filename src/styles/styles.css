@@ -418,8 +418,8 @@ section.main {
 
 .pure-button {
     padding: 0.5em 1em;
-    color: #fff; // rgba not supported (IE 8) 
-    color: rgba(255, 255, 255, 1); // rgba supported 
+    color: #fff; // rgba not supported (IE 8)
+    color: rgba(255, 255, 255, 1); // rgba supported
     *color: #fff; // IE 6 & 7
     border: 0px solid #999;  /*IE 6/7/8
     border: none rgba(0, 0, 0, 0);  // IE9 + everything else
@@ -427,9 +427,9 @@ section.main {
     text-decoration: none;
     border-radius: 0px;
     font-weight: normal;
-  
+
     &-orange  {background-color: @orange; }
-    &-green   {background-color: @green;  }  
+    &-green   {background-color: @green;  }
     &-blue    {background-color: @blue;   }
     &-purple  {background-color: @purple; }
     &-gray    {background-color: @gray;   }
@@ -721,9 +721,9 @@ nav .zetta-logo {
     margin: 0 auto !important;
   }
 }
-/*  
-    Code highlighting 
-    see: zetta-prism.less 
+/*
+    Code highlighting
+    see: zetta-prism.less
 */
 .muted .devices {
   background-color: transparent;
@@ -1086,7 +1086,7 @@ footer a {
 }
 .devices .row.animate-size.open {
   height: auto;
-  max-height: 10rem;
+  max-height: 30rem;
 }
 .devices .row .switches,
 .devices .row .name,

@@ -42,14 +42,14 @@
         <div class="pure-u-5-6 pure-u-md-2-3"  ng-if="!characteristic.type">
           <zetta-overview-action class="row action" value="characteristic" />
         </div>
-        
+
       </div>
     </section>
   </div>
   <div class="server-loading pure-u-1" ng-if="loading"><b>stop</b><b>stop</b><b>stop</b></div>
   <div class="server device-group pure-g" ng-repeat="server in servers" ng-show="server.available && server.devices.length">
     <a name="{{ server.name + server.type | idSafe }}" id="{{ server.name + server.type | idSafe }}"></a>
-    
+
     <h2 class="name pure-u-5-6 pure-u-md-11-12">
       <span ng-if="filter">
         :devices
@@ -94,10 +94,9 @@
                 <b class="mute" ng-click="mute(action)">eye</b>&nbsp;<b class="pin" ng-click="pin(action)">pushpin</b>
               </div>
             </div>
-            <div class="name before-md pure-u-5-6 pure-u-md-1-4">
-              # {{ action.name }}
-            </div>
-            <zetta-overview-action value="action" class="pure-u-md-2-3 pure-u-5-6 pure-g" />
+
+            <zetta-overview-action value="action" class="pure-u-11-12 pure-g"/>
+
           </div>
         </div>
       </section>
