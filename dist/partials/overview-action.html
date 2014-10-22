@@ -1,3 +1,5 @@
+
+<!-- Handle single button -->
 <form class="pure-form action-content" ng-if="action.renderOptionsAsButton">
   <div class="name pure-u-1-4">
     # {{ action.name }}
@@ -6,7 +8,7 @@
   <div class="action-content pure-u-3-4">
     <div class="vis pure-u-1 pure-u-md-5-8">
       <div class="fields">
-            <input ng-repeat="field in action.fields" placeholder="{{ field.name }}" step="{{field.step}}" min="{{field.min}}" max="{{field.max}}" type="{{ field.type }}" class="pure-u-1" name="{{ field.name }}" value="{{ field.value }}"
+        <input ng-repeat="field in action.fields" placeholder="{{ field.name }}" step="{{field.step}}" min="{{field.min}}" max="{{field.max}}" type="{{ field.type }}" class="pure-u-1" name="{{ field.name }}" value="{{ field.value }}"
               id="{{ action.name + field.name }}" ng-model="field.value"/>
       </div>
     </div>
@@ -16,7 +18,7 @@
   </div>
 </form>
 
-
+<!-- Handle double radio inputs as two buttons -->
 <div ng-if="action.renderOptionsAsRadioButtons">
   <div class="name pure-u-1-4">
     # {{ action.name }}
@@ -33,6 +35,7 @@
 </div>
 
 
+<!-- Handle multiple inputs -->
 <div ng-if="action.renderOptionsAsMultipleInputs">
   <form class="pure-form action-content">
 
@@ -55,17 +58,20 @@
         <div class="vis pure-u-1 pure-u-md-5-8">
           <div class="fields" ng-switch="field.type">
 
+            <!-- Handle dropdowns -->
             <select ng-switch-when="radio" ng-model="field.value" ng-options="option.value as (option.text || option.value) for option in field.options">
               <option value="">-- choose {{field.name}} --</option>
             </select>
 
+            <!-- Handle range -->
             <div ng-switch-when="range">
               <font class="min"> {{ field.min }} </font>
               <input ng-model="field.value" id="{{ action.name + field.name }}" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}"  type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
               <font class="max"> {{ field.max }} </font>
-              <input ng-model="field.value" type="number" value="{{ field.value }}" placeholder="{{ field.value }}"  />
+              <input ng-model="field.value" type="number" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}" value="{{ field.value }}" placeholder="{{ field.value }}"  />
             </div>
 
+            <!-- Handle other input types -->
             <input ng-switch-default ng-model="field.value" class="pure-u-1" id="{{ action.name + field.name }}" placeholder="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
 
           </div>

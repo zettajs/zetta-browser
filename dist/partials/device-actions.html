@@ -2,35 +2,51 @@
 <form class="pure-form pure-form-stacked">
   <fieldset>
     <legend># {{ action.name }}</legend>
-    <label ng-repeat-start="field in action.fields" for="{{ action.name + field.name }}" class="{{ field.type }}"></label>
 
-    <ng-switch on="field.type">
-      <div ng-switch-when="radio" ng-if="!action.renderOptionsAsButtons">
-        <!-- regular radios -->
-        <label class="pure-radio" ng-repeat="val in action.radioField.value" for="{{ action.name + field.name }}_{{ $index }}" >
-        <input id="{{ action.name + field.name }}_{{ $index }}" type="radio" name="{{ action.name + field.name }}" value="{{ val.value }}"/>
-          {{ val.value }}
-        </label>
+    <!-- Handle single button and single input -->
+    <div ng-if="action.renderOptionsAsButton">
+      <input class="pure-u-1"  ng-repeat="field in action.fields" placeholder="{{ field.name }}" step="{{field.step}}" min="{{field.min}}" max="{{field.max}}" type="{{ field.type }}" class="pure-u-1" name="{{ field.name }}" value="{{ field.value }}"
+              id="{{ action.name + field.name }}" ng-model="field.value"/>
 
+      <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
+    </div>
+
+
+    <!-- Handle double radio inputs as two buttons -->
+    <div ng-if="action.renderOptionsAsRadioButtons">
+      <button ng-repeat="val in action.radioField.value" class="pure-button {{ action.name + '-button' }}" ng-click="val.execute()">{{ val.title || val.value}}</button>
+    </div>
+
+
+    <!-- Handle multiple inputs -->
+    <div ng-if="action.renderOptionsAsMultipleInputs">
+      <div ng-repeat="field in action.inputFields">
+        <label ng-if="!field.isHidden" for="{{field.name}}">{{field.name}}</label>
+
+        <div class="fields" ng-switch="field.type">
+
+          <!-- Handle dropdowns -->
+          <select ng-switch-when="radio" ng-model="field.value" ng-options="option.value as (option.text || option.value) for option in field.options">
+            <option value="">-- choose {{field.name}} --</option>
+          </select>
+
+          <!-- Handle range -->
+          <div ng-switch-when="range">
+            <font class="min"> {{ field.min }} </font>
+            <input ng-model="field.value" id="{{ action.name + field.name }}" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}"  type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
+            <font class="max"> {{ field.max }} </font>
+            <input ng-model="field.value" type="number" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}" value="{{ field.value }}" placeholder="{{ field.value }}"  />
+          </div>
+
+          <!-- Handle other input types -->
+          <input ng-switch-default ng-model="field.value" class="pure-u-1" id="{{ action.name + field.name }}" placeholder="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
+        </div>
       </div>
 
-      <div ng-switch-when="radio" ng-if="action.renderOptionsAsButtons">
-            <button ng-repeat="val in action.radioField.value" class="pure-button {{ action.name + '-button' }}" ng-click="val.execute()">{{ val.title || val.value}}</button>
-      </div>
+      <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
+    </div>
 
-
-      <textarea ng-switch-when="textarea" name="{{ field.name }}" value="{{ field.value }}"
-              id="{{ action.name + field.name }}" ng-model="field.value" class="pure-u-1"></textarea>
-
-      <input placeholder="{{ field.name }}" type="{{ field.type }}" class="pure-u-1" name="{{ field.name }}" value="{{ field.value }}"
-              id="{{ action.name + field.name }}" step="{{field.step}}" min="{{field.min}}" max="{{field.max}}" ng-model="field.value" ng-switch-default/>
-
-    </ng-switch>
-    <span ng-repeat-end></span>
-
-    <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()" ng-if="!action.renderOptionsAsButtons">{{ action.name }}</button>
   </fieldset>
-
 </form>
 
 <!--
