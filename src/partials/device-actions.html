@@ -4,25 +4,9 @@
     <legend># {{ action.name }}</legend>
 
     <!-- Handle single button and single input -->
-    <div ng-if="action.renderOptionsAsButton">
-      <input class="pure-u-1"  ng-repeat="field in action.fields" placeholder="{{ field.name }}" step="{{field.step}}" min="{{field.min}}" max="{{field.max}}" type="{{ field.type }}" class="pure-u-1" name="{{ field.name }}" value="{{ field.value }}"
-              id="{{ action.name + field.name }}" ng-model="field.value"/>
+    <div ng-if="action.renderOptionsAsButton || action.renderOptionsAsMultipleInputs">
 
-      <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
-    </div>
-
-
-    <!-- Handle double radio inputs as two buttons -->
-    <div ng-if="action.renderOptionsAsRadioButtons">
-      <button ng-repeat="val in action.radioField.value" class="pure-button {{ action.name + '-button' }}" ng-click="val.execute()">{{ val.title || val.value}}</button>
-    </div>
-
-
-    <!-- Handle multiple inputs -->
-    <div ng-if="action.renderOptionsAsMultipleInputs">
       <div ng-repeat="field in action.inputFields">
-        <label ng-if="!field.isHidden" for="{{field.name}}">{{field.name}}</label>
-
         <div class="fields" ng-switch="field.type">
 
           <!-- Handle dropdowns -->
@@ -44,6 +28,12 @@
       </div>
 
       <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
+    </div>
+
+
+    <!-- Handle double radio inputs as two buttons -->
+    <div ng-if="action.renderOptionsAsRadioButtons">
+      <button ng-repeat="val in action.radioField.value" class="pure-button {{ action.name + '-button' }}" ng-click="val.execute()">{{ val.title || val.value}}</button>
     </div>
 
   </fieldset>

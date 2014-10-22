@@ -1,7 +1,25 @@
 angular.module('zetta').directive('zettaOverviewAction', [function() {
   var link = function(scope, element) {
 
-    if (scope.action.fields.length === 2 && (scope.action.fields[0].type === 'radio' || scope.action.fields[1].type === 'radio')) {
+    function isRadioButtons(action) {
+
+      // one input plus hidden
+      if (scope.action.fields.length !== 2) {
+        return false;
+      }
+
+      if (scope.action.fields[0].type !== 'radio' && scope.action.fields[1].type !== 'radio') {
+        return false;
+      }
+
+      var radio = scope.action.fields.filter(function(field) {
+        return field.type === 'radio';
+      })[0];
+
+      return radio.value.length < 3;
+    }
+
+    if (isRadioButtons(scope.action)) {
       var radio = scope.action.fields.filter(function(field) {
         return field.type === 'radio';
       })[0];
@@ -37,7 +55,6 @@ angular.module('zetta').directive('zettaOverviewAction', [function() {
         if (field.type === 'radio') {
           field.options = field.value;
           field.value = '';
-
         }
 
         // When no value is set, set as empty string.
