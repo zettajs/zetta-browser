@@ -49,12 +49,12 @@
             </div>
           </div>
           <div class="pure-u-5-6 pure-u-md-11-12 pure-g">
-            <div class="name pure-u-5-12 pure-u-md-1-4">
+            <div class="name pure-u-1-2 pure-u-md-1-4">
               : {{ stream.name }}
             </div>
-            <div class="value hide-md pure-u-5-12">{{ stream.current }}</div>
+            <div class="value hide-md pure-u-1-2">{{ stream.current }}</div>
             <div class="pure-u-1-6 hide-md"></div>
-            <div class="vis pure-u-5-6 pure-u-md-5-12">
+            <div class="vis pure-u-1 pure-u-md-5-12">
                 <div class="sparkline pure-u-1" ng-if="stream.type === 'numerical'">
                   <sparkline height="16" stream="stream.data" id="{{ stream.name }}"></sparkline>
                 </div>
@@ -74,7 +74,7 @@
               </div>
             </div>
 
-            <zetta-overview-action value="action" class="pure-u-11-12 pure-g"/>
+            <zetta-overview-action value="action" class="pure-u-5-6 pure-u-md-11-12 pure-g"/>
 
           </div>
         </div>

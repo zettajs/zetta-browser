@@ -8,27 +8,28 @@
         <div class="switches pure-u-1-6 pure-u-md-1-12">
           <b class="mute" ng-click="mute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="unpin(characteristic)">pushpin</b>
         </div>
-        <div class="name pure-u-1-2 pure-u-md-1-4">
-          <a class="server-name" ng-click="loadServer(characteristic.device.server)">{{ characteristic.device.server.name }} &gt; </a>
-          <br/>
-          <a ng-click="resolve(characteristic.device.href)" class="device-name">
-            {{ characteristic.device.properties.name || characteristic.device.properties.type }}</a>
-          <span class="stream-name"> {{ characteristic.name }}</span>
-        </div>
-        <div class="value hide-md pure-u-1-3">{{ characteristic.current }}</div>
-        <div class="pure-u-1-6 hide-md"></div>
-        <div class="vis pure-u-5-6 pure-u-md-5-12" ng-if="characteristic.type">
-          <div class="sparkline" ng-if="characteristic.type === 'numerical'">
-            <sparkline height="16" stream="characteristic.data" id="{{ characteristic.name }}"></sparkline>
+        <div class="pure-u-5-6 pure-u-md-11-12">
+          <div class="name pure-u-1-2 pure-u-md-1-4">
+            <a class="server-name" ng-click="loadServer(characteristic.device.server)">{{ characteristic.device.server.name }} &gt; </a>
+            <br/>
+            <a ng-click="resolve(characteristic.device.href)" class="device-name">
+              {{ characteristic.device.properties.name || characteristic.device.properties.type }}</a>
+            <span class="stream-name"> {{ characteristic.name }}</span>
           </div>
-          <div class="dnastrip" ng-if="characteristic.type === 'categorical'">
-            <z-dna-strip width="100" height="16" stream="characteristic"></z-dna-strip>
+          <div class="value hide-md pure-u-1-2">{{ characteristic.current }}</div>
+          <div class="pure-u-1-6 hide-md"></div>
+          <div class="vis pure-u-1 pure-u-md-5-12" ng-if="characteristic.type">
+            <div class="sparkline pure-u-1" ng-if="characteristic.type === 'numerical'">
+              <sparkline height="16" stream="characteristic.data" id="{{ characteristic.name }}"></sparkline>
+            </div>
+            <div class="dnastrip pure-u-1" ng-if="characteristic.type === 'categorical'">
+              <z-dna-strip width="100" height="16" stream="characteristic"></z-dna-strip>
+            </div>
+          </div>
+          <div class="value before-md pure-u-md-1-4" ng-if="characteristic.type">&nbsp;{{ characteristic.current }}</div>
+          <div class="pure-u-5-6 pure-u-md-2-3"  >
+            <zetta-overview-action value="characteristic" ng-if="!characteristic.type"/>
           </div>
         </div>
-        <div class="value before-md pure-u-md-1-4" ng-if="characteristic.type">&nbsp;{{ characteristic.current }}</div>
-        <div class="pure-u-5-6 pure-u-md-2-3"  ng-if="!characteristic.type">
-          <zetta-overview-action class="row action" value="characteristic" />
-        </div>
-
       </div>
     </section>
