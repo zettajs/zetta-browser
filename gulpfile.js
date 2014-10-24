@@ -44,11 +44,11 @@ gulp.task('jshint', function() {
 
 gulp.task('scripts', function() {
   gulp.src(scripts)
-    .pipe(sourcemaps.init()) 
+  /*  .pipe(sourcemaps.init()) */
       .pipe(concat('zetta.js'))
   /*  .pipe(stripDebug()) */
       .pipe(uglify({mangle:false})) //remove mangle.false to further reduce filesize of the production JS file. about a 30% savings
-    .pipe(sourcemaps.write('./')) 
+  /*  .pipe(sourcemaps.write('./'))  */
       .pipe(gulp.dest('./dist/scripts'))
 });
 
@@ -74,7 +74,7 @@ gulp.task('css', function() {
     /*.pipe(sourcemaps.init())*/
     /*.pipe(prefix("last 2 version", "> 5%", "ie 9")) */
       .pipe(concat('zetta.css'))
-      .pipe(minifyCSS({noAdvanced:true, keepSpecialComments: 0}))
+      .pipe(minifyCSS({noAdvanced:true, keepSpecialComments: 0})) 
     /*.pipe(sourcemaps.write('./'))*/
     .pipe(gulp.dest('./dist/styles'));
   

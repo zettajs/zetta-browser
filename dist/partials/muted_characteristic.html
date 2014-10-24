@@ -1,0 +1,20 @@
+<div class="pure-u-1-6 pure-u-md-1-12"></div>
+    <h2 class="name pure-u-5-6 pure-u-md-11-12">Muted<span>:group</span></h2>
+    <section class="devices pure-u-1">
+    <div ng-class="{ open: !!characteristic.muteOpen, closed: !characteristic.muteOpen }" class="device row action pure-g animate-size closed" ng-repeat="characteristic in muted">
+        <div class="switches pure-u-1-6 pure-u-md-1-12">
+          <b class="mute"ng-click="unmute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="pin(characteristic)">pushpin</b>
+        </div>
+        <div class="name pure-u-5-6 pure-u-md-1-4">
+          <a class="server-name" ng-click="loadServer(characteristic.device.server)">{{ characteristic.device.server.name }} &gt; </a>
+          <br/>
+          <a ng-click="resolve(characteristic.device.href)" class="device-name">
+            {{ characteristic.device.properties.name || characteristic.device.properties.type }}</a>
+          <span class="stream-name"> {{ characteristic.name }}</span>
+        </div>
+        <div class="vis pure-u-5-6 pure-u-md-5-12">
+          -
+        </div>
+        <div class="value before-md pure-u-md-1-4">&nbsp;-</div>
+      </div>
+    </section>

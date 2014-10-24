@@ -12,7 +12,9 @@
 .overview-action-form {
   display: inline;
 }
-
+form.action-content label{
+  padding: 0 1rem;
+}
 .pinned, .muted{
   .devices{
     .row {
@@ -87,6 +89,9 @@
       
       text-align: right;
       @media @md { text-align: left; }
+      form {
+        float: left;
+      }
     }
     
     .spacer {
@@ -95,7 +100,6 @@
     &:not(:first-child){
       .name, .value {
         .border-top(@gray_5, 1px);
-        padding-left: 1rem;
       }
       @media @md {
         .vis, .value{ .border-top(@gray_5, 1px)}
@@ -192,11 +196,8 @@
 
 input {
   .body-font();
-  margin-right: .5rem;
-  padding: .25rem .5rem .35rem .5rem !important;
-  border-radius: 0 !important;
   
-  
+  padding: .4rem;
   &[type="color"] {
     -webkit-appearance: none; 
     border: none;
@@ -209,10 +210,13 @@ input {
 }
   
   ::-webkit-input-placeholder { font-style: italic; font-weight: 100;}
-  :-moz-placeholder { }
-  ::-moz-placeholder { }
-  :-ms-input-placeholder { }
-
+  :-moz-placeholder {font-style: italic; font-weight: 100; }
+  ::-moz-placeholder {font-style: italic; font-weight: 100; }
+  :-ms-input-placeholder { font-style: italic; font-weight: 100;}
+select {
+  margin-top: .3rem;
+  width: 100%;
+}
 .pure-button {
     border-radius: 0 !important;
     padding: .3rem .5rem;

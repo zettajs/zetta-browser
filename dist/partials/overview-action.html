@@ -1,14 +1,71 @@
 
 <!-- Handle single button -->
-<form class="pure-form action-content" ng-if="action.renderOptionsAsButton">
+<div ng-if="action.renderOptionsAsButton">
+  
+  <form class="pure-form action-content">
+    <div class="name pure-u-1-4">
+      # {{ action.name }}
+    </div>
+    
+    <div class="vis pure-u-1 pure-u-md-5-12" ng-repeat="field in action.inputFields" ng-if="field.type!='hidden'">
+      
+          <!-- Handle dropdowns -->
+          <select ng-if="field.type=='radio'" ng-options="option.value as (option.text || option.value) for option in field.options">
+            <option value="">-- choose {{field.name}} --</option>
+          </select>
+
+          <!-- Handle range -->
+          <div ng-if="field.type=='range'">
+            {{ field.min }}
+            <input ng-model="field.value" id="{{ action.name + field.name }}" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}"  type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
+            {{ field.max }}
+            <input ng-model="field.value" type="number" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}" value="{{ field.value }}" placeholder="{{ field.value }}"  />
+          </div>
+        
+          <!-- Handle other input types -->
+          <input ng-if="field.type!='range'&&field.type!='radio'" class="pure-u-1" id="{{ action.name + field.name }}" placeholder="{{ field.name }}" ng-type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
+    </div>
+    <div class="vis pure-u-1 pure-u-md-5-12" ng-if="action.inputFields.length<2"></div>
+    <div class="value pure-u-1 pure-u-md-1-3">
+      <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
+    </div>
+</form>
+</div>
+<!-- Handle double radio inputs as two buttons -->
+<div ng-if="action.renderOptionsAsRadioButtons">
   <div class="name pure-u-1-4">
     # {{ action.name }}
   </div>
 
-  <div class="action-content pure-u-3-4">
-    <div class="vis pure-u-1 pure-u-md-5-8">
+  <div class="vis pure-u-1 pure-u-md-5-12"></div>
+  <div class="value pure-u-1 pure-u-md-1-3">
+    <form ng-repeat="val in action.radioField.value" class="pure-form">
+      <button class="pure-button {{ action.name + '-button' }}" ng-click="val.execute()">{{ val.title || val.value}}</button>
+    </form>
+  </div>
+</div>
 
-      <div ng-repeat="field in action.inputFields">
+
+<!-- Handle multiple inputs -->
+<div ng-if="action.renderOptionsAsMultipleInputs">
+  <form class="pure-form action-content">
+
+    <div class="name pure-u-1-4">
+      # {{ action.name }}
+    </div>
+    <div class="vis pure-u-1 pure-u-md-5-12"></div>
+    <div class="value pure-u-1-3">
+      <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
+    </div>
+
+
+
+    <div ng-repeat="field in action.inputFields">
+      <div class="name pure-u-1-4">
+        <label ng-if="!field.isHidden" for="{{field.name}}">{{field.name}}</label>
+      </div>
+
+      <div class="vis pure-u-1 pure-u-md-5-12">
         <div class="fields" ng-switch="field.type">
 
           <!-- Handle dropdowns -->
@@ -26,73 +83,7 @@
 
           <!-- Handle other input types -->
           <input ng-switch-default ng-model="field.value" class="pure-u-1" id="{{ action.name + field.name }}" placeholder="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
-        </div>
-      </div>
 
-    </div>
-    <div class="value pure-u-1 pure-u-md-1-4" ng-if="!action.renderOptionsAsButtons">
-      <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
-    </div>
-  </div>
-</form>
-
-<!-- Handle double radio inputs as two buttons -->
-<div ng-if="action.renderOptionsAsRadioButtons">
-  <div class="name pure-u-1-4">
-    # {{ action.name }}
-  </div>
-
-  <div class="action-content pure-u-3-4">
-    <div class="vis pure-u-1 pure-u-md-5-8"></div>
-    <div class="value pure-u-1 pure-u-md-1-4">
-      <form ng-repeat="val in action.radioField.value" class="pure-form overview-action-form">
-        <button class="pure-button {{ action.name + '-button' }}" ng-click="val.execute()">{{ val.title || val.value}}</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-<!-- Handle multiple inputs -->
-<div ng-if="action.renderOptionsAsMultipleInputs">
-  <form class="pure-form action-content">
-
-    <div class="name pure-u-3-4">
-      # {{ action.name }}
-    </div>
-
-    <div class="name pure-u-1-4">
-      <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
-    </div>
-
-
-
-    <div ng-repeat="field in action.inputFields">
-      <div class="pure-u-1-4">
-        <label ng-if="!field.isHidden" for="{{field.name}}">{{field.name}}</label>
-      </div>
-
-      <div class="pure-u-3-4 pure-g">
-        <div class="vis pure-u-1 pure-u-md-5-8">
-          <div class="fields" ng-switch="field.type">
-
-            <!-- Handle dropdowns -->
-            <select ng-switch-when="radio" ng-model="field.value" ng-options="option.value as (option.text || option.value) for option in field.options">
-              <option value="">-- choose {{field.name}} --</option>
-            </select>
-
-            <!-- Handle range -->
-            <div ng-switch-when="range">
-              <font class="min"> {{ field.min }} </font>
-              <input ng-model="field.value" id="{{ action.name + field.name }}" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}"  type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
-              <font class="max"> {{ field.max }} </font>
-              <input ng-model="field.value" type="number" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}" value="{{ field.value }}" placeholder="{{ field.value }}"  />
-            </div>
-
-            <!-- Handle other input types -->
-            <input ng-switch-default ng-model="field.value" class="pure-u-1" id="{{ action.name + field.name }}" placeholder="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
-
-          </div>
         </div>
       </div>
     </div>
