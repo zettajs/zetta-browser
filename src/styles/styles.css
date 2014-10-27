@@ -418,8 +418,8 @@ section.main {
 
 .pure-button {
     padding: 0.5em 1em;
-    color: #fff; // rgba not supported (IE 8) 
-    color: rgba(255, 255, 255, 1); // rgba supported 
+    color: #fff; // rgba not supported (IE 8)
+    color: rgba(255, 255, 255, 1); // rgba supported
     *color: #fff; // IE 6 & 7
     border: 0px solid #999;  /*IE 6/7/8
     border: none rgba(0, 0, 0, 0);  // IE9 + everything else
@@ -427,9 +427,9 @@ section.main {
     text-decoration: none;
     border-radius: 0px;
     font-weight: normal;
-  
+
     &-orange  {background-color: @orange; }
-    &-green   {background-color: @green;  }  
+    &-green   {background-color: @green;  }
     &-blue    {background-color: @blue;   }
     &-purple  {background-color: @purple; }
     &-gray    {background-color: @gray;   }
@@ -614,7 +614,6 @@ nav .zetta-logo {
   width: 100%;
   font-size: 1.2rem;
   font-family: "fira-mono", courier, monospace;
-  padding: .7rem 0 0rem 1rem;
   border: none;
   background-color: transparent;
 }
@@ -721,9 +720,9 @@ nav .zetta-logo {
     margin: 0 auto !important;
   }
 }
-/*  
-    Code highlighting 
-    see: zetta-prism.less 
+/*
+    Code highlighting
+    see: zetta-prism.less
 */
 .muted .devices {
   background-color: transparent;
@@ -992,8 +991,11 @@ footer a {
 .overview-action-form {
   display: inline;
 }
-.pinned .devices .row:not(:first-child) .switches,
-.muted .devices .row:not(:first-child) .switches {
+form.action-content label {
+  padding: 0 1rem;
+}
+.pinned .devices .row:not(:first-child),
+.muted .devices .row:not(:first-child) {
   border-top: 1px solid #f2f2f2;
   /*
   background-image: linear-gradient(@color @width, transparent @width);
@@ -1069,6 +1071,7 @@ footer a {
   */
 }
 .devices .row {
+  border-top: 1px solid #f2f2f2;
   overflow-x: hidden;
   line-height: 1rem;
 }
@@ -1086,7 +1089,7 @@ footer a {
 }
 .devices .row.animate-size.open {
   height: auto;
-  max-height: 10rem;
+  max-height: 100rem;
 }
 .devices .row .switches,
 .devices .row .name,
@@ -1110,32 +1113,12 @@ footer a {
     text-align: left;
   }
 }
+.devices .row .value form {
+  display: inline-block;
+}
 @media screen and (min-width: 48.1em) {
   .devices .row .spacer {
     display: none;
-  }
-}
-.devices .row:not(:first-child) .name,
-.devices .row:not(:first-child) .value {
-  border-top: 1px solid #f2f2f2;
-  /*
-  background-image: linear-gradient(@color @width, transparent @width);
-  background-size: 100% @width;
-  background-repeat: no-repeat;
-  background-position: top;
-  */
-  padding-left: 1rem;
-}
-@media screen and (min-width: 48.1em) {
-  .devices .row:not(:first-child) .vis,
-  .devices .row:not(:first-child) .value {
-    border-top: 1px solid #f2f2f2;
-    /*
-  background-image: linear-gradient(@color @width, transparent @width);
-  background-size: 100% @width;
-  background-repeat: no-repeat;
-  background-position: top;
-  */
   }
 }
 .devices .row .switches {
@@ -1163,15 +1146,6 @@ footer a {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.devices .row.action .action-content .vis {
-  border-top: 1px solid #ededed;
-  /*
-  background-image: linear-gradient(@color @width, transparent @width);
-  background-size: 100% @width;
-  background-repeat: no-repeat;
-  background-position: top;
-  */
-}
 .devices .row.action .value {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1184,17 +1158,10 @@ footer a {
   .devices .row.action .value {
     padding: .5rem 1rem;
     text-align: left;
-    border-top: 1px solid #f2f2f2;
-    /*
-  background-image: linear-gradient(@color @width, transparent @width);
-  background-size: 100% @width;
-  background-repeat: no-repeat;
-  background-position: top;
-  */
   }
 }
 .devices .row.action .vis {
-  padding: .5rem 1rem ;
+  padding: .5rem 1rem 0 0;
 }
 @media screen and (min-width: 48.1em) {
   .devices .row.action .vis {
@@ -1202,7 +1169,7 @@ footer a {
   }
 }
 .device-group .row.categorical .vis {
-  padding: 0 1rem .5rem 1rem;
+  padding: 0 1rem .5rem 0rem;
 }
 @media screen and (min-width: 48.1em) {
   .device-group .row.categorical .vis {
@@ -1210,7 +1177,7 @@ footer a {
   }
 }
 .device-group .row.numerical .vis {
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 1rem 1rem 0rem;
 }
 @media screen and (min-width: 48.1em) {
   .device-group .row.numerical .vis {
@@ -1218,17 +1185,26 @@ footer a {
   }
 }
 .device-group .row.action .value {
-  text-align: left;
-  padding-left: 1rem;
+  text-align: right;
+  margin-top: .5rem;
+}
+@media screen and (min-width: 48.1em) {
+  .device-group .row.action .value {
+    text-align: left;
+    margin-top: 0;
+  }
 }
 .device-group .row.action .vis {
   border-top: 0;
-  padding: .5rem 1rem .5rem 1rem;
+  padding: .5rem 1rem .5rem 0rem;
 }
 @media screen and (min-width: 48.1em) {
   .device-group .row.action .vis {
     padding: .25rem 0 .5rem 0;
   }
+}
+.device-group.pinned zetta-overview-action .name:first-of-type {
+  display: none;
 }
 .device-group.pinned .row.action .value {
   padding-left: 0rem;
@@ -1247,9 +1223,7 @@ footer a {
 }
 input {
   font-family: "jaf-facitweb", Helvetica, Arial, sans-serif;
-  margin-right: .5rem;
-  padding: .25rem .5rem .35rem .5rem !important;
-  border-radius: 0 !important;
+  padding: .4rem;
 }
 input[type="color"] {
   -webkit-appearance: none;
@@ -1265,6 +1239,22 @@ input[type="color"]::-webkit-color-swatch {
 ::-webkit-input-placeholder {
   font-style: italic;
   font-weight: 100;
+}
+:-moz-placeholder {
+  font-style: italic;
+  font-weight: 100;
+}
+::-moz-placeholder {
+  font-style: italic;
+  font-weight: 100;
+}
+:-ms-input-placeholder {
+  font-style: italic;
+  font-weight: 100;
+}
+select {
+  margin-top: .3rem;
+  width: 100%;
 }
 .pure-button {
   border-radius: 0 !important;

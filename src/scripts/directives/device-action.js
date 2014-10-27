@@ -1,38 +1,67 @@
 angular.module('zetta').directive('zettaDeviceAction', [function() {
   var link = function(scope, element) {
 
-    if (scope.action.fields) {
-      if (scope.action.fields.length === 2
-          && (scope.action.fields[0].type === 'radio' || scope.action.fields[1].type === 'radio')) {
-        var radio = scope.action.fields.filter(function(field) {
-          return field.type === 'radio';
-        })[0];
+    function isRadioButtons(action) {
 
-        scope.action.radioField = {
-          name: radio.name,
-          value: radio.value
-        };
-
-        scope.action.radioField.value.forEach(function(val) {
-          val.execute = function() {
-            radio.value = val.value;
-            scope.execute();
-          };
-        });
-        scope.action.renderOptionsAsButtons = true;
-      } else {
-        scope.action.renderOptionsAsButtons = false;
-        scope.action.fields.forEach(function(field, i) {
-          if (!field.type) {
-            scope.action.fields[i].type = 'text';
-          }
-
-          // When no value is set, set as empty string.
-          if (field.value === undefined) {
-            field.value = '';
-          }
-        });
+      // one input plus hidden
+      if (scope.action.fields.length !== 2) {
+        return false;
       }
+
+      if (scope.action.fields[0].type !== 'radio' && scope.action.fields[1].type !== 'radio') {
+        return false;
+      }
+
+      var radio = scope.action.fields.filter(function(field) {
+        return field.type === 'radio';
+      })[0];
+
+      return radio.value.length < 3;
+    }
+
+    if (isRadioButtons(scope.action)) {
+      var radio = scope.action.fields.filter(function(field) {
+        return field.type === 'radio';
+      })[0];
+
+      scope.action.radioField = {
+        name: radio.name,
+        value: radio.value
+      };
+
+      scope.action.radioField.value.forEach(function(val) {
+        val.execute = function() {
+          radio.value = val.value;
+          scope.execute();
+        };
+      });
+      scope.action.renderOptionsAsRadioButtons = true;
+    } else {
+
+      if (scope.action.fields.length > 2) {
+        scope.action.renderOptionsAsMultipleInputs = true;
+      } else {
+        scope.action.renderOptionsAsButton = true;
+      }
+
+      scope.action.inputFields = scope.action.fields; // create copy so mutations dont show up in api response section
+      scope.action.inputFields.forEach(function(field, i) {
+        if (!field.type) {
+          field.type = 'text';
+        }
+
+        field.isHidden = (field.type === 'hidden') ? true : false;
+
+        if (field.type === 'radio') {
+          field.options = field.value;
+          field.value = '';
+        }
+
+        // When no value is set, set as empty string.
+        if (field.value === undefined) {
+          field.value = '';
+        }
+      });
     }
 
     scope.execute = function() {

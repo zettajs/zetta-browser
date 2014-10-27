@@ -12,13 +12,15 @@
 .overview-action-form {
   display: inline;
 }
-
+form.action-content label{
+  padding: 0 1rem;
+}
 .pinned, .muted{
   .devices{
     .row {
       
       &:not(:first-child){
-        .switches {.border-top(@gray_5, 1px);}
+        .border-top(@gray_5, 1px);
       }
       
       .name { padding: 0rem !important; }
@@ -69,6 +71,7 @@
     
     
   .row {
+    border-top: 1px solid @gray_5;
     overflow-x: hidden;
     .expand();
     line-height: 1rem;
@@ -87,21 +90,15 @@
       
       text-align: right;
       @media @md { text-align: left; }
+      form {
+        display: inline-block;
+      }
     }
     
     .spacer {
       @media @md {display: none;}
     }
-    &:not(:first-child){
-      .name, .value {
-        .border-top(@gray_5, 1px);
-        padding-left: 1rem;
-      }
-      @media @md {
-        .vis, .value{ .border-top(@gray_5, 1px)}
-      }
-      
-    }
+   
     
     .switches{
       padding:1.1rem 0 .9rem 0;
@@ -128,9 +125,7 @@
     } 
     &.action {
       .border-box();
-      .action-content .vis{
-        .border-top(@light-gray-bg, 1px);
-      }
+      
       
       .value {
         .border-box();
@@ -140,11 +135,10 @@
         @media @md {
           padding: .5rem 1rem;
           text-align: left;
-          .border-top(@gray_5, 1px);
         }
       }
       .vis {
-        padding: .5rem 1rem ;
+        padding: .5rem 1rem 0 0;
         @media @md {
           padding: 0rem 0rem;
         }
@@ -157,28 +151,42 @@
 .device-group {
   
   .row.categorical .vis {
-    padding: 0 1rem .5rem 1rem;
+    padding: 0 1rem .5rem 0rem;
     @media @md { padding: 1rem 0 .5rem 0; }
   }
   
   .row.numerical .vis {
-    padding: 0 1rem 1rem 1rem;
-    @media @md { padding: 1rem 0 1rem 0; }
+    padding: 0 1rem 1rem 0rem;
+    @media @md { 
+      padding: 1rem 0 1rem 0; 
+    }
   }
   
   .row.action {
-    .value {text-align: left; padding-left: 1rem;}
+    .value {
+      text-align: right; 
+      margin-top: .5rem;
+      @media @md {text-align: left; margin-top: 0;}
+    }
+    
     .vis {
       border-top: 0;
-      padding: .5rem 1rem .5rem 1rem;
-      @media @md { padding: .25rem 0 .5rem 0; }
+      padding: .5rem 1rem .5rem 0rem;
+      @media @md { 
+        padding: .25rem 0 .5rem 0; 
+      }
 
     }
   }
   
   &.pinned {
+    zetta-overview-action .name:first-of-type {
+      display: none;
+    }
     .row.action {
-      .value {padding-left: 0rem;}
+      .value {
+        padding-left: 0rem;
+      }
       .vis {
         padding: .5rem 1rem .5rem 0rem;
         @media @md { padding: .25rem 0 .5rem 0; }
@@ -192,11 +200,8 @@
 
 input {
   .body-font();
-  margin-right: .5rem;
-  padding: .25rem .5rem .35rem .5rem !important;
-  border-radius: 0 !important;
   
-  
+  padding: .4rem;
   &[type="color"] {
     -webkit-appearance: none; 
     border: none;
@@ -209,10 +214,13 @@ input {
 }
   
   ::-webkit-input-placeholder { font-style: italic; font-weight: 100;}
-  :-moz-placeholder { }
-  ::-moz-placeholder { }
-  :-ms-input-placeholder { }
-
+  :-moz-placeholder {font-style: italic; font-weight: 100; }
+  ::-moz-placeholder {font-style: italic; font-weight: 100; }
+  :-ms-input-placeholder { font-style: italic; font-weight: 100;}
+select {
+  margin-top: .3rem;
+  width: 100%;
+}
 .pure-button {
     border-radius: 0 !important;
     padding: .3rem .5rem;
