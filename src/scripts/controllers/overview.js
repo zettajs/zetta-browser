@@ -7,6 +7,8 @@ angular.module('zetta').controller('OverviewCtrl', [
   
   $scope.pageNav = null;
   $scope.loading = true;
+  $scope.hasDevices = false;
+
   $scope.init = function() {
     loadServers();
   };
@@ -61,6 +63,9 @@ angular.module('zetta').controller('OverviewCtrl', [
         } else {
           zettaShared.state.servers.forEach(function(server) {
             server.available = true;
+            if (server.devices && !$scope.hasDevices) {
+              $scope.hasDevices = true;
+            }
           })
         }
 
@@ -72,6 +77,9 @@ angular.module('zetta').controller('OverviewCtrl', [
       } else {
         zettaShared.state.servers.forEach(function(server) {
           server.available = true;
+          if (server.devices && !$scope.hasDevices) {
+            $scope.hasDevices = true;
+          }
         })
       }
       $scope.loading = false;

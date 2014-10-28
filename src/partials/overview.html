@@ -13,6 +13,7 @@
   </header>
   
   <div class="server-loading pure-u-1" ng-if="loading"><b>stop</b><b>stop</b><b>stop</b></div>
+  <div class="server-loading pure-u-1" ng-if="!hasDevices && !loading">No devices found.</div>
 
   <!-- Pinned Group -->
   <div class="pinned device-group pure-g " ng-show="pinned.length">
