@@ -223,6 +223,11 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
         
         if (!data.entities || !data.entities.length) {
           serverCount++;
+
+          if (serverCount === state.servers.length) {
+            if (cb !== undefined && cb !== null) cb(state.servers);
+          }
+
           return;
         }
 
