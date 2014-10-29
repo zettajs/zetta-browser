@@ -53,17 +53,11 @@
 <div ng-if="action.renderOptionsAsMultipleInputs">
   <form class="pure-form action-content">
 
-    <div class="name pure-u-1-4">
+    <div class="name pure-u-1">
       # {{ action.name }}
     </div>
-    <div class="vis before-md pure-u-1 pure-u-md-5-12"></div>
-    <div class="value before-md pure-u-1 pure-u-md-1-3">
-      <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
-    </div>
-
-
-
-    <div ng-repeat="field in action.inputFields">
+    
+    <div ng-repeat="field in action.inputFields" ng-if="!field.isHidden">
       <div class="name pure-u-1-4">
         <label ng-if="!field.isHidden" for="{{field.name}}">{{field.name}}</label>
       </div>
@@ -90,8 +84,13 @@
         </div>
       </div>
     </div>
-    <div class="value hide-md pure-u-1 pure-u-md-1-3">
-      <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
+    
+    <div class="pure-g">
+        <div class="before-md pure-u-md-2-3"></div>
+        <div class="value pure-u-1 pure-u-md-1-3"><button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button></div>
     </div>
+    
+    
+    
   </form>
 </div>

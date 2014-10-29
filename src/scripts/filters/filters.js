@@ -51,6 +51,18 @@ angular.module('zetta')
 .filter('idSafe', function(){
   return function(input){ return input.replace(/([^A-z0-9])+/g,''); }
 })
+.filter('validInputType', function(){
+  return function(input){ 
+    
+    var valid = ['hidden', 'text', 'search', 'tel', 'url', 'email', 'password', 'datetime', 'date', 'month', 'week', 'time', 'datetime-local', 'number', 'range', 'color', 'checkbox', 'radio', 'file', 'image', 'button'];
+    
+    if(valid.indexOf(input.toLowerCase())){
+      return input.toLowerCase();
+    }else{
+      return "text";
+    }
+  }
+})
 .filter('purify', function() {
   return function(input) {
     var purified = {};

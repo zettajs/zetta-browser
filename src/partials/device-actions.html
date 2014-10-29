@@ -23,7 +23,7 @@
           </div>
 
           <!-- Handle other input types -->
-          <input ng-switch-default ng-model="field.value" class="pure-u-1" id="{{ action.name + field.name }}" placeholder="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
+          <input ng-switch-default ng-model="field.value" class="pure-u-1" id="{{ action.name + field.name }}" placeholder="{{ field.name }}" type="{{ field.type | validInputType}}" name="{{ field.name }}" value="{{ field.value }}" />
         </div>
       </div>
 
