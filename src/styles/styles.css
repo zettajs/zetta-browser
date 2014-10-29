@@ -1375,6 +1375,99 @@ select {
   font-size: .8rem;
   background-color: transparent;
 }
+.query {
+  margin-top: 1rem;
+}
+.query a {
+  font-size: .8rem;
+}
+.query .search_icon,
+.query .dropdown {
+  text-align: center;
+  padding-top: .5rem;
+}
+.query .pure-button {
+  padding: .25rem 1rem;
+  height: 2.5rem;
+  margin-left: 1rem;
+}
+.query .search_icon {
+  background-image: linear-gradient(90deg, #ededed 2px, transparent 2px);
+}
+.query .input {
+  padding: 0rem 0 .5rem 0;
+}
+.query .search_icon,
+.query .input,
+.query .dropdown {
+  border-top: 2px solid #ededed;
+  border-bottom: 2px solid #ededed;
+  height: 2.5rem;
+  box-shadow: 0 .1rem 0 #59595b;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.query .input {
+  overflow: hidden;
+}
+.query .input input {
+  padding: .5rem 0;
+  border: none;
+  box-shadow: none;
+}
+.query .submit {
+  background-image: linear-gradient(#ededed 2px, transparent 2px), linear-gradient(to top, #59595b 2px, #ededed 2px, #ededed 4px, transparent 4px);
+  height: 42px;
+  background-size: 20px 100%;
+  background-repeat: no-repeat;
+}
+.query button.icon {
+  color: #faa438;
+  border: none;
+  background-color: transparent;
+}
+.query button.icon:hover {
+  text-decoration: underline;
+}
+.query .clear {
+  padding: .5rem;
+}
+.query .join a {
+  display: none;
+}
+.query .join.active button.icon {
+  color: #59595b;
+}
+.query .join.active a {
+  display: inline-block;
+}
+.query .advanced_query .header {
+  padding: .25rem 0;
+  border-bottom: 1px solid #ededed;
+  margin-bottom: .5rem;
+}
+.query .advanced_query .header a {
+  margin-left: 1rem;
+}
+.query .advanced_query .header .dismiss {
+  text-align: center;
+}
+.server_endpoint {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-top: 1.5rem;
+  padding-left: 3%;
+}
+.server_endpoint .copy_group {
+  margin-left: 1rem;
+}
+.server_endpoint input {
+  font-size: .8rem;
+  font-family: "fira-mono", courier, monospace;
+  padding: .25rem;
+}
 /* Device Show */
 .focus {
   background-color: #fff;
