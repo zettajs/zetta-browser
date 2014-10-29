@@ -38748,6 +38748,7 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.servers = zettaShared.state.servers;
   $scope.muted = zettaShared.state.muted;
   $scope.query = zettaShared.state.query;
+  $scope.showAdvancedQuery = false;
   $scope.activeQuery = null; 
   $scope.queryError = null;
   
