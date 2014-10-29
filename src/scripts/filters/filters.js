@@ -56,11 +56,12 @@ angular.module('zetta')
     
     var valid = ['hidden', 'text', 'search', 'tel', 'url', 'email', 'password', 'datetime', 'date', 'month', 'week', 'time', 'datetime-local', 'number', 'range', 'color', 'checkbox', 'radio', 'file', 'image', 'button'];
     
-    if(valid.indexOf(input.toLowerCase())){
+    if(valid.indexOf(input.toLowerCase()) > -1){
       return input.toLowerCase();
     }else{
-      return "text";
+      return 'text';
     }
+    
   }
 })
 .filter('purify', function() {
