@@ -4,12 +4,17 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.pinned = zettaShared.state.pinned;
   $scope.servers = zettaShared.state.servers;
   $scope.muted = zettaShared.state.muted;
+  $scope.query = zettaShared.state.query;
+  $scope.activeQuery = null; 
+  $scope.queryError = null;
   
   $scope.pageNav = null;
   $scope.loading = true;
   $scope.hasDevices = false;
 
   $scope.init = function() {
+    console.log('scope.query:', $scope.query);
+    console.log('shared.query:', zettaShared.state.query);
     loadServers();
   };
 
@@ -25,6 +30,95 @@ angular.module('zetta').controller('OverviewCtrl', [
       $scope.pageNav = null;
     }
   });    
+
+  $scope.clearQuery = function() {
+    $scope.servers.forEach(function(server) {
+      server.lastSearch = null;
+      server.devices.forEach(function(device) {
+        device.available = true;
+      });
+    });
+
+    $scope.activeQuery = null;
+    $scope.query = null;
+    zettaShared.state.query = null;
+  };
+
+  $scope.submitQuery = function() {
+    var isValid = false;
+
+    try {
+      caql.parse($scope.query);
+      $scope.queryError = null;
+      $scope.activeQuery = $scope.query;
+      isValid = true;
+      zettaShared.state.query = $scope.query;
+    } catch(e) {
+      $scope.queryError = e.message;
+      $scope.activeQuery = null;
+    }
+
+    if (!isValid || !$scope.servers.length) {
+      return;
+    }
+
+    $scope.servers.forEach(function(server) {
+      var queryActions = server.actions.filter(function(action) {
+        return action.name === 'query-devices';
+      });
+
+      if (!queryActions.length) {
+        return;
+      }
+
+      var queryAction = queryActions[0];
+      console.log(queryAction);
+
+      var qlFields = queryAction.fields.filter(function(field) {
+        return field.name === 'ql';
+      });
+
+      if (!qlFields.length) {
+        return;
+      }
+
+      var qlField = qlFields[0];
+
+      qlField.value = $scope.query;
+
+      server.devices.forEach(function(device) {
+        device.available = false;
+      });
+
+      queryAction.execute(function(result) {
+        server.lastSearch = result.config.url;
+        var data = result.data;
+        if (!data.entities.length) {
+          return;
+        }
+        data.entities.forEach(function(entity) {
+          var selfHref;
+
+          entity.links.forEach(function(link) {
+            if (link.rel.indexOf('self') !== -1) {
+              selfHref = link.href;
+            }
+          });
+
+          if (!selfHref) {
+            return;
+          }
+
+          server.devices.forEach(function(device) {
+            if (device.href === selfHref) {
+              device.available = true;
+            }
+          });
+        });
+        console.log(data);
+      });
+    });
+  };
       
   function loadServers() {
     

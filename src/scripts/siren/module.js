@@ -103,8 +103,6 @@ angular
             params[field.name] = field.value;
           });
 
-          var url = options.url;
-
           var serialize = function(obj) {
             var str = [];
             for(var p in obj)
@@ -114,13 +112,19 @@ angular
             return str.join("&");
           };
 
-          url = url.split('?')[0] + '?' + serialize(params); 
+          options.url = options.url.split('?')[0] + '?' + serialize(params); 
 
-          $state.transitionTo('entity', { url: url });
+          //$state.transitionTo('entity', { url: url });
 
           var deferred = $q.defer();
 
-          deferred.resolve({ noop: true });
+          //deferred.resolve({ noop: true });
+          $http(options).success(function(data, status, headers, config) {
+            deferred.resolve({ data: data, config: config });
+          })
+          .error(function(data, status, headers, config) {
+            deferred.reject(status);
+          });
 
           return deferred.promise;
         } else {
