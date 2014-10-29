@@ -1,0 +1,4 @@
+<!-- Handle dropdowns -->
+<select ng-model="$parent.field.value" ng-options="option.value as (option.text || option.value) for option in $parent.field.options">
+  <option value="">-- choose {{$parent.field.name}} --</option>
+</select>

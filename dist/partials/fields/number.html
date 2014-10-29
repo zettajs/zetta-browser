@@ -1,0 +1,6 @@
+<table><tr>
+  <td>{{ $parent.field.min }}</td>
+  <td><input ng-model="$parent.field.value" id="{{ $parent.action.name + $parent.field.name }}" min="{{ $parent.field.min }}" max="{{ $parent.field.max }}" step="{{ $parent.field.step }}"  type="range" name="{{ $parent.field.name }}" value="{{ $parent.field.value }}" /></td>
+  <td>{{ field.max }}</td>
+  <td><input ng-model="$parent.field.value" type="number" min="{{ $parent.field.min }}" max="{{ $parent.field.max }}" step="{{ $parent.field.step }}" value="{{ $parent.field.value }}" placeholder="{{ $parent.field.value }}"  /></td>
+</tr></table>

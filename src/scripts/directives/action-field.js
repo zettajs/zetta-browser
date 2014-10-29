@@ -1,21 +1,36 @@
-angular.module('zetta').directive('actionField', [function() {
-  var link = function(scope, element) {
+angular.module('zetta')
+  .directive('includeReplace', function () {
+      return {
+          require: 'ngInclude',
+          restrict: 'A', /* optional */
+          link: function (scope, el, attrs) {
+              el.replaceWith(el.children());
+          }
+      };
+  })
+  .directive('actionField', [function() {
 
-    console.log('action-field element: ', element.type);
-    scope.execute = function() {
-      //something something, save value as new placeholder?
+
+    function link(scope, element, attrs) {
+      var template = scope.field.type;
+      var valid = ['hidden', 'text', 'search', 'tel', 'url', 'email', 'password', 'datetime', 'date', 'month', 'week', 'time', 'datetime-local', 'number', 'range', 'color', 'checkbox', 'radio', 'file', 'image', 'button'];
+      
+      if(valid.indexOf(scope.field.type) == -1){template = 'default'} //attempt to fail fast and gracefully
+      else if(scope.field.type == 'text'){ template = 'default' }
+      else if(['number', 'range'].indexOf(scope.field.type) > -1){ template = 'number'; } //normalize
+      else if(['select', 'radio'].indexOf(scope.field.type) > -1){ template = 'dropdown'; } //normalize
+
+      scope.contentUrl = 'partials/fields/'+template+'.html'
+      //scope.contentUrl = 'partials/fields/default.html'
+      console.log(scope.contentUrl);
     };
-  };
 
-  return {
-    restrict: 'E',
-    scope: {
-      self: '=value'
-    },
-    templateUrl: function(elem, attr){
-        console.log('action-field attr:', attr.type);
-        return 'partials/fields/default.html';
-    },
-    link: link
-  };
-}]);
+    return {
+      restrict: 'E',
+      scope: {
+        field: '=value'
+      },
+      link: link,
+      template: '<div ng-include="contentUrl"></div>'
+    };
+  }]);
