@@ -406,12 +406,14 @@ section.main {
   background-position: 1rem 0;
   height: 2rem;
   margin: 1rem 0 0 0;
+  width: 6rem;
 }
 @media screen and (min-width: 48.1em) {
   .zetta-logo {
     background-position: 0rem 0;
     background-size: auto 2rem;
     height: 2rem;
+    width: 5rem;
   }
 }
 /*
@@ -456,6 +458,7 @@ a.home {
   background-color: transparent;
   color: transparent;
   text-shadow: none;
+  float: left;
 }
 a.home:hover {
   background-color: transparent;
@@ -559,6 +562,7 @@ nav ul.closed li {
   }
   nav ul.closed,
   nav ul.open {
+    float: left;
     max-height: 2rem;
   }
   nav ul.closed li,
@@ -1009,6 +1013,24 @@ form.action-content label {
 }
 .muted .mute {
   color: #59595b !important;
+}
+h1 .back {
+  display: inline-block;
+  position: relative;
+  width: 1rem;
+  font-size: 1rem;
+  margin-left: -1rem;
+  color: #faa438;
+  cursor: pointer;
+}
+h1 .back:hover {
+  color: #d3990a;
+}
+@media screen and (min-width: 48.1em) {
+  h1 .back {
+    width: 2rem;
+    margin-left: -2rem;
+  }
 }
 #overview .row .vis {
   -webkit-box-sizing: border-box;

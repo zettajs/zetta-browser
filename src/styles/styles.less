@@ -118,12 +118,13 @@ section.main{
   background-position: 1rem 0;
   height: 2rem;
   margin: 1rem 0 0 0;
+  width: 6rem;
 
   @media @md {
     background-position: 0rem 0;
     background-size: auto 2rem;
     height: 2rem;
-
+    width: 5rem;
   }
 
 }
@@ -166,6 +167,7 @@ a {
       background-color: transparent;
       color: transparent;
       text-shadow: none;
+      float: left;
       &:hover {
         background-color: transparent;
         text-decoration: none;
@@ -229,7 +231,7 @@ nav {
     height: auto;
     max-height: 10rem;
     padding: 1rem;
-
+    
     &.closed {
       max-height: 0;
       padding: 0 1rem;
@@ -249,6 +251,7 @@ nav {
       padding: 0;
       background-color: transparent;
       &.closed, &.open {
+        float: left;
         max-height: 2rem;
         li {
           opacity: 1;

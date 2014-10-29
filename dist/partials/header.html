@@ -1,9 +1,9 @@
 <div ng-controller="HeaderCtrl">
   <header>  
     <nav>
-      <section class="pure-g" ng-init="dropdown='closed'">
-          <a href="/" class="home pure-u-1-2 pure-u-md-1-6"><div class="zetta-logo">zetta</div></a>
-          <div class="menu-toggle pure-u-1-2 hide-md {{dropdown}}" ng-show="breadcrumbs.length">
+      <section ng-init="dropdown='closed'">
+          <a href="/" class="home"><div class="zetta-logo">zetta</div></a>
+          <div class="menu-toggle hide-md {{dropdown}}" ng-show="breadcrumbs.length">
             <b class="open-icon" ng-click="dropdown='open'">rows</b>
             <b class="closed-icon" ng-click="dropdown='closed'">delete</b>
           </div>
