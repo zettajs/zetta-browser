@@ -88,12 +88,12 @@
   <div class="server device-group pure-g" ng-repeat="server in servers" ng-show="server.available && server.devices.length">
     <a name="{{ server.name + server.type | idSafe }}" id="{{ server.name + server.type | idSafe }}"></a>
 
-    <h2 class="name pure-u-5-6 pure-u-md-11-12">
+    <h2 class="name pure-u-2-3">
       <span ng-if="filter">
-        :devices
+        :devices <span class="active_query">where type="generator"</span>
       </span>
       <span ng-if="!filter">
-        <a ng-click="loadServer(server)">{{ server.name }}</a> : {{ server.type }}
+        <a ng-click="loadServer(server)">{{ server.name }}</a> : {{ server.type }} <span class="active_query">where type="generator"</span>
       </span>
     </h2>
     <div class="server_endpoint pure-u-1-3">
