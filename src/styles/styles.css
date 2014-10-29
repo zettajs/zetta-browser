@@ -1275,6 +1275,9 @@ select {
   box-sizing: border-box;
   border-bottom: none !important;
 }
+.device-meta .row {
+  border-top: none;
+}
 @media screen and (min-width: 48.1em) {
   .device-meta {
     width: 90%;
@@ -1311,6 +1314,9 @@ select {
   */
   border-bottom: 2px solid #59595b;
   padding: 1rem;
+}
+.device-meta form {
+  margin-bottom: 1.5rem;
 }
 .device-meta .meta-group {
   padding-left: 1rem;
@@ -1649,5 +1655,17 @@ select {
   color: #57C9E8;
   heigh: 1rem;
   margin-top: 2.6rem;
+}
+table.number_control {
+  width: 100%;
+}
+table.number_control td {
+  text-align: center;
+}
+table.number_control .range_ui input {
+  width: 80%;
+}
+table.number_control .number_ui input {
+  float: right;
 }
 /* Mixins  */

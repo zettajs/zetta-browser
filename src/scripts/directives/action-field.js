@@ -1,15 +1,4 @@
-angular.module('zetta')
-  .directive('includeReplace', function () {
-      return {
-          require: 'ngInclude',
-          restrict: 'A', /* optional */
-          link: function (scope, el, attrs) {
-              el.replaceWith(el.children());
-          }
-      };
-  })
-  .directive('actionField', [function() {
-
+angular.module('zetta').directive('actionField', [function() {
 
     function link(scope, element, attrs) {
       var template = scope.field.type;
@@ -31,6 +20,6 @@ angular.module('zetta')
         field: '=value'
       },
       link: link,
-      template: '<div ng-include="contentUrl"></div>'
+      template: '<div ng-include="contentUrl" ></div>'
     };
   }]);
