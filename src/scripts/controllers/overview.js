@@ -8,6 +8,7 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.showAdvancedQuery = false;
   $scope.activeQuery = null; 
   $scope.queryError = null;
+  $scope.queryFilters = null;
   
   $scope.pageNav = null;
   $scope.loading = true;
@@ -32,6 +33,10 @@ angular.module('zetta').controller('OverviewCtrl', [
     }
   });    
 
+  $scope.hideAdvancedQuery = function() {
+    $scope.showAdvancedQuery = false;
+  };
+
   $scope.clearQuery = function() {
     $scope.servers.forEach(function(server) {
       server.lastSearch = null;
@@ -50,6 +55,59 @@ angular.module('zetta').controller('OverviewCtrl', [
     }
 
     $location.search($state.params);
+  };
+
+
+  $scope.setQueryFilters = function(filters) {
+    $scope.queryFilters = filters;
+  }
+
+  $scope.submitAdvancedQuery = function() {
+    var expressions = [];
+    $scope.queryFilters.forEach(function(filter) {
+      var value = filter.value;
+      if (isNaN(Number(value))) {
+        value = JSON.stringify(value);
+      } else {
+        value = Number(value);
+      }
+
+      var comparisons = ['eq', 'gt', 'gte', 'lt', 'lte'];
+
+      if (comparisons.indexOf(filter.operator) !== -1) {
+        expressions.push(new CaqlAst.ComparisonPredicateNode(filter.field, filter.operator, value));
+      } else if (filter.operator === 'like') {
+        expressions.push(new CaqlAst.LikePredicateNode(filter.field, filter.value));
+      }
+    });
+
+    var filterNode;
+    if (expressions.length === 1) {
+      filterNode = new CaqlAst.FilterNode(expressions[0]);
+    } else {
+      var conjunction = expressions.reduce(function(prev, curr) {
+        if (!prev.left) {
+          prev.left = curr;
+          return prev;
+        } else if (!prev.right) {
+          prev.right = curr;
+          return prev;
+        } else {
+          return new CaqlAst.ConjunctionNode(prev, curr);
+        }
+      }, new CaqlAst.ConjunctionNode());
+
+      filterNode = new CaqlAst.FilterNode(conjunction);
+    }
+
+    var ast = new CaqlAst.SelectStatementNode(new CaqlAst.FieldListNode(), filterNode, null);
+
+    var decompiler = new CaqlDecompiler();
+    var ql = decompiler.decompile(ast);
+    console.log(ql);
+
+    $scope.query = ql;
+    $scope.submitQuery();
   };
 
   $scope.submitQuery = function() {
