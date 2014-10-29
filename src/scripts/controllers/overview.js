@@ -42,6 +42,13 @@ angular.module('zetta').controller('OverviewCtrl', [
     $scope.activeQuery = null;
     $scope.query = null;
     zettaShared.state.query = null;
+
+    delete $state.params.query;
+    if (!$state.params.filter) {
+      delete $state.params.filter;
+    }
+
+    $location.search($state.params);
   };
 
   $scope.submitQuery = function() {
@@ -89,6 +96,12 @@ angular.module('zetta').controller('OverviewCtrl', [
       server.devices.forEach(function(device) {
         device.available = false;
       });
+
+      $state.params.query = $scope.query;
+      if (!$state.params.filter) {
+        delete $state.params.filter;
+      }
+      $location.search($state.params);
 
       queryAction.execute(function(result) {
         server.lastSearch = result.config.url;
@@ -154,6 +167,12 @@ angular.module('zetta').controller('OverviewCtrl', [
       zettaShared.state.loadServers(rootUrl, function() {
         if ($state.params.filter) {
           filterServer();
+          console.log('state.params:', $state.params);
+          if ($state.params.query) {
+            console.log('has query');
+            $scope.query = $state.params.query;
+            $scope.submitQuery();
+          }
         } else {
           zettaShared.state.servers.forEach(function(server) {
             server.available = true;
@@ -164,10 +183,23 @@ angular.module('zetta').controller('OverviewCtrl', [
         }
 
         $scope.loading = false;
+
+        console.log('state.params:', $state.params);
+        if ($state.params.query) {
+          console.log('has query');
+          $scope.query = $state.params.query;
+          $scope.submitQuery();
+        }
       });
     } else {
       if ($state.params.filter) {
         filterServer();
+        console.log('state.params:', $state.params);
+        if ($state.params.query) {
+          console.log('has query');
+          $scope.query = $state.params.query;
+          $scope.submitQuery();
+        }
       } else {
         zettaShared.state.servers.forEach(function(server) {
           server.available = true;
@@ -177,6 +209,12 @@ angular.module('zetta').controller('OverviewCtrl', [
         })
       }
       $scope.loading = false;
+      console.log('state.params:', $state.params);
+      if ($state.params.query) {
+        console.log('has query');
+        $scope.query = $state.params.query;
+        $scope.submitQuery();
+      }
     }
   }
 

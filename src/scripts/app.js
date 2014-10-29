@@ -15,7 +15,7 @@ angular.module('zetta',
       controller: 'MainCtrl'
     })
     .state('overview', {
-      url: '/overview?url&filter',
+      url: '/overview?url&filter&query',
       templateUrl: 'partials/overview.html',
       controller: 'OverviewCtrl'
     })
@@ -27,5 +27,5 @@ angular.module('zetta',
   }
 ])
 .factory('appState', function() {
-  return { url: '', filter: null };
+  return { url: '', filter: null, query: null };
 });
