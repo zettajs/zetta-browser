@@ -37612,14 +37612,11 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
         
         if (!data.entities || !data.entities.length) {
           serverCount++;
-<<<<<<< HEAD
 
           if (serverCount === state.servers.length) {
             if (cb !== undefined && cb !== null) cb(state.servers);
           }
 
-=======
->>>>>>> 462cfe6f78879884094919fa7189580a2d95449f
           return;
         }
 
@@ -38230,11 +38227,8 @@ angular.module('zetta').controller('OverviewCtrl', [
   
   $scope.pageNav = null;
   $scope.loading = true;
-<<<<<<< HEAD
   $scope.hasDevices = false;
 
-=======
->>>>>>> 462cfe6f78879884094919fa7189580a2d95449f
   $scope.init = function() {
     loadServers();
   };
@@ -38289,12 +38283,9 @@ angular.module('zetta').controller('OverviewCtrl', [
         } else {
           zettaShared.state.servers.forEach(function(server) {
             server.available = true;
-<<<<<<< HEAD
             if (server.devices && !$scope.hasDevices) {
               $scope.hasDevices = true;
             }
-=======
->>>>>>> 462cfe6f78879884094919fa7189580a2d95449f
           })
         }
 
@@ -38306,12 +38297,9 @@ angular.module('zetta').controller('OverviewCtrl', [
       } else {
         zettaShared.state.servers.forEach(function(server) {
           server.available = true;
-<<<<<<< HEAD
           if (server.devices && !$scope.hasDevices) {
             $scope.hasDevices = true;
           }
-=======
->>>>>>> 462cfe6f78879884094919fa7189580a2d95449f
         })
       }
       $scope.loading = false;
