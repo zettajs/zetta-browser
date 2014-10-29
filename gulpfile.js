@@ -55,7 +55,7 @@ gulp.task('scripts', function() {
 gulp.task('styles',['css'], function() {
   gulp.src('./src/styles/styles.less')
     .pipe(less({
-      generateSourceMap: true, 
+      generateSourceMap: false, 
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
     .pipe(gulp.dest('./src/styles'));

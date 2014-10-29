@@ -2,13 +2,74 @@
 <section class="page_content pure-g" id="overview" ng-init="init()">
   <header class="pure-u-1">
     <section class="content" >
-      <h1>{{ filter || 'root' }}
-      <!-- add to select when done w/ dev:  -->
-      <select ng-model="pageNav" ng-show="!filter && servers.length > 1">
-        <option value="null">Jump to...</option>
-        <option ng-repeat="server in servers" ng-if="server.available && server.devices.length" value="{{ server.name + server.type | idSafe }}"> {{ server.name }} : {{ server.type }}</option>
-      </select>
-      </h1>
+      <b class="back" ng-if="!filter">previous</b>
+      <h1>{{ filter || 'root' }}</h1>
+      <form class="pure-form query">
+        <fieldset class="main_query">
+          <div class="pure-g">
+            <div class="search_icon pure-u-1-12"><b>search</b></div>
+            <div class="pure-u-11-12 pure-g">
+              <div class="input pure-u-15-24">
+              <input class="pure-input-1"type="text" id="query_form" name="query" placeholder="CaQL Device Query" />
+              </div>
+              <div class="dropdown pure-u-1-24">
+                <button class="icon">dropdown</button>
+              </div>
+              <div class="submit pure-u-1-4">
+                <button class="pure-button">Submit</button>
+                <a href="#">clear</a>
+              </div>
+            </div>
+          </div> 
+        </fieldset>
+        
+        <fieldset class="advanced_query">
+        
+          <div class="header pure-g">
+            <div class="pure-u-1-12"></div>
+            <div class="pure-u-11-12 pure-g">
+              <div class="pure-u-15-24">
+                <strong>CaQL Device query</strong>
+                <a href="https://github.com/kevinswiber/caql#calypso-query-language-specification">more info</a> 
+              </div>
+              <div class="pure-u-1-24 dismiss">
+                <button class="icon">delete</button>
+              </div>
+              
+            </div>
+          </div>
+          
+          <div class="query_set pure-g">
+            <div class="pure-u-1-12"></div>
+            <div class="pure-u-11-12 pure-g">
+              <label class="pure-u-1-4">property</label>
+              <input class="pure-u-5-12" type="text" name="property" placeholder="type, name, prop.name..."/>
+              <br/><label class="pure-u-1-4">comparison</label>
+              <select class="pure-u-5-12" name="comparison">
+                <option value="=" selected>=</option>
+                <option value="contains">contains</option>
+                <option value="like">like</option>
+                <option value="not like">not like</option>
+              </select>
+              <br/><label class="pure-u-1-4">value</label><input class="pure-u-5-12" type="text" name="value" placeholder="% wildcard matches 0 or more characters"/>
+              <br/><p class="pure-u-1-4 join active">
+                <!-- adding or removing .active will change styles. disable button when .active -->
+                <button class="icon">plus</button> <a href="#">remove</a>
+              </p>
+            </div>
+          </div>
+          
+          <!-- this structure is in lieu of doing all the math by hand and hard-coding -->
+          <div class="pure-g">
+            <div class="pure-u-1-12"></div>
+            <div class="pure-u-11-12 pure-g">
+              <div class="pure-u-2-3"></div>
+              <div class="pure-u-1-4"><button class="pure-button">Submit</button></div>
+            </div>
+          </div>
+    
+        </fieldset>
+      </form>
     </section>
   </header>
   
@@ -24,15 +85,17 @@
   <div class="server device-group pure-g" ng-repeat="server in servers" ng-show="server.available && server.devices.length">
     <a name="{{ server.name + server.type | idSafe }}" id="{{ server.name + server.type | idSafe }}"></a>
 
-    <h2 class="name pure-u-5-6 pure-u-md-11-12">
+    <h2 class="name pure-u-2-3">
       <span ng-if="filter">
-        :devices
+        :devices <span class="active_query">where type="generator"</span>
       </span>
       <span ng-if="!filter">
-        <a ng-click="loadServer(server)">{{ server.name }}</a> : {{ server.type }}
+        <a ng-click="loadServer(server)">{{ server.name }}</a> : {{ server.type }} <span class="active_query">where type="generator"</span>
       </span>
     </h2>
-    
+    <div class="server_endpoint pure-u-1-3" style="text-align: right;">
+      <input type="text" value="server endpoint" readonly/><b>checkclipboard</b>
+    </div>
     <section class="devices pure-u-1">
       <section class="device pure-u-1" ng-repeat="device in server.devices">
         <div class="row main pure-g">
