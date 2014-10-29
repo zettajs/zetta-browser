@@ -1436,6 +1436,16 @@ select {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  padding-top: 1.5rem;
+  padding-left: 3%;
+}
+.server_endpoint .copy_group {
+  margin-left: 1rem;
+}
+.server_endpoint input {
+  font-size: .8rem;
+  font-family: "fira-mono", courier, monospace;
+  padding: .25rem;
 }
 /* Device Show */
 .focus {
