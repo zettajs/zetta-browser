@@ -4,6 +4,8 @@
     <section class="content" >
       <b class="back" ng-if="!filter">previous</b>
       <h1>{{ filter || 'root' }}</h1>
+      
+      <!-- Queries -->
       <form class="pure-form query">
         <fieldset class="main_query">
           <div class="pure-g">
@@ -93,8 +95,10 @@
         <a ng-click="loadServer(server)">{{ server.name }}</a> : {{ server.type }} <span class="active_query">where type="generator"</span>
       </span>
     </h2>
-    <div class="server_endpoint pure-u-1-3" style="text-align: right;">
-      <input type="text" value="server endpoint" readonly/><b>checkclipboard</b>
+    <div class="server_endpoint pure-u-1-3">
+      <form class="pure-form copy_group">
+        <input class="pure-input-1" type="text" value="server endpoint with text that definitely overflows" readonly/>
+      </form>
     </div>
     <section class="devices pure-u-1">
       <section class="device pure-u-1" ng-repeat="device in server.devices">
