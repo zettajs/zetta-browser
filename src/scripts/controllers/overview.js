@@ -349,6 +349,9 @@ angular.module('zetta').controller('OverviewCtrl', [
 
   $scope.loadServer = function(server) {
     $state.params.filter = server.name;
+    if (!$state.params.query) {
+      delete $state.params.query;
+    }
     $location.search($state.params);
     loadServers();
     $window.scrollTo(0, 0);
