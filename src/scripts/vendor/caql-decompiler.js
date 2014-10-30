@@ -91,11 +91,18 @@ CaqlDecompiler.prototype.visitConjunction = function(conjunction) {
   if (conjunction.isNegated) {
     this.filter.push('not');
   }
-  this.filter.push('(');
+  //this.filter.push('(');
   conjunction.left.accept(this);
   this.filter.push('and');
-  conjunction.right.accept(this);
-  this.filter.push(')');
+
+  if (conjunction.right.type === 'Disjunction') {
+    this.filter.push('(');
+    conjunction.right.accept(this);
+    this.filter.push(')');
+  } else {
+    conjunction.right.accept(this);
+  }
+  //this.filter.push(')');
 };
 
 CaqlDecompiler.prototype.visitDisjunction = function(disjunction) {
@@ -104,9 +111,16 @@ CaqlDecompiler.prototype.visitDisjunction = function(disjunction) {
   }
   this.filter.push('(');
   disjunction.left.accept(this);
-  this.filter.push('or');
-  disjunction.right.accept(this);
-  this.filter.push(')');
+  //this.filter.push('or');
+  //disjunction.right.accept(this);
+  //this.filter.push(')');
+  if (disjunction.right.type === 'Disjunction') {
+    this.filter.push('(');
+    disjunction.right.accept(this);
+    this.filter.push(')');
+  } else {
+    disjunction.right.accept(this);
+  }
 };
 
 CaqlDecompiler.prototype.visitLikePredicate = function(like) {
