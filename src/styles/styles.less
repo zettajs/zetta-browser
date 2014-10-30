@@ -136,12 +136,13 @@ h1 {
   background-position: 1rem 0;
   height: 2rem;
   margin: 1rem 0 0 0;
+  width: 6rem;
 
   @media @md {
     background-position: 0rem 0;
     background-size: auto 2rem;
     height: 2rem;
-
+    width: 5rem;
   }
 
 }
@@ -184,6 +185,7 @@ a {
       background-color: transparent;
       color: transparent;
       text-shadow: none;
+      float: left;
       &:hover {
         background-color: transparent;
         text-decoration: none;
@@ -247,7 +249,7 @@ nav {
     height: auto;
     max-height: 10rem;
     padding: 1rem;
-
+    
     &.closed {
       max-height: 0;
       padding: 0 1rem;
@@ -267,6 +269,7 @@ nav {
       padding: 0;
       background-color: transparent;
       &.closed, &.open {
+        float: left;
         max-height: 2rem;
         li {
           opacity: 1;
@@ -584,6 +587,11 @@ header nav, #wampum {
     overflow: hidden;
 
   }
+  .actions fields {
+    margin-bottom: 1rem;
+  }
+  
+  
 }
 .serverError {color: @orange;}
 .front-door header { padding-bottom: 1rem; }
@@ -756,6 +764,14 @@ footer {
 
   }
 }
+
+table.number_control {
+  width: 100%;
+  td {text-align: center;}
+  .range_ui input{width: 80%;}
+  .number_ui input {float: right;}
+}
+
 
 /* Mixins  */
 .heading-fonts() {

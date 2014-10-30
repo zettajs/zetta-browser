@@ -97,7 +97,7 @@ gulp.task('move', function() {
   gulp.src(['./src/favicon.ico']).pipe(gulp.dest('./dist'));
   gulp.src(['./src/index.html']).pipe(gulp.dest('./dist'));
   gulp.src(['./src/images/*.*']).pipe(gulp.dest('./dist/images'));
-  gulp.src(['./src/partials/*.*']).pipe(gulp.dest('./dist/partials'));
+  gulp.src(['./src/partials/**']).pipe(gulp.dest('./dist/partials'));
   gulp.src('./src/styles/fonts/*.*').pipe(gulp.dest('./dist/fonts'));
 });
 
@@ -110,7 +110,7 @@ gulp.task('default', ['scripts', 'styles', 'move', 'serve'], function(){
   //gulp.watch(zettaScripts, ['jshint']);
   gulp.watch(scripts, ['scripts']);
   gulp.watch('./src/styles/*.*', ['styles']);
-  gulp.watch(['./src/index.html', './src/images/*.*', './src/partials/*.*'], ['move']);
+  gulp.watch(['./src/index.html', './src/images/*.*', './src/partials/**'], ['move']);
 
 });
 

@@ -2,28 +2,14 @@
 <form class="pure-form pure-form-stacked">
   <fieldset>
     <legend># {{ action.name }}</legend>
-
+    
     <!-- Handle single button and single input -->
     <div ng-if="action.renderOptionsAsButton || action.renderOptionsAsMultipleInputs">
 
       <div ng-repeat="field in action.inputFields">
-        <div class="fields" ng-switch="field.type">
-
-          <!-- Handle dropdowns -->
-          <select ng-switch-when="radio" ng-model="field.value" ng-options="option.value as (option.text || option.value) for option in field.options">
-            <option value="">-- choose {{field.name}} --</option>
-          </select>
-
-          <!-- Handle range -->
-          <div ng-switch-when="range">
-            <font class="min"> {{ field.min }} </font>
-            <input ng-model="field.value" id="{{ action.name + field.name }}" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}"  type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
-            <font class="max"> {{ field.max }} </font>
-            <input ng-model="field.value" type="number" min="{{ field.min }}" max="{{ field.max }}" step="{{ field.step }}" value="{{ field.value }}" placeholder="{{ field.value }}"  />
-          </div>
-
-          <!-- Handle other input types -->
-          <input ng-switch-default ng-model="field.value" class="pure-u-1" id="{{ action.name + field.name }}" placeholder="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" value="{{ field.value }}" />
+        <div class="fields" ng-if="!field.isHidden">
+<label ng-if="!field.isHidden && action.renderOptionsAsMultipleInputs" for="{{field.name}}">{{field.name}}</label>
+          <action-field value="field"></action-field>
         </div>
       </div>
 

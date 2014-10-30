@@ -424,12 +424,14 @@ h1 .back:hover {
   background-position: 1rem 0;
   height: 2rem;
   margin: 1rem 0 0 0;
+  width: 6rem;
 }
 @media screen and (min-width: 48.1em) {
   .zetta-logo {
     background-position: 0rem 0;
     background-size: auto 2rem;
     height: 2rem;
+    width: 5rem;
   }
 }
 /*
@@ -474,6 +476,7 @@ a.home {
   background-color: transparent;
   color: transparent;
   text-shadow: none;
+  float: left;
 }
 a.home:hover {
   background-color: transparent;
@@ -577,6 +580,7 @@ nav ul.closed li {
   }
   nav ul.closed,
   nav ul.open {
+    float: left;
     max-height: 2rem;
   }
   nav ul.closed li,
@@ -925,6 +929,9 @@ header nav,
 #device .properties {
   overflow: hidden;
 }
+#device .actions fields {
+  margin-bottom: 1rem;
+}
 .serverError {
   color: #ff4300;
 }
@@ -1057,6 +1064,24 @@ form.action-content label {
 }
 .muted .mute {
   color: #59595b !important;
+}
+h1 .back {
+  display: inline-block;
+  position: relative;
+  width: 1rem;
+  font-size: 1rem;
+  margin-left: -1rem;
+  color: #faa438;
+  cursor: pointer;
+}
+h1 .back:hover {
+  color: #d3990a;
+}
+@media screen and (min-width: 48.1em) {
+  h1 .back {
+    width: 2rem;
+    margin-left: -2rem;
+  }
 }
 #overview .row .vis {
   -webkit-box-sizing: border-box;
@@ -1301,6 +1326,9 @@ select {
   box-sizing: border-box;
   border-bottom: none !important;
 }
+.device-meta .row {
+  border-top: none;
+}
 @media screen and (min-width: 48.1em) {
   .device-meta {
     width: 90%;
@@ -1321,11 +1349,6 @@ select {
 .device-meta h2.name span {
   font-weight: 100;
 }
-@media screen and (min-width: 48.1em) {
-  .device-meta h2.name {
-    padding-left: 1rem;
-  }
-}
 .device-meta .content {
   background-color: #fff;
   border-top: 2px solid #59595b;
@@ -1337,6 +1360,9 @@ select {
   */
   border-bottom: 2px solid #59595b;
   padding: 1rem;
+}
+.device-meta form {
+  margin-bottom: 1.5rem;
 }
 .device-meta .meta-group {
   padding-left: 1rem;
@@ -1354,6 +1380,9 @@ select {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding-right: 1rem;
+}
+.device-meta .actions .fields {
+  margin-bottom: 1rem;
 }
 .device-meta .api .content.request,
 .device-meta .api .content.response {
@@ -1688,5 +1717,17 @@ select {
   color: #57C9E8;
   heigh: 1rem;
   margin-top: 2.6rem;
+}
+table.number_control {
+  width: 100%;
+}
+table.number_control td {
+  text-align: center;
+}
+table.number_control .range_ui input {
+  width: 80%;
+}
+table.number_control .number_ui input {
+  float: right;
 }
 /* Mixins  */

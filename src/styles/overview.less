@@ -67,6 +67,26 @@ form.action-content label{
 .muted .mute { color: @apigee-grey !important; }
 
 
+h1 {
+  .back {
+    display : inline-block;
+    position: relative;
+    width: 1rem;
+    font-size: 1rem;
+    margin-left: -1rem;
+    color: @yellow;
+    
+    cursor: pointer;
+    &:hover {
+      color: @yellow-bg
+    }
+    
+    @media @md {
+    width: 2rem; margin-left: -2rem;
+    }
+  }
+}
+
 #overview .row .vis {
   .border-box();
   
@@ -192,6 +212,7 @@ form.action-content label{
       text-align: right; 
       margin-top: .5rem;
       @media @md {text-align: left; margin-top: 0;}
+      
     }
     
     .vis {
@@ -260,12 +281,12 @@ select {
 
 
 .device-meta {
+  .row {border-top: none;}
   .centered();
   .border-box();
   h2.name {
     .border-box();
     .serverHeading(); text-transform: uppercase; 
-    @media @md{padding-left: 1rem;}
   }
   border-bottom: none !important;
   .content {
@@ -275,7 +296,10 @@ select {
     padding: 1rem;
 
   }
-
+  form {
+    margin-bottom: 1.5rem;
+  
+  }
   .meta-group {
     .smallPadding();
     
@@ -290,7 +314,7 @@ select {
      
     
   }
-  
+  .actions .fields {margin-bottom: 1rem;}
   .api .content.request, .api .content.response {
     font-size: .9rem;
     padding: 0;
