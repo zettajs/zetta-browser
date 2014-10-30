@@ -444,7 +444,6 @@ angular.module('zetta').controller('OverviewCtrl', [
     if (characteristic.muted) {
       $scope.unmute(characteristic);
     }
-
     if ($scope.pinned.indexOf(characteristic) === -1) {
       $scope.pinned.push(characteristic);
       setTimeout(function() {
@@ -463,6 +462,7 @@ angular.module('zetta').controller('OverviewCtrl', [
       characteristic.pinOpen = false;
       setTimeout(function() {
         $scope.pinned.splice(index, 1);
+        $scope.$apply();
       }, 1);
     }
   };
