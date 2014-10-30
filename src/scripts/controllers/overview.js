@@ -226,6 +226,9 @@ angular.module('zetta').controller('OverviewCtrl', [
         server.lastSearch = result.config.url;
         var data = result.data;
         if (!data.entities.length) {
+          if (serverIndex === $scope.servers.length - 1) {
+            $scope.queryInProgress = false;
+          }
           return;
         }
         data.entities.forEach(function(entity) {
