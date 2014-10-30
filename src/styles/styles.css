@@ -825,6 +825,14 @@ nav .zetta-logo {
   opacity: 0;
   -webkit-animation: blink 1s .2s ease infinite;
 }
+.query .server-loading {
+  width: initial;
+  padding-top: .5rem;
+}
+.query button.server-loading {
+  padding-top: .5rem;
+  margin: 0 1rem !important;
+}
 .pairing + .pairing {
   margin-top: 3rem;
 }

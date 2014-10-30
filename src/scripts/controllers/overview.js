@@ -297,7 +297,6 @@ angular.module('zetta').controller('OverviewCtrl', [
       zettaShared.state.loadServers(rootUrl, function() {
         if ($state.params.filter) {
           filterServer();
-          console.log('state.params:', $state.params);
           if ($state.params.query) {
             console.log('has query');
             $scope.query = $state.params.query;
@@ -336,6 +335,10 @@ angular.module('zetta').controller('OverviewCtrl', [
           if (server.devices && !$scope.hasDevices) {
             $scope.hasDevices = true;
           }
+
+          server.devices.forEach(function(device) {
+            device.available = true;
+          });
         })
       }
       $scope.loading = false;
@@ -350,6 +353,9 @@ angular.module('zetta').controller('OverviewCtrl', [
 
   $scope.loadServer = function(server) {
     $state.params.filter = server.name;
+    if (!$state.params.query) {
+      delete $state.params.query;
+    }
     $location.search($state.params);
     loadServers();
     $window.scrollTo(0, 0);
@@ -361,6 +367,10 @@ angular.module('zetta').controller('OverviewCtrl', [
     var height = $('.dnastrip canvas').height();
 
     $scope.servers.forEach(function(server) {
+      if (server.devices && !$scope.hasDevices) {
+        $scope.hasDevices = true;
+      }
+
       if (server.name !== $state.params.filter) {
         server.available = false;
       } else {
