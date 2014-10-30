@@ -12,10 +12,10 @@
             <div class="search_icon pure-u-1-12"><b>search</b></div>
             <div class="pure-u-11-12 pure-g">
               <div class="input pure-u-15-24">
-              <input class="pure-input-1"type="text" id="query_form" ng-model="query" name="query" placeholder="CaQL Device Query" />
+              <input class="pure-input-1"type="text" id="query_form" ng-model="query" name="query" ng-focus="hideAdvancedQuery()" placeholder="CaQL Device Query" />
               </div>
               <div class="dropdown pure-u-1-24">
-                <a class="icon" ng-click="showAdvancedQuery = !showAdvancedQuery">dropdown</a>
+                <a class="icon" ng-click="showAdvancedQuery()" ng-show="!isAdvancedQueryVisible">dropdown</a>
               </div>
               <div class="submit pure-u-1-4">
                 <button class="pure-button" ng-click="submitQuery()">Submit</button>
@@ -27,7 +27,7 @@
         </fieldset>
         
         <zetta-advanced-query
-          ng-show="showAdvancedQuery"
+          ng-show="isAdvancedQueryVisible"
           submit="submitAdvancedQuery()"
           current="queryFilters"
           set-query-filters="setQueryFilters"

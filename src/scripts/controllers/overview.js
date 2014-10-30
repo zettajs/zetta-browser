@@ -17,6 +17,7 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.showAdvancedQuery = false;
   $scope.activeQuery = null; 
   $scope.queryError = null;
+  $scope.isAdvancedQueryVisible = false;
   $scope.queryFilters = [$scope.emptyFilter()];
   
   $scope.pageNav = null;
@@ -45,7 +46,11 @@ angular.module('zetta').controller('OverviewCtrl', [
   });
 
   $scope.hideAdvancedQuery = function() {
-    $scope.showAdvancedQuery = false;
+    $scope.isAdvancedQueryVisible = false;
+  };
+
+  $scope.showAdvancedQuery = function() {
+    $scope.isAdvancedQueryVisible = true;
   };
 
   $scope.clearQuery = function() {
