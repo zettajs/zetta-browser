@@ -69,6 +69,7 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
     }
 
     var device = {
+      available: true,
       properties: deviceData.properties,
       body: deviceData
     };
@@ -221,6 +222,16 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
           }
         });
         
+        server.actions = data.actions.map(function(action) {
+          if (!action.execute) {
+            action.execute = function(cb) {
+              serverExecute(action, cb);
+            }
+          }
+
+          return action;
+        });
+
         if (!data.entities || !data.entities.length) {
           serverCount++;
 
@@ -312,6 +323,12 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
           });
         });
       });
+    });
+  };
+
+  var serverExecute = function(action, cb) {
+    navigator.execute(action).then(function(result) {
+      cb(result);
     });
   };
 
@@ -414,6 +431,8 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
   state.buildDeviceFromData = buildDeviceFromData;
   state.loadServers = loadServers;
   state.execute = execute;
+  state.query = null;
+
 
   return { state: state };
 }]);

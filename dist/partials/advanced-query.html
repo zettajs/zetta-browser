@@ -1,0 +1,51 @@
+<form class="pure-form query">
+  <fieldset class="advanced_query">
+
+    <div class="header pure-g">
+      <div class="pure-u-1-12"></div>
+      <div class="pure-u-11-12 pure-g">
+        <div class="pure-u-15-24">
+          <strong>CaQL Device query</strong>
+          <a href="https://github.com/kevinswiber/caql#calypso-query-language-specification" target="_blank">more info</a> 
+        </div>
+        <div class="pure-u-1-24 dismiss">
+          <button type="button" class="icon" ng-click="dismiss()">delete</button>
+        </div>
+        
+      </div>
+    </div>
+    
+    <div class="query_set pure-g" ng-repeat="filter in filters">
+      <div class="pure-u-1-12"></div>
+      <div class="pure-u-11-12 pure-g">
+        <label class="pure-u-1-4">property</label>
+        <input class="pure-u-5-12" type="text" name="property" ng-model="filter.field" placeholder="type, name, prop.name..."/>
+        <br/><label class="pure-u-1-4">comparison</label>
+        <select class="pure-u-5-12" name="comparison" ng-model="filter.operator">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+          <option value="gte">&gt;=</option>
+          <option value="lte">&lt;=</option>
+          <option value="like">like</option>
+        </select>
+        <br/><label class="pure-u-1-4">value</label><input class="pure-u-5-12" type="text" name="value" ng-model="filter.value" placeholder="% wildcard matches 0 or more characters"/>
+        <br/><p class="pure-u-1-4 join" ng-class="{ active: !$last }">
+          <!-- adding or removing .active will change styles. disable button when .active -->
+          <button type="button" class="icon" ng-click="addNewFilter()" ng-disabled="!$last">plus</button>
+          <a ng-click="removeFilter($index+1)" >remove</a>
+        </p>
+      </div>
+    </div>
+    
+    <!-- this structure is in lieu of doing all the math by hand and hard-coding -->
+    <div class="pure-g">
+      <div class="pure-u-1-12"></div>
+      <div class="pure-u-11-12 pure-g">
+        <div class="pure-u-2-3"></div>
+        <div class="pure-u-1-4"><button class="pure-button" ng-click="performQuery()">Submit</button></div>
+      </div>
+    </div>
+
+  </fieldset>
+</form>
