@@ -1,11 +1,33 @@
-.device-group, .device-meta {
+.device-meta {
   border-bottom: 2px solid @apigee-gray;
-  h2 {
-    .serverHeading();
-  }
+  h2 { .serverHeading(); }
 }
+.device-group{ 
+  h2 { .serverHeading(); } 
+  .devices {border-bottom: 2px solid @apigee-gray;}
+  
+  .device_count {
+    font-size: .8rem;
+    padding-top: .5rem;
+  }
+  
+}
+
 .device-group {
-  h2 {padding-left: 1rem; @media @md {padding-left: 0;}}
+  h2 {
+    padding-left: 1rem; 
+    @media @md {padding-left: 0;}
+    
+    .active_query  {
+      .mono();
+      background-color: white;
+      padding: .25rem .5rem;
+      margin-left: .5rem;
+      font-size: .8rem;
+      border-radius: 3px;
+    }
+    
+  }
   .centered();
 }
 
