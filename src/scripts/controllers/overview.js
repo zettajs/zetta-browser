@@ -214,6 +214,8 @@ angular.module('zetta').controller('OverviewCtrl', [
       $scope.query = 'where ' + $scope.query;
     }
 
+    $scope.isAdvancedQueryVisible = false;
+
     try {
       parsed = caql.parse($scope.query);
       $scope.queryError = null;
