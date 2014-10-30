@@ -7,7 +7,7 @@
 
       
       <!-- Queries -->
-      <form class="pure-form query">
+      <form class="pure-form query" ng-submit="checkAndSubmitQuery()">
         <fieldset class="main_query">
           <div class="pure-g">
             <div class="search_icon pure-u-1-12"><b>search</b></div>
@@ -20,7 +20,7 @@
                 <button type="button" class="icon" ng-show="!isAdvancedQueryVisible">dropdown</button>
               </div>
               <div class="submit pure-u-1-4">
-                <button ng-show="!queryInProgress" class="pure-button" ng-click="submitQuery()">Submit</button>
+                <button ng-show="!queryInProgress" class="pure-button">Submit</button>
                 <button ng-show="queryInProgress" class="server-loading pure-button"><b>stop</b><b>stop</b><b>stop</b></button>
                 <a ng-click="clearQuery()">clear</a>
               </div>

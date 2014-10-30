@@ -165,19 +165,16 @@ angular.module('zetta').controller('OverviewCtrl', [
 
     var decompiler = new CaqlDecompiler();
     var ql = decompiler.decompile(ast);
-    console.log(ql);
 
     $scope.query = ql;
     $scope.submitQuery();
   };
 
   $scope.updateQueryFilters = function(parsed) {
-      console.log('parsed:', parsed);
       var filters = [];
 
       var cancel = false;
       var next = function(node) {
-        console.log(node.type);
         if (node.type === 'Disjunction') {
           cancel = true;
           return;
@@ -197,8 +194,15 @@ angular.module('zetta').controller('OverviewCtrl', [
 
       next(parsed.filterNode.expression);
 
-      console.log('filters:', filters);
       $scope.queryFilters = cancel ? [$scope.emptyFilter()] : filters;
+  };
+
+  $scope.checkAndSubmitQuery = function() {
+    if ($scope.isAdvancedQueryVisible) {
+      $scope.submitAdvancedQuery();
+    } else {
+      $scope.submitQuery();
+    }
   };
 
   $scope.submitQuery = function() {
@@ -238,7 +242,6 @@ angular.module('zetta').controller('OverviewCtrl', [
       }
 
       var queryAction = queryActions[0];
-      console.log(queryAction);
 
       var qlFields = queryAction.fields.filter(function(field) {
         return field.name === 'ql';
@@ -338,7 +341,6 @@ angular.module('zetta').controller('OverviewCtrl', [
         if ($state.params.filter) {
           filterServer();
           if ($state.params.query) {
-            console.log('has query');
             $scope.query = $state.params.query;
             $scope.submitQuery();
           }
