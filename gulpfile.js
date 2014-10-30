@@ -115,3 +115,9 @@ gulp.task('default', ['scripts', 'styles', 'move', 'serve'], function(){
 });
 
 
+gulp.task('heroku:production', ['scripts', 'styles', 'move'], function(){
+  //gulp.watch(zettaScripts, ['jshint']);
+  //gulp.watch(scripts, ['scripts']);
+  //gulp.watch('./src/styles/*.*', ['styles']);
+  //gulp.watch(['./src/index.html', './src/images/*.*', './src/partials/*.*'], ['move']);
+});
