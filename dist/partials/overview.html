@@ -6,7 +6,7 @@
       <h1>{{ filter || 'root' }}</h1>
       
       <!-- Queries -->
-      <form class="pure-form query" ng-submit="submitQuery()">
+      <form class="pure-form query">
         <fieldset class="main_query">
           <div class="pure-g">
             <div class="search_icon pure-u-1-12"><b>search</b></div>
@@ -15,7 +15,7 @@
               <input class="pure-input-1"type="text" id="query_form" ng-model="query" name="query" placeholder="CaQL Device Query" />
               </div>
               <div class="dropdown pure-u-1-24">
-                <button class="icon" ng-click="showAdvancedQuery = !showAdvancedQuery">dropdown</button>
+                <a class="icon" ng-click="showAdvancedQuery = !showAdvancedQuery">dropdown</a>
               </div>
               <div class="submit pure-u-1-4">
                 <button class="pure-button" ng-click="submitQuery()">Submit</button>
