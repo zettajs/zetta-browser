@@ -397,6 +397,24 @@ section.main {
     margin: 0 auto !important;
   }
 }
+h1 .back {
+  display: inline-block;
+  position: relative;
+  width: 1rem;
+  font-size: 1rem;
+  margin-left: -1rem;
+  color: #faa438;
+  cursor: pointer;
+}
+h1 .back:hover {
+  color: #d3990a;
+}
+@media screen and (min-width: 48.1em) {
+  h1 .back {
+    width: 2rem;
+    margin-left: -2rem;
+  }
+}
 .zetta-logo {
   background: url('../images/zetta-logo.png');
   background-image: url('../images/zetta-logo.svg'), none;
@@ -942,11 +960,9 @@ footer .zetta-logo {
 footer a {
   text-shadow: none;
 }
-.device-group,
 .device-meta {
   border-bottom: 2px solid #59595b;
 }
-.device-group h2,
 .device-meta h2 {
   font-size: 1rem;
   line-height: 1rem;
@@ -954,9 +970,25 @@ footer a {
   padding: 2rem 0 1rem 0;
   font-family: "jaf-facitweb", Helvetica, Arial, sans-serif !important;
 }
-.device-group h2 span,
 .device-meta h2 span {
   font-weight: 100;
+}
+.device-group h2 {
+  font-size: 1rem;
+  line-height: 1rem;
+  margin: 0;
+  padding: 2rem 0 1rem 0;
+  font-family: "jaf-facitweb", Helvetica, Arial, sans-serif !important;
+}
+.device-group h2 span {
+  font-weight: 100;
+}
+.device-group .devices {
+  border-bottom: 2px solid #59595b;
+}
+.device-group .device_count {
+  font-size: .8rem;
+  padding-top: .5rem;
 }
 .device-group {
   width: 100%;
@@ -968,6 +1000,14 @@ footer a {
   .device-group h2 {
     padding-left: 0;
   }
+}
+.device-group h2 .active_query {
+  font-family: "fira-mono", courier, monospace;
+  background-color: white;
+  padding: .25rem .5rem;
+  margin-left: .5rem;
+  font-size: .8rem;
+  border-radius: 3px;
 }
 @media screen and (min-width: 48.1em) {
   .device-group {
@@ -1439,6 +1479,19 @@ select {
 }
 .query .advanced_query .header .dismiss {
   text-align: center;
+}
+.query .query_error {
+  color: #ff4300;
+}
+.query .query_error .bg {
+  background-color: rgba(255, 67, 0, 0.08);
+}
+.query .query_error .bg.error {
+  padding-right: 1rem;
+}
+.query .query_error .bg.symbol {
+  text-align: center;
+  padding-top: 1rem;
 }
 .server_endpoint {
   -webkit-box-sizing: border-box;

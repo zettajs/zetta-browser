@@ -24,7 +24,14 @@
               </div>
             </div>
           </div> 
-          <div><pre>{{queryError}}</pre></div>
+          <div class="query_error pure-g" ng-if="queryError">
+              <div class="bg symbol pure-u-1-12"><b>ban</b></div>
+              <div class="pure-u-11-12">
+                <div class="bg error pure-u-2-3">
+                  <pre>{{queryError}}</pre>
+                </div>
+              </div>
+          </div>
         </fieldset>
       </form>
         

@@ -393,6 +393,15 @@ select {
     a {margin-left: 1rem;}
     .dismiss {text-align: center;}
   }
+  
+  .query_error{
+    color: @apigee-orange;
+    .bg {
+      background-color: fade(@apigee-orange, 8%);
+      &.error {padding-right: 1rem;}
+      &.symbol {text-align: center; padding-top: 1rem;}
+    }
+  }
 }
 
 .server_endpoint {
