@@ -15,8 +15,6 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.hasDevices = false;
 
   $scope.init = function() {
-    console.log('scope.query:', $scope.query);
-    console.log('shared.query:', zettaShared.state.query);
     loadServers();
   };
 
@@ -47,6 +45,7 @@ angular.module('zetta').controller('OverviewCtrl', [
 
     $scope.activeQuery = null;
     $scope.query = null;
+    $scope.queryFilters = null;
     zettaShared.state.query = null;
 
     delete $state.params.query;
@@ -112,9 +111,10 @@ angular.module('zetta').controller('OverviewCtrl', [
 
   $scope.submitQuery = function() {
     var isValid = false;
+    var parsed;
 
     try {
-      caql.parse($scope.query);
+      parsed = caql.parse($scope.query);
       $scope.queryError = null;
       $scope.activeQuery = $scope.query;
       isValid = true;
@@ -126,6 +126,37 @@ angular.module('zetta').controller('OverviewCtrl', [
 
     if (!isValid || !$scope.servers.length) {
       return;
+    }
+
+    if (!$scope.queryFilters || !$scope.queryFilters.length) {
+      console.log('parsed:', parsed);
+      var filters = [];
+
+      var cancel = false;
+      var next = function(node) {
+        if (node.type === 'Disjunction') {
+          cancel = true;
+          return;
+        }
+
+        if (node.type === 'Conjunction') {
+          next(node.left);
+          next(node.right);
+        } else {
+          filters.push({
+            field: node.field,
+            operator: node.operator,
+            value: node.value
+          });
+        }
+      };
+
+      next(parsed.filterNode.expression);
+
+      console.log('filters:', filters);
+      if (!cancel) {
+        $scope.queryFilters = filters;
+      }
     }
 
     $scope.servers.forEach(function(server) {
