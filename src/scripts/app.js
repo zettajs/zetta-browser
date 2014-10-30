@@ -15,7 +15,7 @@ angular.module('zetta',
       controller: 'MainCtrl'
     })
     .state('overview', {
-      url: '/overview?url&filter&query',
+      url: '/overview?url&filter&query&expandQuery',
       templateUrl: 'partials/overview.html',
       controller: 'OverviewCtrl'
     })

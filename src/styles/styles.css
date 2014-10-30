@@ -397,6 +397,24 @@ section.main {
     margin: 0 auto !important;
   }
 }
+h1 .back {
+  display: inline-block;
+  position: relative;
+  width: 1rem;
+  font-size: 1rem;
+  margin-left: -1rem;
+  color: #faa438;
+  cursor: pointer;
+}
+h1 .back:hover {
+  color: #d3990a;
+}
+@media screen and (min-width: 48.1em) {
+  h1 .back {
+    width: 2rem;
+    margin-left: -2rem;
+  }
+}
 .zetta-logo {
   background: url('../images/zetta-logo.png');
   background-image: url('../images/zetta-logo.svg'), none;

@@ -31,6 +31,10 @@ angular.module('zetta').controller('OverviewCtrl', [
       $scope.query = null;
       zettaShared.state.query = null;
     }
+
+    if ($state.params.expandQuery) {
+      $scope.showAdvancedQuery();
+    }
   };
 
   $scope.$watch('pageNav', function() {
@@ -48,14 +52,33 @@ angular.module('zetta').controller('OverviewCtrl', [
 
   $scope.hideAdvancedQuery = function() {
     $scope.isAdvancedQueryVisible = false;
+
+    if (!$state.params.filter) {
+      delete $state.params.filter;
+    }
+
+    delete $state.params.expandQuery;
+    $location.search($state.params);
   };
 
   $scope.showAdvancedQuery = function() {
     $scope.isAdvancedQueryVisible = true;
+
+    if (!$state.params.filter) {
+      delete $state.params.filter;
+    }
+
+    $state.params.expandQuery = true;
+
+    $location.search($state.params);
   };
 
   $scope.toggleAdvancedQuery = function() {
-    $scope.isAdvancedQueryVisible = !$scope.isAdvancedQueryVisible;
+    if ($scope.isAdvancedQueryVisible) {
+      $scope.hideAdvancedQuery();
+    } else {
+      $scope.showAdvancedQuery();
+    }
   };
 
   $scope.availableDevices = function(server) {
@@ -86,6 +109,10 @@ angular.module('zetta').controller('OverviewCtrl', [
     delete $state.params.query;
     if (!$state.params.filter) {
       delete $state.params.filter;
+    }
+
+    if (!$state.params.expandQuery) {
+      delete $state.params.expandQuery;
     }
 
     $location.search($state.params);
@@ -235,6 +262,9 @@ angular.module('zetta').controller('OverviewCtrl', [
       if (!$state.params.filter) {
         delete $state.params.filter;
       }
+      if (!$state.params.expandQuery) {
+        delete $state.params.expandQuery;
+      }
       $location.search($state.params);
 
       queryAction.execute(function(result) {
@@ -323,9 +353,7 @@ angular.module('zetta').controller('OverviewCtrl', [
 
         $scope.loading = false;
 
-        console.log('state.params:', $state.params);
         if ($state.params.query) {
-          console.log('has query');
           $scope.query = $state.params.query;
           $scope.submitQuery();
         }
@@ -333,9 +361,7 @@ angular.module('zetta').controller('OverviewCtrl', [
     } else {
       if ($state.params.filter) {
         filterServer();
-        console.log('state.params:', $state.params);
         if ($state.params.query) {
-          console.log('has query');
           $scope.query = $state.params.query;
           $scope.submitQuery();
         }
@@ -352,9 +378,7 @@ angular.module('zetta').controller('OverviewCtrl', [
         })
       }
       $scope.loading = false;
-      console.log('state.params:', $state.params);
       if ($state.params.query) {
-        console.log('has query');
         $scope.query = $state.params.query;
         $scope.submitQuery();
       }
@@ -366,6 +390,11 @@ angular.module('zetta').controller('OverviewCtrl', [
     if (!$state.params.query) {
       delete $state.params.query;
     }
+
+    if (!$state.params.expandQuery) {
+      delete $state.params.expandQuery;
+    }
+
     $location.search($state.params);
     loadServers();
     $window.scrollTo(0, 0);
