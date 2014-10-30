@@ -58,6 +58,16 @@ angular.module('zetta').controller('OverviewCtrl', [
     $scope.isAdvancedQueryVisible = !$scope.isAdvancedQueryVisible;
   };
 
+  $scope.availableDevices = function(server) {
+    if (!server.devices) {
+      return [];
+    }
+
+    return server.devices.filter(function(device) {
+      return device.available;
+    });
+  }
+
   $scope.clearQuery = function() {
     $scope.servers.forEach(function(server) {
       server.lastSearch = null;

@@ -111,7 +111,7 @@
         </div>
       </section>
     </section>
-    <div class="device_count pure-u-1" ng-if="activeQuery"># devices found. (only show during active query)</div>
+    <div class="device_count pure-u-1" ng-if="activeQuery">{{ availableDevices(server).length }} found</div>
   </div>
   
   <!-- Muted Group -->
