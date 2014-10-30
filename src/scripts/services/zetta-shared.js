@@ -222,16 +222,6 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
           }
         });
         
-        if (!data.entities || !data.entities.length) {
-          serverCount++;
-
-          if (serverCount === state.servers.length) {
-            if (cb !== undefined && cb !== null) cb(state.servers);
-          }
-
-          return;
-        }
-
         server.actions = data.actions.map(function(action) {
           if (!action.execute) {
             action.execute = function(cb) {
@@ -241,6 +231,16 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
 
           return action;
         });
+
+        if (!data.entities || !data.entities.length) {
+          serverCount++;
+
+          if (serverCount === state.servers.length) {
+            if (cb !== undefined && cb !== null) cb(state.servers);
+          }
+
+          return;
+        }
 
         server.devices = [];
 

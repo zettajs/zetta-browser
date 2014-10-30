@@ -51,9 +51,11 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.clearQuery = function() {
     $scope.servers.forEach(function(server) {
       server.lastSearch = null;
-      server.devices.forEach(function(device) {
-        device.available = true;
-      });
+      if (server.devices) {
+        server.devices.forEach(function(device) {
+          device.available = true;
+        });
+      }
     });
 
     $scope.activeQuery = null;
@@ -197,9 +199,11 @@ angular.module('zetta').controller('OverviewCtrl', [
 
       qlField.value = $scope.query;
 
-      server.devices.forEach(function(device) {
-        device.available = false;
-      });
+      if (server.devices) {
+        server.devices.forEach(function(device) {
+          device.available = false;
+        });
+      }
 
       $state.params.query = $scope.query;
       if (!$state.params.filter) {
