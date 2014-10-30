@@ -168,6 +168,11 @@ angular.module('zetta').controller('OverviewCtrl', [
     var isValid = false;
     var parsed;
 
+    var where = 'where';
+    if ($scope.query.toLowerCase().substr(0, where.length) !== where) {
+      $scope.query = 'where ' + $scope.query;
+    }
+
     try {
       parsed = caql.parse($scope.query);
       $scope.queryError = null;
