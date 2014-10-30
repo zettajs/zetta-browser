@@ -141,7 +141,7 @@ angular.module('zetta').controller('OverviewCtrl', [
           filters.push({
             field: node.field,
             operator: node.operator,
-            value: node.value
+            value: JSON.parse(node.value)
           });
         }
       };
