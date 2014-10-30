@@ -10,6 +10,10 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
   };
 
   var getAssumedStreamType = function(stream) {
+    if (stream.current === null || stream.current === undefined) {
+      return null;
+    }
+
     return isNaN(parseInt(stream.current))
             ? 'categorical'
             : 'numerical';
