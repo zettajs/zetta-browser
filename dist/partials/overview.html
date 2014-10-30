@@ -12,13 +12,15 @@
             <div class="search_icon pure-u-1-12"><b>search</b></div>
             <div class="pure-u-11-12 pure-g">
               <div class="input pure-u-15-24">
-              <input class="pure-input-1"type="text" id="query_form" ng-model="query" name="query" ng-focus="hideAdvancedQuery()" placeholder="CaQL Device Query" />
+              <div ng-show="queryInProgress" class="server-loading pure-u-1"><b>stop</b><b>stop</b><b>stop</b></div>
+              <input class="pure-input-1"type="text" id="query_form" ng-model="query" name="query" ng-focus="hideAdvancedQuery()" placeholder="CaQL Device Query" ng-show="!queryInProgress"/>
               </div>
               <div class="dropdown pure-u-1-24" ng-click="toggleAdvancedQuery()">
                 <a class="icon" ng-show="!isAdvancedQueryVisible">dropdown</a>
               </div>
               <div class="submit pure-u-1-4">
-                <button class="pure-button" ng-click="submitQuery()">Submit</button>
+                <button ng-show="queryInProgress" class="server-loading pure-button"><b>stop</b><b>stop</b><b>stop</b></div>
+                <button ng-show="!queryInProgress" class="pure-button" ng-click="submitQuery()">Submit</button>
                 <a ng-click="clearQuery()">clear</a>
               </div>
             </div>

@@ -19,6 +19,7 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.queryError = null;
   $scope.isAdvancedQueryVisible = false;
   $scope.queryFilters = [$scope.emptyFilter()];
+  $scope.queryInProgress = false;
   
   $scope.pageNav = null;
   $scope.loading = true;
@@ -184,7 +185,8 @@ angular.module('zetta').controller('OverviewCtrl', [
 
     $scope.updateQueryFilters(parsed);
 
-    $scope.servers.forEach(function(server) {
+    $scope.queryInProgress = true;
+    $scope.servers.forEach(function(server, serverIndex) {
       var queryActions = server.actions.filter(function(action) {
         return action.name === 'query-devices';
       });
@@ -245,7 +247,10 @@ angular.module('zetta').controller('OverviewCtrl', [
             }
           });
         });
-        console.log(data);
+
+        if (serverIndex === $scope.servers.length - 1) {
+          $scope.queryInProgress = false;
+        }
       });
     });
   };
