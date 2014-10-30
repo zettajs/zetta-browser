@@ -12,6 +12,7 @@ angular.module('zetta').directive('zettaAdvancedQuery', [function() {
 
     scope.addNewFilter = function() {
       scope.filters.push(emptyFilter());
+      console.log('current:', scope.current)
     };
 
     scope.removeFilter = function(i) {
@@ -40,6 +41,7 @@ angular.module('zetta').directive('zettaAdvancedQuery', [function() {
     scope: {
       dismiss: '&',
       submit: '&',
+      current: '=',
       setQueryFilters: '='
     },
     templateUrl: 'partials/advanced-query.html',

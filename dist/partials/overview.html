@@ -26,7 +26,12 @@
           <div><pre>{{queryError}}</pre></div>
         </fieldset>
         
-        <zetta-advanced-query ng-show="showAdvancedQuery" submit="submitAdvancedQuery()" set-query-filters="setQueryFilters" dismiss="hideAdvancedQuery()"/>
+        <zetta-advanced-query
+          ng-show="showAdvancedQuery"
+          submit="submitAdvancedQuery()"
+          current="query"
+          set-query-filters="setQueryFilters"
+          dismiss="hideAdvancedQuery()"/>
       </form>
     </section>
   </header>
