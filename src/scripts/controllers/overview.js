@@ -53,6 +53,10 @@ angular.module('zetta').controller('OverviewCtrl', [
     $scope.isAdvancedQueryVisible = true;
   };
 
+  $scope.toggleAdvancedQuery = function() {
+    $scope.isAdvancedQueryVisible = !$scope.isAdvancedQueryVisible;
+  };
+
   $scope.clearQuery = function() {
     $scope.servers.forEach(function(server) {
       server.lastSearch = null;

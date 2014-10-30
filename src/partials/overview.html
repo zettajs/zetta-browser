@@ -14,8 +14,8 @@
               <div class="input pure-u-15-24">
               <input class="pure-input-1"type="text" id="query_form" ng-model="query" name="query" ng-focus="hideAdvancedQuery()" placeholder="CaQL Device Query" />
               </div>
-              <div class="dropdown pure-u-1-24">
-                <a class="icon" ng-click="showAdvancedQuery()" ng-show="!isAdvancedQueryVisible">dropdown</a>
+              <div class="dropdown pure-u-1-24" ng-click="toggleAdvancedQuery()">
+                <a class="icon" ng-show="!isAdvancedQueryVisible">dropdown</a>
               </div>
               <div class="submit pure-u-1-4">
                 <button class="pure-button" ng-click="submitQuery()">Submit</button>
