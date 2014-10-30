@@ -335,6 +335,10 @@ angular.module('zetta').controller('OverviewCtrl', [
           if (server.devices && !$scope.hasDevices) {
             $scope.hasDevices = true;
           }
+
+          server.devices.forEach(function(device) {
+            device.available = true;
+          });
         })
       }
       $scope.loading = false;
