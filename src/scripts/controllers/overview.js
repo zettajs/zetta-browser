@@ -1,6 +1,15 @@
 angular.module('zetta').controller('OverviewCtrl', [
   '$scope', '$state', '$http', '$location', '$window', 'navigator', 'zettaShared',
     function($scope, $state, $http, $location, $window, navigator, zettaShared) {
+
+  $scope.emptyFilter = function() {
+    return {
+      field: null,
+      operator: 'eq',
+      value: null
+    }
+  };
+
   $scope.pinned = zettaShared.state.pinned;
   $scope.servers = zettaShared.state.servers;
   $scope.muted = zettaShared.state.muted;
@@ -8,7 +17,7 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.showAdvancedQuery = false;
   $scope.activeQuery = null; 
   $scope.queryError = null;
-  $scope.queryFilters = null;
+  $scope.queryFilters = [$scope.emptyFilter()];
   
   $scope.pageNav = null;
   $scope.loading = true;
@@ -29,7 +38,7 @@ angular.module('zetta').controller('OverviewCtrl', [
       $(window).scrollTop(pos);
       $scope.pageNav = null;
     }
-  });    
+  });
 
   $scope.hideAdvancedQuery = function() {
     $scope.showAdvancedQuery = false;
@@ -109,31 +118,13 @@ angular.module('zetta').controller('OverviewCtrl', [
     $scope.submitQuery();
   };
 
-  $scope.submitQuery = function() {
-    var isValid = false;
-    var parsed;
-
-    try {
-      parsed = caql.parse($scope.query);
-      $scope.queryError = null;
-      $scope.activeQuery = $scope.query;
-      isValid = true;
-      zettaShared.state.query = $scope.query;
-    } catch(e) {
-      $scope.queryError = e.message;
-      $scope.activeQuery = null;
-    }
-
-    if (!isValid || !$scope.servers.length) {
-      return;
-    }
-
-    if (!$scope.queryFilters || !$scope.queryFilters.length) {
+  $scope.updateQueryFilters = function(parsed) {
       console.log('parsed:', parsed);
       var filters = [];
 
       var cancel = false;
       var next = function(node) {
+        console.log(node.type);
         if (node.type === 'Disjunction') {
           cancel = true;
           return;
@@ -154,10 +145,28 @@ angular.module('zetta').controller('OverviewCtrl', [
       next(parsed.filterNode.expression);
 
       console.log('filters:', filters);
-      if (!cancel) {
-        $scope.queryFilters = filters;
-      }
+      $scope.queryFilters = cancel ? [$scope.emptyFilter()] : filters;
+  };
+  $scope.submitQuery = function() {
+    var isValid = false;
+    var parsed;
+
+    try {
+      parsed = caql.parse($scope.query);
+      $scope.queryError = null;
+      $scope.activeQuery = $scope.query;
+      isValid = true;
+      zettaShared.state.query = $scope.query;
+    } catch(e) {
+      $scope.queryError = e.message;
+      $scope.activeQuery = null;
     }
+
+    if (!isValid || !$scope.servers.length) {
+      return;
+    }
+
+    $scope.updateQueryFilters(parsed);
 
     $scope.servers.forEach(function(server) {
       var queryActions = server.actions.filter(function(action) {
