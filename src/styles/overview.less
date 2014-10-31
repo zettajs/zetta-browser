@@ -48,12 +48,13 @@ form.action-content label{
         .border-top(@gray_5, 1px);
       }
       
-      .name { padding: 0rem !important; }
+      .lone-name {
+        padding: 0;
+      }
       
       .server-name { font-size: .5rem; }
       .device-name {
         font-weight: 700;
-        color: @apigee-grey;
       }
       .stream-name {font-size: .75rem;}
       .action {
@@ -226,19 +227,7 @@ h1 {
   }
   
   &.pinned {
-    zetta-overview-action .name:first-of-type {
-      display: none;
-    }
-    .row.action {
-      .value {
-        padding-left: 0rem;
-      }
-      .vis {
-        padding: .5rem 1rem .5rem 0rem;
-        @media @md { padding: .25rem 0 .5rem 0; }
-      }
-    }
-    .row.numerical .vis, .row.categorical .vis { padding-left: 0;}
+
   }
   
 }

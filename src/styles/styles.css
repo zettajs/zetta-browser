@@ -929,9 +929,6 @@ header nav,
 #device .properties {
   overflow: hidden;
 }
-#device .actions fields {
-  margin-bottom: 1rem;
-}
 .serverError {
   color: #ff4300;
 }
@@ -1038,9 +1035,9 @@ form.action-content label {
   background-position: top;
   */
 }
-.pinned .devices .row .name,
-.muted .devices .row .name {
-  padding: 0rem !important;
+.pinned .devices .row .lone-name,
+.muted .devices .row .lone-name {
+  padding: 0;
 }
 .pinned .devices .row .server-name,
 .muted .devices .row .server-name {
@@ -1049,7 +1046,6 @@ form.action-content label {
 .pinned .devices .row .device-name,
 .muted .devices .row .device-name {
   font-weight: 700;
-  color: #59595b;
 }
 .pinned .devices .row .stream-name,
 .muted .devices .row .stream-name {
@@ -1254,24 +1250,6 @@ h1 .back:hover {
   .device-group .row.action .vis {
     padding: .25rem 0 .5rem 0;
   }
-}
-.device-group.pinned zetta-overview-action .name:first-of-type {
-  display: none;
-}
-.device-group.pinned .row.action .value {
-  padding-left: 0rem;
-}
-.device-group.pinned .row.action .vis {
-  padding: .5rem 1rem .5rem 0rem;
-}
-@media screen and (min-width: 48.1em) {
-  .device-group.pinned .row.action .vis {
-    padding: .25rem 0 .5rem 0;
-  }
-}
-.device-group.pinned .row.numerical .vis,
-.device-group.pinned .row.categorical .vis {
-  padding-left: 0;
 }
 input {
   font-family: "jaf-facitweb", Helvetica, Arial, sans-serif;

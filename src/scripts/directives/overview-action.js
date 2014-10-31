@@ -1,6 +1,6 @@
 angular.module('zetta').directive('zettaOverviewAction', [function() {
   var link = function(scope, element) {
-
+    
     function isRadioButtons(action) {
 
       // one input plus hidden
@@ -80,7 +80,8 @@ angular.module('zetta').directive('zettaOverviewAction', [function() {
   return {
     restrict: 'E',
     scope: {
-      action: '=value'
+      action: '=value',
+      context: '='
     },
     templateUrl: 'partials/overview-action.html',
     link: link

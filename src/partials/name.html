@@ -1,0 +1,26 @@
+<div ng-if="$parent.context!='pinned'">
+  <span class="stream-name" ng-if="action"># {{ action.name }}</span>
+  <span class="stream-name" ng-if="$parent.stream">: {{ $parent.stream.name }}</span>
+</div>
+
+<div ng-if="$parent.characteristic">
+  <a class="server-name" ng-click="loadServer($parent.characteristic.device.server)">
+    {{ $parent.characteristic.device.server.name }} <br/>
+  </a>
+  <a class="device-name" ng-click="resolve($parent.characteristic.device.href)" >
+    {{ $parent.characteristic.device.properties.name || $parent.characteristic.device.properties.type }}
+  </a>
+  <span class="stream-name">: {{ $parent.characteristic.name }}</span>
+</div>
+
+<div ng-if="$parent.context=='pinned'&&action">
+  <a class="server-name" ng-click="loadServer(action.device.server)">
+    {{ action.device.server.name }} <br/>
+  </a>
+  <a class="device-name" ng-click="resolve(action.device.href)">
+    {{ action.device.properties.name || action.device.properties.type }}
+  </a>
+  <span class="stream-name"># {{ action.name}}</span>
+
+</div>
+

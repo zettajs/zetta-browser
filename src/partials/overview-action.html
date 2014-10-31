@@ -1,11 +1,9 @@
-
 <!-- Handle single button -->
 <div ng-if="action.renderOptionsAsButton">
   
   <form class="pure-form action-content">
-    <div class="name pure-u-1-2 pure-u-md-1-4">
-      # {{ action.name }}
-    </div>
+    
+    <ng-include src="'partials/name.html'" class="name lone-name pure-u-1-2 pure-u-md-1-4"></ng-include>
     
     <div class="vis pure-u-1 pure-u-md-5-12" ng-repeat="field in action.inputFields" ng-if="field.type!='hidden'">
           <action-field value="field"></action-field>
@@ -19,9 +17,7 @@
 </div>
 <!-- Handle double radio inputs as two buttons -->
 <div ng-if="action.renderOptionsAsRadioButtons">
-  <div class="name pure-u-1-2 pure-u-md-1-4">
-    # {{ action.name }}
-  </div>
+  <ng-include src="'partials/name.html'" class="name lone-name pure-u-1-2 pure-u-md-1-4"></ng-include>
 
   <div class="vis before-md pure-u-1 pure-u-md-5-12"></div>
   <div class="value pure-u-1-2 pure-u-md-1-3">
@@ -36,9 +32,7 @@
 <div ng-if="action.renderOptionsAsMultipleInputs">
   <form class="pure-form action-content">
 
-    <div class="name pure-u-1">
-      # {{ action.name }}
-    </div>
+    <ng-include src="'partials/name.html'" class="name lone-name pure-u-1"></ng-include>
     
     <div ng-repeat="field in action.inputFields" ng-if="!field.isHidden">
       <div class="name pure-u-1-4">
@@ -59,7 +53,8 @@
         <div class="value pure-u-1 pure-u-md-1-3"><button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button></div>
     </div>
     
-    
-    
   </form>
 </div>
+
+
+
