@@ -25,10 +25,8 @@ angular.module('zetta').directive('zettaAdvancedQuery', [function() {
       var filters = scope.filters.filter(function(filter) {
         return !!filter.field;
       });
-      console.log(filters);
 
       if (filters.length) {
-        console.log(scope.setQueryFilters);
         scope.setQueryFilters(filters);
         scope.submit();
       }

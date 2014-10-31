@@ -10,8 +10,11 @@
       <div ng-repeat="stream in device.streams">
         <section class="vis stream numerical pure-g">
           <div class="meta pure-u-1 pure-u-md-1-3">
-            <div class="value">
+            <div class="value" ng-if="stream.type === 'numerical' || stream.type === 'categorical'">
               <span>{{ stream.current }}</span>
+            </div>
+            <div class="value server-loading" ng-if="stream.type === null || stream.type === undefined">
+              <b>stop</b><b>stop</b><b>stop</b>
             </div>
             <div class="name">: {{ stream.name }}</div>
           </div>
@@ -22,6 +25,7 @@
           <div class="dnastrip pure-u-1 pure-u-md-2-3" ng-if="stream.type === 'categorical'">
             <z-dna-strip width="100" height="48" stream="stream"></z-dna-strip>
           </div>
+
           
         </section>
         
