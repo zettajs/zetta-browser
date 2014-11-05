@@ -72,12 +72,12 @@
   }
 */
 var caql = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,11],$V2=[2,37],$V3=[1,14],$V4=[1,26],$V5=[1,19],$V6=[1,25],$V7=[5,44],$V8=[5,18,44],$V9=[5,14,18,44],$Va=[1,33],$Vb=[1,34],$Vc=[1,35],$Vd=[5,21,23,26,44],$Ve=[1,37],$Vf=[1,38],$Vg=[1,39],$Vh=[5,14];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,11],$V2=[2,43],$V3=[1,14],$V4=[1,28],$V5=[1,19],$V6=[1,27],$V7=[5,49],$V8=[5,18,49],$V9=[5,14,18,49],$Va=[1,35],$Vb=[1,36],$Vc=[1,37],$Vd=[5,21,23,26,49],$Ve=[1,39],$Vf=[1,41],$Vg=[1,42],$Vh=[1,50],$Vi=[5,14],$Vj=[1,63],$Vk=[1,64],$Vl=[1,62],$Vm=[1,67],$Vn=[1,68],$Vo=[1,66];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"root":3,"select_statement":4,"EOF":5,"SELECT":6,"fields":7,"where_optional":8,"orderby_optional":9,"where_clause":10,"column_list":11,"*":12,"column_field":13,",":14,"NAME":15,"AS":16,"column":17,"WHERE":18,"filter":19,"conjunction":20,"AND":21,"disjunction":22,"OR":23,"predicate":24,"(":25,")":26,"comparison_predicate":27,"contains_predicate":28,"location_predicate":29,"like_predicate":30,"COMPARISON":31,"literal":32,"NOT":33,"CONTAINS":34,"STRING":35,"PARAM":36,"LIKE":37,"WITHIN":38,"location":39,"NUMBER":40,"OF":41,"coordinates":42,"orderby_clause":43,"ORDERBY":44,"sort_list":45,"sort_expression":46,"direction":47,"ASC":48,"DESC":49,"boolean":50,"TRUE":51,"FALSE":52,"NULL":53,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",6:"SELECT",12:"*",14:",",15:"NAME",16:"AS",18:"WHERE",21:"AND",23:"OR",25:"(",26:")",31:"COMPARISON",33:"NOT",34:"CONTAINS",35:"STRING",36:"PARAM",37:"LIKE",38:"WITHIN",40:"NUMBER",41:"OF",44:"ORDERBY",48:"ASC",49:"DESC",51:"TRUE",52:"FALSE",53:"NULL"},
-productions_: [0,[3,2],[4,4],[4,2],[7,1],[7,1],[11,1],[11,3],[13,1],[13,3],[17,1],[8,0],[8,1],[10,2],[20,3],[22,3],[19,1],[19,1],[19,1],[19,3],[24,1],[24,1],[24,1],[24,1],[27,3],[27,2],[28,3],[28,3],[28,2],[30,3],[30,3],[30,4],[30,4],[29,3],[29,2],[39,3],[42,3],[9,0],[9,1],[43,2],[45,1],[45,3],[46,2],[47,0],[47,1],[47,1],[50,1],[50,1],[32,1],[32,1],[32,1],[32,1],[32,1]],
+symbols_: {"error":2,"root":3,"select_statement":4,"EOF":5,"SELECT":6,"fields":7,"where_optional":8,"orderby_optional":9,"where_clause":10,"column_list":11,"*":12,"column_field":13,",":14,"NAME":15,"AS":16,"column":17,"WHERE":18,"filter":19,"conjunction":20,"AND":21,"disjunction":22,"OR":23,"predicate":24,"(":25,")":26,"comparison_predicate":27,"not_equal_predicate":28,"contains_predicate":29,"location_predicate":30,"like_predicate":31,"missing_predicate":32,"NOTEQUAL":33,"literal":34,"NOT":35,"COMPARISON":36,"CONTAINS":37,"STRING":38,"PARAM":39,"LIKE":40,"IS":41,"MISSING":42,"WITHIN":43,"location":44,"NUMBER":45,"OF":46,"coordinates":47,"orderby_clause":48,"ORDERBY":49,"sort_list":50,"sort_expression":51,"direction":52,"ASC":53,"DESC":54,"boolean":55,"TRUE":56,"FALSE":57,"NULL":58,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",6:"SELECT",12:"*",14:",",15:"NAME",16:"AS",18:"WHERE",21:"AND",23:"OR",25:"(",26:")",33:"NOTEQUAL",35:"NOT",36:"COMPARISON",37:"CONTAINS",38:"STRING",39:"PARAM",40:"LIKE",41:"IS",42:"MISSING",43:"WITHIN",45:"NUMBER",46:"OF",49:"ORDERBY",53:"ASC",54:"DESC",56:"TRUE",57:"FALSE",58:"NULL"},
+productions_: [0,[3,2],[4,4],[4,2],[7,1],[7,1],[11,1],[11,3],[13,1],[13,3],[17,1],[8,0],[8,1],[10,2],[20,3],[22,3],[19,1],[19,1],[19,1],[19,3],[24,1],[24,1],[24,1],[24,1],[24,1],[24,1],[28,3],[28,4],[27,3],[27,2],[29,3],[29,3],[29,2],[31,3],[31,3],[31,4],[31,4],[32,3],[32,4],[30,3],[30,2],[44,3],[47,3],[9,0],[9,1],[48,2],[50,1],[50,3],[51,2],[52,0],[52,1],[52,1],[55,1],[55,1],[34,1],[34,1],[34,1],[34,1],[34,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -98,7 +98,7 @@ break;
 case 6:
  this.$ = new yy.FieldListNode($$[$0]); 
 break;
-case 7: case 41:
+case 7: case 47:
  $$[$0-2].push($$[$0]); this.$ = $$[$0-2]; 
 break;
 case 8:
@@ -119,43 +119,55 @@ break;
 case 19:
  this.$ = $$[$0-1] 
 break;
-case 24:
+case 26:
+ this.$ = new yy.ComparisonPredicateNode($$[$0-2], 'eq', $$[$0]).negate(); 
+break;
+case 27:
+ this.$ = new yy.ComparisonPredicateNode($$[$0-2], 'eq', $$[$0]); 
+break;
+case 28:
  this.$ = new yy.ComparisonPredicateNode($$[$0-2], $$[$0-1], $$[$0]); 
 break;
-case 25: case 28: case 34:
+case 29: case 32: case 40:
  this.$ = $$[$0].negate(); 
 break;
-case 26: case 27:
+case 30: case 31:
  this.$ = new yy.ContainsPredicateNode($$[$0-2], $$[$0]); 
 break;
-case 29: case 30:
+case 33: case 34:
  this.$ = new yy.LikePredicateNode($$[$0-2], $$[$0]); 
 break;
-case 31: case 32:
+case 35: case 36:
  this.$ = new yy.LikePredicateNode($$[$0-3], $$[$0]).negate(); 
 break;
-case 33:
- this.$ = new yy.LocationPredicateNode($$[$0-2], $$[$0]); 
+case 37:
+ this.$ = new yy.MissingPredicateNode($$[$0-2]); 
 break;
-case 35:
- this.$ = new yy.LocationNode($$[$0-2], $$[$0]); 
-break;
-case 36:
- this.$ = new yy.CoordinatesNode($$[$0-2], $$[$0]); 
+case 38:
+ this.$ = new yy.MissingPredicateNode($$[$0-3]).negate(); 
 break;
 case 39:
- this.$ = new yy.OrderByNode($$[$0]); 
+ this.$ = new yy.LocationPredicateNode($$[$0-2], $$[$0]); 
 break;
-case 40:
- this.$ = new yy.SortListNode($$[$0]); 
+case 41:
+ this.$ = new yy.LocationNode($$[$0-2], $$[$0]); 
 break;
 case 42:
+ this.$ = new yy.CoordinatesNode($$[$0-2], $$[$0]); 
+break;
+case 45:
+ this.$ = new yy.OrderByNode($$[$0]); 
+break;
+case 46:
+ this.$ = new yy.SortListNode($$[$0]); 
+break;
+case 48:
  this.$ = new yy.SortNode($$[$0-1], $$[$0]); 
 break;
 }
 },
-table: [{3:1,4:2,6:[1,3],10:4,18:$V0},{1:[3]},{5:[1,6]},{7:7,11:8,12:[1,9],13:10,15:$V1},{5:$V2,9:12,43:13,44:$V3},{15:$V4,17:24,19:15,20:17,22:18,24:16,25:$V5,27:20,28:21,29:22,30:23,33:$V6},{1:[2,1]},o($V7,[2,11],{8:27,10:28,18:$V0}),o($V8,[2,4],{14:[1,29]}),o($V8,[2,5]),o($V9,[2,6]),o($V9,[2,8],{16:[1,30]}),{5:[2,3]},{5:[2,38]},{15:$Va,45:31,46:32},o($V7,[2,13],{21:$Vb,23:$Vc}),o($Vd,[2,16]),o($Vd,[2,17]),o($Vd,[2,18]),{15:$V4,17:24,19:36,20:17,22:18,24:16,25:$V5,27:20,28:21,29:22,30:23,33:$V6},o($Vd,[2,20]),o($Vd,[2,21]),o($Vd,[2,22]),o($Vd,[2,23]),{31:$Ve,33:[1,41],34:$Vf,37:[1,40],38:$Vg},{15:$V4,17:45,27:42,28:43,29:44,33:$V6},o([31,33,34,37,38],[2,10]),{5:$V2,9:46,43:13,44:$V3},o($V7,[2,12]),{13:47,15:$V1},{15:[1,48]},{5:[2,39],14:[1,49]},o($Vh,[2,40]),o($Vh,[2,43],{47:50,48:[1,51],49:[1,52]}),{15:$V4,17:24,19:53,20:17,22:18,24:16,25:$V5,27:20,28:21,29:22,30:23,33:$V6},{15:$V4,17:24,19:54,20:17,22:18,24:16,25:$V5,27:20,28:21,29:22,30:23,33:$V6},{21:$Vb,23:$Vc,26:[1,55]},{32:56,35:[1,58],36:[1,59],40:[1,57],50:60,51:[1,62],52:[1,63],53:[1,61]},{35:[1,64],36:[1,65]},{39:66,40:[1,67]},{35:[1,68],36:[1,69]},{37:[1,70]},o($Vd,[2,25]),o($Vd,[2,28]),o($Vd,[2,34]),{31:$Ve,34:$Vf,38:$Vg},{5:[2,2]},o($V9,[2,7]),o($V9,[2,9]),{15:$Va,46:71},o($Vh,[2,42]),o($Vh,[2,44]),o($Vh,[2,45]),o($Vd,[2,14]),o([5,23,26,44],[2,15],{21:$Vb}),o($Vd,[2,19]),o($Vd,[2,24]),o($Vd,[2,48]),o($Vd,[2,49]),o($Vd,[2,50]),o($Vd,[2,51]),o($Vd,[2,52]),o($Vd,[2,46]),o($Vd,[2,47]),o($Vd,[2,26]),o($Vd,[2,27]),o($Vd,[2,33]),{41:[1,72]},o($Vd,[2,29]),o($Vd,[2,30]),{35:[1,73],36:[1,74]},o($Vh,[2,41]),{40:[1,76],42:75},o($Vd,[2,31]),o($Vd,[2,32]),o($Vd,[2,35]),{14:[1,77]},{40:[1,78]},o($Vd,[2,36])],
-defaultActions: {6:[2,1],12:[2,3],13:[2,38],46:[2,2]},
+table: [{3:1,4:2,6:[1,3],10:4,18:$V0},{1:[3]},{5:[1,6]},{7:7,11:8,12:[1,9],13:10,15:$V1},{5:$V2,9:12,48:13,49:$V3},{15:$V4,17:26,19:15,20:17,22:18,24:16,25:$V5,27:20,28:21,29:22,30:23,31:24,32:25,35:$V6},{1:[2,1]},o($V7,[2,11],{8:29,10:30,18:$V0}),o($V8,[2,4],{14:[1,31]}),o($V8,[2,5]),o($V9,[2,6]),o($V9,[2,8],{16:[1,32]}),{5:[2,3]},{5:[2,44]},{15:$Va,50:33,51:34},o($V7,[2,13],{21:$Vb,23:$Vc}),o($Vd,[2,16]),o($Vd,[2,17]),o($Vd,[2,18]),{15:$V4,17:26,19:38,20:17,22:18,24:16,25:$V5,27:20,28:21,29:22,30:23,31:24,32:25,35:$V6},o($Vd,[2,20]),o($Vd,[2,21]),o($Vd,[2,22]),o($Vd,[2,23]),o($Vd,[2,24]),o($Vd,[2,25]),{33:[1,40],35:[1,44],36:$Ve,37:$Vf,40:[1,43],41:[1,45],43:$Vg},{15:$V4,17:47,27:46,29:48,30:49,35:$Vh},o([33,35,36,37,40,41,43],[2,10]),{5:$V2,9:51,48:13,49:$V3},o($V7,[2,12]),{13:52,15:$V1},{15:[1,53]},{5:[2,45],14:[1,54]},o($Vi,[2,46]),o($Vi,[2,49],{52:55,53:[1,56],54:[1,57]}),{15:$V4,17:26,19:58,20:17,22:18,24:16,25:$V5,27:20,28:21,29:22,30:23,31:24,32:25,35:$V6},{15:$V4,17:26,19:59,20:17,22:18,24:16,25:$V5,27:20,28:21,29:22,30:23,31:24,32:25,35:$V6},{21:$Vb,23:$Vc,26:[1,60]},{34:61,38:$Vj,39:$Vk,45:$Vl,55:65,56:$Vm,57:$Vn,58:$Vo},{34:69,38:$Vj,39:$Vk,45:$Vl,55:65,56:$Vm,57:$Vn,58:$Vo},{38:[1,70],39:[1,71]},{44:72,45:[1,73]},{38:[1,74],39:[1,75]},{40:[1,76]},{35:[1,78],42:[1,77]},o($Vd,[2,29]),{33:[1,79],36:$Ve,37:$Vf,43:$Vg},o($Vd,[2,32]),o($Vd,[2,40]),{15:$V4,17:80,27:46,29:48,30:49,35:$Vh},{5:[2,2]},o($V9,[2,7]),o($V9,[2,9]),{15:$Va,51:81},o($Vi,[2,48]),o($Vi,[2,50]),o($Vi,[2,51]),o($Vd,[2,14]),o([5,23,26,49],[2,15],{21:$Vb}),o($Vd,[2,19]),o($Vd,[2,28]),o($Vd,[2,54]),o($Vd,[2,55]),o($Vd,[2,56]),o($Vd,[2,57]),o($Vd,[2,58]),o($Vd,[2,52]),o($Vd,[2,53]),o($Vd,[2,26]),o($Vd,[2,30]),o($Vd,[2,31]),o($Vd,[2,39]),{46:[1,82]},o($Vd,[2,33]),o($Vd,[2,34]),{38:[1,83],39:[1,84]},o($Vd,[2,37]),{42:[1,85]},{34:86,38:$Vj,39:$Vk,45:$Vl,55:65,56:$Vm,57:$Vn,58:$Vo},{36:$Ve,37:$Vf,43:$Vg},o($Vi,[2,47]),{45:[1,88],47:87},o($Vd,[2,35]),o($Vd,[2,36]),o($Vd,[2,38]),o($Vd,[2,27]),o($Vd,[2,41]),{14:[1,89]},{45:[1,90]},o($Vd,[2,42])],
+defaultActions: {6:[2,1],12:[2,3],13:[2,44],51:[2,2]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -650,7 +662,7 @@ break;
 case 6:
                                           this.popState(); /* in: INITIAL */
                                           this.begin('ordby');
-                                          return 44;
+                                          return 49;
                                         
 break;
 case 7:return 15
@@ -664,7 +676,7 @@ case 9:return 21
 break;
 case 10:return 23
 break;
-case 11:return 33
+case 11:return 35
 break;
 case 12:return 21
 break;
@@ -690,102 +702,111 @@ case 17:return 25
 break;
 case 18:return 26
 break;
-case 19:return 31
+case 19:return 36
 break;
 case 20:
                                           yy_.yytext = letterify(yy_.yytext);
-                                          return 31;
+                                          return 36;
                                         
 break;
 case 21:
                                           yy_.yytext = letterify(yy_.yytext);
-                                          return 31;
+                                          return 36;
                                         
 break;
 case 22:return 33
 break;
-case 23:return 34
+case 23:return 41
 break;
-case 24:return 37
+case 24:return 35
 break;
-case 25:
-                                          this.begin('loc');
-                                          return 38;
-                                        
+case 25:return 37
 break;
-case 26:
-                                          this.popState(); /* in fltr */
-                                          return 36;
-                                        
+case 26:return 40
 break;
 case 27:
-                                          this.popState(); /* in: fltr */
-                                          return 35;
+                                          this.begin('loc');
+                                          return 43;
                                         
 break;
 case 28:
-                                          this.popState(); /* in: fltr */
-                                          return 40;
+                                          this.popState(); /* in fltr */
+                                          return 39;
                                         
 break;
 case 29:
-                                          this.popState(); /* in fltr */
-                                          yy_.yytext = true;
-                                          return 51;
+                                          this.popState(); /* in: fltr */
+                                          return 38;
                                         
 break;
 case 30:
-                                          this.popState(); /* in fltr */
-                                          yy_.yytext = false;
-                                          return 52;
+                                          this.popState(); /* in: fltr */
+                                          return 45;
                                         
 break;
 case 31:
                                           this.popState(); /* in fltr */
-                                          yy_.yytext = null;
-                                          return 53;
+                                          yy_.yytext = true;
+                                          return 56;
                                         
 break;
-case 32:return 40
+case 32:
+                                          this.popState(); /* in fltr */
+                                          yy_.yytext = false;
+                                          return 57;
+                                        
 break;
-case 33:return 41
+case 33:
+                                          this.popState(); /* in fltr */
+                                          yy_.yytext = null;
+                                          return 58;
+                                        
 break;
 case 34:
+                                          this.popState(); /* in fltr */
+                                          return 42;
+                                        
+break;
+case 35:return 45
+break;
+case 36:return 46
+break;
+case 37:
                                           this.popState(); /* in: asgn */
                                           this.popState(); /* in: fltr */
                                           return 21;
                                         
 break;
-case 35:
+case 38:
                                           this.popState(); /* in: asgn */
                                           this.popState(); /* in: fltr */
                                           return 23;
                                         
 break;
-case 36:
+case 39:
                                           this.popState(); /* in: asgn */
                                           this.popState(); /* in: fltr */
                                           this.begin('ordby');
-                                          return 44;
+                                          return 49;
                                         
 break;
-case 37:return 48
+case 40:return 53
 break;
-case 38:return 49
+case 41:return 54
 break;
-case 39:return 15
+case 42:return 15
 break;
-case 40:
+case 43:
                                           yy_.yytext = yy_.yytext.slice(1, -1);
                                           return 15;
                                         
 break;
-case 41:return 5
+case 44:return 5
 break;
 }
 },
-rules: [/^(?:\s+)/i,/^(?:select\b)/i,/^(?:,)/i,/^(?:\*)/i,/^(?:as\b)/i,/^(?:where\b)/i,/^(?:order by\b)/i,/^(?:([A-Za-z0-9_-][\.A-Za-z0-9_-]*))/i,/^(?:(\[(?:(?!\])[^\\]|\\.)*\]))/i,/^(?:and\b)/i,/^(?:or\b)/i,/^(?:not\b)/i,/^(?:&&)/i,/^(?:\|\|)/i,/^(?:$)/i,/^(?:([A-Za-z0-9_-][\.A-Za-z0-9_-]*))/i,/^(?:(\[(?:(?!\])[^\\]|\\.)*\]))/i,/^(?:\()/i,/^(?:\))/i,/^(?:eq|gt|lt|gte|lte\b)/i,/^(?:>=|<=)/i,/^(?:=|>|<)/i,/^(?:not\b)/i,/^(?:contains\b)/i,/^(?:like\b)/i,/^(?:within\b)/i,/^(?:(@\w+))/i,/^(?:(["'])(?:(?!\1)[^\\]|\\.)*\1)/i,/^(?:([+-]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?))/i,/^(?:true\b)/i,/^(?:false\b)/i,/^(?:null\b)/i,/^(?:([+-]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?))/i,/^(?:of\b)/i,/^(?:and\b)/i,/^(?:or\b)/i,/^(?:order by\b)/i,/^(?:ASC\b)/i,/^(?:DESC\b)/i,/^(?:([A-Za-z0-9_-][\.A-Za-z0-9_-]*))/i,/^(?:(\[(?:(?!\])[^\\]|\\.)*\]))/i,/^(?:$)/i],
-conditions: {"sel":{"rules":[0,2,3,4,5,6,7,8,14],"inclusive":false},"fltr":{"rules":[0,2,6,9,10,11,12,13,14,15,16,17,18],"inclusive":false},"asgn":{"rules":[0,19,20,21,22,23,24,25,26,27,28,29,30,31],"inclusive":false},"loc":{"rules":[0,2,32,33,34,35,36,41],"inclusive":false},"ordby":{"rules":[0,2,14,37,38,39,40],"inclusive":false},"INITIAL":{"rules":[0,1,5,41],"inclusive":true}}
+rules: [/^(?:\s+)/i,/^(?:select\b)/i,/^(?:,)/i,/^(?:\*)/i,/^(?:as\b)/i,/^(?:where\b)/i,/^(?:order by\b)/i,/^(?:([A-Za-z0-9_-][\.A-Za-z0-9_-]*))/i,/^(?:(\[(?:(?!\])[^\\]|\\.)*\]))/i,/^(?:and\b)/i,/^(?:or\b)/i,/^(?:not\b)/i,/^(?:&&)/i,/^(?:\|\|)/i,/^(?:$)/i,/^(?:([A-Za-z0-9_-][\.A-Za-z0-9_-]*))/i,/^(?:(\[(?:(?!\])[^\\]|\\.)*\]))/i,/^(?:\()/i,/^(?:\))/i,/^(?:eq|gt|lt|gte|lte\b)/i,/^(?:>=|<=)/i,/^(?:=|>|<)/i,/^(?:!=|neq\b)/i,/^(?:is\b)/i,/^(?:not\b)/i,/^(?:contains\b)/i,/^(?:like\b)/i,/^(?:within\b)/i,/^(?:(@\w+))/i,/^(?:(["'])(?:(?!\1)[^\\]|\\.)*\1)/i,/^(?:([+-]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?))/i,/^(?:true\b)/i,/^(?:false\b)/i,/^(?:null\b)/i,/^(?:missing\b)/i,/^(?:([+-]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?))/i,/^(?:of\b)/i,/^(?:and\b)/i,/^(?:or\b)/i,/^(?:order by\b)/i,/^(?:ASC\b)/i,/^(?:DESC\b)/i,/^(?:([A-Za-z0-9_-][\.A-Za-z0-9_-]*))/i,/^(?:(\[(?:(?!\])[^\\]|\\.)*\]))/i,/^(?:$)/i],
+conditions: {"sel":{"rules":[0,2,3,4,5,6,7,8,14],"inclusive":false},"fltr":{"rules":[0,2,6,9,10,11,12,13,14,15,16,17,18],"inclusive":false},"asgn":{"rules":[0,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34],"inclusive":false},"loc":{"rules":[0,2,35,36,37,38,39,44],"inclusive":false},"ordby":{"rules":[0,2,14,40,41,42,43],"inclusive":false},"INITIAL":{"rules":[0,1,5,44],"inclusive":true}}
 });
 function letterify(op) {
   switch(op) {

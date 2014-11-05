@@ -187,7 +187,7 @@ angular.module('zetta').controller('OverviewCtrl', [
           filters.push({
             field: node.field,
             operator: node.operator,
-            value: JSON.parse(node.value)
+            value: node.value === undefined ? undefined : JSON.parse(node.value)
           });
         }
       };

@@ -102,6 +102,18 @@ CaqlAst.LikePredicateNode.prototype.negate = function() {
   return this;
 };
 
+CaqlAst.MissingPredicateNode = function(field) {
+  this.field = field;
+  this.operator = 'missing';
+  this.isNegated = false;
+  this.type = 'MissingPredicate';
+};
+
+CaqlAst.MissingPredicateNode.prototype.negate = function() {
+  this.isNegated = !this.isNegated;
+  return this;
+};
+
 CaqlAst.LocationPredicateNode = function(field, value) {
   this.field = field;
   this.operator = 'within';
