@@ -349,6 +349,11 @@ select {
     padding-top: .5rem;
     
   }
+  .query_set {
+    border-top: 1px solid @light-gray-bg;
+    padding: 1rem 0;
+    .reveal();
+  }
   .pure-button {
     padding: .25rem 1rem;
     height: 2.5rem;
@@ -388,20 +393,23 @@ select {
     &:hover {
       text-decoration: underline;
     }
+    &:disabled {
+      color: @light-gray-bg;
+      &:hover {text-decoration: none;}
+    }
   }
   .clear {padding: .5rem;}
-  .join {
-    a {display: none;}
-    &.active {
-      button.icon {color: @gray;}
-      a {display: inline-block;;}
+  .icon_column {
+    text-align: center;
+    button:not(.more_info) {
+      padding-top: .75rem;
     }
   }
   
   
   .advanced_query .header {
     padding: .25rem 0;
-    border-bottom: 1px solid @light-gray-bg;
+    
     margin-bottom: .5rem;
     a {margin-left: 1rem;}
     .dismiss {text-align: center;}

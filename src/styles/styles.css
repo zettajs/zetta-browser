@@ -1420,6 +1420,18 @@ select {
   text-align: center;
   padding-top: .5rem;
 }
+.query .query_set {
+  border-top: 1px solid #ededed;
+  padding: 1rem 0;
+}
+.query .query_set.ng-enter {
+  transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  height: auto;
+  max-height: 0;
+}
+.query .query_set.ng-enter.ng-enter-active {
+  max-height: 100rem;
+}
 .query .pure-button {
   padding: .25rem 1rem;
   height: 2.5rem;
@@ -1464,21 +1476,23 @@ select {
 .query button.icon:hover {
   text-decoration: underline;
 }
+.query button.icon:disabled {
+  color: #ededed;
+}
+.query button.icon:disabled:hover {
+  text-decoration: none;
+}
 .query .clear {
   padding: .5rem;
 }
-.query .join a {
-  display: none;
+.query .icon_column {
+  text-align: center;
 }
-.query .join.active button.icon {
-  color: #59595b;
-}
-.query .join.active a {
-  display: inline-block;
+.query .icon_column button:not(.more_info) {
+  padding-top: .75rem;
 }
 .query .advanced_query .header {
   padding: .25rem 0;
-  border-bottom: 1px solid #ededed;
   margin-bottom: .5rem;
 }
 .query .advanced_query .header a {
