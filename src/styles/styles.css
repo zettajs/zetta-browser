@@ -1412,9 +1412,6 @@ select {
 .query {
   margin-top: 1rem;
 }
-.query a {
-  font-size: .8rem;
-}
 .query .search_icon,
 .query .dropdown {
   text-align: center;
