@@ -1,6 +1,6 @@
 angular.module('zetta').controller('OverviewCtrl', [
-  '$scope', '$state', '$http', '$location', '$window', 'navigator', 'zettaShared',
-    function($scope, $state, $http, $location, $window, navigator, zettaShared) {
+  '$scope', '$state', '$http', '$location', '$window', 'navigator', 'zettaShared', 
+    function($scope, $state, $http, $location, $window, navigator, zettaShared ) {
 
   $scope.emptyFilter = function() {
     return {
@@ -25,6 +25,21 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.loading = true;
   $scope.hasDevices = false;
 
+  $scope.containsKey = function(streams, name){
+    var names = streams.map(function(s){ return s.name; });
+    if(names.indexOf(name) > -1){ return true; }
+    else { return false; }
+  }
+  
+  $scope.toggleProperties = function(repeatScope) {
+    if(repeatScope.showProperties){
+      repeatScope.showProperties = false
+    }
+    else {
+      repeatScope.showProperties = true;
+    }
+  }
+      
   $scope.init = function() {
     loadServers();
     if (!$scope.activeQuery) {

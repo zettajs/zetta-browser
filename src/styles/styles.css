@@ -1123,22 +1123,6 @@ h1 .back:hover {
   overflow-x: hidden;
   line-height: 1rem;
 }
-.devices .row.animate-size {
-  transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-  /*
-    height: auto;
-    max-height: 0;
-    */
-  overflow: hidden;
-}
-.devices .row.animate-size.closed {
-  height: auto;
-  max-height: 0;
-}
-.devices .row.animate-size.open {
-  height: auto;
-  max-height: 100rem;
-}
 .devices .row .switches,
 .devices .row .name,
 .devices .row .value {
@@ -1164,6 +1148,15 @@ h1 .back:hover {
 .devices .row .value form {
   display: inline-block;
 }
+.devices .row.properties {
+  border-top: none;
+}
+.devices .row.properties .name,
+.devices .row.properties .value {
+  font-size: .8rem;
+  color: #808080;
+  padding: .25rem 0;
+}
 @media screen and (min-width: 48.1em) {
   .devices .row .spacer {
     display: none;
@@ -1180,6 +1173,9 @@ h1 .back:hover {
 .devices .row .switches b:hover {
   color: #59595b;
   cursor: pointer;
+}
+.devices .row.main {
+  border-bottom: 1px solid #f2f2f2;
 }
 .devices .row.main .name {
   color: #59595b;
@@ -1409,6 +1405,26 @@ select {
   font-size: .8rem;
   background-color: transparent;
 }
+.icon_column {
+  text-align: center;
+}
+.icon_column button:not(.more_info) {
+  padding-top: .75rem;
+}
+button.icon {
+  color: #faa438;
+  border: none;
+  background-color: transparent;
+}
+button.icon:hover {
+  text-decoration: underline;
+}
+button.icon:disabled {
+  color: #ededed;
+}
+button.icon:disabled:hover {
+  text-decoration: none;
+}
 .query {
   margin-top: 1rem;
 }
@@ -1465,28 +1481,8 @@ select {
   background-size: 20px 100%;
   background-repeat: no-repeat;
 }
-.query button.icon {
-  color: #faa438;
-  border: none;
-  background-color: transparent;
-}
-.query button.icon:hover {
-  text-decoration: underline;
-}
-.query button.icon:disabled {
-  color: #ededed;
-}
-.query button.icon:disabled:hover {
-  text-decoration: none;
-}
 .query .clear {
   padding: .5rem;
-}
-.query .icon_column {
-  text-align: center;
-}
-.query .icon_column button:not(.more_info) {
-  padding-top: .75rem;
 }
 .query .advanced_query .header {
   padding: .25rem 0;
