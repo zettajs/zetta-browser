@@ -20,6 +20,7 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.isAdvancedQueryVisible = false;
   $scope.queryFilters = [$scope.emptyFilter()];
   $scope.queryInProgress = false;
+  $scope.propertyNameIndex = [];
   
   $scope.pageNav = null;
   $scope.loading = true;
@@ -366,11 +367,20 @@ angular.module('zetta').controller('OverviewCtrl', [
             server.available = true;
             if (server.devices && !$scope.hasDevices) {
               $scope.hasDevices = true;
+              server.devices.forEach(function(device) {
+                Object.keys(device.properties).forEach(function(key) {
+                  if ($scope.propertyNameIndex.indexOf(key) === -1) {
+                    $scope.propertyNameIndex.push(key);
+                    $scope.propertyNameIndex.sort();
+                  }
+                });
+              });
             }
           })
         }
 
         $scope.loading = false;
+        console.log($scope.propertyNameIndex);
 
         if ($state.params.query) {
           $scope.query = $state.params.query;

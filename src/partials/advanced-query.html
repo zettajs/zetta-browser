@@ -23,7 +23,14 @@
       <div class="pure-u-1-12 icon_column"><button type="button" class="icon" ng-click="removeFilter($index)" ng-disabled="filters.length < 2" mac-tooltip="Remove Group" mac-tooltip-direction="bottom">delete</button></div>
       <div class="pure-u-11-12 pure-g">
         <label class="pure-u-1-4" mac-tooltip="'string' name of device property" mac-tooltip-direction="bottom">property</label>
-        <input class="pure-u-5-12" type="text" name="property" ng-model="filter.field" placeholder="type, name, id..."/>
+        <!--<input class="pure-u-5-12" type="text" name="property" ng-model="filter.field" placeholder="type, name, id..."/>-->
+        <mac-autocomplete
+          class="pure-u-5-12"
+          name="property"
+          mac-autocomplete-source="index"
+          placeholder="type, name, id..."
+          ng-model="filter.field">
+        </mac-autocomplete>
         <br/><label class="pure-u-1-4">comparison</label>
         <select class="pure-u-5-12" name="comparison" ng-model="filter.operator">
           <option value="eq">=</option>

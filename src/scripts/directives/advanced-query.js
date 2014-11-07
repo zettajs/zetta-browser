@@ -8,6 +8,12 @@ angular.module('zetta').directive('zettaAdvancedQuery', [function() {
       }
     };
 
+    scope.$watchCollection('index', function() {
+
+      console.log('index');
+      console.log(scope.index);
+    });
+
     scope.filters = [emptyFilter()];
 
     scope.addNewFilter = function() {
@@ -43,6 +49,7 @@ angular.module('zetta').directive('zettaAdvancedQuery', [function() {
       dismiss: '&',
       submit: '&',
       current: '=',
+      index: '=',
       setQueryFilters: '='
     },
     templateUrl: 'partials/advanced-query.html',
