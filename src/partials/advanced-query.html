@@ -12,7 +12,7 @@
           <strong>Device Query Form</strong>
         </div>
         <div class="pure-u-1-24 dismiss">
-          <button type="button" class="icon" ng-click="dismiss()">delete</button>
+          <button type="button" class="icon" ng-click="dismiss()" mac-tooltip="Hide Query Form" mac-tooltip-direction="bottom">delete</button>
         </div>
         
       </div>
@@ -20,9 +20,9 @@
     
     <div class="query_set pure-g" ng-repeat="filter in filters">
      
-      <div class="pure-u-1-12 icon_column"><button type="button" class="icon" ng-click="removeFilter($index)" ng-disabled="filters.length < 2">delete</button></div>
+      <div class="pure-u-1-12 icon_column"><button type="button" class="icon" ng-click="removeFilter($index)" ng-disabled="filters.length < 2" mac-tooltip="Remove Group" mac-tooltip-direction="bottom">delete</button></div>
       <div class="pure-u-11-12 pure-g">
-        <label class="pure-u-1-4">property</label>
+        <label class="pure-u-1-4" mac-tooltip="'string' name of device property" mac-tooltip-direction="bottom">property</label>
         <input class="pure-u-5-12" type="text" name="property" ng-model="filter.field" placeholder="type, name, id..."/>
         <br/><label class="pure-u-1-4">comparison</label>
         <select class="pure-u-5-12" name="comparison" ng-model="filter.operator">
@@ -33,7 +33,7 @@
           <option value="lte">&lt;=</option>
           <option value="like">like</option>
         </select>
-        <br/><label class="pure-u-1-4">value</label><input class="pure-u-5-12" type="text" name="value" ng-model="filter.value" placeholder="% wildcard matches 0 or more characters"/>
+        <br/><label class="pure-u-1-4" mac-tooltip="String or number value of property.<br/>Strings can contain the '%' wildcard<br/>when used with 'like'" mac-tooltip-direction="bottom">value</label><input class="pure-u-5-12" type="text" name="value" ng-model="filter.value" placeholder="% wildcard matches 0 or more characters"/>
       
         
       </div>
@@ -41,10 +41,10 @@
     
     <!-- this structure is in lieu of doing all the math by hand and hard-coding -->
     <div class="pure-g">
-      <div class="pure-u-1-12 icon_column"><button type="button" class="icon" ng-click="addNewFilter()">plus</button></div>
+      <div class="pure-u-1-12 icon_column"><button type="button" mac-tooltip="Add Group" mac-tooltip-direction="bottom" class="icon" ng-click="addNewFilter()">plus</button></div>
       <div class="pure-u-11-12 pure-g">
         <div class="pure-u-2-3">&nbsp;</div>
-        <div class="pure-u-1-4"><button class="pure-button" ng-click="performQuery()">Submit</button></div>
+        <div class="pure-u-1-4"><button class="pure-button" ng-click="performQuery()" mac-tooltip="Submit Device Query" mac-tooltip-direction="bottom">Submit</button></div>
       </div>
     </div>
 

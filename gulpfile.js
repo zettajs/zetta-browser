@@ -16,6 +16,7 @@ var scripts = [
             './src/scripts/angular.js'
           , './src/scripts/app.js'
           , './src/scripts/vendor/*.js'
+          , './src/scripts/vendor/macgyver/*.js'
           , './src/scripts/directives/*.js'
           , './src/scripts/services/*.js'
           , './src/scripts/filters/*.js'
@@ -70,6 +71,7 @@ gulp.task('css', function() {
       ,'./src/styles/prism.css'
       ,'./src/styles/animate.css'  
       ,'./src/styles/styles.css'
+      ,'./src/scripts/vendor/macgyver/*.css'
     ])
     /*.pipe(sourcemaps.init())*/
     /*.pipe(prefix("last 2 version", "> 5%", "ie 9")) */

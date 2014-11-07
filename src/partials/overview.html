@@ -19,11 +19,11 @@
               <div ng-show="queryInProgress" class="server-loading pure-u-1"><b>stop</b><b>stop</b><b>stop</b></div>
               <input class="pure-input-1"type="text" id="query_form" ng-model="query" name="query" ng-focus="hideAdvancedQuery()" placeholder="Zetta Device Query" ng-show="!queryInProgress"/>
               </div>
-              <div class="dropdown pure-u-1-24" ng-click="toggleAdvancedQuery()">
+              <div class="dropdown pure-u-1-24" ng-click="toggleAdvancedQuery()" mac-tooltip="Show Query Form" mac-tooltip-direction="bottom">
                 <button type="button" class="icon" ng-show="!isAdvancedQueryVisible">dropdown</button>
               </div>
               <div class="submit pure-u-1-4">
-                <button ng-show="!queryInProgress" class="pure-button">Submit</button>
+                <button ng-show="!queryInProgress" class="pure-button" mac-tooltip="Submit Device Query" mac-tooltip-direction="bottom">Submit</button>
                 <button ng-show="queryInProgress" class="server-loading pure-button"><b>stop</b><b>stop</b><b>stop</b></button>
               </div>
             </div>
@@ -104,13 +104,13 @@
     </h2>
     <div class="server_endpoint pure-u-1-3">
       <form class="pure-form copy_group">
-        <input class="pure-input-1" type="text" value="{{ server.lastSearch || server.href }}" readonly select-on-click/>
+        <input class="pure-input-1" type="text" value="{{ server.lastSearch || server.href }}" readonly select-on-click mac-tooltip="Server API URL" mac-tooltip-direction="bottom"/>
       </form>
     </div>
     <section class="devices pure-u-1">
       <section class="device pure-u-1" ng-repeat="device in server.devices" ng-show="device.available">
         <div class="row main pure-g">
-          <div class="pure-u-1-6 pure-u-md-1-12 icon_column"><button class="icon" ng-click="toggleProperties(this)">direct{{showProperties ? 'down':'right'}}</button></div>
+          <div class="pure-u-1-6 pure-u-md-1-12 icon_column"><button class="icon" ng-click="toggleProperties(this)" mac-tooltip="{{ showProperties ? 'Hide Properties' : 'Show Properties' }}" mac-tooltip-direction="bottom">direct{{showProperties ? 'down':'right'}}</button></div>
           <div class="name pure-u-5-6 pure-u-md-11-12">
             <a ng-click="resolve(device.href)">{{ device.properties.name || device.properties.type }}</a>
           </div>
@@ -155,7 +155,8 @@
           <div class="pure-g action-content">
             <div class="switches pure-u-1-6 pure-u-md-1-12">
               <div ng-class="{ pinned: action.pinned }">
-                <b class="mute" ng-click="mute(action)">eye</b>&nbsp;<b class="pin" ng-click="pin(action)">pushpin</b>
+                <b ng-if="action.pinned" class="mute" ng-click="mute(action)">eye</b>&nbsp;<b class="pin" ng-click="pin(action)">pushpin</b>
+
               </div>
             </div>
 
