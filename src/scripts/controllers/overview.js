@@ -127,6 +127,7 @@ angular.module('zetta').controller('OverviewCtrl', [
 
     $scope.activeQuery = null;
     $scope.query = null;
+    $scope.queryError = null;
     $scope.queryFilters = [$scope.emptyFilter()];
     zettaShared.state.query = null;
 
@@ -232,6 +233,13 @@ angular.module('zetta').controller('OverviewCtrl', [
   $scope.submitQuery = function() {
     var isValid = false;
     var parsed;
+
+    $scope.query = $scope.query.trim();
+
+    if (!$scope.query) {
+      $scope.clearQuery();
+      return;
+    }
 
     var where = 'where';
     if ($scope.query.toLowerCase().substr(0, where.length) !== where) {
@@ -388,7 +396,6 @@ angular.module('zetta').controller('OverviewCtrl', [
         }
 
         $scope.loading = false;
-        console.log($scope.propertyNameIndex);
 
         if ($state.params.query) {
           $scope.query = $state.params.query;
