@@ -10,11 +10,14 @@
       <form class="pure-form query" ng-submit="checkAndSubmitQuery()">
         <fieldset class="main_query">
           <div class="pure-g">
-            <div class="search_icon pure-u-1-12"><b>search</b></div>
+            <div class="search_icon pure-u-1-12">
+              <b ng-if="!query.length">search</b>
+              <button class="icon" ng-click="clearQuery()" ng-if="query.length > 0">delete</button>
+            </div>
             <div class="pure-u-11-12 pure-g">
               <div class="input pure-u-15-24">
               <div ng-show="queryInProgress" class="server-loading pure-u-1"><b>stop</b><b>stop</b><b>stop</b></div>
-              <input class="pure-input-1"type="text" id="query_form" ng-model="query" name="query" ng-focus="hideAdvancedQuery()" placeholder="CaQL Device Query" ng-show="!queryInProgress"/>
+              <input class="pure-input-1"type="text" id="query_form" ng-model="query" name="query" ng-focus="hideAdvancedQuery()" placeholder="Zetta Device Query" ng-show="!queryInProgress"/>
               </div>
               <div class="dropdown pure-u-1-24" ng-click="toggleAdvancedQuery()">
                 <button type="button" class="icon" ng-show="!isAdvancedQueryVisible">dropdown</button>
@@ -22,7 +25,6 @@
               <div class="submit pure-u-1-4">
                 <button ng-show="!queryInProgress" class="pure-button">Submit</button>
                 <button ng-show="queryInProgress" class="server-loading pure-button"><b>stop</b><b>stop</b><b>stop</b></button>
-                <a ng-click="clearQuery()">clear</a>
               </div>
             </div>
           </div> 
@@ -108,9 +110,18 @@
     <section class="devices pure-u-1">
       <section class="device pure-u-1" ng-repeat="device in server.devices" ng-show="device.available">
         <div class="row main pure-g">
-          <div class="pure-u-1-6 pure-u-md-1-12"></div>
+          <div class="pure-u-1-6 pure-u-md-1-12 icon_column"><button class="icon" ng-click="toggleProperties(this)">direct{{showProperties ? 'down':'right'}}</button></div>
           <div class="name pure-u-5-6 pure-u-md-11-12">
             <a ng-click="resolve(device.href)">{{ device.properties.name || device.properties.type }}</a>
+          </div>
+        </div>
+        <div ng-if="showProperties">
+          <div class="row properties pure-g" ng-repeat="(property, value) in device.properties" ng-if="!containsKey(device.streams, property)">
+            <div class="pure-u-1-6 pure-u-md-1-12"></div>
+            <div class="pure-u-5-6 pure-u-md-11-12 pure-g">
+              <div class="name pure-u-1-2 pure-u-md-1-4">:{{property}}</div>
+              <div class="value before-md pure-u-md-1-3">{{ value }}</div>
+            </div>
           </div>
         </div>
         <!-- Stream -->

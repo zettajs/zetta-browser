@@ -119,7 +119,6 @@ h1 {
   .row {
     border-top: 1px solid @gray_5;
     overflow-x: hidden;
-    .expand();
     line-height: 1rem;
     .switches, .name, .value {
         padding: 1rem 0;
@@ -141,6 +140,15 @@ h1 {
       }
     }
     
+    &.properties {
+      border-top: none;
+      .name, .value {
+        font-size: .8rem;
+        color: @gray_50;
+        padding: .25rem 0;
+      }
+    }
+    
     .spacer {
       @media @md {display: none;}
     }
@@ -159,6 +167,7 @@ h1 {
       }
     }
     &.main {
+      border-bottom: 1px solid @gray_5;
       .name {
         color: @apigee-gray;
         font-weight: 700;
@@ -341,13 +350,41 @@ select {
   }
 }
 
+
+.icon_column {
+    text-align: center;
+    button:not(.more_info) {
+      padding-top: .75rem;
+    }
+  
+  }
+  
+  button.icon {
+    color: @yellow;
+    border: none;
+    background-color: transparent;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:disabled {
+      color: @light-gray-bg;
+      &:hover {text-decoration: none;}
+    }
+  }
+
+
 .query {
   margin-top: 1rem;
-  a {font-size: .8rem;}
+  
   .search_icon, .dropdown{
     text-align: center;
     padding-top: .5rem;
     
+  }
+  .query_set {
+    border-top: 1px solid @light-gray-bg;
+    padding: 1rem 0;
+    .reveal();
   }
   .pure-button {
     padding: .25rem 1rem;
@@ -381,27 +418,14 @@ select {
     background-size: 20px 100%;
     background-repeat: no-repeat;
   }
-  button.icon {
-    color: @yellow;
-    border: none;
-    background-color: transparent;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  
   .clear {padding: .5rem;}
-  .join {
-    a {display: none;}
-    &.active {
-      button.icon {color: @gray;}
-      a {display: inline-block;;}
-    }
-  }
+  
   
   
   .advanced_query .header {
     padding: .25rem 0;
-    border-bottom: 1px solid @light-gray-bg;
+    
     margin-bottom: .5rem;
     a {margin-left: 1rem;}
     .dismiss {text-align: center;}
