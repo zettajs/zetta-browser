@@ -44,11 +44,11 @@ gulp.task('jshint', function() {
 
 gulp.task('scripts', function() {
   gulp.src(scripts)
-    .pipe(sourcemaps.init()) 
+  /*  .pipe(sourcemaps.init())  */
       .pipe(concat('zetta.js'))
-  /*  .pipe(stripDebug()) */
-      .pipe(uglify({mangle:false})) //remove mangle.false to further reduce filesize of the production JS file. about a 30% savings
-    .pipe(sourcemaps.write('./'))  
+  /*  .pipe(stripDebug())  */
+  .pipe(uglify({mangle:false})) //remove mangle.false to further reduce filesize of the production JS file. about a 30% savings
+  /*  .pipe(sourcemaps.write('./'))  */
       .pipe(gulp.dest('./dist/scripts'))
 });
 
@@ -81,23 +81,23 @@ gulp.task('css', function() {
 });
   
 gulp.task('html', function() {
-  gulp.src('./src/*.html')
+  gulp.src('./src/partials/*.html')
     /*.pipe(sourcemaps.init())*/
       .pipe(htmlmin({
         useShortDoctype: true
         , removeRedundantAttributes: true
-      /*, collapseWhitespace: true
-        , conservativeCollapse: true */
+      , collapseWhitespace: true
+        , conservativeCollapse: false
       }))
     /*.pipe(sourcemaps.write())*/
-    .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('./dist/partials'))
 });
 
-gulp.task('move', function() {
+gulp.task('move',['html'], function() {
   gulp.src(['./src/favicon.ico']).pipe(gulp.dest('./dist'));
   gulp.src(['./src/index.html']).pipe(gulp.dest('./dist'));
   gulp.src(['./src/images/*.*']).pipe(gulp.dest('./dist/images'));
-  gulp.src(['./src/partials/**']).pipe(gulp.dest('./dist/partials'));
+  gulp.src(['./src/partials/fields/**']).pipe(gulp.dest('./dist/partials/fields'));
   gulp.src('./src/styles/fonts/*.*').pipe(gulp.dest('./dist/fonts'));
 });
 
@@ -116,8 +116,5 @@ gulp.task('default', ['scripts', 'styles', 'move', 'serve'], function(){
 
 
 gulp.task('heroku:production', ['scripts', 'styles', 'move'], function(){
-  //gulp.watch(zettaScripts, ['jshint']);
-  //gulp.watch(scripts, ['scripts']);
-  //gulp.watch('./src/styles/*.*', ['styles']);
-  //gulp.watch(['./src/index.html', './src/images/*.*', './src/partials/*.*'], ['move']);
+
 });
