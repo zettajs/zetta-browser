@@ -48,6 +48,10 @@ angular.module('zetta').controller('OverviewCtrl', [
       zettaShared.state.query = null;
     }
 
+    if ($state.params.query === 'null') {
+      delete $state.params.query;
+    }
+
     if ($state.params.expandQuery) {
       $scope.showAdvancedQuery();
     }
@@ -71,6 +75,10 @@ angular.module('zetta').controller('OverviewCtrl', [
 
     if (!$state.params.filter) {
       delete $state.params.filter;
+    }
+
+    if (!$state.params.query) {
+      delete $state.params.query;
     }
 
     delete $state.params.expandQuery;
