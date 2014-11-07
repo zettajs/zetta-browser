@@ -1,6 +1,6 @@
 
 angular.module('zetta',
-    ['siren', 'ui.state'])
+    ['siren', 'ui.state', 'Mac'])
 .config(['classRouterProvider', '$stateProvider',
     function(classRouterProvider, $stateProvider) {
 
