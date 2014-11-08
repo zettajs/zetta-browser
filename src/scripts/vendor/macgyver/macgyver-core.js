@@ -1485,7 +1485,7 @@ angular.module("Mac").directive("macTooltip", [
         enabled = false;
         disabled = false;
         defaults = {
-          direction: "top",
+          direction: "bottom",
           trigger: "hover",
           inside: false
         };

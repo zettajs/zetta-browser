@@ -2,7 +2,8 @@ angular.module('zetta').directive('zettaOverviewAction', [function() {
   var link = function(scope, element) {
     
     function isRadioButtons(action) {
-
+        scope.device.name = scope.device.name ?  scope.device.name : scope.device.type
+        console.log('devProps', scope.device.name);
       // one input plus hidden
       if (scope.action.fields.length !== 2) {
         return false;
@@ -81,7 +82,8 @@ angular.module('zetta').directive('zettaOverviewAction', [function() {
     restrict: 'E',
     scope: {
       action: '=value',
-      context: '='
+      context: '=',
+      device: '='
     },
     templateUrl: 'partials/overview-action.html',
     link: link

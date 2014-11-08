@@ -10,7 +10,13 @@
     </div>
     <div class="vis before-md pure-u-1 pure-u-md-5-12" ng-if="action.inputFields.length<2"></div>
     <div class="value pure-u-md-1-3">
-      <button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button>
+      <button 
+        class="pure-button {{ action.name + '-button' }}" 
+        ng-disabled="!action.available"
+        ng-click="execute()"
+        mac-tooltip="{{device.name}} # {{action.name}}"
+        mac-tooltip-direction="bottom"        
+        >{{ action.name }}</button>
     </div>
 
 </form>
@@ -22,7 +28,11 @@
   <div class="vis before-md pure-u-1 pure-u-md-5-12"></div>
   <div class="value pure-u-1-2 pure-u-md-1-3">
     <form ng-repeat="val in action.radioField.value" class="pure-form">
-      <button class="pure-button {{ action.name + '-button' }}" ng-click="val.execute()">{{ val.title || val.value}}</button>
+      <button class="pure-button {{ action.name + '-button' }}" 
+        ng-click="val.execute()"
+        mac-tooltip="{{device.name}} # {{val.title || val.value}}"
+        mac-tooltip-direction="bottom"       
+        >{{ val.title || val.value}}</button>
     </form>
   </div>
 </div>
@@ -50,7 +60,14 @@
     
     <div class="pure-g">
         <div class="before-md pure-u-md-2-3"></div>
-        <div class="value pure-u-1 pure-u-md-1-3"><button class="pure-button {{ action.name + '-button' }}" ng-disabled="!action.available" ng-click="execute()">{{ action.name }}</button></div>
+        <div class="value pure-u-1 pure-u-md-1-3">
+            <button 
+                class="pure-button {{ action.name + '-button' }}" 
+                ng-disabled="!action.available" 
+                ng-click="execute()"
+                mac-tooltip="{{device.name}} # {{action.name}}"
+                mac-tooltip-direction="bottom" 
+                >{{ action.name }}</button></div>
     </div>
     
   </form>

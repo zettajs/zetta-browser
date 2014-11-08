@@ -3,7 +3,17 @@
     <section class="devices pure-u-1">
     <div ng-class="{ open: !!characteristic.muteOpen, closed: !characteristic.muteOpen }" class="device row action pure-g animate-size closed" ng-repeat="characteristic in muted">
         <div class="switches pure-u-1-6 pure-u-md-1-12">
-          <b class="mute"ng-click="unmute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="pin(characteristic)">pushpin</b>
+            <b class="mute" 
+             ng-click="unmute(characteristic)"
+             mac-tooltip="Unmute {{characteristic.name | capitalize}}" 
+             mac-tooltip-direction="bottom"
+             >eye</b>
+            &nbsp;
+          <b class="pin" 
+             ng-click="pin(characteristic)"
+             mac-tooltip="Pin {{characteristic.name | capitalize}}" 
+             mac-tooltip-direction="bottom"
+             >pushpin</b>
         </div>
         <div class="name lone-name pure-u-5-6 pure-u-md-1-4">
           <a class="server-name" ng-click="loadServer(characteristic.device.server)">{{ characteristic.device.server.name }} &gt; </a>

@@ -1163,11 +1163,13 @@ h1 .back:hover {
   }
 }
 .devices .row .switches {
-  padding: 1.1rem 0 .9rem 0;
+  padding: 0;
   text-align: center;
   font-size: 1em;
 }
 .devices .row .switches b {
+  display: inline-block;
+  padding: 1rem 0;
   color: #e6e6e6;
 }
 .devices .row .switches b:hover {

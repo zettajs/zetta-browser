@@ -12,7 +12,7 @@
           <div class="pure-g">
             <div class="search_icon pure-u-1-12">
               <b ng-if="!query.length">search</b>
-              <button type="button" class="icon" ng-click="clearQuery()" ng-if="query.length > 0">delete</button>
+              <button type="button" class="icon" ng-click="clearQuery()" ng-if="query.length > 0" mac-tooltip="Clear Query" mac-tooltip-direction="bottom">delete</button>
             </div>
             <div class="pure-u-11-12 pure-g">
               <div class="input pure-u-15-24">
@@ -62,7 +62,17 @@
       <div ng-repeat="characteristic in pinned" class="device row pure-g animate-size {{characteristic.type}}"
   ng-class="{ open: !!characteristic.pinOpen, closed: !characteristic.pinOpen, action: !characteristic.type, stream: !!characteristic.type, disabled: (!characteristic.type && !characteristic.available) }" >
         <div class="switches pure-u-1-6 pure-u-md-1-12">
-          <b class="mute" ng-click="mute(characteristic)">eye</b>&nbsp;<b class="pin" ng-click="unpin(characteristic)">pushpin</b>
+          <b class="mute" 
+             ng-click="mute(characteristic)"
+             mac-tooltip="Mute {{characteristic.name | capitalize}}" 
+             mac-tooltip-direction="bottom"
+             >eye</b>
+            &nbsp;
+          <b class="pin" 
+             ng-click="unpin(characteristic)"
+             mac-tooltip="Unpin {{characteristic.name | capitalize}}" 
+             mac-tooltip-direction="bottom"
+             >pushpin</b>
         </div>
         <!-- Stream -->
         <div class="pure-u-5-6 pure-u-md-11-12 pure-g" ng-if="characteristic.type">
@@ -100,7 +110,9 @@
         :devices <span class="active_query" ng-if="activeQuery">{{ activeQuery }}</span>
       </span>
       <span ng-if="!filter">
-        <a ng-click="loadServer(server)">{{ server.name }}</a> : {{ server.type }} <span class="active_query" ng-if="activeQuery">{{ activeQuery }}</span>
+        <a ng-click="loadServer(server)">{{ server.name }}</a> : {{ server.type }}  <span class="active_query" ng-if="activeQuery"
+      mac-tooltip="Devices visible to {{ server.name }} are being filtered by this query"
+      mac-tooltip-direction="bottom"                                                     >{{ activeQuery }}</span>
       </span>
     </h2>
     <div class="server_endpoint pure-u-1-3">
@@ -113,7 +125,10 @@
         <div class="row main pure-g">
           <div class="pure-u-1-6 pure-u-md-1-12 icon_column"><button class="icon" ng-click="toggleProperties(this)" mac-tooltip="{{ showProperties ? 'Hide Properties' : 'Show Properties' }}" mac-tooltip-direction="bottom">direct{{showProperties ? 'down':'right'}}</button></div>
           <div class="name pure-u-5-6 pure-u-md-11-12">
-            <a ng-click="resolve(device.href)">{{ device.properties.name || device.properties.type }}</a>
+            <a ng-click="resolve(device.href)"
+               mac-tooltip="Details for {{ device.properties.name || device.properties.type }}"
+               mac-tooltip-direction="bottom"
+               >{{ device.properties.name || device.properties.type }}</a>
           </div>
         </div>
         <div ng-if="showProperties">
@@ -129,7 +144,17 @@
         <div ng-repeat="stream in device.streams" class="row stream pure-g animate-size closed {{stream.type}}" ng-show="!stream.muted" id="{{ stream.id }}" ng-class="{ open: !!stream.open, closed: !stream.open }">
           <div class="switches pure-u-1-6 pure-u-md-1-12">
             <div ng-class="{ pinned: stream.pinned }">
-              <b class="mute" ng-click="mute(stream)">eye</b>&nbsp;<b class="pin" ng-click="pin(stream)">pushpin</b>
+              <b class="mute" 
+                 ng-click="mute(stream)"
+                 mac-tooltip="Mute :{{stream.name | capitalize}}" 
+                 mac-tooltip-direction="bottom"
+                 >eye</b>
+                &nbsp;
+              <b class="pin" 
+                 ng-click="pin(stream)" 
+                 mac-tooltip="Pin :{{stream.name | capitalize}}" 
+                 mac-tooltip-direction="bottom"
+                 >pushpin</b>
             </div>
           </div>
           <div class="pure-u-5-6 pure-u-md-11-12 pure-g">
@@ -148,7 +173,10 @@
                   <b>stop</b><b>stop</b><b>stop</b>
                 </div>
             </div>
-            <div class="value before-md pure-u-md-1-3">&nbsp;{{ stream.current }}</div>
+            <div class="value before-md pure-u-md-1-3">&nbsp;
+                <span
+                 mac-tooltip="{{ device.properties.name || device.properties.type }} : {{stream.name}}"
+                 mac-tooltip-direction="bottom"                                                  >{{ stream.current }}</span></div>
           </div>
         </div>
         <!-- Action -->
@@ -156,18 +184,35 @@
           <div class="pure-g action-content">
             <div class="switches pure-u-1-6 pure-u-md-1-12">
               <div ng-class="{ pinned: action.pinned }">
-                <b ng-if="action.pinned" class="mute" ng-click="mute(action)">eye</b>&nbsp;<b class="pin" ng-click="pin(action)">pushpin</b>
-
+                  <b class="mute" 
+                     ng-click="mute(action)"
+                     mac-tooltip="Mute #{{action.name | capitalize}}" 
+                     mac-tooltip-direction="bottom"
+                     >eye</b>
+                    &nbsp;
+                  <b class="pin" 
+                     ng-click="pin(action)" 
+                     mac-tooltip="Pin #{{action.name | capitalize}}" 
+                     mac-tooltip-direction="bottom"
+                     >pushpin</b>
               </div>
             </div>
 
-            <zetta-overview-action value="action" context="'server'" class="pure-u-5-6 pure-u-md-11-12 pure-g"/>
+            <zetta-overview-action value="action" context="'server'" device="device.properties" class="pure-u-5-6 pure-u-md-11-12 pure-g"/>
 
           </div>
         </div>
       </section>
     </section>
-    <div class="device_count pure-u-1" ng-if="activeQuery">{{ availableDevices(server).length }} found</div>
+    <div class="device_count pure-u-1" ng-if="activeQuery">
+        <ng-pluralize 
+            count="availableDevices(server).length"
+            when="{'one': '1 device matched','other': '{} devices matched'}"
+            mac-tooltip="Devices Matched by Active Query"
+            mac-tooltip-direction="bottom"           
+            >
+        </ng-pluralize>
+    </div>
   </div>
   
   <!-- Muted Group -->
