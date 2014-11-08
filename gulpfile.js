@@ -64,6 +64,18 @@ gulp.task('styles',['css'], function() {
  
 });
 
+gulp.task('test-styles', function() {
+  gulp.src('./src/styles/test.less')
+    .pipe(less({
+      generateSourceMap: false, 
+      paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
+    .pipe(gulp.dest('./src/styles'));
+  
+ 
+});
+
+
 gulp.task('css', function() {
   gulp.src([
        './src/styles/pure.css'
@@ -116,6 +128,10 @@ gulp.task('default', ['scripts', 'styles', 'move', 'serve'], function(){
 
 });
 
+gulp.task('test', ['test-styles'],function(){
+    gulp.watch('./src/styles/test.less', ['test-styles']);
+
+});
 
 gulp.task('heroku:production', ['scripts', 'styles', 'move'], function(){
 

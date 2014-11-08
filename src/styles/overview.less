@@ -4,8 +4,6 @@
 }
 .device-group{ 
   h2 { .serverHeading(); } 
-  .devices {border-bottom: 2px solid @apigee-gray;}
-  
   .device_count {
     font-size: .8rem;
     padding-top: .5rem;
@@ -106,13 +104,18 @@ h1 {
 
 .devices {
     background-color: #fff;
-    .border-top(@apigee-gray);
+    border-top: 1px solid @gray_20;
+    border-bottom: 1px solid @gray_30;
+    .shadow(2);
   
   .device {
     background-color: transparent; 
     &:not(:first-child){
       .border-top(@gray_20, 1px)
     }
+    box-shadow: none;
+    transition: box-shadow .2s ease;
+    &:hover {.shadow(6);}
   }
     
     
@@ -291,10 +294,14 @@ select {
   border-bottom: none !important;
   .content {
     background-color: #fff;
-    .border-top(@apigee-grey);
-    border-bottom: 2px solid @apigee-grey;
+    
+    border-top: 1px solid @gray_20;
+    border-bottom: 1px solid @gray_20;
+    
     padding: 1rem;
-
+    transition: box-shadow .2s ease;
+    .shadow(2);
+    &:hover {.shadow(6);}
   }
   form {
     margin-bottom: 1.5rem;
@@ -365,9 +372,8 @@ select {
     color: @yellow;
     border: none;
     background-color: transparent;
-    &:hover {
-      text-decoration: underline;
-    }
+    
+      
     &:disabled {
       color: @light-gray-bg;
       &:hover {text-decoration: none;}

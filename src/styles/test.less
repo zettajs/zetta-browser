@@ -1,0 +1,44 @@
+/* test styles */
+@import 'apigee-colors.less';
+body {
+    font-family: 'Source Sans Pro', Helvetica, sans-serif;
+    font-weight: 200;
+    //background-color: #BF4904;
+}
+
+.shadow(@height){
+    
+    
+    @h1: unit(@height, px);
+    @h: round(pow(@h1,1.1));
+    box-shadow: 0px @h @h1 * 2 fade(black, max(unit(25 - unit(@h), %), 5%)), 
+                0px 0px @h fade(black, max(unit(25 - unit(@h), %), 5%));
+}
+ 
+/* Create a Parametric mixin and add a guard operation */
+.loop(@index) when(@index > 0) {
+  .shadow_@{index} {
+    .shadow(@index);
+  }
+ .loop(@index - 1); 
+}
+
+
+
+.unit {
+    padding: 1rem;
+    margin: 1rem;
+    width: 3rem;
+    height: 3rem;
+    display: inline-block;
+    background-color: white;
+    
+    border-top: 1px solid @gray_10;
+    border-bottom: 1px solid @gray_40;
+    border-radius: 3px;
+    
+    box-shadow: none;
+    transition: box-shadow .2s ease;
+    &:hover {.shadow(10);}
+}
+

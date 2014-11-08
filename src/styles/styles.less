@@ -318,7 +318,8 @@ nav {
 
 
   .zetta-logo {margin-top: .25rem;}
-  height: 2.5rem;
+  min-height: 2.5rem;
+  .shadow(10);
 }
 
 /* get-started */
@@ -568,7 +569,7 @@ header nav, #wampum {
       .centered();
 
     }
-
+    .shadow(2);
   }
 }
 
@@ -626,9 +627,8 @@ footer {
 
 .focus {
   background-color: #fff;
-  .border-top(@apigee-gray); .border-bottom(@apigee-gray);
-  margin-top: 1rem;
-
+  .shadow(2);
+    z-index: -10;
   .streams {
 
     padding: 0;
@@ -893,3 +893,11 @@ table.number_control {
   }
 
 }
+
+.shadow(@height){
+    @h1: unit(@height, px);
+    @h: round(pow(@h1,1.1));
+    box-shadow: 0px @h @h1 * 2 fade(black, max(unit(15 - unit(@h), %), 2%)), 
+                0px 0px @h fade(black, max(unit(15 - unit(@h), %), 2%));
+}
+ 

@@ -524,7 +524,8 @@ a.home:hover {
 nav {
   background-color: #0b1a1f;
   text-align: left;
-  height: 2.5rem;
+  min-height: 2.5rem;
+  box-shadow: 0px 13px 20px rgba(0, 0, 0, 0.02), 0px 0px 13px rgba(0, 0, 0, 0.02);
 }
 nav section {
   width: 100%;
@@ -750,7 +751,7 @@ nav .zetta-logo {
   background-color: transparent;
 }
 .muted .devices .row .switches b {
-  color: #cccccc;
+  color: rgba(0, 0, 0, 0.2);
 }
 /* features */
 .feature {
@@ -899,6 +900,7 @@ header nav,
   padding: 0 0 1rem 0;
   padding-left: 1rem;
   padding-right: 1rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.13), 0px 0px 2px rgba(0, 0, 0, 0.13);
 }
 .page_content header h1 {
   margin: 2rem 0 0rem 0;
@@ -987,9 +989,6 @@ footer a {
 .device-group h2 span {
   font-weight: 100;
 }
-.device-group .devices {
-  border-bottom: 2px solid #59595b;
-}
 .device-group .device_count {
   font-size: .8rem;
   padding-top: .5rem;
@@ -1027,7 +1026,7 @@ form.action-content label {
 }
 .pinned .devices .row:not(:first-child),
 .muted .devices .row:not(:first-child) {
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   /*
   background-image: linear-gradient(@color @width, transparent @width);
   background-size: 100% @width;
@@ -1098,19 +1097,17 @@ h1 .back:hover {
 }
 .devices {
   background-color: #fff;
-  border-top: 2px solid #59595b;
-  /*
-  background-image: linear-gradient(@color @width, transparent @width);
-  background-size: 100% @width;
-  background-repeat: no-repeat;
-  background-position: top;
-  */
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.13), 0px 0px 2px rgba(0, 0, 0, 0.13);
 }
 .devices .device {
   background-color: transparent;
+  box-shadow: none;
+  transition: box-shadow 0.2s ease;
 }
 .devices .device:not(:first-child) {
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
   /*
   background-image: linear-gradient(@color @width, transparent @width);
   background-size: 100% @width;
@@ -1118,8 +1115,11 @@ h1 .back:hover {
   background-position: top;
   */
 }
+.devices .device:hover {
+  box-shadow: 0px 7px 12px rgba(0, 0, 0, 0.08), 0px 0px 7px rgba(0, 0, 0, 0.08);
+}
 .devices .row {
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   overflow-x: hidden;
   line-height: 1rem;
 }
@@ -1154,7 +1154,7 @@ h1 .back:hover {
 .devices .row.properties .name,
 .devices .row.properties .value {
   font-size: .8rem;
-  color: #808080;
+  color: rgba(0, 0, 0, 0.5);
   padding: .25rem 0;
 }
 @media screen and (min-width: 48.1em) {
@@ -1170,22 +1170,22 @@ h1 .back:hover {
 .devices .row .switches b {
   display: inline-block;
   padding: 1rem 0;
-  color: #e6e6e6;
+  color: rgba(0, 0, 0, 0.1);
 }
 .devices .row .switches b:hover {
   color: #59595b;
   cursor: pointer;
 }
 .devices .row.main {
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 .devices .row.main .name {
   color: #59595b;
   font-weight: 700;
 }
 .devices .row.disabled {
-  background-color: #f2f2f2;
-  color: #666666;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.6);
 }
 .devices .row.action {
   -webkit-box-sizing: border-box;
@@ -1327,15 +1327,14 @@ select {
 }
 .device-meta .content {
   background-color: #fff;
-  border-top: 2px solid #59595b;
-  /*
-  background-image: linear-gradient(@color @width, transparent @width);
-  background-size: 100% @width;
-  background-repeat: no-repeat;
-  background-position: top;
-  */
-  border-bottom: 2px solid #59595b;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 1rem;
+  transition: box-shadow 0.2s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.13), 0px 0px 2px rgba(0, 0, 0, 0.13);
+}
+.device-meta .content:hover {
+  box-shadow: 0px 7px 12px rgba(0, 0, 0, 0.08), 0px 0px 7px rgba(0, 0, 0, 0.08);
 }
 .device-meta form {
   margin-bottom: 1.5rem;
@@ -1378,7 +1377,7 @@ select {
   padding: 0 !important;
 }
 .device-meta .properties .content div:not(:first-child) {
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
   /*
   background-image: linear-gradient(@color @width, transparent @width);
   background-size: 100% @width;
@@ -1387,7 +1386,7 @@ select {
   */
 }
 .device-meta .properties .content div:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 .device-meta .properties .content span {
   -webkit-box-sizing: border-box;
@@ -1417,9 +1416,6 @@ button.icon {
   color: #faa438;
   border: none;
   background-color: transparent;
-}
-button.icon:hover {
-  text-decoration: underline;
 }
 button.icon:disabled {
   color: #ededed;
@@ -1527,21 +1523,8 @@ button.icon:disabled:hover {
 /* Device Show */
 .focus {
   background-color: #fff;
-  border-top: 2px solid #59595b;
-  /*
-  background-image: linear-gradient(@color @width, transparent @width);
-  background-size: 100% @width;
-  background-repeat: no-repeat;
-  background-position: top;
-  */
-  border-bottom: 2px solid #59595b;
-  /*
-  background-image: linear-gradient(transparent @width, @color @width);
-  background-size: 100% @width;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  */
-  margin-top: 1rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.13), 0px 0px 2px rgba(0, 0, 0, 0.13);
+  z-index: -10;
 }
 .focus .streams {
   padding: 0;
@@ -1597,7 +1580,7 @@ button.icon:disabled:hover {
   line-height: 2rem;
 }
 .focus .streams .stream .name {
-  color: #b3b3b3;
+  color: rgba(0, 0, 0, 0.3);
 }
 .focus .streams .stream.numerical .vis,
 .focus .streams .stream.categorical .vis {
@@ -1629,7 +1612,7 @@ button.icon:disabled:hover {
   list-style-type: none;
 }
 .state_log ul li:not(:last-child) {
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   /*
   background-image: linear-gradient(transparent @width, @color @width);
   background-size: 100% @width;
@@ -1638,7 +1621,7 @@ button.icon:disabled:hover {
   */
 }
 .state_log ul li:not(:first-child) {
-  color: #999999;
+  color: rgba(0, 0, 0, 0.4);
 }
 .state_log ul li strong {
   font-family: "fira-mono", courier, monospace !important;
@@ -1682,7 +1665,7 @@ button.icon:disabled:hover {
   text-align: center;
   font-size: .8rem;
   height: 1rem;
-  color: #b3b3b3;
+  color: rgba(0, 0, 0, 0.3);
 }
 .linegraph .labels .q5 {
   text-align: left;
