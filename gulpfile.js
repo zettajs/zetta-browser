@@ -81,8 +81,8 @@ gulp.task('css', function() {
        './src/styles/pure.css'
       ,'./src/styles/grids-responsive.css'
       ,'./src/styles/prism.css'
-      ,'./src/styles/animate.css'  
       ,'./src/styles/styles.css'
+      ,'./src/styles/macgyver.css'
       ,'./src/scripts/vendor/macgyver/*.css'
     ])
     /*.pipe(sourcemaps.init())*/

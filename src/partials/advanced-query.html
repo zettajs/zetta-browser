@@ -12,7 +12,7 @@
           <strong>Device Query Form</strong>
         </div>
         <div class="pure-u-1-24 dismiss">
-          <button type="button" class="icon" ng-click="dismiss()" mac-tooltip="Hide Query Form" mac-tooltip-direction="bottom">delete</button>
+          <button type="button" class="icon" ng-click="dismiss()" mac-tooltip="Hide Query Form" mac-tooltip-direction="bottom">minus</button>
         </div>
         
       </div>
@@ -22,7 +22,9 @@
      
       <div class="pure-u-1-12 icon_column"><button type="button" class="icon" ng-click="removeFilter($index)" ng-disabled="filters.length < 2" mac-tooltip="Remove Group" mac-tooltip-direction="bottom">delete</button></div>
       <div class="pure-u-11-12 pure-g">
-        <label class="pure-u-1-4" mac-tooltip="'string' name of device property" mac-tooltip-direction="bottom">property</label>
+        <label class="pure-u-1-4" >
+            <span mac-tooltip="'string' name of device property" mac-tooltip-direction="bottom">property</span>
+          </label>
         <!--<input class="pure-u-5-12" type="text" name="property" ng-model="filter.field" placeholder="type, name, id..."/>-->
         <mac-autocomplete
           class="pure-u-5-12"
@@ -31,7 +33,10 @@
           placeholder="type, name, id..."
           ng-model="filter.field">
         </mac-autocomplete>
-        <br/><label class="pure-u-1-4">comparison</label>
+        <br/><label class="pure-u-1-4">
+          <span mac-tooltip="Method used to compare 'property' with 'value'" mac-tooltip-direction="bottom">comparison</span>
+          
+        </label>
         <select class="pure-u-5-12" name="comparison" ng-model="filter.operator">
           <option value="eq">=</option>
           <option value="gt">&gt;</option>
@@ -40,7 +45,9 @@
           <option value="lte">&lt;=</option>
           <option value="like">like</option>
         </select>
-        <br/><label class="pure-u-1-4" mac-tooltip="String or number value of property.<br/>Strings can contain the '%' wildcard<br/>when used with 'like'" mac-tooltip-direction="bottom">value</label><input class="pure-u-5-12" type="text" name="value" ng-model="filter.value" placeholder="% wildcard matches 0 or more characters"/>
+        <br/><label class="pure-u-1-4">
+          <span mac-tooltip="String or number value of property.<br/>Strings can contain the '%' wildcard<br/>when used with 'like'" mac-tooltip-direction="bottom">value</span>
+        </label><input class="pure-u-5-12" type="text" name="value" ng-model="filter.value" placeholder="% wildcard matches 0 or more characters"/>
       
         
       </div>

@@ -12,26 +12,21 @@ body {
     @h1: unit(@height, px);
     @h: round(pow(@h1,1.1));
     box-shadow: 0px @h @h1 * 2 fade(black, max(unit(25 - unit(@h), %), 5%)), 
-                0px 0px @h fade(black, max(unit(25 - unit(@h), %), 5%));
+                0px 0px @h fade(black, max(unit(25 - unit(@h*2), %), 5%));
 }
  
 /* Create a Parametric mixin and add a guard operation */
-.loop(@index) when(@index > 0) {
-  .shadow_@{index} {
-    .shadow(@index);
-  }
- .loop(@index - 1); 
-}
 
 
 
 .unit {
     padding: 1rem;
     margin: 1rem;
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 5rem;
     display: inline-block;
     background-color: white;
+    text-align: center;
     
     border-top: 1px solid @gray_10;
     border-bottom: 1px solid @gray_40;
@@ -39,6 +34,17 @@ body {
     
     box-shadow: none;
     transition: box-shadow .2s ease;
+    
+    &:nth-child(1) { .shadow(1); }
+    &:nth-child(2) { .shadow(2); }
+    &:nth-child(3) { .shadow(3); }
+    &:nth-child(4) { .shadow(4); }
+    &:nth-child(5) { .shadow(5); }
+    &:nth-child(6) { .shadow(6); }
+    &:nth-child(7) { .shadow(9); }
+    &:nth-child(8) { .shadow(8); }
+    &:nth-child(9) { .shadow(9); }
+    
     &:hover {.shadow(10);}
 }
 

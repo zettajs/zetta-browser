@@ -145,11 +145,19 @@ h1 {
     
     &.properties {
       border-top: none;
-      .name, .value {
+      border-bottom: 1px solid transparent;
+      .name, .val {
         font-size: .8rem;
-        color: @gray_50;
         padding: .25rem 0;
       }
+      .val input {
+        padding: 0; margin: 0;
+        border: none;
+        color: inherit;
+      }
+      color: @gray_40;
+      &:hover {color: @gray_60;}
+      
     }
     
     .spacer {
@@ -273,11 +281,18 @@ select {
 .pure-button {
     border-radius: 0 !important;
     padding: .3rem .5rem;
-    box-shadow: 0px .1rem 0 @apigee-grey;
-    color: @apigee-grey;
-    &:hover {color: #000;}
+    border-bottom: 2px solid @gray_20;
+    color: @gray_70;
+    
     margin: 0 .5rem 0 0;
     .body-font();
+    transition: all .2s ease;
+    .shadow(1);
+    
+    &:hover:not([disabled]) {
+        background-color: @yellow;
+        .shadow(4);
+    }
   }
 
 
@@ -369,7 +384,8 @@ select {
   }
   
   button.icon {
-    color: @yellow;
+    color: mix(@yellow, @dark, 90%);
+    &:hover {color: @yellow;}
     border: none;
     background-color: transparent;
     
@@ -383,14 +399,14 @@ select {
 
 .query {
   margin-top: 1rem;
-  
+      
   .search_icon, .dropdown{
     text-align: center;
     padding-top: .5rem;
     
   }
   .query_set {
-    border-top: 1px solid @light-gray-bg;
+    border-top: 1px solid @gray_20;
     padding: 1rem 0;
     .reveal();
   }
@@ -400,16 +416,18 @@ select {
     margin-left: 1rem;
   }
   .search_icon {
-    background-image: linear-gradient(90deg, @light-gray-bg 2px, transparent 2px);
+    border-left: 1px solid @gray_20;
   }
   .input {padding: 0rem 0 .5rem 0;}
   .search_icon, .input, .dropdown{
-    border-top: 2px solid @light-gray-bg;
-    border-bottom: 2px solid @light-gray-bg;
+    border-top: 1px solid @gray_20;
+    border-bottom: 1px solid @gray_20;
     height: 2.5rem;
-    box-shadow:  0 .1rem 0 #59595b;
+    //box-shadow:  0 .1rem 0 #59595b;
     .border-box();
+    
   }
+  .dropdown{ border-right: 1px solid @gray_20; }
   .input {
     overflow: hidden;
     input{
@@ -418,14 +436,7 @@ select {
       box-shadow: none;
     }
   }
-  .submit {
-    background-image: linear-gradient(@light-gray-bg 2px, transparent 2px), 
-      linear-gradient(to top, #59595b 2px, @light-gray-bg 2px, @light-gray-bg 4px,transparent 4px);
-    height: (2.5 * 16) + 2px;
-    
-    background-size: 20px 100%;
-    background-repeat: no-repeat;
-  }
+  
   
   .clear {padding: .5rem;}
   
@@ -464,6 +475,7 @@ select {
     padding: .25rem;
     
   }
+&:hover input {background-color: #fff;}
 }
 
 

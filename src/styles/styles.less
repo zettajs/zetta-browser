@@ -5,7 +5,7 @@
 ***/
 
 @import 'fira.less';
-@import 'facit.less';
+//@import 'facit.less';
 @import 'ss-pika.less';
 @import 'apigee-colors.less';
 @import 'breakpoints.less';
@@ -33,7 +33,7 @@ body {
 html, button, input, select, textarea,
 .pure-g [class *= "pure-u"] {
     /* Set your content font stack here: */
-    font-family: "jaf-facitweb", Helvetica, Arial, sans-serif;
+    font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
 
     h1, h2, h3, h4, h5, h6 { .heading-fonts(); }
 
@@ -93,10 +93,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-h1 {
-  font: normal 2em/3rem; margin: 1rem 0;
-  line-height: 2rem;
-}
+
 h2 { font: normal 1.75em/2rem; margin: .7rem 0; }
 h3 { font: normal 1.4em/2rem; margin: .4rem 0; }
 h4 { font: normal 1.2em/2rem; margin: .5rem 0; }
@@ -108,6 +105,13 @@ section.main{
 }
 
 h1 {
+  font: normal 2em/3rem; margin: 1rem 0;
+  line-height: 2rem;
+    
+  &.front_door {
+    padding-bottom: 1rem;
+  }    
+    
   .back {
     display : inline-block;
     position: relative;
@@ -146,6 +150,9 @@ h1 {
   }
 
 }
+
+.mac-tooltip {line-height: 1rem;}
+
 /*
 
 .pure-button {
@@ -556,7 +563,10 @@ header nav, #wampum {
 
 .page_content {
 
-  a {color: mix(@yellow, @dark, 70%);}
+  a {
+      color: mix(@yellow, @dark, 90%);
+    &:hover {color: @yellow;}
+  }
 
   header {
     margin-top: 2.5rem;
@@ -569,7 +579,9 @@ header nav, #wampum {
       .centered();
 
     }
+    transition: box-shadow .2s ease;
     .shadow(2);
+    &:hover {.shadow(4);}
   }
 }
 
@@ -779,10 +791,10 @@ table.number_control {
 }
 
 .mono(){
-  font-family: "fira-mono",courier, monospace;
+  font-family: "Source Code Pro",courier, monospace;
 }
 .body-font(){
-  font-family: "jaf-facitweb", Helvetica, Arial, sans-serif;
+  font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
 }
 .menu() {
   margin: 0; padding: 0;
@@ -819,7 +831,7 @@ table.number_control {
 .serverHeading(){
   font-size: 1rem; line-height: 1rem; margin: 0; padding: 2rem 0 1rem 0;
   .body-font() !important;
-  span {font-weight: 100;}
+  span {font-weight: 200;}
 }
 
 .border-top(@color, @width: 2px){
