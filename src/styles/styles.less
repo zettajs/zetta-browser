@@ -573,7 +573,7 @@ header nav, #wampum {
     margin-top: 2.5rem;
     background-color: #fff;
     padding: 0 0 1rem 0;
-    z-index: 100;
+    z-index: 49;
     h1 {margin: 2rem 0 1rem 0;}
     .smallPadding();
     .content {
@@ -769,9 +769,21 @@ footer {
 
 table.number_control {
   width: 100%;
-  td {text-align: center;}
-  .range_ui input{width: 80%;}
-  .number_ui input {float: right;}
+  td {
+    
+    padding: .75em 0;
+    text-align: center;
+    margin: 0;
+    &:first-of-type {text-align: left;}
+    
+    .border-box();
+    
+    &.range_ui input[type=range]{
+      padding: .2em 0;
+    }
+    &.number_ui {padding: 0;}
+  }
+  
 }
 
 

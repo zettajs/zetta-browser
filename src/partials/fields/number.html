@@ -1,6 +1,27 @@
-<table class="number_control"><tr>
-  <td>{{ $parent.field.min }}</td>
-  <td class="range_ui"><input ng-model="$parent.field.value" id="{{ $parent.action.name + $parent.field.name }}" min="{{ $parent.field.min }}" max="{{ $parent.field.max }}" step="{{ $parent.field.step }}"  type="range" name="{{ $parent.field.name }}" value="{{ $parent.field.value }}" /></td>
-  <td>{{ field.max }}</td>
-  <td class="number_ui"><input ng-model="$parent.field.value" type="number" min="{{ $parent.field.min }}" max="{{ $parent.field.max }}" step="{{ $parent.field.step }}" value="{{ $parent.field.value }}" placeholder="{{ $parent.field.value }}"  /></td>
+<table class="number_control"><tr class="pure-g">
+  <td class="pure-u-1-6">{{ $parent.field.min }}</td>
+  <td class="range_ui pure-u-5-12">
+    <input 
+           ng-model="$parent.field.value" 
+           id="{{ $parent.action.name + $parent.field.name }}" 
+           min="{{ $parent.field.min }}" 
+           max="{{ $parent.field.max }}" 
+           step="{{ $parent.field.step }}"  
+           type="range" 
+           name="{{ $parent.field.name }}" 
+           value="{{ $parent.field.value }}" 
+           class="pure-input-1"
+           /></td>
+  <td class="pure-u-1-6">{{ field.max }}</td>
+  <td class="number_ui pure-u-1-4">
+    <input 
+           ng-model="$parent.field.value" 
+           type="number" 
+           min="{{ $parent.field.min }}" 
+           max="{{ $parent.field.max }}" 
+           step="{{ $parent.field.step }}" 
+           value="{{ $parent.field.value }}" 
+           placeholder="{{ $parent.field.value }}" 
+           class="pure-input-1" 
+           /></td>
 </tr></table>

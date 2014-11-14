@@ -889,7 +889,7 @@ header nav,
   margin-top: 2.5rem;
   background-color: #fff;
   padding: 0 0 1rem 0;
-  z-index: 100;
+  z-index: 49;
   padding-left: 1rem;
   padding-right: 1rem;
   transition: box-shadow 0.2s ease;
@@ -1692,12 +1692,20 @@ table.number_control {
   width: 100%;
 }
 table.number_control td {
+  padding: .75em 0;
   text-align: center;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-table.number_control .range_ui input {
-  width: 80%;
+table.number_control td:first-of-type {
+  text-align: left;
 }
-table.number_control .number_ui input {
-  float: right;
+table.number_control td.range_ui input[type=range] {
+  padding: .2em 0;
+}
+table.number_control td.number_ui {
+  padding: 0;
 }
 /* Mixins  */
