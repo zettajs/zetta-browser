@@ -207,6 +207,7 @@ a {
   background-color: @white;
   header {
     .centered();
+    
   }
   #cta {
     .content {
@@ -572,7 +573,8 @@ header nav, #wampum {
     margin-top: 2.5rem;
     background-color: #fff;
     padding: 0 0 1rem 0;
-    h1 {margin: 2rem 0 0rem 0;}
+    z-index: 100;
+    h1 {margin: 2rem 0 1rem 0;}
     .smallPadding();
     .content {
       
@@ -607,7 +609,6 @@ header nav, #wampum {
   
 }
 .serverError {color: @orange;}
-.front-door header { padding-bottom: 1rem; }
 /* footer */
 
 footer {
@@ -639,8 +640,11 @@ footer {
 
 .focus {
   background-color: #fff;
+  transition: box-shadow .2s ease;
   .shadow(2);
-    z-index: -10;
+  &:hover {.shadow(4);}
+    
+  
   .streams {
 
     padding: 0;
@@ -660,20 +664,6 @@ footer {
         height: 4rem;
         .dotdot();
         margin-top: 1.0rem;
-        span:hover {
-           position: absolute;
-           overflow: visible;
-           white-space: pre-wrap;
-           max-width: 80%;
-           padding: 1rem;
-           background-color: #fff;
-          
-           box-shadow: 0px 0px 5px @apigee-grey;
-
-           font-size: 2rem;
-           line-height: 2rem;
-        }
-
       }
 
       .name {
