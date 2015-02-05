@@ -141,6 +141,25 @@ CaqlDecompiler.prototype.visitLikePredicate = function(like) {
   this.filter.push(expr.join(' '));
 };
 
+CaqlDecompiler.prototype.visitMissingPredicate = function(missing) {
+  var isParam = false;
+
+  if (typeof missing.value === 'string'
+      && missing.value[0] === '@' && this.params) {
+    missing.value = this.params[missing.value.substring(1)];
+    isParam = true;
+  }
+
+  if (typeof missing.value === 'string') {
+    missing.value = normalizeString(missing.value, isParam);
+  }
+
+  var expr = [missing.field, 'is', missing.isNegated ? 'not missing' : 'missing'];
+
+  this.filter.push(expr.join(' '));
+
+};
+
 CaqlDecompiler.prototype.visitContainsPredicate = function(contains) {
   var isParam = false;
 
