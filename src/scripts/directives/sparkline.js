@@ -1,10 +1,14 @@
 angular.module('zetta').directive('sparkline', ['$compile', function($compile) {
   function link(scope, element, attrs) {
     scope.$watchCollection('stream', function() {
+
+      // Nothing in the stream; do nothing
+      if(!scope.stream || scope.stream.length == 0) return;
+      
       stream = scope.stream.map(function(item){
         return {'x': parseInt(item[0].getTime()), 'y': item[1]};
-      }); 
-      
+      });
+
       var x = d3.time.scale().range([0, element.parent()[0].clientWidth]);
       var y = d3.scale.linear().range([scope.height-6, 0]);
 
@@ -16,10 +20,10 @@ angular.module('zetta').directive('sparkline', ['$compile', function($compile) {
           .y(function(d) {return y(d.y) + 3;});
 
       var d = scope.line(stream);
-      
+
       if (d) { element.find('path').attr({"d": d}); }
-      
-    }); 
+
+    });
   }
 
   return {
