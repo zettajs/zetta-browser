@@ -12,7 +12,7 @@ angular
         map[c] = { known: true, state: state };
         return this;
       };
-      
+
       this.otherwise = function(state) {
         map[null] = { known: false, state: state };
       };
@@ -64,14 +64,14 @@ angular
           if (!immediateReturn || (redirectIfKnown && state.known)) {
             self.cache.push(self.current);
           }
-          
+
           $rootScope.$broadcast('entityChangeSuccess', data);
 
           $state.transitionTo(state.state, params);
 
           var stateIsUnknown = !state.known;
           var resolveIfKnown = !redirectIfKnown;
-          
+
           if (immediateReturn && (stateIsUnknown || resolveIfKnown)) {
             deferred.resolve(data);
           }
@@ -98,7 +98,7 @@ angular
         if (options.method === 'GET') {
           var params = {};
 
-          angular.forEach(action.fields, function(field) {
+          angular.forEach(action.inputFields, function(field) {
           console.log(field);
             params[field.name] = field.value;
           });
@@ -112,7 +112,7 @@ angular
             return str.join("&");
           };
 
-          options.url = options.url.split('?')[0] + '?' + serialize(params); 
+          options.url = options.url.split('?')[0] + '?' + serialize(params);
 
           //$state.transitionTo('entity', { url: url });
 
@@ -130,12 +130,12 @@ angular
         } else {
           if (contentType === 'application/json') {
             options.data = {};
-            angular.forEach(action.fields, function(field) {
+            angular.forEach(action.inputFields, function(field) {
               options.data[field.name] = field.value;
             });
           } else if (contentType === 'application/x-www-form-urlencoded') {
             var data = [];
-            angular.forEach(action.fields, function(field) {
+            angular.forEach(action.inputFields, function(field) {
               data.push(encodeURIComponent(field.name) + '=' + encodeURIComponent(field.value));
             });
 

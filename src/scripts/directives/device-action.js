@@ -44,7 +44,7 @@ angular.module('zetta').directive('zettaDeviceAction', [function() {
         scope.action.renderOptionsAsButton = true;
       }
 
-      scope.action.inputFields = scope.action.fields; // create copy so mutations dont show up in api response section
+      scope.action.inputFields = getFieldsCopy(scope.action); // create copy so mutations dont show up in api response section
       scope.action.inputFields.forEach(function(field, i) {
         if (!field.type) {
           field.type = 'text';
@@ -63,6 +63,16 @@ angular.module('zetta').directive('zettaDeviceAction', [function() {
         }
       });
     }
+
+    function getFieldsCopy(action) {
+      return action.fields.map(function(field){
+          var result = {};
+          for(var p in field) {
+              result[p] = field[p];
+          }
+          return result;
+        });
+    };
 
     scope.execute = function() {
       var button = $('.' + scope.action.name + '-button', element);
