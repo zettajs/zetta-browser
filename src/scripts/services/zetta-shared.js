@@ -180,27 +180,13 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
       }
 
       var serverLinks = data.links.filter(function(link) {
-        return link.rel.indexOf('http://rels.zettajs.io/server') !== -1;
+        return link.rel.indexOf('http://rels.zettajs.io/server') !== -1 || link.rel.indexOf('http://rels.zettajs.io/peer') !== -1;
       });
 
-      if (serverLinks.length) {
-        var server = serverLinks[0];
-        state.servers.push({
-          name: server.title,
-          type: 'server',
-          href: server.href,
-          available: $state.params.filter ? $state.params.filter === server.title : true
-        });
-      }
-
-      var peerLinks = data.links.filter(function(link) {
-        return link.rel.indexOf('http://rels.zettajs.io/peer') !== -1;
-      });
-
-      peerLinks.forEach(function(peer) {
+      serverLinks.forEach(function(peer) {
         state.servers.push({
           name: peer.title,
-          type: 'peer',
+          type: 'server',
           href: peer.href,
           available: $state.params.filter ? $state.params.filter === peer.title : true
         });
