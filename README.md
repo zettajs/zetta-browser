@@ -16,3 +16,4 @@ To build the browser for local development do the following.
 2. Set the buildpack to the gulp buildpack `heroku buildpacks:set https://github.com/appstack/heroku-buildpack-nodejs-gulp.git`
 3. Set the node env variable to production `heroku config:set NODE_ENV=production`
 4. Push your branch to heroku `git push heroku master` 
+
