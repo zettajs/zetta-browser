@@ -7,9 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zettajs/zetta-browser.git"
+  },
   "author": "Kevin Swiber <kswiber@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "4"
+  },
   "dependencies": {
     "argo": "*",
     "mime": "~1.2.9",
@@ -30,5 +36,10 @@
     "gulp-serve": "~0.2.0",
     "gulp-file-include": "~0.4.0",
     "gulp-livereload": "~2.1.1"
-  }
+  },
+  "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/zettajs/zetta-browser/issues"
+  },
+  "homepage": "https://github.com/zettajs/zetta-browser#readme"
 }
