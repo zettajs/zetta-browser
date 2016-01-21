@@ -72,8 +72,11 @@ angular.module('zetta').controller('DeviceCtrl', [
 
       $scope.loggerUrl = url;
     }
-
-    $scope.loggerSocket = new WebSocket($scope.loggerUrl);
+    //add token as query param query param for WS connections 
+    var _turl = $scope.loggerUrl;
+    if(zettaShared.state.oauthtoken && zettaShared.state.oauthtoken!='')
+      _turl += (_turl.split('?')[1] ? '&':'?') + 'token=' + zettaShared.state.oauthtoken;
+    $scope.loggerSocket = new WebSocket(_turl);
     
     $scope.loggerSocket.onmessage = function(event) {
       var d = JSON.parse(event.data);

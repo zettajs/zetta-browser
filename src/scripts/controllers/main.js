@@ -1,6 +1,6 @@
 angular.module('zetta').controller('MainCtrl', [
-  '$scope', '$state', 'navigator', 'appState', 'zettaShared',
-  function($scope, $state, navigator, appState, zettaShared) {
+  '$scope', '$state', 'navigator', 'appState', 'zettaShared', '$http',
+  function($scope, $state, navigator, appState, zettaShared, $http) {
     zettaShared.state.breadcrumbs = [];
     zettaShared.state.servers = [];
     zettaShared.state.pinned = [];
@@ -8,11 +8,18 @@ angular.module('zetta').controller('MainCtrl', [
 
     $scope.init = function() {
       $scope.params = { url: appState.url || '' };
+      $scope.params.security='none'
     };
 
     $scope.errMsg = null;
     
     $scope.fetchUrl = function(params) {
+      if(params.oauthtoken && params.oauthtoken!='')
+      {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + params.oauthtoken
+        zettaShared.state.oauthtoken = params.oauthtoken
+      }
+
       $scope.errMsg = null;
       if (!params.url) {
         return;
