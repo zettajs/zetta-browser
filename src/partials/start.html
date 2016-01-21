@@ -7,28 +7,25 @@
         {{errMsg}}
       </div>
       <form class="pure-form">
-        <fieldset class="pure-group">
-        <input placeholder="Server URL" type="url" ng-model="params.url" name="url" class="pure-u-1 pure-u-md-1-2"/>
-        <button ng-click="fetchUrl(params)" class="pure-button">Connect</button>
+        <fieldset>
+          <input placeholder="Server URL" type="url" ng-model="params.url" name="url" class="pure-u-1 pure-u-md-1-2"/>
+          <button ng-click="fetchUrl(params)" class="pure-button">Connect</button>
+
+          <div class="pure-u-md-1-3" style="margin-top: -15px; padding-left: 10px;">
+          <h3 >Select Security scheme</h3>
+          <label for="option-no-sec" style="padding-right: 10px;">
+            <input id="option-no-sec" type="radio" ng-model="params.security" name="optionsRadios" value="none" checked>
+            None
+          </label>
+          <label for="option-oauth">
+              <input id="option-oauth" type="radio" ng-model="params.security" name="optionsRadios" value="oauth">
+              OAuth
+          </label>
+          </div>
         </fieldset>
-       
-        <p>Select Security scheme</p>
-        
-        <label for="option-no-sec" class="pure-radio">
-          <input id="option-no-sec" type="radio" ng-model="params.security" name="optionsRadios" value="none" checked>
-          None
-        </label>
-
-      <label for="option-oauth" class="pure-radio">
-          <input id="option-oauth" type="radio" ng-model="params.security" name="optionsRadios" value="oauth">
-          OAuth
-      </label>
-    
-        <input placeholder="OAuthToken" type="text" ng-disabled="params.security!='oauth'" ng-model="params.oauthtoken" name="oauthtoken" class="pure-u-1 pure-u-md-1-2"/>
-          
+        <h4 ng-hide="params.security!='oauth'">OAuth Token</h4>
+        <input placeholder="OAuthToken" type="text" ng-hide="params.security!='oauth'" ng-disabled="params.security!='oauth'" ng-model="params.oauthtoken" name="oauthtoken" class="pure-u-1 pure-u-md-1-2"/>
       </form>
-    
-
     </section>
   </header>
   <section class="device-meta pure-u-1" ng-show="serverUrls.length">
