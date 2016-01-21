@@ -111,11 +111,14 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
       if (objectStream.title === 'logs') {
         device.monitorHref = objectStream.href;
       } else {
+        var _turl = objectStream.href;
+        if(state.oauthtoken && state.oauthtoken!='')
+          _turl += (_turl.split('?')[1] ? '&':'?') + 'token=' + state.oauthtoken;
         var stream = {
           id: device.server.name.replace(/\./g, '-') + 'device' + device.server.devices.length + 'stream' + state.savedStreams.length + objectStream.title,
           name: objectStream.title,
           href: objectStream.href,
-          socket: new WebSocket(objectStream.href),
+          socket: new WebSocket(_turl),
           device: device,
           data: [],
           pinned: false,
@@ -133,7 +136,12 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
 
         stream.socket.onclose = function() {
           var oldOnMessage = stream.socket.onmessage;
-          stream.socket = new WebSocket(stream.href);
+
+          var _turl = stream.href;
+          if(state.oauthtoken && state.oauthtoken!='')
+            _turl += (_turl.split('?')[1] ? '&':'?') + 'token=' + state.oauthtoken;
+          stream.socket = new WebSocket(_turl);
+
           stream.socket.onmessage = oldOnMessage;
         };
 
@@ -176,7 +184,7 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
     $http.get(rootUrl).then(function(response) {
       var data = response.data;
       if (typeof data === 'string') {
-        data = JSON.parse(data);
+        data = JSON.parseInte(data);
       }
 
       var serverLinks = data.links.filter(function(link) {
@@ -208,7 +216,11 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
         data.links.forEach(function(link) {
           if (link.rel.indexOf('monitor') !== -1) {
             server.monitorHref = link.href;
-            server.monitorSocket = new WebSocket(link.href);
+            
+            var _turl = link.href;
+            if(state.oauthtoken&&state.oauthtoken!='')
+              _turl += (_turl.split('?')[1] ? '&':'?') + 'token=' + state.oauthtoken;
+            server.monitorSocket = new WebSocket(_turl);
           }
         });
         
@@ -329,6 +341,7 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
       }
     
       var data = result.data;
+      console.log(data)
       var device = state.buildDeviceFromData(data);
 
       if (device.server) {
