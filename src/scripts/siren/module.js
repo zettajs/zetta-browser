@@ -95,11 +95,12 @@ angular
           }
         };
 
+        action.inputFields = action.inputFields || action.fields;
+
         if (options.method === 'GET') {
           var params = {};
 
           angular.forEach(action.inputFields, function(field) {
-          console.log(field);
             params[field.name] = field.value;
           });
 
