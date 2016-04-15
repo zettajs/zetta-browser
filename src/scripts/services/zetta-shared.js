@@ -192,6 +192,12 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
       });
 
       serverLinks.forEach(function(peer) {
+
+        // If peer does not have a title use peer name in href
+        if (!peer.title) {
+          peer.title = peer.href.match(/^(.+)\/([^\/]+)$/)[2];
+        }
+        
         state.servers.push({
           name: peer.title,
           type: 'server',
@@ -200,6 +206,7 @@ angular.module('zetta').factory('zettaShared', ['$http', '$state', 'navigator', 
         });
       });
 
+      console.log('Servers:', state.servers)
       crawl(cb);
     });
   };
