@@ -6,9 +6,11 @@ This is an easily deployable API browser for the Zetta project. Visualize your A
 
 To build the browser for local development do the following.
 
-1. run `npm install`
-2. run `npm install -g gulp`
-3. run `gulp`
+1. `git clone https://github.com/zettajs/zetta-browser.git
+1. `cd zetta-browser`
+1. `npm install`
+1. `npm install -g gulp`
+1. `gulp`
 
 # Building Heroku
 
